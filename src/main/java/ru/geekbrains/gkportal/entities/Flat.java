@@ -26,6 +26,8 @@ public class Flat {
     private Integer buildPorch;
     @Column(name = "owners_count")
     private Integer countOwners;
+    @Column(name = "riser_num")
+    private int riserNum;
 
     public Flat() {
     }

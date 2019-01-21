@@ -1,26 +1,10 @@
-/*
-SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 5.7.24-log : Database - support_boot_db
-*********************************************************************
-*/
-
-/*!40101 SET NAMES utf8 */;
-
-/*!40101 SET SQL_MODE = ''*/;
-
-/*!40014 SET @OLD_UNIQUE_CHECKS = @@UNIQUE_CHECKS, UNIQUE_CHECKS = 0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0 */;
-/*!40101 SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES = @@SQL_NOTES, SQL_NOTES = 0 */;
-CREATE DATABASE IF NOT EXISTS `support_boot_db` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
 USE `support_boot_db`;
+
 
 /*Table structure for table `build_porch_config` */
 
-DROP TABLE IF EXISTS `build_porch_config`;
 
-CREATE TABLE  `build_porch_config`
+CREATE TABLE IF NOT EXISTS `build_porch_config`
 (
   `housing`                  int(10) unsigned NOT NULL COMMENT 'номер дома',
   `porch`                    int(10) unsigned NOT NULL COMMENT 'номер подъезда',
@@ -71,9 +55,8 @@ values (1, 1, 10, 5, 2, 5, '\0', '\0', '\0', 0, 3, 1),
 
 /*Table structure for table `flats` */
 
-DROP TABLE IF EXISTS `flats`;
 
-CREATE TABLE  `flats`
+CREATE TABLE IF NOT EXISTS `flats`
 (
   `housing`       int(10) unsigned NOT NULL COMMENT 'дом',
   `porch`         int(10) unsigned NOT NULL COMMENT 'подъезд',
@@ -1769,7 +1752,53 @@ values (3, 1, 2, 1, 0, 30, NULL, NULL, 1, NULL, 1),
 
 
 
-/*!40101 SET SQL_MODE = @OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES = @OLD_SQL_NOTES */;
+ALTER TABLE `flats`
+  ADD COLUMN `riser_num` INT UNSIGNED DEFAULT 0 NOT NULL COMMENT 'номер стояка' AFTER `room_count`;
+
+ALTER TABLE `support_boot_db`.`build_porch_config`
+  CHANGE `housing` `housing` INT(10) NOT NULL COMMENT 'номер дома',
+  CHANGE `porch` `porch` INT(10) NOT NULL COMMENT 'номер подъезда',
+  CHANGE `floors_count` `floors_count` INT(10) NOT NULL COMMENT 'кол-во этажей',
+  CHANGE `flat_quantity_floor` `flat_quantity_floor` INT(10) NOT NULL COMMENT 'кол-во квартир на этаже',
+  CHANGE `flat_from_floor` `flat_from_floor` INT(10) NOT NULL COMMENT 'с какого этажа начинаются квартиры',
+  CHANGE `flat_quatity_start_floor` `flat_quatity_start_floor` INT(10) NOT NULL COMMENT 'кол-во квартир на стартовом этаже',
+  DROP COLUMN `all_flat_count` ,
+  ADD COLUMN `all_flat_count` INT(10) AS ( ((((`floors_count` - `flat_from_floor`) * `flat_quantity_floor`) + `flat_quatity_start_floor`)) ) VIRTUAL COMMENT 'всего квартир в подъезде - вычисляемое поле',
+  CHANGE `build_housing` `build_housing` INT(10) NOT NULL COMMENT 'строительный номер дома',
+  CHANGE `build_porch` `build_porch` INT(10) NOT NULL COMMENT 'строительный номер подъезда, про запас';
+
+ALTER TABLE `support_boot_db`.`flats`
+  CHANGE `housing` `housing` INT(10) NOT NULL COMMENT 'дом',
+  CHANGE `porch` `porch` INT(10) NOT NULL COMMENT 'подъезд',
+  CHANGE `floor` `floor` INT(10) NOT NULL COMMENT 'этаж',
+  CHANGE `flat` `flat` INT(10) NOT NULL COMMENT 'квартира',
+  CHANGE `flat_build` `flat_build` INT(10) NOT NULL COMMENT 'строительный номер',
+  CHANGE `flat_id` `flat_id` INT(10) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  CHANGE `riser_num` `riser_num` INT(10) DEFAULT 0 NOT NULL COMMENT 'номер стояка';
+
+
+
+/**
+(SELECT
+  f.`housing`,
+  f.`porch`,
+  f.floor,
+  f.`flat`,
+  CASE WHEN c.porch_num_from_right THEN
+  c.flat_quantity_floor - (
+    f.`flat` - (
+      (f.floor - c.`flat_from_floor`) * c.flat_quantity_floor
+    )-1 )
+    ELSE
+  f.`flat` - (
+    (f.floor - c.`flat_from_floor`) * c.flat_quantity_floor)
+  END AS rising
+
+
+FROM
+  flats f
+  JOIN build_porch_config c
+    ON f.`housing` = c.`housing`
+    AND c.`porch` = f.`porch`
+
+    **/
