@@ -32,6 +32,14 @@ public class Flat {
     public Flat() {
     }
 
+    public int getRiserNum() {
+        return riserNum;
+    }
+
+    public void setRiserNum(int riserNum) {
+        this.riserNum = riserNum;
+    }
+
     public Integer getBuildHousing() {
         return buildHousing;
     }
