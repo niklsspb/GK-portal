@@ -1,5 +1,5 @@
 INSERT INTO `support_boot_db`.`properties` (`property_id`, `name`, `value`) VALUES
-('1', 'host', 'smtp.gMAIL.com', 'MAIL'),
+('1', 'host', 'smtp.mail.com', 'MAIL'),
 ('2', 'port', '587', 'MAIL'),
 ('3', 'user_name', 'uatilman', 'MAIL'),
 ('4', 'password', '', 'MAIL'),
