@@ -1,10 +1,13 @@
 package ru.geekbrains.gkportal.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 
 @Entity
+@Data
 @Table(name = "build_porch_config")
 @IdClass(BuildPorchConfig.HousingPorchID.class)
 public class BuildPorchConfig {
@@ -37,109 +40,6 @@ public class BuildPorchConfig {
     @Column(name = "build_porch")
     private int buildPorch;
 
-    public int getHousingID() {
-        return housingID;
-    }
-
-    public void setHousingID(int housingID) {
-        this.housingID = housingID;
-    }
-
-    public int getBuildHousing() {
-        return buildHousing;
-    }
-
-    public void setBuildHousing(int buildHousing) {
-        this.buildHousing = buildHousing;
-    }
-
-    public int getBuildPorch() {
-        return buildPorch;
-    }
-
-    public void setBuildPorch(int buildPorch) {
-        this.buildPorch = buildPorch;
-    }
-
-    public int getPorchID() {
-        return porchID;
-    }
-
-    public void setPorchID(int porchID) {
-        this.porchID = porchID;
-    }
-
-    public int getFloorsCount() {
-        return floorsCount;
-    }
-
-    public void setFloorsCount(int floorsCount) {
-        this.floorsCount = floorsCount;
-    }
-
-    public int getFlatCountOnFloor() {
-        return flatCountOnFloor;
-    }
-
-    public void setFlatCountOnFloor(int flatCountOnFloor) {
-        this.flatCountOnFloor = flatCountOnFloor;
-    }
-
-    public int getFlatStartFromFloor() {
-        return flatStartFromFloor;
-    }
-
-    public void setFlatStartFromFloor(int flatStartFromFloor) {
-        this.flatStartFromFloor = flatStartFromFloor;
-    }
-
-    public int getFlatCountOnStartFloor() {
-        return flatCountOnStartFloor;
-    }
-
-    public void setFlatCountOnStartFloor(int flatCountOnStartFloor) {
-        this.flatCountOnStartFloor = flatCountOnStartFloor;
-    }
-
-    public boolean isPurchUsed() {
-        return purchUsed;
-    }
-
-    public void setPurchUsed(boolean purchUsed) {
-        this.purchUsed = purchUsed;
-    }
-
-    public boolean isPorchNumFromRight() {
-        return porchNumFromRight;
-    }
-
-    public void setPorchNumFromRight(boolean porchNumFromRight) {
-        this.porchNumFromRight = porchNumFromRight;
-    }
-
-    public boolean isHousingNumFromRight() {
-        return housingNumFromRight;
-    }
-
-    public void setHousingNumFromRight(boolean housingNumFromRight) {
-        this.housingNumFromRight = housingNumFromRight;
-    }
-
-    public int getFlatOnPorchCount() {
-        return flatOnPorchCount;
-    }
-
-    public void setFlatOnPorchCount(int flatOnPorchCount) {
-        this.flatOnPorchCount = flatOnPorchCount;
-    }
-
-    public int getFlatOnPorchIdentCount() {
-        return flatOnPorchIdentCount;
-    }
-
-    public void setFlatOnPorchIdentCount(int flatOnPorchIdentCount) {
-        this.flatOnPorchIdentCount = flatOnPorchIdentCount;
-    }
 
     @Embeddable
     public static class HousingPorchID implements Serializable {
