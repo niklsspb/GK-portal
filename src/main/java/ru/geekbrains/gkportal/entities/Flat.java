@@ -9,19 +9,20 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Table(name = "flats")
+@Table(name = "flat")
 public class Flat {
     @Id
-    @Column(name = "flat_id")
+    @Column(name = "id")
     private int id;
-    private int housing;
+    private int house;
     private int porch;
     private int floor;
-    private int flat;
-    @Column(name = "flat_build")
-    private int flatBuild;
+    @Column(name = "flat_num")
+    private int flatNum;
+    @Column(name = "flat_num_build")
+    private int flatNumBuild;
     private Float square;
-    @Column(name = "room_count")
+    @Column(name = "rooms")
     private Integer roomCount;
     @Column(name = "housing_build")
     private Integer buildHousing;
@@ -29,6 +30,6 @@ public class Flat {
     private Integer buildPorch;
     @Column(name = "owners_count")
     private Integer countOwners;
-    @Column(name = "riser_num")
+    @Column(name = "riser")
     private int riserNum;
 }
