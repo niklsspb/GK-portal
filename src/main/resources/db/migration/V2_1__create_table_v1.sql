@@ -12,6 +12,37 @@ MySQL - 5.7.24-log : Database - support_boot_db
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*Table structure for table `account` */
+
+DROP TABLE IF EXISTS `account`;
+
+CREATE TABLE `account` (
+  `id` int(11) NOT NULL,
+  `login` varchar(45) NOT NULL COMMENT 'email-login',
+  `confirmed` tinyint(1) NOT NULL COMMENT 'подтверждён почтой',
+  `active` tinyint(1) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `contact_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `login_UNIQUE` (`login`),
+  KEY `fk_account_users1_idx` (`contact_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `account_role` */
+
+DROP TABLE IF EXISTS `account_role`;
+
+CREATE TABLE `account_role` (
+  `id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_account-roles_account1_idx` (`account_id`),
+  KEY `fk_account-roles_roles1_idx` (`role_id`),
+  CONSTRAINT `fk_account-roles_account1` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_account-roles_roles1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*Table structure for table `build_porch_config` */
 
 DROP TABLE IF EXISTS `build_porch_config`;
@@ -33,70 +64,102 @@ CREATE TABLE `build_porch_config` (
   PRIMARY KEY (`housing`,`porch`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `flats` */
+/*Table structure for table `communication` */
 
-DROP TABLE IF EXISTS `flats`;
+DROP TABLE IF EXISTS `communication`;
 
-CREATE TABLE `flats` (
-  `housing` int(11) NOT NULL COMMENT 'дом',
+CREATE TABLE `communication` (
+  `id` int(11) NOT NULL,
+  `communication_type_id` int(11) NOT NULL COMMENT 'вид связи',
+  `contact_id` int(11) NOT NULL COMMENT 'чей',
+  `identify` varchar(255) NOT NULL COMMENT 'логин связи',
+  `description` varchar(255) NOT NULL COMMENT 'описание - типа домашняя почта',
+  `confirmed` tinyint(1) NOT NULL,
+  `confirm_code_date` date NOT NULL,
+  `confirm_code` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_communication_communication_type1_idx` (`communication_type_id`),
+  KEY `fk_communication_users1_idx` (`contact_id`),
+  CONSTRAINT `fk_communication_communication_type1` FOREIGN KEY (`communication_type_id`) REFERENCES `communication_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_communication_users1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `communication_type` */
+
+DROP TABLE IF EXISTS `communication_type`;
+
+CREATE TABLE `communication_type` (
+  `id` int(11) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `contact` */
+
+DROP TABLE IF EXISTS `contact`;
+
+CREATE TABLE `contact` (
+  `id` int(11) NOT NULL,
+  `contact_type_id` int(11) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `middle_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `contact_flat` */
+
+DROP TABLE IF EXISTS `contact_flat`;
+
+CREATE TABLE `contact_flat` (
+  `contact_id` int(11) NOT NULL,
+  `flat_id` int(11) NOT NULL,
+  PRIMARY KEY (`contact_id`,`flat_id`),
+  KEY `fk_users_has_flats_flats1_idx` (`flat_id`),
+  CONSTRAINT `fk_users_has_flats_flats1` FOREIGN KEY (`flat_id`) REFERENCES `flat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_users_has_flats_users1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `contact_type` */
+
+DROP TABLE IF EXISTS `contact_type`;
+
+CREATE TABLE `contact_type` (
+  `id` int(11) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `flat` */
+
+DROP TABLE IF EXISTS `flat`;
+
+CREATE TABLE `flat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `square` float DEFAULT NULL COMMENT 'кв.м. без учёта лоджии/балкона',
+  `rooms` int(11) DEFAULT NULL COMMENT 'кол-во комнат',
+  `owners_count` int(11) DEFAULT NULL COMMENT 'кол-во собственников',
+  `house` int(11) NOT NULL COMMENT 'дом',
   `porch` int(11) NOT NULL COMMENT 'подъезд',
   `floor` int(11) NOT NULL COMMENT 'этаж',
-  `flat` int(11) NOT NULL COMMENT 'квартира',
-  `flat_build` int(11) NOT NULL COMMENT 'строительный номер',
-  `flat_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `square` float DEFAULT NULL COMMENT 'кв.м. без учёта лоджии/балкона',
-  `room_count` int(11) DEFAULT NULL COMMENT 'кол-во комнат',
-  `riser_num` int(11) NOT NULL DEFAULT '0' COMMENT 'номер стояка',
-  `housing_build` int(11) NOT NULL COMMENT 'строительный номер дома',
-  `owners_count` int(11) DEFAULT NULL COMMENT 'кол-во собственников',
+  `flat_num` int(11) NOT NULL COMMENT 'квартира',
+  `riser` int(11) NOT NULL DEFAULT '0' COMMENT 'номер стояка',
+  `house_build` int(11) NOT NULL COMMENT 'строительный номер дома',
   `porch_build` int(11) NOT NULL COMMENT 'строительный номер подъезда',
-  PRIMARY KEY (`flat_id`),
-  UNIQUE KEY `num` (`housing`,`porch`,`floor`,`flat`),
-  KEY `num_build` (`housing_build`,`porch_build`,`floor`,`flat_build`)
+  `flat_num_build` int(11) NOT NULL COMMENT 'строительный номер',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `num` (`house`,`porch`,`flat_num`),
+  KEY `num_build` (`house_build`,`porch_build`,`flat_num_build`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1698 DEFAULT CHARSET=utf8;
 
-/*Table structure for table `user_type` */
+/*Table structure for table `role` */
 
-DROP TABLE IF EXISTS `user_type`;
+DROP TABLE IF EXISTS `role`;
 
-CREATE TABLE `user_type` (
-  `user_type_id` int(11) NOT NULL,
-  `type_name` varchar(45) NOT NULL,
-  PRIMARY KEY (`user_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Table structure for table `users` */
-
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `e-mail` varchar(45) NOT NULL,
-  `phone` varchar(11) NOT NULL,
-  `password` char(80) NOT NULL,
-  `registration_email_code` varchar(10) DEFAULT NULL COMMENT 'код подтверждения e-mail ',
-  `registration_phone_code` varchar(10) DEFAULT NULL COMMENT 'код подтверждения телефона',
-  `confirmed` tinyint(1) NOT NULL,
-  `user_type_id` int(11) NOT NULL,
-  `user_tg_id` int(11) DEFAULT NULL,
-  `user_tg_confirm_code` varchar(10) DEFAULT NULL COMMENT 'код подтверждения telegram',
-  PRIMARY KEY (`user_id`),
-  KEY `fk_users_user_type_idx` (`user_type_id`),
-  CONSTRAINT `fk_users_user_type` FOREIGN KEY (`user_type_id`) REFERENCES `user_type` (`user_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Table structure for table `users_has_flats` */
-
-DROP TABLE IF EXISTS `users_has_flats`;
-
-CREATE TABLE `users_has_flats` (
-  `users_id` int(11) NOT NULL,
-  `flats_flat_id` int(11) NOT NULL,
-  PRIMARY KEY (`users_id`,`flats_flat_id`),
-  KEY `fk_users_has_flats_flats1_idx` (`flats_flat_id`),
-  CONSTRAINT `fk_users_has_flats_flats1` FOREIGN KEY (`flats_flat_id`) REFERENCES `flats` (`flat_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_has_flats_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

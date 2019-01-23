@@ -21,7 +21,7 @@ public class TestControllers {
 
     @GetMapping("/email")
     public int sendMail() {
-        mailService.sendRegistrationMail("uatilman@gmail.com");
+        mailService.sendRegistrationMail("admin@chertenok.ru");
         return HttpStatus.OK.value();
     }
 }
