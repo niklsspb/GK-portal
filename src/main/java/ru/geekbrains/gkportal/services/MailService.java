@@ -9,6 +9,7 @@ import ru.geekbrains.gkportal.util.MailMessageBuilder;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -30,13 +31,23 @@ public class MailService {
         this.builder = builder;
     }
 
-    private void sendMail(String email, String subject, String text) {
+    public void sendMail(List<String> emails, String subject, String text, boolean isHtml) {
+        for (String mail : emails) {
+            sendMail(mail, subject, text, isHtml);
+        }
+    }
+
+    public void sendMail(String email, String subject, String text) {
+        sendMail(email, subject, text, true);
+    }
+
+    public void sendMail(String email, String subject, String text, boolean isHtml) {
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
         try {
             helper.setTo(email);
-            helper.setText(text, true);
+            helper.setText(text, isHtml);
             helper.setSubject(subject);
         } catch (MessagingException e) {
             e.printStackTrace();
