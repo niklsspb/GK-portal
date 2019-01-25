@@ -19,13 +19,14 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `id` int(11) NOT NULL,
   `login` varchar(45) NOT NULL COMMENT 'email-login',
-  `confirmed` tinyint(1) NOT NULL COMMENT 'подтверждён почтой',
-  `active` tinyint(1) NOT NULL,
+  `confirmed` bit(1) NOT NULL COMMENT 'подтверждён почтой',
+  `active` bit(1) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
-  `contact_id` int(11) NOT NULL,
+  `contact_id` int(11),
   PRIMARY KEY (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`),
-  KEY `fk_account_users1_idx` (`contact_id`)
+  KEY `fk_account_users1_idx` (`contact_id`),
+  CONSTRAINT `fk_account_users1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `account_role` */
@@ -33,10 +34,9 @@ CREATE TABLE `account` (
 DROP TABLE IF EXISTS `account_role`;
 
 CREATE TABLE `account_role` (
-  `id` int(11) NOT NULL,
   `account_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`account_id`,`role_id`),
   KEY `fk_account-roles_account1_idx` (`account_id`),
   KEY `fk_account-roles_roles1_idx` (`role_id`),
   CONSTRAINT `fk_account-roles_account1` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -53,14 +53,14 @@ CREATE TABLE `build_porch_config` (
   `floors_count` int(11) NOT NULL COMMENT 'кол-во этажей',
   `flat_quantity_floor` int(11) NOT NULL COMMENT 'кол-во квартир на этаже',
   `flat_from_floor` int(11) NOT NULL COMMENT 'с какого этажа начинаются квартиры',
-  `flat_quatity_start_floor` int(11) NOT NULL COMMENT 'кол-во квартир на стартовом этаже',
-  `record_builded` bit(1) NOT NULL DEFAULT b'0' COMMENT 'записи квартир созданы, фильтр для отбора рабочих записей',
+  `flat_quantity_start_floor` int(11) NOT NULL COMMENT 'кол-во квартир на стартовом этаже',
+  `record_built` bit(1) NOT NULL DEFAULT b'0' COMMENT 'записи квартир созданы, фильтр для отбора рабочих записей',
   `porch_num_from_right` bit(1) NOT NULL DEFAULT b'0' COMMENT 'нумерация квартир справа, а не слева внутри подъезда как везде',
   `housing_num_from_right` bit(1) NOT NULL DEFAULT b'0' COMMENT 'строительная нумерация справа по этажно через весь дом, а не слева как в остальных',
   `ident_flat_count` int(11) NOT NULL DEFAULT '0' COMMENT 'квартир с известными собственниками',
   `build_housing` int(11) NOT NULL COMMENT 'строительный номер дома',
   `build_porch` int(11) NOT NULL COMMENT 'строительный номер подъезда, про запас',
-  `all_flat_count` int(11) GENERATED ALWAYS AS ((((`floors_count` - `flat_from_floor`) * `flat_quantity_floor`) + `flat_quatity_start_floor`)) VIRTUAL COMMENT 'всего квартир в подъезде - вычисляемое поле',
+  `all_flat_count` int(11) GENERATED ALWAYS AS ((((`floors_count` - `flat_from_floor`) * `flat_quantity_floor`) + `flat_quantity_start_floor`)) VIRTUAL COMMENT 'всего квартир в подъезде - вычисляемое поле',
   PRIMARY KEY (`housing`,`porch`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -74,7 +74,7 @@ CREATE TABLE `communication` (
   `contact_id` int(11) NOT NULL COMMENT 'чей',
   `identify` varchar(255) NOT NULL COMMENT 'логин связи',
   `description` varchar(255) NOT NULL COMMENT 'описание - типа домашняя почта',
-  `confirmed` tinyint(1) NOT NULL,
+  `confirmed` bit(1) NOT NULL,
   `confirm_code_date` date NOT NULL,
   `confirm_code` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -104,7 +104,9 @@ CREATE TABLE `contact` (
   `first_name` varchar(255) NOT NULL,
   `middle_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_contact_type_id1_idx` (`contact_type_id`),
+  CONSTRAINT `fk_contact_type_id1` FOREIGN KEY (`contact_type_id`) REFERENCES `contact_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `contact_flat` */
