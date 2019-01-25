@@ -3,43 +3,65 @@ package ru.geekbrains.gkportal.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
 
 @Entity
 @Data
 @Table(name = "build_porch_config")
 @IdClass(BuildPorchConfig.HousingPorchID.class)
 public class BuildPorchConfig {
+
     @Id
     @Column(name = "housing")
     private int housingID;
+
     @Id
     @Column(name = "porch")
     private int porchID;
+
     @Column(name = "floors_count")
+    @NotNull(message = "Couldn't be empty!")
     private int floorsCount;
+
     @Column(name = "flat_quantity_floor")
+    @NotNull(message = "Couldn't be empty!")
     private int flatCountOnFloor;
+
     @Column(name = "flat_from_floor")
+    @NotNull(message = "Couldn't be empty!")
     private int flatStartFromFloor;
+
     @Column(name = "flat_quantity_start_floor")
+    @NotNull(message = "Couldn't be empty!")
     private int flatCountOnStartFloor;
+
     @Column(name = "record_builded")
+    @NotNull(message = "Couldn't be empty!")
     private boolean purchUsed;
+
     @Column(name = "porch_num_from_right")
+    @NotNull(message = "Couldn't be empty!")
     private boolean porchNumFromRight;
+
     @Column(name = "housing_num_from_right")
+    @NotNull(message = "Couldn't be empty!")
     private boolean housingNumFromRight;
-    @Column(name = "all_flat_count")
-    private int flatOnPorchCount;
+
     @Column(name = "ident_flat_count")
+    @NotNull(message = "Couldn't be empty!")
     private int flatOnPorchIdentCount;
+
     @Column(name = "build_housing")
+    @NotNull(message = "Couldn't be empty!")
     private int buildHousing;
+
     @Column(name = "build_porch")
+    @NotNull(message = "Couldn't be empty!")
     private int buildPorch;
 
+    @Column(name = "all_flat_count")
+    private int flatOnPorchCount;
 
     @Embeddable
     public static class HousingPorchID implements Serializable {
@@ -53,7 +75,6 @@ public class BuildPorchConfig {
             this.housingID = housingID;
             this.porchID = porchID;
         }
-
 
         @Override
         public boolean equals(Object o) {

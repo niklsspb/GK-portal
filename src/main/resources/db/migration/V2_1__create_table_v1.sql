@@ -22,10 +22,11 @@ CREATE TABLE `account` (
   `confirmed` bit(1) NOT NULL COMMENT 'подтверждён почтой',
   `active` bit(1) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
-  `contact_id` int(11) NOT NULL,
+  `contact_id` int(11),
   PRIMARY KEY (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`),
-  KEY `fk_account_users1_idx` (`contact_id`)
+  KEY `fk_account_users1_idx` (`contact_id`),
+  CONSTRAINT `fk_account_users1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `account_role` */
