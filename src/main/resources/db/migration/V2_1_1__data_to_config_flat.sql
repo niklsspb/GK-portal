@@ -14,7 +14,7 @@ MySQL - 5.7.24-log : Database - support_boot_db
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*Data for the table `build_porch_config` */
 
-INSERT  INTO `build_porch_config`(`housing`,`porch`,`floors_count`,`flat_quantity_floor`,`flat_from_floor`,`flat_quatity_start_floor`,`record_builded`,`porch_num_from_right`,`housing_num_from_right`,`ident_flat_count`,`build_housing`,`build_porch`) VALUES
+INSERT  INTO `build_porch_config`(`housing`,`porch`,`floors_count`,`flat_quantity_floor`,`flat_from_floor`,`flat_quantity_start_floor`,`record_built`,`porch_num_from_right`,`housing_num_from_right`,`ident_flat_count`,`build_housing`,`build_porch`) VALUES
 (1,1,10,5,2,5,'\0','\0','\0',0,3,1),
 (1,2,10,4,2,4,'\0','\0','\0',0,3,2),
 (1,3,19,4,2,4,'\0','\0','\0',0,3,3),
