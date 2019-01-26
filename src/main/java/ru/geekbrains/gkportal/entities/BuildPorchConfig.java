@@ -32,7 +32,7 @@ public class BuildPorchConfig {
     @Column(name = "flat_quantity_start_floor")
     private int flatCountOnStartFloor;
 
-    @Column(name = "record_builded")
+    @Column(name = "record_built")
     private boolean purchUsed;
 
     @Column(name = "porch_num_from_right")
