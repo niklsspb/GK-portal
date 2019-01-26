@@ -2,22 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:src="@{/js/chessboard.js}" type="text/javascript"></script>
     <title>Title</title>
     <style>
-        .porch {
+        .gk-porch {
             display: inline-block;
             vertical-align: bottom;
         }
-        .porch h2 {
+        .gk-porch h2 {
             text-align: center;
         }
     </style>
 </head>
 <body>
-<div th:each="porch: ${house.porchList}" class="porch">
+<div class="gk-porch" th:each="porch: ${house.porchList}" >
     <h2 th:text="${porch.description.porchID}+' подъезд'"></h2>
-    <div>
-    <div th:attr="data-floor=${flat.floor}" th:attrappend="data-riser=${flat.riser}" th:text="${flat.flatNumber}" th:each="flat:${porch.flats}"></div>
+    <div class="gk-flatblock" th:attr="data-flats-per-floor=${porch.description.flatCountOnFloor}" th:attrappend="data-floor-count=${porch.description.floorsCount}">
+    <div class="gk-flat" th:attr="data-floor=${flat.floor}" th:attrappend="data-riser=${flat.riser}" th:text="${flat.flatNumber}" th:each="flat:${porch.flats}"></div>
     </div>
 </div>
 </body>

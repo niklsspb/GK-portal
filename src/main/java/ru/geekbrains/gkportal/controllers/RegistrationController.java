@@ -26,4 +26,5 @@ public class RegistrationController {
         model.addAttribute("house", house);
         return "reg-form-new";
     }
+
 }
