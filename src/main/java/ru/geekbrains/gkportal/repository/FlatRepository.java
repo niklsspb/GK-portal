@@ -1,10 +1,13 @@
 package ru.geekbrains.gkportal.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import ru.geekbrains.gkportal.entities.Flat;
 
 import java.util.List;
 
-public interface FlatRepository<Flat, Integer> extends JpaRepository {
+@Repository
+public interface FlatRepository extends JpaRepository<Flat, Integer> {
     List<Flat> findAllByHouse(int house);
     List<Flat> findAllByHouseAndPorch(int house, int porch);
 

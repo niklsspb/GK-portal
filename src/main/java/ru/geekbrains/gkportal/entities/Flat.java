@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.entities;
 
+import javafx.beans.binding.IntegerBinding;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,7 +13,8 @@ public class Flat {
 
     @Id
     @Column(name = "id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "contact_flat",
@@ -21,36 +23,36 @@ public class Flat {
     private Collection<Contact> contacts;
 
     @Column(name = "square")
-    private float square;
+    private Float square;
 
     @Column(name = "rooms")
-    private int rooms;
+    private Integer rooms;
 
     @Column(name = "owners_count")
-    private int ownersCount;
+    private Integer ownersCount;
 
     @Column(name = "house")
-    private int house;
+    private Integer house;
 
     @Column(name = "porch")
-    private int porch;
+    private Integer porch;
 
     @Column(name = "floor")
-    private int floor;
+    private Integer floor;
 
     @Column(name = "flat_num")
-    private int flatNumber;
+    private Integer flatNumber;
 
     @Column(name = "riser")
-    private int riser;
+    private Integer riser;
 
     @Column(name = "house_build")
-    private int houseBuild;
+    private Integer houseBuild;
 
     @Column(name = "porch_build")
-    private int porchBuild;
+    private Integer porchBuild;
 
     @Column(name = "flat_num_build")
-    private int flatNumberBuild;
+    private Integer flatNumberBuild;
 
 }
