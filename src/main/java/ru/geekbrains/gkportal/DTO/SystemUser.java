@@ -25,7 +25,7 @@ public class SystemUser {
 
     private Integer roomCount;
 
-    private Boolean isHaveParkingPlace;
+    private Boolean HaveParkingPlace;
 
 
 
