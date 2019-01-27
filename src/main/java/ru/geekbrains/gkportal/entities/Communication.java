@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -13,7 +14,7 @@ public class Communication {
 
     @Id
     @Column(name = "id")
-    private int id;
+    private UUID uuid;
 
     @ManyToOne
     @JoinColumn(name = "communication_type_id")
@@ -44,4 +45,6 @@ public class Communication {
     @Column(name = "confirm_code")
     private String confirmCode;
 
+    public Communication() {
+    }
 }
