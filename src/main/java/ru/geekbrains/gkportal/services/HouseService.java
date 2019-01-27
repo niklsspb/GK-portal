@@ -9,7 +9,9 @@ import ru.geekbrains.gkportal.repository.BuildPorchConfigRepository;
 import ru.geekbrains.gkportal.repository.FlatRepository;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HouseService {
@@ -39,8 +41,12 @@ public class HouseService {
                 Floor floor = new Floor();
                 int w = i;
                 floor.setNumber(w);
-                flats.parallelStream().filter(f -> f.getFloor() == w).filter(f -> f.getPorch() == config.getPorchID())
-                        .forEach(floor.getFlats()::add);
+                List<Flat> floorFlats = flats.parallelStream().filter(f -> f.getFloor() == w)
+                        .filter(f -> f.getPorch() == config.getPorchID())
+                        //.sorted(Comparator.comparing(Flat::getRiser))
+                        .collect(Collectors.toList());
+                floor.getFlats().addAll(floorFlats);
+                flats.removeAll(floorFlats);
                 porch.getFloors().add(floor);
             }
             house.getPorchList().add(porch);

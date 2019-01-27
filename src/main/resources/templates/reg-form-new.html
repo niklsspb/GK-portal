@@ -18,7 +18,7 @@
 <body>
 <div class="gk-porch" th:each="porch: ${house.porchList}" >
     <h2 th:text="${porch.description.porchID}+' подъезд'"></h2>
-    <div class="gk-flatblock" th:attr="data-flats-per-floor=${porch.description.flatCountOnFloor}" th:attrappend="data-floor-count=${porch.description.floorsCount}">
+    <div class="gk-flatblock" th:attr="data-flats-ret-floor=${porch.description.flatCountOnFloor}" th:attrappend="data-floor-count=${porch.description}">
     <div class="gk-flat" th:attr="data-floor=${flat.floor}" th:attrappend="data-riser=${flat.riser}" th:text="${flat.flatNumber}" th:each="flat:${porch.flats}"></div>
     </div>
 </div>
