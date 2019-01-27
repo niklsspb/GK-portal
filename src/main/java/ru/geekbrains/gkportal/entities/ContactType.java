@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -17,6 +18,7 @@ public class ContactType {
     private int id;
 
     @Column(name = "description")
+    @NotNull(message = "Couldn't be empty!")
     private String description;
 
 }

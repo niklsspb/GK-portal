@@ -9,9 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class GkPortalApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
-
 }
+
+
 

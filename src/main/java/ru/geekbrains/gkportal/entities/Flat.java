@@ -1,9 +1,9 @@
 package ru.geekbrains.gkportal.entities;
 
-import javafx.beans.binding.IntegerBinding;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity
@@ -32,27 +32,35 @@ public class Flat {
     private Integer ownersCount;
 
     @Column(name = "house")
-    private Integer house;
+    @NotNull(message = "Couldn't be empty!")
+    private int house;
 
     @Column(name = "porch")
-    private Integer porch;
+    @NotNull(message = "Couldn't be empty!")
+    private int porch;
 
     @Column(name = "floor")
-    private Integer floor;
+    @NotNull(message = "Couldn't be empty!")
+    private int floor;
 
     @Column(name = "flat_num")
-    private Integer flatNumber;
+    @NotNull(message = "Couldn't be empty!")
+    private int flatNumber;
 
     @Column(name = "riser")
-    private Integer riser;
+    @NotNull(message = "Couldn't be empty!")
+    private int riser;
 
     @Column(name = "house_build")
-    private Integer houseBuild;
+    @NotNull(message = "Couldn't be empty!")
+    private int houseBuild;
 
     @Column(name = "porch_build")
-    private Integer porchBuild;
+    @NotNull(message = "Couldn't be empty!")
+    private int porchBuild;
 
     @Column(name = "flat_num_build")
-    private Integer flatNumberBuild;
+    @NotNull(message = "Couldn't be empty!")
+    private int flatNumberBuild;
 
 }
