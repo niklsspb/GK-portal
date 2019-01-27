@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.geekbrains.gkportal.entities.BuildPorchConfig;
 
 @Repository
-public interface BuildPorchConfigRepository extends JpaRepository<BuildPorchConfig, Integer> {
+public interface BuildPorchConfigRepository extends JpaRepository<BuildPorchConfig, BuildPorchConfig.HousingPorchID> {
 
 }
