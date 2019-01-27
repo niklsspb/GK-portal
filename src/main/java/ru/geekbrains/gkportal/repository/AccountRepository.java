@@ -6,5 +6,5 @@ import ru.geekbrains.gkportal.entities.Account;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
-
+    Account findOneByLogin(String login);
 }
