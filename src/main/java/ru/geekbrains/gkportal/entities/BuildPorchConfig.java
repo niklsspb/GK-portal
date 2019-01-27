@@ -36,9 +36,9 @@ public class BuildPorchConfig {
     @NotNull(message = "Couldn't be empty!")
     private Integer flatCountOnStartFloor;
 
-    @Column(name = "record_builded")
+    @Column(name = "record_built")
     @NotNull(message = "Couldn't be empty!")
-    private boolean purchUsed;
+    private boolean recordBuilt;
 
     @Column(name = "porch_num_from_right")
     @NotNull(message = "Couldn't be empty!")

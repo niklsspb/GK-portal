@@ -37,7 +37,7 @@ public class Account {
     private Contact contact;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "account_roles",
+    @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     @NotNull(message = "Role s.b. selected!")
