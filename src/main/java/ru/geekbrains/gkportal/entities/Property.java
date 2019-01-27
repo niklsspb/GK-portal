@@ -22,4 +22,6 @@ public class Property {
     @Enumerated(EnumType.STRING)
     private PropertyType propertyType;
 
+    public Property() {
+    }
 }

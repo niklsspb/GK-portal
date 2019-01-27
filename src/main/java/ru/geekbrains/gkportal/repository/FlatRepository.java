@@ -6,8 +6,10 @@ import ru.geekbrains.gkportal.entities.Flat;
 
 import java.util.List;
 
+import java.util.UUID;
+
 @Repository
-public interface FlatRepository extends JpaRepository<Flat, String > {
+public interface FlatRepository extends JpaRepository<Flat, UUID> {
     List<Flat> findAllByHouse(int house);
     List<Flat> findAllByHouseAndPorch(int house, int porch);
 
