@@ -13,8 +13,7 @@ public class Flat {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "contact_flat",

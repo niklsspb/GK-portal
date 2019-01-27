@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.gkportal.DTO.House;
-import ru.geekbrains.gkportal.DTO.HouseSimple;
 import ru.geekbrains.gkportal.DTO.SystemUser;
 import ru.geekbrains.gkportal.services.HouseService;
 

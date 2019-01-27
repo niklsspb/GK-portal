@@ -40,14 +40,14 @@
 
 </head>
 <body>
-<div th:each="porch: ${house.porchList}" class="porch">
+<div th:each="porch: ${house.porchList}" class="porch" th:fragment="porch-view">
     <h2 th:text="${porch.description.porchID}+' подъезд'"></h2>
     <table border="1">
 
-        <tbody>
-        <tr th:each="floor:${porch.floors}">
+        <tbody th:attr="data-porch-number=${porch.description.porchID}">
+        <tr th:each="floor:${porch.floors}" th:attr="data-floor-number=${floor.number}">
             <td th:text="${floor.number}+' этаж'" style="font-style: italic; border: hidden"></td>
-            <td class="gk-flat-holder" th:each="iter: ${#numbers.sequence( 0, porch.description.flatCountOnFloor - 1)}">
+            <td class="gk-flat-holder" th:attr="data-rizer-number=${iter}" th:each="iter: ${#numbers.sequence( 0, porch.description.flatCountOnFloor - 1)}">
                 <div class="gk-flat" th:each="flat:${floor.flats}" th:attr="data-flat-id=${flat.id}" th:if="${flat.riser==iter }">
                     <div class="gk-flat-number" th:text="${flat.flatNumber}" ></div>
                     <div class="gk-flat-build-number" th:text="${flat.flatNumberBuild}"></div>
