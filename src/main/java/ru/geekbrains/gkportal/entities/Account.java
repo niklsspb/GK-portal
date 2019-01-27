@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -13,7 +14,7 @@ public class Account {
 
     @Id
     @Column(name = "id")
-    private int id;
+    private UUID uuid;
 
     @Column(name = "login")
     @NotNull(message = "Couldn't be empty!")
@@ -36,10 +37,12 @@ public class Account {
     private Contact contact;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "account_roles",
+    @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     @NotNull(message = "Role s.b. selected!")
     private Collection<Role> roles;
 
+    public Account() {
+    }
 }

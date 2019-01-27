@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-
 @Entity
 @Data
 @Table(name = "build_porch_config")
@@ -15,31 +14,31 @@ public class BuildPorchConfig {
 
     @Id
     @Column(name = "housing")
-    private int housingID;
+    private Integer housingID;
 
     @Id
     @Column(name = "porch")
-    private int porchID;
+    private Integer porchID;
 
     @Column(name = "floors_count")
     @NotNull(message = "Couldn't be empty!")
-    private int floorsCount;
+    private Integer floorsCount;
 
     @Column(name = "flat_quantity_floor")
     @NotNull(message = "Couldn't be empty!")
-    private int flatCountOnFloor;
+    private Integer flatCountOnFloor;
 
     @Column(name = "flat_from_floor")
     @NotNull(message = "Couldn't be empty!")
-    private int flatStartFromFloor;
+    private Integer flatStartFromFloor;
 
     @Column(name = "flat_quantity_start_floor")
     @NotNull(message = "Couldn't be empty!")
-    private int flatCountOnStartFloor;
+    private Integer flatCountOnStartFloor;
 
     @Column(name = "record_built")
     @NotNull(message = "Couldn't be empty!")
-    private boolean purchUsed;
+    private boolean recordBuilt;
 
     @Column(name = "porch_num_from_right")
     @NotNull(message = "Couldn't be empty!")
@@ -49,22 +48,23 @@ public class BuildPorchConfig {
     @NotNull(message = "Couldn't be empty!")
     private boolean housingNumFromRight;
 
-    @Column(name = "all_flat_count")
-    private int flatOnPorchCount;
-
     @Column(name = "ident_flat_count")
     @NotNull(message = "Couldn't be empty!")
-    private int flatOnPorchIdentCount;
+    private Integer flatOnPorchIdentCount;
 
     @Column(name = "build_housing")
     @NotNull(message = "Couldn't be empty!")
-    private int buildHousing;
+    private Integer buildHousing;
 
     @Column(name = "build_porch")
     @NotNull(message = "Couldn't be empty!")
-    private int buildPorch;
+    private Integer buildPorch;
 
+    @Column(name = "all_flat_count")
+    private Integer flatOnPorchCount;
 
+    public BuildPorchConfig() {
+    }
 
     @Embeddable
     public static class HousingPorchID implements Serializable {
@@ -78,7 +78,6 @@ public class BuildPorchConfig {
             this.housingID = housingID;
             this.porchID = porchID;
         }
-
 
         @Override
         public boolean equals(Object o) {

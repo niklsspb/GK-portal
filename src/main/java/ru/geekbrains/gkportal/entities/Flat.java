@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -13,7 +14,7 @@ public class Flat {
 
     @Id
     @Column(name = "id")
-    private String id;
+    private UUID uuid;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "contact_flat",
@@ -32,34 +33,36 @@ public class Flat {
 
     @Column(name = "house")
     @NotNull(message = "Couldn't be empty!")
-    private int house;
+    private Integer house;
 
     @Column(name = "porch")
     @NotNull(message = "Couldn't be empty!")
-    private int porch;
+    private Integer porch;
 
     @Column(name = "floor")
     @NotNull(message = "Couldn't be empty!")
-    private int floor;
+    private Integer floor;
 
     @Column(name = "flat_num")
     @NotNull(message = "Couldn't be empty!")
-    private int flatNumber;
+    private Integer flatNumber;
 
     @Column(name = "riser")
     @NotNull(message = "Couldn't be empty!")
-    private int riser;
+    private Integer riser;
 
     @Column(name = "house_build")
     @NotNull(message = "Couldn't be empty!")
-    private int houseBuild;
+    private Integer houseBuild;
 
     @Column(name = "porch_build")
     @NotNull(message = "Couldn't be empty!")
-    private int porchBuild;
+    private Integer porchBuild;
 
     @Column(name = "flat_num_build")
     @NotNull(message = "Couldn't be empty!")
-    private int flatNumberBuild;
+    private Integer flatNumberBuild;
 
+    public Flat() {
+    }
 }
