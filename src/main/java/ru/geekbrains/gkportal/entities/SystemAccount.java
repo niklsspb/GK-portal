@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @FieldMatch(first = "password", second = "matchingPassword", message = "Значения полей пароль и пароль подтверждение должны совпадать")
-public class SystemUser {
+public class SystemAccount {
     @NotNull(message = "не может принимать пустое значение")
     @Size(min = 1, max=25, message = "недопустимое количество символов")
     private String firstName;
@@ -50,23 +50,23 @@ public class SystemUser {
 
     @NotNull(message = "не может принимать пустое значение")
     @Pattern(regexp = "^[0-9]{1,3}", message = "требуется от 1 до 3-х цифровых символов")
-    private int housingNumber;
+    private String housingNumber;
 
     @NotNull(message = "не может принимать пустое значение")
     @Pattern(regexp = "^[0-9]{1,2}", message = "требуется от 1 до 2-х цифровых символов")
-    private int porchNumber;
+    private String porchNumber;
 
     @NotNull(message = "не может принимать пустое значение")
     @Pattern(regexp = "^[0-9]{1,2}", message = "требуется от 1 до 2-х цифровых символов")
-    private int floorNumber;
+    private String floorNumber;
 
     @NotNull(message = "не может принимать пустое значение")
     @Pattern(regexp = "^[0-9]{1,4}", message = "требуется от 1 до 4-х цифровых символов")
-    private int flatNumber;
+    private String flatNumber;
 
     private String comments;
 
-    public SystemUser() {
+    public SystemAccount() {
 
     }
 }

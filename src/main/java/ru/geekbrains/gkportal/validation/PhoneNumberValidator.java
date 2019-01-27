@@ -1,4 +1,4 @@
-package com.springStudyProject.studyProject.validation;
+package ru.geekbrains.gkportal.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

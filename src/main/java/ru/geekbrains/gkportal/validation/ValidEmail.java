@@ -1,4 +1,4 @@
-package com.springStudyProject.studyProject.validation;
+package ru.geekbrains.gkportal.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Target({ ElementType.TYPE, ElementType.FIELD, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidEmail {
-	String message() default "Invalid email";
+	String message() default "Не верно указан email";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
 }
