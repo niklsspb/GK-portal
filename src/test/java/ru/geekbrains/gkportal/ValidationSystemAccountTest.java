@@ -43,7 +43,6 @@ public class ValidationSystemAccountTest {
         systemAccount.setPorchNumber("1");
     }
 
-
     @Test
     public void ValidationSuccessSystemAccountTest() throws Exception {
         Set<ConstraintViolation<SystemAccount>> violations = validator.validate(systemAccount);
@@ -117,7 +116,6 @@ public class ValidationSystemAccountTest {
                 violations.iterator().next().getMessage()
         );
     }
-
 
 }
 

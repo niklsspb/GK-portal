@@ -1,4 +1,4 @@
-package com.springStudyProject.studyProject.validation;
+package ru.geekbrains.gkportal.validation;
 
 import org.springframework.beans.BeanWrapperImpl;
 
