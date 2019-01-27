@@ -2,6 +2,7 @@ package ru.geekbrains.gkportal.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.gkportal.DTO.FlatDTO;
 import ru.geekbrains.gkportal.services.HouseService;
@@ -19,7 +20,8 @@ public class HouseRestController {
         this.houseService = houseService;
     }
 
-    @PutMapping("/flat")
+
+    @PutMapping(value = "/flat")
     public int changeFlat (@RequestBody FlatDTO flatDTO) {
         houseService.changeFlat(flatDTO);
         return HttpStatus.OK.value();
