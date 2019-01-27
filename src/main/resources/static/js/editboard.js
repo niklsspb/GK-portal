@@ -26,9 +26,23 @@ $(document).ready(function () {
                     const fFloor = flat.parent().parent().attr('data-floor-number');
                     const fRizer = flat.parent().attr('data-rizer-number');
                     const fPorch = flat.parent().parent().parent().attr('data-porch-number');
-                    alert('Теперь у квартиры с id: ' + fId + '\nномер '+ fNumber + '; строительный номер ' + fBuildNumber
+                   /* alert('Теперь у квартиры с id: ' + fId + '\nномер '+ fNumber + '; строительный номер ' + fBuildNumber
                         +'\nномер этажа ' + fFloor + '; номер стояка '+ fRizer
-                        + '\nв '+ fPorch + ' подъезде')
+                        + '\nв '+ fPorch + ' подъезде');*/
+                    var flatObject = {id : fId, porch : fPorch, floor : fFloor, flatNumber : fNumber, riser : fRizer, flatNumberBuild : fBuildNumber};
+                    $('#area').text(JSON.stringify(flatObject));
+                    $.ajax({
+                        type: "PUT",
+                        url: "/rest/flat",
+                        contentType: "application/json; charset=utf-8",
+                        async: true,
+                        data : JSON.stringify(flatObject),
+
+
+                    }).fail(function () {
+                        alert("Что-то пошло не так!");
+
+                    })
                 }
             },
         }).disableSelection;
