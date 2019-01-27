@@ -40,7 +40,8 @@
 
 </head>
 <body>
-<div th:each="porch: ${house.porchList}" class="porch">
+<div th:replace="~{reg-form :: porch-view}"></div>
+<!--<div th:each="porch: ${house.porchList}" class="porch">
     <h2 th:text="${porch.description.porchID}+' подъезд'"></h2>
     <table border="1">
 
@@ -57,7 +58,7 @@
         </tbody>
 
     </table>
-</div>
+</div>-->
 <div><button id="edit">Редактирование</button>
 <button id="stopedit">Перестать редактировать</button></div>
 <div>

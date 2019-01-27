@@ -64,8 +64,7 @@ public class BuildPorchConfig {
     @NotNull(message = "Couldn't be empty!")
     private int buildPorch;
 
-    @Column(name = "all_flat_count")
-    private int flatOnPorchCount;
+
 
     @Embeddable
     public static class HousingPorchID implements Serializable {

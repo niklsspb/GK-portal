@@ -11,6 +11,7 @@ import ru.geekbrains.gkportal.repository.FlatRepository;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,19 +55,18 @@ public class HouseService {
         return house;
     }
 
-    public HouseSimple buildSimple(int houseNumber) {
-        List<BuildPorchConfig> porchConfigs = porchConfigRepository.findAllByhousingID(houseNumber);
-        List<Flat> flats = flatRepository.findAllByHouse(houseNumber);
-        HouseSimple house = new HouseSimple();
-        house.setNumber(houseNumber);
-        for (BuildPorchConfig config : porchConfigs)
-        {
-            PorchSimple porch = new PorchSimple();
-            porch.setDescription(config);
-            flats.stream().filter(f -> f.getPorch() == config.getPorchID())
-                    .forEach(porch.getFlats()::add);
-            house.getPorchList().add(porch);
+    public Flat changeFlat(FlatDTO flatDTO) {
+        Optional<Flat> optional = flatRepository.findById(flatDTO.getId());
+        if (optional.isPresent()) {
+            Flat flat = optional.get();
+            flat.setPorch(flatDTO.getPorch());
+            flat.setFloor(flatDTO.getFloor());
+            flat.setFlatNumber(flatDTO.getFlatNumber());
+            flat.setRiser(flatDTO.getRiser());
+            flat.setFlatNumberBuild(flatDTO.getFlatNumberBuild());
+            return flatRepository.save(flat);
         }
-        return house;
+        return null;
     }
+
 }
