@@ -6,7 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.gkportal.DTO.House;
 import ru.geekbrains.gkportal.DTO.SystemUser;
+import ru.geekbrains.gkportal.entities.SystemAccount;
 import ru.geekbrains.gkportal.services.HouseService;
+
+import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
@@ -22,15 +25,18 @@ public class RegistrationController {
     public String showHouse(@PathVariable(name = "number") int number, Model model){
         House house = houseService.build(number);
         model.addAttribute("house", house);
-        model.addAttribute("systemUser", new SystemUser());
+        SystemAccount account = new SystemAccount();
+        account.setHousingNumber(number);
+        model.addAttribute("systemUser", account);
         return "reg-form";
     }
 
 
-    @PostMapping("/userRegister")
+    @PostMapping(value = "/userRegister")
     @ResponseBody
-    public String registerUser(@ModelAttribute("systemUser") SystemUser systemUser, Model model){
-        return systemUser.toString();
+    public String registerUser(@Valid @ModelAttribute("systemUser") SystemAccount systemAccount, Model model){
+        return systemAccount.toString();
+
 
     }
 }
