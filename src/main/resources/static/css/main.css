@@ -54,3 +54,7 @@ form li {
 .gk-flat-holder {
     min-width: 50px;
 }
+.error{
+    color: red;
+    background-color: aliceblue;
+}

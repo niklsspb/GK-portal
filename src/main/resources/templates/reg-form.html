@@ -37,20 +37,29 @@
 <div>
     <form th:action=" @{'/userRegister'}" th:object="${systemUser}" method="post">
         <div><label>Фамилия<input th:field="*{lastName}" placeholder="Иванов"></label>
-            <div></div>
-        </div>
-        <div><label>Имя<input th:field="*{firstName}" placeholder="Иван"></label></div>
-        <div><label>Отчество<input th:field="*{middleName}" placeholder="Иванович"></label></div>
-        <div><label>Номер телефона<input th:field="*{phoneNumber}" placeholder="+7 999 123-45-67"></label></div>
-        <div><label>Адрес электронной почты<input type="email" th:field="*{email}"></label></div>
-        <div><label>Логин<input th:field="*{login}" placeholder="login"></label></div>
-        <div><label>Пароль <input th:field="*{password}" type="password" placeholder="Very stRong paSS"></label></div>
-        <div><label>Повтор пароля<input th:field="*{matchingPassword}" type="password"
-                                        placeholder="Very stRong paSS"></label></div>
-        <div><label>Номер Дома<input th:field="*{housingNumber}" readonly="readonly"></label></div>
-        <div><label>Номер Подъезда<input th:field="*{porchNumber}" readonly="readonly"></label></div>
-        <div><label>Номер Этажа<input th:field="*{floorNumber}" readonly="readonly"></label></div>
-        <div><label>Номер Квартиры<input th:field="*{flatNumber}" readonly="readonly"></label></div>
+            <span class="error"  th:errors="*{lastName}"></span></div>
+        <div><label>Имя<input th:field="*{firstName}" placeholder="Иван"></label>
+            <span class="error"  th:errors="*{firstName}"></span></div>
+        <div><label>Отчество<input th:field="*{middleName}" placeholder="Иванович"></label>
+            <span class="error"  th:errors="*{middleName}"></span></div>
+        <div><label>Номер телефона<input th:field="*{phoneNumber}" placeholder="+7 999 123-45-67"></label>
+            <span class="error"  th:errors="*{phoneNumber}"></span></div>
+        <div><label>Адрес электронной почты<input type="email" th:field="*{email}"></label>
+            <span class="error"  th:errors="*{email}"></span></div>
+        <div><label>Логин<input th:field="*{login}" placeholder="login"></label>
+            <span class="error"  th:errors="*{login}"></span></div>
+        <div><label>Пароль <input th:field="*{password}" type="password" placeholder="Very stRong paSS"></label>
+            <span class="error"  th:errors="*{password}"></span></div>
+        <div><label>Повтор пароля<input th:field="*{matchingPassword}" type="password" placeholder="Very stRong paSS"></label>
+            <span class="error"  th:errors="*{matchingPassword}"></span></div>
+        <div><label>Номер Дома<input th:field="*{housingNumber}" readonly="readonly"></label>
+            <span class="error"  th:errors="*{housingNumber}"></span></div>
+        <div><label>Номер Подъезда<input th:field="*{porchNumber}" readonly="readonly">
+            <span class="error"  th:errors="*{porchNumber}"></span></label></div>
+        <div><label>Номер Этажа<input th:field="*{floorNumber}" readonly="readonly">
+            <span class="error"  th:errors="*{floorNumber}"></span></label></div>
+        <div><label>Номер Квартиры<input th:field="*{flatNumber}" readonly="readonly">
+            <span class="error"  th:errors="*{flatNumber}"></span></label></div>
         <div><label>Число комнат<select th:field="*{roomCount}">
             <option value="1">1 комната</option>
             <option value="2">2 комнаты</option>
@@ -59,7 +68,7 @@
         </select></label></div>
         <div><p>У меня есть место в подземном паркинге</p>
             <label><input type="radio" th:field="*{boughtParkingPlace}" value="true">Да</label>
-            <label><input type="radio" th:field="*{boughtParkingPlace}" value="false" checked>Нет</label>
+            <label><input type="radio" th:field="*{boughtParkingPlace}" value="false" th:checked="checked">Нет</label>
         </div>
         <div><p>Мне инересны</p>
             <ul>
@@ -69,8 +78,16 @@
                 </li>
             </ul>
             <p>Дополнительные интересы</p>
-            <textarea th:field="*{interestedIn}"></textarea>
+            <textarea th:field="*{extraInterests}"></textarea>
         </div>
+        <div><label>Число автомобилей в семье<select th:field="*{carsInFamily}">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select></label></div>
         <div><label><input type="checkbox" th:field="*{allowContactsSharing}" value="true">Я разрешаю делиться моими
             контактами с соседями</label>
         </div>
