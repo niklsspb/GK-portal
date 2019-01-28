@@ -44,4 +44,11 @@ public class RegistrationController {
 
 
     }
+
+    @ModelAttribute("interests")
+    public String[] getMultiCheckboxAllValues() {
+        return new String[] {
+                "Место в паркинге", "Детский сад", "Школа"
+        };
+    }
 }
