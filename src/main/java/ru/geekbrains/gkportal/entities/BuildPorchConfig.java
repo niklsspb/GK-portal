@@ -6,9 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Entity
 @Data
-@Table(name = "build_porch_config")
+@Entity(name = "build_porch_config")
 @IdClass(BuildPorchConfig.HousingPorchID.class)
 public class BuildPorchConfig {
 
