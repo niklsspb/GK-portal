@@ -6,7 +6,7 @@ import ru.geekbrains.gkportal.entities.Property;
 import ru.geekbrains.gkportal.entities.PropertyType;
 
 @Repository
-public interface PropertiesRepository extends CrudRepository<Property, Long> {
+public interface PropertiesRepository extends CrudRepository<Property, String> {
 
     Property findByNameAndPropertyType(String name, PropertyType type);
 

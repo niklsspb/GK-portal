@@ -9,9 +9,8 @@ import javax.persistence.*;
 public class Property {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "property_id")
-    private Long id;
+    private String id;
 
     @Column(name = "name")
     private String name;
@@ -23,4 +22,6 @@ public class Property {
     @Enumerated(EnumType.STRING)
     private PropertyType propertyType;
 
+    public Property() {
+    }
 }

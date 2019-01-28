@@ -17,12 +17,12 @@ MySQL - 5.7.24-log : Database - support_boot_db
 DROP TABLE IF EXISTS `account`;
 
 CREATE TABLE `account` (
-  `id` int(11) NOT NULL,
+  `id` char(36) NOT NULL,
   `login` varchar(45) NOT NULL COMMENT 'email-login',
   `confirmed` bit(1) NOT NULL COMMENT 'подтверждён почтой',
   `active` bit(1) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
-  `contact_id` int(11),
+  `contact_id` char(36),
   PRIMARY KEY (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`),
   KEY `fk_account_users1_idx` (`contact_id`),
@@ -34,8 +34,8 @@ CREATE TABLE `account` (
 DROP TABLE IF EXISTS `account_role`;
 
 CREATE TABLE `account_role` (
-  `account_id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL,
+  `account_id` char(36) NOT NULL,
+  `role_id` char(36) NOT NULL,
   PRIMARY KEY (`account_id`,`role_id`),
   KEY `fk_account-roles_account1_idx` (`account_id`),
   KEY `fk_account-roles_roles1_idx` (`role_id`),
@@ -69,9 +69,9 @@ CREATE TABLE `build_porch_config` (
 DROP TABLE IF EXISTS `communication`;
 
 CREATE TABLE `communication` (
-  `id` int(11) NOT NULL,
-  `communication_type_id` int(11) NOT NULL COMMENT 'вид связи',
-  `contact_id` int(11) NOT NULL COMMENT 'чей',
+  `id` char(36) NOT NULL,
+  `communication_type_id` char(36) NOT NULL COMMENT 'вид связи',
+  `contact_id` char(36) NOT NULL COMMENT 'чей',
   `identify` varchar(255) NOT NULL COMMENT 'логин связи',
   `description` varchar(255) NOT NULL COMMENT 'описание - типа домашняя почта',
   `confirmed` bit(1) NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE `communication` (
 DROP TABLE IF EXISTS `communication_type`;
 
 CREATE TABLE `communication_type` (
-  `id` int(11) NOT NULL,
+  `id` char(36) NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -99,8 +99,8 @@ CREATE TABLE `communication_type` (
 DROP TABLE IF EXISTS `contact`;
 
 CREATE TABLE `contact` (
-  `id` int(11) NOT NULL,
-  `contact_type_id` int(11) NOT NULL,
+  `id` char(36) NOT NULL,
+  `contact_type_id` char(36) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `middle_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) NOT NULL,
@@ -114,8 +114,8 @@ CREATE TABLE `contact` (
 DROP TABLE IF EXISTS `contact_flat`;
 
 CREATE TABLE `contact_flat` (
-  `contact_id` int(11) NOT NULL,
-  `flat_id` int(11) NOT NULL,
+  `contact_id` char(36) NOT NULL,
+  `flat_id` char(36) NOT NULL,
   PRIMARY KEY (`contact_id`,`flat_id`),
   KEY `fk_users_has_flats_flats1_idx` (`flat_id`),
   CONSTRAINT `fk_users_has_flats_flats1` FOREIGN KEY (`flat_id`) REFERENCES `flat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -127,7 +127,7 @@ CREATE TABLE `contact_flat` (
 DROP TABLE IF EXISTS `contact_type`;
 
 CREATE TABLE `contact_type` (
-  `id` int(11) NOT NULL,
+  `id` char(36) NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -137,7 +137,7 @@ CREATE TABLE `contact_type` (
 DROP TABLE IF EXISTS `flat`;
 
 CREATE TABLE `flat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` char(36) NOT NULL COMMENT 'id',
   `square` float DEFAULT NULL COMMENT 'кв.м. без учёта лоджии/балкона',
   `rooms` int(11) DEFAULT NULL COMMENT 'кол-во комнат',
   `owners_count` int(11) DEFAULT NULL COMMENT 'кол-во собственников',
@@ -159,7 +159,7 @@ CREATE TABLE `flat` (
 DROP TABLE IF EXISTS `role`;
 
 CREATE TABLE `role` (
-  `id` int(11) NOT NULL,
+  `id` char(36) NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
