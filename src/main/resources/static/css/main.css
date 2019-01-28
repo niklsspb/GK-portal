@@ -1,0 +1,60 @@
+.gk-flat {
+    border-width: 1px;
+    border-radius: 3px;
+    border-style: solid;
+    text-align: center;
+}
+.porch {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.porch h2 {
+    text-align: center;
+}
+
+.porch table td {
+    border-width: 1px;
+    border-color: royalblue;
+    border-style: dotted;
+    align-content: center;
+    padding: 3px;
+}
+.gk-floor-number {
+    border-bottom-style: none;
+    border-top-style: none;
+    background-color: beige;
+}
+
+.porch table {
+     border-width: 3px;
+     border-collapse: collapse;
+     border-style: solid;
+ }
+form {
+    width: min-content;
+}
+
+form label {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    white-space: nowrap;
+}
+form li {
+    white-space: nowrap;
+}
+.gk-flat-number {
+    background-color: #ffe0c8
+}
+.gk-flat-build-number{
+    background-color : #e6f5ff
+}
+
+.gk-flat-holder {
+    min-width: 50px;
+}
+.error{
+    color: red;
+    background-color: aliceblue;
+}
