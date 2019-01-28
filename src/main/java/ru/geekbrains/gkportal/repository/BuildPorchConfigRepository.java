@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.geekbrains.gkportal.entities.BuildPorchConfig;
 
-@Repository
-public interface BuildPorchConfigRepository extends JpaRepository<BuildPorchConfig, Integer> {
+import java.util.List;
 
+@Repository
+public interface BuildPorchConfigRepository  extends JpaRepository<BuildPorchConfig, BuildPorchConfig.HousingPorchID> {
+    List<BuildPorchConfig> findAllByhousingID(int housingID);
 }

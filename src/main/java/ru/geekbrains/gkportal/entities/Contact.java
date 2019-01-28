@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -12,7 +13,7 @@ public class Contact {
 
     @Id
     @Column(name = "id")
-    private int id;
+    private UUID uuid;
 
     @ManyToOne
     @JoinColumn(name = "contact_type_id")
@@ -30,4 +31,6 @@ public class Contact {
     @NotNull(message = "Couldn't be empty!")
     private String lastName;
 
+    public Contact() {
+    }
 }
