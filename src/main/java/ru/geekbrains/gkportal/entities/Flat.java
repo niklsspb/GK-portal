@@ -14,7 +14,7 @@ public class Flat {
 
     @Id
     @Column(name = "id")
-    private UUID uuid;
+    private String uuid;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "contact_flat",

@@ -6,6 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script th:src="@{/js/main.js}" type="text/javascript"></script>
     <script th:src="@{/js/regboard.js}" type="text/javascript"></script>
     <title>Title</title>
 
@@ -21,7 +22,7 @@
             <td class="gk-floor-number" th:text="${floor.number}+' этаж'"></td>
             <td class="gk-flat-holder" th:attr="data-rizer-number=${iter}"
                 th:each="iter: ${#numbers.sequence( 0, porch.description.flatCountOnFloor - 1)}">
-                <div class="gk-flat" th:each="flat:${floor.flats}" th:attr="data-flat-id=${flat.id}"
+                <div class="gk-flat" th:each="flat:${floor.flats}" th:attr="data-flat-id=${flat.uuid.toString()}"
                      th:if="${flat.riser==iter }">
                     <div class="gk-flat-number" th:text="${flat.flatNumber}"></div>
                     <div class="gk-flat-build-number" th:text="${flat.flatNumberBuild}"></div>
@@ -44,8 +45,12 @@
         <div><label>Адрес электронной почты<input type="email" th:field="*{email}"></label></div>
         <div><label>Логин<input th:field="*{login}" placeholder="login"></label></div>
         <div><label>Пароль <input th:field="*{password}" type="password" placeholder="Very stRong paSS"></label></div>
-        <div><label>Повтор пароля<input th:field="*{matchingPassword}" placeholder="Very stRong paSS"></label></div>
-        <div><label></label></div>
+        <div><label>Повтор пароля<input th:field="*{matchingPassword}" type="password" placeholder="Very stRong paSS"></label></div>
+        <div><label>Номер Дома<input th:field="*{housingNumber}" readonly="readonly"></label></div>
+        <div><label>Номер Подъезда<input th:field="*{porchNumber}" readonly="readonly"></label></div>
+        <div><label>Номер Этажа<input th:field="*{floorNumber}" readonly="readonly"></label></div>
+        <div><label>Номер Квартиры<input th:field="*{flatNumber}" readonly="readonly"></label></div>
+
         <div>
             <button type="submit">Отправить</button>
         </div>

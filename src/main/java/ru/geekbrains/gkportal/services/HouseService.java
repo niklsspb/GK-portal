@@ -8,10 +8,7 @@ import ru.geekbrains.gkportal.entities.Flat;
 import ru.geekbrains.gkportal.repository.BuildPorchConfigRepository;
 import ru.geekbrains.gkportal.repository.FlatRepository;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,10 +40,11 @@ public class HouseService {
                 int w = i;
                 floor.setNumber(w);
                 List<Flat> floorFlats = flats.parallelStream().filter(f -> f.getFloor() == w)
-                        .filter(f -> f.getPorch() == config.getPorchID())
+                        .filter(f -> f.getPorch().equals(config.getPorchID()))
                         //.sorted(Comparator.comparing(Flat::getRiser))
                         .collect(Collectors.toList());
                 floor.getFlats().addAll(floorFlats);
+                //floorFlats.forEach(s-> System.out.println(s.getUuid()));
                 flats.removeAll(floorFlats);
                 porch.getFloors().add(floor);
             }
@@ -66,7 +64,9 @@ public class HouseService {
             flat.setFlatNumberBuild(flatDTO.getFlatNumberBuild());
             return flatRepository.save(flat);
         }
+        System.out.println("Ничего не нашлось");
         return null;
+
     }
 
 }

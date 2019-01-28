@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface FlatRepository extends JpaRepository<Flat, UUID> {
+public interface FlatRepository extends JpaRepository<Flat, String> {
     List<Flat> findAllByHouse(int house);
     List<Flat> findAllByHouseAndPorch(int house, int porch);
 
