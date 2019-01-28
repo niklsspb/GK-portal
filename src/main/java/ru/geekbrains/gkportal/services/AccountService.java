@@ -17,13 +17,17 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements UserDetailsService {
+public class AccountService implements UserDetailsService {
 
     private AccountRepository accountRepository;
 
     @Autowired
     public void setAccountRepository(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
+    }
+
+    public Account save(Account account) {
+        return accountRepository.save(account);
     }
 
     @Override

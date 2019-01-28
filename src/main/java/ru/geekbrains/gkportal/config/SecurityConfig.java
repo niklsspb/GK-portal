@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ru.geekbrains.gkportal.services.UserService;
+import ru.geekbrains.gkportal.services.AccountService;
 
 /**
  * Аннотация @EnableGlobalMethodSecurity позволяет использовать аннотации для защиты на уровне
@@ -22,11 +22,11 @@ import ru.geekbrains.gkportal.services.UserService;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserService userService;
+    private AccountService accountService;
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setAccountService(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @Override
@@ -37,8 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/test/admin").authenticated()
-                .antMatchers("/test/manager").hasAnyRole("manager")
+                .antMatchers("/test/admin").hasAuthority("admin")
+                .antMatchers("/test/manager").hasAuthority("manager")
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -46,8 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/")
-                .and();
+                .logoutSuccessUrl("/login")
+                .and()
+                .csrf().disable(); // todo убарть когда будет создана кнопка на post /logout
     }
 
     @Bean
@@ -58,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(userService);
+        auth.setUserDetailsService(accountService);
         auth.setPasswordEncoder(passwordEncoder());
         return auth;
     }
