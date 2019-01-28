@@ -34,14 +34,14 @@ public class ValidationSystemAccountTest {
         systemAccount.setLastName("test");
         systemAccount.setMiddleName("test");
         systemAccount.setEmail("test@mail.ru");
-        //systemAccount.setFlatNumber("1");
-       // systemAccount.setFloorNumber("1");
-       // systemAccount.setHousingNumber("1");
+        systemAccount.setFlatNumber(1);
+        systemAccount.setFloorNumber(1);
+        systemAccount.setHousingNumber(1);
         systemAccount.setLogin("mytest");
         systemAccount.setPassword("123456");
         systemAccount.setMatchingPassword("123456");
         systemAccount.setPhoneNumber("1234567890");
-        //systemAccount.setPorchNumber("1");
+        systemAccount.setPorchNumber(1);
     }
 
     @Test
