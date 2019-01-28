@@ -9,7 +9,6 @@ import javax.persistence.*;
 public class Property {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "property_id")
     private String id;
 
