@@ -2,6 +2,7 @@ package ru.geekbrains.gkportal.entities;
 
 
 import lombok.Data;
+
 import ru.geekbrains.gkportal.validation.FieldMatch;
 import ru.geekbrains.gkportal.validation.ValidEmail;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
@@ -10,6 +11,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 
 @Data
@@ -69,9 +71,22 @@ public class SystemAccount {
     @Min(value = 1, message = "минимальное значение 1")
     private Integer flatNumber;
 
+    @NotNull(message = "не может принимать пустое значение")
+    @Min(value = 1, message = "минимальное значение 1")
+    private Integer roomCount;
 
+    private Boolean boughtParkingPlace;
+
+    private Boolean allowContactsSharing;
+
+    private List<String> interestedIn;
+
+    private Integer carsInFamily;
 
     private String comments;
+
+
+
 
     public SystemAccount() {
 

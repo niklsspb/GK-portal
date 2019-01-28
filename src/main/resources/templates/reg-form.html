@@ -45,12 +45,35 @@
         <div><label>Адрес электронной почты<input type="email" th:field="*{email}"></label></div>
         <div><label>Логин<input th:field="*{login}" placeholder="login"></label></div>
         <div><label>Пароль <input th:field="*{password}" type="password" placeholder="Very stRong paSS"></label></div>
-        <div><label>Повтор пароля<input th:field="*{matchingPassword}" type="password" placeholder="Very stRong paSS"></label></div>
+        <div><label>Повтор пароля<input th:field="*{matchingPassword}" type="password"
+                                        placeholder="Very stRong paSS"></label></div>
         <div><label>Номер Дома<input th:field="*{housingNumber}" readonly="readonly"></label></div>
         <div><label>Номер Подъезда<input th:field="*{porchNumber}" readonly="readonly"></label></div>
         <div><label>Номер Этажа<input th:field="*{floorNumber}" readonly="readonly"></label></div>
         <div><label>Номер Квартиры<input th:field="*{flatNumber}" readonly="readonly"></label></div>
-
+        <div><label>Число комнат<select th:field="*{roomCount}">
+            <option value="1">1 комната</option>
+            <option value="2">2 комнаты</option>
+            <option value="3">3 комнаты</option>
+            <option value="4">4 комнаты</option>
+        </select></label></div>
+        <div><p>У меня есть место в подземном паркинге</p>
+            <label><input type="radio" th:field="*{boughtParkingPlace}" value="true">Да</label>
+            <label><input type="radio" th:field="*{boughtParkingPlace}" value="false" checked>Нет</label>
+        </div>
+        <div><p>Мне инересны</p>
+            <ul>
+                <li th:each="boxValue: ${interests}">
+                    <input type="checkbox" th:field="*{interestedIn}" th:value="${boxValue}"><label
+                        th:text="${boxValue}" th:for="${#ids.prev('interestedIn')}"></label>
+                </li>
+            </ul>
+            <p>Дополнительные интересы</p>
+            <textarea th:field="*{interestedIn}"></textarea>
+        </div>
+        <div><label><input type="checkbox" th:field="*{allowContactsSharing}" value="true">Я разрешаю делиться моими
+            контактами с соседями</label>
+        </div>
         <div>
             <button type="submit">Отправить</button>
         </div>

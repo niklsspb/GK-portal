@@ -41,6 +41,9 @@ form label {
     padding: 5px;
     white-space: nowrap;
 }
+form li {
+    white-space: nowrap;
+}
 .gk-flat-number {
     background-color: #ffe0c8
 }
