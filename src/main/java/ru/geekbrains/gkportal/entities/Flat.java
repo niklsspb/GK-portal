@@ -1,6 +1,7 @@
 package ru.geekbrains.gkportal.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -63,6 +64,8 @@ public class Flat {
     @NotNull(message = "Couldn't be empty!")
     private Integer flatNumberBuild;
 
+    @Formula("(SELECT count(*) FROM contact_flat cf WHERE cf.flat_id=id)")
+    private Integer accountCount;
     public Flat() {
     }
 }
