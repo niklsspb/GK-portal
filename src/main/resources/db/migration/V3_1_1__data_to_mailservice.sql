@@ -1,4 +1,4 @@
-INSERT INTO `support_boot_db`.`properties` (`property_id`, `name`, `value`,`type`) VALUES
+INSERT INTO `support_boot_db`.`properties` (`id`, `name`, `value`,`type`) VALUES
 ('cad1d71f-2166-11e9-a2f1-3085a9986b2c', 'host', 'smtp.gmail.com', 'MAIL'),
 ('d565eb4f-2166-11e9-a2f1-3085a9986b2c', 'port', '587', 'MAIL'),
 ('dd53215b-2166-11e9-a2f1-3085a9986b2c', 'user_name', 'smtp.gmail.com', 'MAIL'),
