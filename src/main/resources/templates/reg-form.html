@@ -22,7 +22,7 @@
             <td class="gk-floor-number" th:text="${floor.number}+' этаж'"></td>
             <td class="gk-flat-holder" th:attr="data-rizer-number=${iter}"
                 th:each="iter: ${#numbers.sequence( 0, porch.description.flatCountOnFloor - 1)}">
-                <div class="gk-flat" th:each="flat:${floor.flats}" th:attr="data-flat-id=${flat.uuid.toString()}"
+                <div th:class="gk-flat" th:classappend="${flat.accountCount}>0 ? 'gk-occupied' : 'gk'" th:each="flat:${floor.flats}" th:attr="data-flat-id=${flat.uuid.toString()}"
                      th:if="${flat.riser==iter }">
                     <div class="gk-flat-number" th:text="${flat.flatNumber}"></div>
                     <div class="gk-flat-build-number" th:text="${flat.flatNumberBuild}"></div>
