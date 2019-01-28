@@ -81,6 +81,8 @@ public class SystemAccount {
 
     private List<String> interestedIn;
 
+    private String extraInterests;
+
     private Integer carsInFamily;
 
     private String comments;
