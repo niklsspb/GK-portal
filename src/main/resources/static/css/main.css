@@ -40,9 +40,9 @@ body {
     border: 3px solid;
 }
 
-form {
+/*form {
     width: min-content;
-}
+}*/
 
 .login-form{
 width: 300px;
@@ -61,16 +61,16 @@ width: 300px;
     padding-right: 110px;
 }
 
-form label {
+/*form label {
     display: flex;
     justify-content: space-between;
     padding: 5px;
     white-space: nowrap;
-}
+}*/
 
-form li {
+/*form li {
     white-space: nowrap;
-}
+}*/
 
 .gk-flat-number {
     background-color: #ffe0c8
@@ -79,7 +79,10 @@ form li {
 .gk-flat-build-number {
     background-color: #e6f5ff
 }
-
+.gk-form-container{
+    margin-top: 30px;
+    margin-left: 50px;
+}
 
 .gk-occupied .gk-flat-number {
     background-color: crimson;
@@ -94,4 +97,12 @@ form li {
 .error {
     color: red;
     background-color: aliceblue;
+}
+
+.gk-error {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+    margin-left: 5%;
 }
