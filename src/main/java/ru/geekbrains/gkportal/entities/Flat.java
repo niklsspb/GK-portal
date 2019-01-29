@@ -2,16 +2,15 @@ package ru.geekbrains.gkportal.entities;
 
 import lombok.Data;
 import org.hibernate.annotations.Formula;
-
+import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
-import java.util.UUID;
 
-@Entity
 @Data
-@Table(name = "flat")
-public class Flat {
+@Entity(name = "flat")
+@EqualsAndHashCode(callSuper = true)
+public class Flat extends AbstractEntity {
 
     @Id
     @Column(name = "id")

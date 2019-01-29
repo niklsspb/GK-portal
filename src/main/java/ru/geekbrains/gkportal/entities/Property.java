@@ -1,16 +1,17 @@
 package ru.geekbrains.gkportal.entities;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
-@Entity(name = "properties")
 @Data
-public class Property {
-
-    @Id
-    @Column(name = "property_id")
-    private String id;
+@Entity(name = "properties")
+@EqualsAndHashCode(callSuper = true)
+public class Property extends AbstractEntity {
 
     @Column(name = "name")
     private String name;
@@ -18,7 +19,7 @@ public class Property {
     @Column(name = "value")
     private String value;
 
-    @Column (name ="type")
+    @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private PropertyType propertyType;
 
