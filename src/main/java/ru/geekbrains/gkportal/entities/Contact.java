@@ -1,19 +1,18 @@
 package ru.geekbrains.gkportal.entities;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
 
-@Entity
 @Data
-@Table(name = "contact")
-public class Contact {
-
-    @Id
-    @Column(name = "id")
-    private UUID uuid;
+@Entity(name = "contact")
+@EqualsAndHashCode(callSuper = true)
+public class Contact extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "contact_type_id")

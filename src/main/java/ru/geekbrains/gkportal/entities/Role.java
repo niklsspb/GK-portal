@@ -1,22 +1,16 @@
 package ru.geekbrains.gkportal.entities;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
 
-@Entity
 @Data
-@Table(name = "role")
-public class Role {
-
-    @Id
-    @Column(name = "id")
-    private UUID uuid;
+@Entity(name = "role")
+@EqualsAndHashCode(callSuper = true)
+public class Role extends AbstractEntity {
 
     @Column(name = "description")
     @NotNull(message = "Couldn't be empty!")
