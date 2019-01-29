@@ -1,8 +1,8 @@
 package ru.geekbrains.gkportal.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.Formula;
 import lombok.EqualsAndHashCode;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -63,6 +63,8 @@ public class Flat extends AbstractEntity {
     @NotNull(message = "Couldn't be empty!")
     private Integer flatNumberBuild;
 
+    @Formula("(SELECT count(*) FROM contact_flat cf WHERE cf.flat_id=id)")
+    private Integer accountCount;
     public Flat() {
     }
 }

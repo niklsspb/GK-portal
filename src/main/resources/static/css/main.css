@@ -80,6 +80,13 @@ form li {
     background-color: #e6f5ff
 }
 
+
+.gk-occupied .gk-flat-number {
+    background-color: crimson;
+}
+.gk-occupied .gk-flat-build-number{
+    background-color : darkcyan;
+}
 .gk-flat-holder {
     min-width: 50px;
 }
