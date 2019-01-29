@@ -75,17 +75,18 @@ public class SystemAccount {
     @Min(value = 1, message = "минимальное значение 1")
     private Integer roomCount;
 
-    private Boolean boughtParkingPlace;
+    private ContactType contactType;
+    //private Boolean boughtParkingPlace;
 
-    private Boolean allowContactsSharing;
+    private Boolean allowContactsSharing; // Пока бесполезная фигня, но потом прикрутим.
 
-    private List<String> interestedIn;
+    //private List<String> interestedIn;
 
-    private String extraInterests;
+    //private String extraInterests;
 
-    private Integer carsInFamily;
+    //private Integer carsInFamily;
 
-    private String comments;
+   // private String comments;
 
 
 
