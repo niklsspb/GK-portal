@@ -7,7 +7,6 @@ import ru.geekbrains.gkportal.entities.Flat;
 import java.util.List;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public interface FlatRepository extends JpaRepository<Flat, String> {
