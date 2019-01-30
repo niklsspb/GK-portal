@@ -2,10 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}"/>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}"/>
     <script th:src="@{/js/main.js}" type="text/javascript"></script>
     <script th:src="@{/js/regboard.js}" type="text/javascript"></script>
     <title>Title</title>
@@ -22,7 +25,8 @@
             <td class="gk-floor-number" th:text="${floor.number}+' этаж'"></td>
             <td class="gk-flat-holder" th:attr="data-rizer-number=${iter}"
                 th:each="iter: ${#numbers.sequence( 0, porch.description.flatCountOnFloor - 1)}">
-                <div th:class="gk-flat" th:classappend="${flat.accountCount}>0 ? 'gk-occupied' : 'gk'" th:each="flat:${floor.flats}" th:attr="data-flat-id=${flat.uuid.toString()}"
+                <div th:class="gk-flat" th:classappend="${flat.accountCount}>0 ? 'gk-occupied' : 'gk'"
+                     th:each="flat:${floor.flats}" th:attr="data-flat-id=${flat.uuid.toString()}"
                      th:if="${flat.riser==iter }">
                     <div class="gk-flat-number" th:text="${flat.flatNumber}"></div>
                     <div class="gk-flat-build-number" th:text="${flat.flatNumberBuild}"></div>
@@ -34,39 +38,80 @@
     </table>
 </div>
 
-<div>
+<div class="gk-form-container">
     <form th:action=" @{'/userRegister'}" th:object="${systemUser}" method="post">
-        <div><label>Фамилия<input th:field="*{lastName}" placeholder="Иванов"></label>
-            <span class="error"  th:errors="*{lastName}"></span></div>
-        <div><label>Имя<input th:field="*{firstName}" placeholder="Иван"></label>
-            <span class="error"  th:errors="*{firstName}"></span></div>
-        <div><label>Отчество<input th:field="*{middleName}" placeholder="Иванович"></label>
-            <span class="error"  th:errors="*{middleName}"></span></div>
-        <div><label>Номер телефона<input th:field="*{phoneNumber}" placeholder="+7 999 123-45-67"></label>
-            <span class="error"  th:errors="*{phoneNumber}"></span></div>
-        <div><label>Адрес электронной почты<input type="email" th:field="*{email}"></label>
-            <span class="error"  th:errors="*{email}"></span></div>
-        <div><label>Логин<input th:field="*{login}" placeholder="login"></label>
-            <span class="error"  th:errors="*{login}"></span></div>
+        <div th:if="${registrationError != null}" class="form-group">
+            <div class="col-xs-6">
+                <div class="alert alert-danger col-xs-offset-1 col-xs-10">${registrationError}</div>
+            </div>
+        </div>
+        <div class="form-group row"><label class="col-sm-3 col-form-label" th:for="login">Логин</label>
+            <div class="col-sm-3">
+                <input th:field="*{login}" placeholder="login">
+                <div class="gk-error" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
+            </div>
+        </div>
+
         <div><label>Пароль <input th:field="*{password}" type="password" placeholder="Very stRong paSS"></label>
-            <span class="error"  th:errors="*{password}"></span></div>
-        <div><label>Повтор пароля<input th:field="*{matchingPassword}" type="password" placeholder="Very stRong paSS"></label>
-            <span class="error"  th:errors="*{matchingPassword}"></span></div>
+            <span class="error" th:errors="*{password}"></span></div>
+
+        <div><label>Повтор пароля<input th:field="*{matchingPassword}" type="password"
+                                        placeholder="Very stRong paSS"></label>
+            <span class="error" th:errors="*{matchingPassword}"></span></div>
+
+        <div><label>Адрес электронной почты<input type="email" th:field="*{email}"></label>
+            <span class="error" th:errors="*{email}"></span></div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" th:for="phoneNumber">Номер телефона</label>
+            <div class="col-sm-3">
+                <input class="form-control" th:field="*{phoneNumber}" placeholder="+7 999 123-45-67">
+                <div class="gk-error" th:if="${#fields.hasErrors('phoneNumber')}" th:error="*{phoneNumber}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" th:for="lastName">Фамилия</label>
+            <div class="col-sm-3">
+                <input class="form-control" th:field="*{lastName}" placeholder="Иванов">
+                <div class="gk-error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" th:for="firstName">Имя</label>
+            <div class="col-sm-3">
+                <input class="form-control" th:field="*{firstName}" placeholder="Иван">
+                <div class="gk-error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" th:for="middleName">Отчество</label>
+            <div class="col-sm-3">
+                <input class="form-control" th:field="*{middleName}" placeholder="Иванович">
+                <div class="gk-error" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"></div>
+            </div>
+        </div>
+
         <div><label>Номер Дома<input th:field="*{housingNumber}" readonly="readonly"></label>
-            <span class="error"  th:errors="*{housingNumber}"></span></div>
+            <span class="error" th:errors="*{housingNumber}"></span></div>
         <div><label>Номер Подъезда<input th:field="*{porchNumber}" readonly="readonly">
-            <span class="error"  th:errors="*{porchNumber}"></span></label></div>
+            <span class="error" th:errors="*{porchNumber}"></span></label></div>
         <div><label>Номер Этажа<input th:field="*{floorNumber}" readonly="readonly">
-            <span class="error"  th:errors="*{floorNumber}"></span></label></div>
+            <span class="error" th:errors="*{floorNumber}"></span></label></div>
         <div><label>Номер Квартиры<input th:field="*{flatNumber}" readonly="readonly">
-            <span class="error"  th:errors="*{flatNumber}"></span></label></div>
-        <div><label>Число комнат<select th:field="*{roomCount}">
+            <span class="error" th:errors="*{flatNumber}"></span></label></div>
+        <div><label>Число комнат в квартире<select th:field="*{roomCount}">
             <option value="1">1 комната</option>
             <option value="2">2 комнаты</option>
             <option value="3">3 комнаты</option>
             <option value="4">4 комнаты</option>
         </select></label></div>
-        <div><p>У меня есть место в подземном паркинге</p>
+        <div><label>Ваш статус<select th:field="*{contactType.uuid}">
+            <option th:each="type : ${userTypes}" th:value="${type.uuid}" th:text="${type.description}"></option>
+        </select></label></div>
+        <!--/*<div><p>У меня есть место в подземном паркинге</p>
             <label><input type="radio" th:field="*{boughtParkingPlace}" value="true">Да</label>
             <label><input type="radio" th:field="*{boughtParkingPlace}" value="false" th:checked="checked">Нет</label>
         </div>
@@ -87,12 +132,21 @@
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
-        </select></label></div>
-        <div><label><input type="checkbox" th:field="*{allowContactsSharing}" value="true">Я разрешаю делиться моими
-            контактами с соседями</label>
+        </select></label></div>*/-->
+        <div class="form-group row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div class="form-check"><input class="form-check-input" type="checkbox"
+                                               th:field="*{allowContactsSharing}" value="true">
+                    <label class="form-check-label" th:for="allowContactsSharing1">Я разрешаю делиться моими контактами
+                        с соседями</label></div>
+            </div>
+
         </div>
-        <div>
-            <button type="submit">Отправить</button>
+        <div class="form-group row">
+            <div class="col-sm-5">
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </div>
         </div>
     </form>
 </div>
