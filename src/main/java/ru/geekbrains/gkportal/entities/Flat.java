@@ -12,9 +12,7 @@ import java.util.Collection;
 @EqualsAndHashCode(callSuper = true)
 public class Flat extends AbstractEntity {
 
-    @Id
-    @Column(name = "id")
-    private String uuid;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "contact_flat",

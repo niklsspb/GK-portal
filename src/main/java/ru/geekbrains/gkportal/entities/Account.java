@@ -29,7 +29,7 @@ public class Account extends AbstractEntity {
     @NotNull(message = "Couldn't be empty!")
     private String passwordHash;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "contact_id")
     private Contact contact;
 
