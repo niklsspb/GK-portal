@@ -6,12 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ServerErrorException;
-import ru.geekbrains.gkportal.entities.Account;
-import ru.geekbrains.gkportal.entities.Role;
 import ru.geekbrains.gkportal.services.AccountService;
 import ru.geekbrains.gkportal.services.RoleService;
-
-import java.util.Collections;
 
 @Controller
 @RequestMapping("/test")
@@ -57,11 +53,6 @@ public class TestWebController {
 //        manager.setRoles(Collections.singletonList(roleManager));
 //        accountService.save(admin);
 
-        return "test_page";
-    }
-
-    @GetMapping("admin")
-    public String adminPage() {
         return "test_page";
     }
 
