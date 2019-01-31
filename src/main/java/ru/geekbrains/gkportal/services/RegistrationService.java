@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @Service
 public class RegistrationService {
+
     private FlatRepository flatRepository;
     private AccountRepository accountRepository;
     private BCryptPasswordEncoder encoder;
@@ -46,10 +47,10 @@ public class RegistrationService {
         this.accountRepository = accountRepository;
     }
 
-    public boolean registerNewUser(SystemAccount systemAccount){
+    public boolean registerNewUser(SystemAccount systemAccount) {
         Optional<Flat> flatOptional = flatRepository.findByHouseAndPorchAndFloorAndFlatNumber(systemAccount.getHousingNumber(),
-                systemAccount.getPorchNumber(),systemAccount.getFloorNumber(), systemAccount.getFlatNumber());
-        if(flatOptional.isPresent()){
+                systemAccount.getPorchNumber(), systemAccount.getFloorNumber(), systemAccount.getFlatNumber());
+        if (flatOptional.isPresent()) {
             Contact contact = new Contact();
             contact.setContactType(systemAccount.getContactType());
             contact.setFirstName(systemAccount.getFirstName());
@@ -65,8 +66,8 @@ public class RegistrationService {
             account.setPasswordHash(encoder.encode(systemAccount.getPassword()));
             account.setContact(contact);
             List<Role> roles = new ArrayList<>();
-            Optional<Role> roleOptional =  roleRepository.findRoleByDescription("habitant");
-            if(roleOptional.isPresent()){
+            Optional<Role> roleOptional = roleRepository.findRoleByDescription("habitant");
+            if (roleOptional.isPresent()) {
                 roles.add(roleOptional.get());
                 account.setRoles(roles);
                 contactRepository.save(contact);
