@@ -4,18 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import ru.geekbrains.gkportal.DTO.House;
-import ru.geekbrains.gkportal.DTO.SystemUser;
-import ru.geekbrains.gkportal.entities.Contact;
-import ru.geekbrains.gkportal.entities.Flat;
 import ru.geekbrains.gkportal.entities.SystemAccount;
 import ru.geekbrains.gkportal.services.ContactTypeService;
 import ru.geekbrains.gkportal.services.HouseService;
 import ru.geekbrains.gkportal.services.RegistrationService;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 public class RegistrationController {
@@ -40,7 +39,7 @@ public class RegistrationController {
     }
 
     @GetMapping("/showHouse/{number}")
-    public String showHouse(@PathVariable(name = "number") int number, Model model){
+    public String showHouse(@PathVariable(name = "number") int number, Model model) {
         House house = houseService.build(number);
         model.addAttribute("house", house);
         SystemAccount account = new SystemAccount();
@@ -52,17 +51,17 @@ public class RegistrationController {
 
 
     @PostMapping(value = "/userRegister")
-    public String registerUser(@Valid @ModelAttribute("systemUser") SystemAccount systemAccount, BindingResult bindingResult,  Model model){
-        if(bindingResult.hasErrors()){
+    public String registerUser(@Valid @ModelAttribute("systemUser") SystemAccount systemAccount, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
             House house = houseService.build(systemAccount.getHousingNumber());//TODO засунуть в сессию, чтобы по 10 раз не дёргать базу
             model.addAttribute("house", house);
             model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
             return "reg-form";
         }
-        if (registrationService.registerNewUser(systemAccount)){
+
+        if (registrationService.registerNewUser(systemAccount)) {
             return "reg-success";
-        }
-        else {
+        } else {
             House house = houseService.build(systemAccount.getHousingNumber());//TODO засунуть в сессию, чтобы по 10 раз не дёргать базу
             model.addAttribute("house", house);
             model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
