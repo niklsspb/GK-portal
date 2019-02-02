@@ -6,12 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ServerErrorException;
-import ru.geekbrains.gkportal.entities.Account;
-import ru.geekbrains.gkportal.entities.Role;
 import ru.geekbrains.gkportal.services.AccountService;
 import ru.geekbrains.gkportal.services.RoleService;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/test")
@@ -30,38 +30,33 @@ public class TestWebController {
         this.roleService = roleService;
     }
 
-    @GetMapping("all")
+    @GetMapping("uuidGenerator")
     public String permitAllPage(Model model) {
+
+        List<String> uuidList = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            uuidList.add(UUID.randomUUID().toString());
+        }
+
+        model.addAttribute("uuids", uuidList);
 //        При изменение данных можно использовать для тестирвоания создания ролей и пользователей
 //        Role role = new Role();
-//        role.setDescription("admin");
+//        role.setDescription("habitant");
 //        role = roleService.save(role);
 //
-//        Account admin = new Account();
-//        admin.setLogin("admin_login");
-//        admin.setActive(true);
-//        admin.setConfirmed(true);
-//        admin.setPasswordHash("$2a$10$NKFyj/dcM.HCT52A2jO/k.Vq52X8F1Yhc2wC2MOaWzkztDcyM6hYu");
-//        admin.setRoles(Collections.singletonList(role));
-//        accountService.save(admin);
+//        Account habitant = new Account();
+//        habitant.setLogin("habitant_login");
+//        habitant.setActive(true);
+//        habitant.setConfirmed(true);
+//        habitant.setPasswordHash("$2a$10$NKFyj/dcM.HCT52A2jO/k.Vq52X8F1Yhc2wC2MOaWzkztDcyM6hYu");
+//        habitant.setRoles(Collections.singletonList(role));
+//        accountService.save(habitant);
 //
 //        Role roleManager = new Role();
 //        roleManager.setDescription("manager");
-//        roleManager = roleService.save(role);
-//
-//        Account manager = new Account();
-//        manager.setLogin("manager_login");
-//        manager.setActive(true);
-//        manager.setConfirmed(true);
-//        manager.setPasswordHash("$2a$10$NKFyj/dcM.HCT52A2jO/k.Vq52X8F1Yhc2wC2MOaWzkztDcyM6hYu");
-//        manager.setRoles(Collections.singletonList(roleManager));
-//        accountService.save(admin);
+//        roleService.save(role);
 
-        return "test_page";
-    }
-
-    @GetMapping("admin")
-    public String adminPage() {
         return "test_page";
     }
 

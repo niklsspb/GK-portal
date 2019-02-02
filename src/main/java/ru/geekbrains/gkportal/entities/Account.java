@@ -1,7 +1,6 @@
 package ru.geekbrains.gkportal.entities;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,6 +8,9 @@ import java.util.Collection;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "account")
 public class Account extends AbstractEntity {
@@ -29,17 +31,15 @@ public class Account extends AbstractEntity {
     @NotNull(message = "Couldn't be empty!")
     private String passwordHash;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id")
     private Contact contact;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     @NotNull(message = "Role s.b. selected!")
     private Collection<Role> roles;
 
-    public Account() {
-    }
 }
