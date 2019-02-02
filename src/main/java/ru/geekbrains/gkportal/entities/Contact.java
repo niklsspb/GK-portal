@@ -1,7 +1,6 @@
 package ru.geekbrains.gkportal.entities;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,6 +8,9 @@ import java.util.Collection;
 
 @Data
 @Entity(name = "contact")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Contact extends AbstractEntity {
 
@@ -33,6 +35,23 @@ public class Contact extends AbstractEntity {
             joinColumns = @JoinColumn(name = "contact_id"),
             inverseJoinColumns = @JoinColumn(name = "flat_id"))
     private Collection<Flat> flats;
-    public Contact() {
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_id")
+    private Collection<Communication> communications;
+
+    /**
+     * @deprecated because creating a contact from {@link ru.geekbrains.gkportal.entities.SystemAccount}
+     * is the business logic.
+     * Need to consult with Denis Volnenko
+     */
+    @Deprecated
+    public Contact(SystemAccount systemAccount) {
+        contactType = systemAccount.getContactType();
+        firstName = systemAccount.getFirstName();
+        lastName = systemAccount.getLastName();
+        middleName = systemAccount.getMiddleName();
     }
+
+
 }

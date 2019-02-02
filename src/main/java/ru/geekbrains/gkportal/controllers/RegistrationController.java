@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.geekbrains.gkportal.DTO.House;
 import ru.geekbrains.gkportal.entities.SystemAccount;
+import ru.geekbrains.gkportal.services.AccountService;
 import ru.geekbrains.gkportal.services.ContactTypeService;
 import ru.geekbrains.gkportal.services.HouseService;
-import ru.geekbrains.gkportal.services.RegistrationService;
 
 import javax.validation.Valid;
 
@@ -21,11 +21,11 @@ public class RegistrationController {
 
     private HouseService houseService;
     private ContactTypeService contactTypeService;
-    private RegistrationService registrationService;
+    private AccountService accountService;
 
     @Autowired
-    public void setRegistrationService(RegistrationService registrationService) {
-        this.registrationService = registrationService;
+    public void setAccountService(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @Autowired
@@ -53,23 +53,32 @@ public class RegistrationController {
     @PostMapping(value = "/userRegister")
     public String registerUser(@Valid @ModelAttribute("systemUser") SystemAccount systemAccount, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            House house = houseService.build(systemAccount.getHousingNumber());//TODO засунуть в сессию, чтобы по 10 раз не дёргать базу
-            model.addAttribute("house", house);
-            model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
+            createErrorModel(systemAccount, model, "проверьте правильность заполненых полей");
             return "reg-form";
         }
 
-        if (registrationService.registerNewUser(systemAccount)) {
+        if (accountService.isLoginExist(systemAccount.getLogin())) {
+            createErrorModel(systemAccount, model, "Указанный логин уже существует");
+            return "reg-form";
+        }
+
+        try {
+            accountService.createAccount(systemAccount);
             return "reg-success";
-        } else {
-            House house = houseService.build(systemAccount.getHousingNumber());//TODO засунуть в сессию, чтобы по 10 раз не дёргать базу
-            model.addAttribute("house", house);
-            model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
-            model.addAttribute("registrationError", "Произошла какая-то ошибка, в будущем мы даже будем писать, какая");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace(); // TODO: 02.02.2019 to Log
+            createErrorModel(systemAccount, model, "Произошла непредвиденная ошибка");
             return "reg-form";
         }
 
 
+    }
+
+    private void createErrorModel(SystemAccount systemAccount, Model model, String error) {
+        House house = houseService.build(systemAccount.getHousingNumber());
+        model.addAttribute("house", house);
+        model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
+        model.addAttribute("registrationError", error);
     }
 
    /* @ModelAttribute("interests")
