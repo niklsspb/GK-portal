@@ -2,31 +2,28 @@ package ru.geekbrains.gkportal.entities;
 
 
 import lombok.Data;
-
 import ru.geekbrains.gkportal.validation.FieldMatch;
 import ru.geekbrains.gkportal.validation.ValidEmail;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 
 @Data
 @FieldMatch(first = "password", second = "matchingPassword", message = "Значения полей пароль и пароль подтверждение должны совпадать")
 public class SystemAccount {
     @NotNull(message = "не может принимать пустое значение")
-    @Size(min = 1, max=25, message = "недопустимое количество символов")
+    @Size(min = 2, max = 25, message = "недопустимое количество символов")
     private String firstName;
 
     @NotNull(message = "не может принимать пустое значение")
-    @Size(min = 1, max=25, message = "недопустимое количество символов")
+    @Size(min = 2, max = 25, message = "недопустимое количество символов")
     private String lastName;
 
     @NotNull(message = "не может принимать пустое значение")
-    @Size(min = 1, max=25, message = "недопустимое количество символов")
+    @Size(min = 0, max = 25, message = "недопустимое количество символов")
     private String middleName;
 
     @NotNull(message = "не может принимать пустое значение")

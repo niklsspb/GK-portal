@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.geekbrains.gkportal.DTO.House;
+import ru.geekbrains.gkportal.DTO.Porch;
 import ru.geekbrains.gkportal.entities.SystemAccount;
 import ru.geekbrains.gkportal.services.AccountService;
 import ru.geekbrains.gkportal.services.ContactTypeService;
 import ru.geekbrains.gkportal.services.HouseService;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class RegistrationController {
@@ -38,16 +41,35 @@ public class RegistrationController {
         this.houseService = houseService;
     }
 
-    @GetMapping("/showHouse/{number}")
-    public String showHouse(@PathVariable(name = "number") int number, Model model) {
-        House house = houseService.build(number);
-        model.addAttribute("house", house);
+    @GetMapping("/reg")
+    public String reg(Model model) {
         SystemAccount account = new SystemAccount();
-        account.setHousingNumber(number);
         model.addAttribute("systemUser", account);
+        List<String> housingList = houseService.getHousingNumList();
+        housingList.add(0, "");
+
+        model.addAttribute("housingList", housingList);
         model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
         return "reg-form";
     }
+
+    @GetMapping("/showPorch/{build}/{porch}")
+    public String showPorch(@PathVariable(name = "build") int build, @PathVariable(name = "porch") int porchNum, Model model) {
+        Porch porch = houseService.build(build, porchNum);
+        model.addAttribute("porch", porch);
+        return "porch-form";
+    }
+
+    @GetMapping("/getPorchCount/{build}")
+    public String getPorchCount(@PathVariable(name = "build") int build, Model model) {
+        List<String> porchList = new ArrayList<>();
+        porchList.add("");
+        int count = houseService.getHousingPorchCount(build);
+        for (int i = 1; i <= count; i++) porchList.add(String.valueOf(i));
+        model.addAttribute("porchList", porchList);
+        return "select-porch-form";
+    }
+
 
 
     @PostMapping(value = "/userRegister")

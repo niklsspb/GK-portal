@@ -16,27 +16,6 @@
 
 </head>
 <body>
-<div th:each="porch: ${house.porchList}" class="porch" th:fragment="porch-view">
-    <h2 th:text="${porch.description.porchID}+' подъезд'"></h2>
-    <table>
-
-        <tbody th:attr="data-porch-number=${porch.description.porchID}">
-        <tr th:each="floor:${porch.floors}" th:attr="data-floor-number=${floor.number}">
-            <td class="gk-floor-number" th:text="${floor.number}+' этаж'"></td>
-            <td class="gk-flat-holder" th:attr="data-rizer-number=${iter}"
-                th:each="iter: ${#numbers.sequence( 0, porch.description.flatCountOnFloor - 1)}">
-                <div th:class="gk-flat" th:classappend="${flat.accountCount}>0 ? 'gk-occupied' : 'gk'"
-                     th:each="flat:${floor.flats}" th:attr="data-flat-id=${flat.uuid.toString()}"
-                     th:if="${flat.riser==iter }">
-                    <div class="gk-flat-number" th:text="${flat.flatNumber}"></div>
-                    <div class="gk-flat-build-number" th:text="${flat.flatNumberBuild}"></div>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-
-    </table>
-</div>
 
 <div class="gk-form-container">
     <form th:action=" @{'/userRegister'}" th:object="${systemUser}" method="post">
@@ -94,10 +73,15 @@
             </div>
         </div>
 
-        <div><label>Номер Дома<input th:field="*{housingNumber}" readonly="readonly"></label>
+        <div id="div_housing">
+            <label>Номер Дома (почтовый номер, где 3 - колодец)</label>
+            <select id="housingNumber" onChange="onChangeHousing()" th:field="*{housingNumber}" th:name="housingNumber">
+                <option multiple="false" th:each="item: ${housingList}" th:text="${item}" th:value="${item}">Пункт 1
+                </option>
+            </select>
             <span class="error" th:errors="*{housingNumber}"></span></div>
-        <div><label>Номер Подъезда<input th:field="*{porchNumber}" readonly="readonly">
-            <span class="error" th:errors="*{porchNumber}"></span></label></div>
+        <div id="div_porch"></div>
+        <div id="div_show_flat"></div>
         <div><label>Номер Этажа<input th:field="*{floorNumber}" readonly="readonly">
             <span class="error" th:errors="*{floorNumber}"></span></label></div>
         <div><label>Номер Квартиры<input th:field="*{flatNumber}" readonly="readonly">
