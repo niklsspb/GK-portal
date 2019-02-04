@@ -1,11 +1,11 @@
 INSERT INTO `support_boot_db`.`role` (`id`, `description`)
-VALUES ('ebb66409-3e94-48f2-8021-b1df90f02a3b', 'habitant');
+VALUES ('ebb66409-3e94-48f2-8021-b1df90f02a3b', 'user');
 
 
 INSERT INTO `support_boot_db`.`contact_type` (`id`, `description`)
-VALUES ('ccd7b370-47ad-473a-ab1f-d1641e096d72', 'habitant'),
-       ('e99cc24d-fcc8-4bfd-803a-66554103961b', 'owner'),
-       ('59f14283-2dcf-4065-8244-ba3232c9af30', 'tenant');
+VALUES ('ccd7b370-47ad-473a-ab1f-d1641e096d72', 'Житель'),
+       ('e99cc24d-fcc8-4bfd-803a-66554103961b', 'Собственник'),
+       ('59f14283-2dcf-4065-8244-ba3232c9af30', 'Арендатор');
 
 INSERT INTO `support_boot_db`.`contact` (`id`, `contact_type_id`, `first_name`, `middle_name`, `last_name`)
 VALUES ('27fa708c-394d-43b7-8358-b58050ecfdb8',

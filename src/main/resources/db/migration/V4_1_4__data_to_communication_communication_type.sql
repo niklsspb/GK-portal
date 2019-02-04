@@ -1,6 +1,6 @@
 INSERT INTO `support_boot_db`.`communication_type` (`id`, `description`)
-VALUES ('dd2ff57f-901e-4dee-b914-56659187fe85', 'email'),
-       ('b5bc1897-c6f4-4efd-9dbd-cf89002997e4', 'phone');
+VALUES ('dd2ff57f-901e-4dee-b914-56659187fe85', 'Email'),
+       ('b5bc1897-c6f4-4efd-9dbd-cf89002997e4', 'Телефон');
 
 INSERT INTO `support_boot_db`.`communication` (`id`,
                                                `communication_type_id`,

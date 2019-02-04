@@ -14,58 +14,55 @@ import javax.validation.constraints.Size;
 @Data
 @PasswordsNotEqual(passwordFieldName = "password", passwordVerificationFieldName = "matchingPassword", message = "Значения полей пароль и пароль подтверждение должны совпадать")
 public class SystemAccount {
-    @NotNull(message = "не может принимать пустое значение")
-    @Size(min = 2, max = 25, message = "недопустимое количество символов")
+    @NotNull(message = "Поле обязательно")
+    @Size(min = 2, max = 25, message = "2-5 символов")
     private String firstName;
 
-    @NotNull(message = "не может принимать пустое значение")
-    @Size(min = 2, max = 25, message = "недопустимое количество символов")
+    @NotNull(message = "Поле обязательно")
+    @Size(min = 2, max = 25, message = "2-5 символа")
     private String lastName;
 
-    @NotNull(message = "не может принимать пустое значение")
-    @Size(min = 0, max = 25, message = "недопустимое количество символов")
+
+    @NotNull(message = "Поле обязательно")
+    @Size(min = 0, max = 25, message = "от 0 до 25 символов")
     private String middleName;
 
-    @NotNull(message = "не может принимать пустое значение")
-    @Size(min = 3, max=25, message = "недопустимое количество символов")
-    private String login;
-
-    @NotNull(message = "не может принимать пустое значение")
-    @Size(min = 6, max=25, message = "недопустимое количество символов")
+    @NotNull(message = "Поле обязательно")
+    @Size(min = 6, max = 25, message = "6-25 символов")
     private String password;
 
-    @NotNull(message = "не может принимать пустое значение")
-    @Size(min = 6, max=25, message = "недопустимое количество символов")
+    @NotNull(message = "Поле обязательно")
+    @Size(min = 6, max = 25, message = "6-25 символов")
     private String matchingPassword;
 
-    @Email
-    @NotNull(message = "не может принимать пустое значение")
-    @Size(min = 3, max=25, message = "недопустимое количество символов")
+    @Email(message = "Почта указана не корректна")
+    @NotNull(message = "Поле обязательно")
+    @Size(min = 5, max = 25, message = "5-25 символов")
     private String email;
 
-    @ValidPhoneNumber
-    @NotNull(message = "не может принимать пустое значение")
-    @Size(min = 10, message = "требуется минимум 10 символов")
+    @ValidPhoneNumber(message = "Телефон указан не корректно")
+    @NotNull(message = "Поле обязательно")
+    @Size(min = 10, message = "Минимум 10 символов")
     private String phoneNumber;
 
-    @NotNull(message = "не может принимать пустое значение")
-    @Range(min = 1, max = 999, message = "значение должно быть в пределах от 1-999")
+    @NotNull(message = "Поле обязательно")
+    @Range(min = 1, max = 99, message = "Значение 1-99")
     private Integer housingNumber;
 
-    @NotNull(message = "не может принимать пустое значение")
-    @Range(min = 1, max = 200, message = "значение должно быть в пределах от 1-200")
+    @NotNull(message = "Поле обязательно")
+    @Range(min = 1, max = 200, message = "Значение 1-200")
     private Integer porchNumber;
 
-    @NotNull(message = "не может принимать пустое значение")
-    @Range(min = 1, max = 999, message = "значение должно быть в пределах от 1-999")
+    @NotNull(message = "Поле обязательно")
+    @Range(min = 1, max = 99, message = "Значение 1-99")
     private Integer floorNumber;
 
-    @NotNull(message = "не может принимать пустое значение")
-    @Range(min = 1, max = 9999, message = "значение должно быть в пределах от 1-9999")
+    @NotNull(message = "Поле обязательно")
+    @Range(min = 1, max = 99999, message = "Значение 1-99999")
     private Integer flatNumber;
 
-    @NotNull(message = "не может принимать пустое значение")
-    @Range(min = 1, max = 20, message = "значение должно быть в пределах от 1-20")
+    @NotNull(message = "Поле обязательно")
+    @Range(min = 1, max = 20, message = "Значение 1-20 ")
     private Integer roomCount;
 
     private ContactType contactType;

@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 @Service
 public class RoleService {
 
-    private static final String DEFAULT_ROLE_DESCRIPTION = "habitant";
+    private static final String DEFAULT_ROLE_DESCRIPTION = "user";
 
     private RoleRepository roleRepository;
 

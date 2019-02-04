@@ -11,8 +11,8 @@ import java.util.function.Supplier;
 @Service
 public class CommunicationTypeService {
 
-    public static final String PHONE_DESCRIPTION = "phone";
-    public static final String EMAIL_DESCRIPTION = "email";
+    public static final String PHONE_DESCRIPTION = "Телефон";
+    public static final String EMAIL_DESCRIPTION = "Email";
 
     private CommunicationTypeRepository communicationTypeRepository;
 

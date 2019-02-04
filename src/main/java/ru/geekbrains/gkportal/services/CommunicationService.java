@@ -15,8 +15,15 @@ import java.util.UUID;
 @Service
 public class CommunicationService {
 
+    private static final String DEFAULT_DESCRIPTION = "Основной контакт";
     private CommunicationRepository communicationRepository;
     private CommunicationTypeService communicationTypeService;
+    private MailService mailService;
+
+    @Autowired
+    public void setMailService(MailService mailService) {
+        this.mailService = mailService;
+    }
 
     @Autowired
     public void setCommunicationRepository(CommunicationRepository communicationRepository) {
@@ -28,6 +35,24 @@ public class CommunicationService {
         this.communicationTypeService = communicationTypeService;
     }
 
+    public Contact confirmAccountAndGetContact(String mail, String code) {
+        try {
+            Communication communication =
+                    communicationRepository.findCommunicationByCommunicationTypeAndIdentify(communicationTypeService.findEmailType(), mail);
+
+            if (communication.getConfirmCode().equals(code)) {
+                communication.setConfirmed(true);
+                communicationRepository.save(communication);
+                return communication.getContact();
+            }
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+
+        return null;
+    }
+
     public List<Communication> createCommunication(SystemAccount systemAccount, Contact contact) throws Throwable {
 
         Communication phoneCommunication = Communication.builder()
@@ -36,7 +61,7 @@ public class CommunicationService {
                 .confirmCode(UUID.randomUUID().toString())
                 .confirmCodeDate(LocalDateTime.now())
                 .confirmed(false)
-                .description("Кастыльььь")
+                .description(DEFAULT_DESCRIPTION)
                 .contact(contact)
                 .build();
 
@@ -46,9 +71,10 @@ public class CommunicationService {
                 .confirmCode(UUID.randomUUID().toString())
                 .confirmCodeDate(LocalDateTime.now())
                 .confirmed(false)
-                .description("Кастыльььь")
+                .description(DEFAULT_DESCRIPTION)
                 .contact(contact)
                 .build();
+        mailService.sendRegistrationMail(contact, emailCommunication);
 
         return Arrays.asList(phoneCommunication, emailCommunication);
     }
