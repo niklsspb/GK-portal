@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.gkportal.entities.Account;
+import ru.geekbrains.gkportal.entities.Contact;
 import ru.geekbrains.gkportal.entities.Role;
 import ru.geekbrains.gkportal.entities.SystemAccount;
 import ru.geekbrains.gkportal.repository.AccountRepository;
@@ -62,11 +63,22 @@ public class AccountService implements UserDetailsService {
         accountRepository.save(Account.builder()
                 .confirmed(false)
                 .active(false)
-                .login(systemAccount.getLogin())
+                .login(systemAccount.getEmail())
                 .passwordHash(encoder.encode(systemAccount.getPassword()))
                 .contact(contactService.createContact(systemAccount))
                 .roles(Arrays.asList(roleService.getDefaultRole()))
                 .build());
+    }
+
+
+    public boolean confirmAccount(Contact contact) {
+        Account account = accountRepository.findByContact(contact);
+        if (account != null) {
+            account.setConfirmed(true);
+            account.setActive(true);
+            accountRepository.save(account);
+            return true;
+        } else return false;
     }
 
     @Override

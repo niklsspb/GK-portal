@@ -5,10 +5,15 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import ru.geekbrains.gkportal.entities.Communication;
+import ru.geekbrains.gkportal.entities.Contact;
 import ru.geekbrains.gkportal.util.MailMessageBuilder;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -37,11 +42,11 @@ public class MailService {
         }
     }
 
-    public void sendMail(String email, String subject, String text) {
-        sendMail(email, subject, text, true);
+    public boolean sendMail(String email, String subject, String text) {
+        return sendMail(email, subject, text, true);
     }
 
-    public void sendMail(String email, String subject, String text, boolean isHtml) {
+    public boolean sendMail(String email, String subject, String text, boolean isHtml) {
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
@@ -51,24 +56,36 @@ public class MailService {
             helper.setSubject(subject);
         } catch (MessagingException e) {
             e.printStackTrace();
+            return false;
         }
 
         try {
             executorService.submit(() -> sender.send(message));
         } catch (MailException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
-    public void sendRegistrationMail(String email) {
-        sendMail(email, "Регистрация на сайте  www.gk-gorod.ru", builder.buildRegistrationEmail());
+    public boolean sendRegistrationMail(String email) {
+        return sendMail(email, "Регистрация на сайте  ЖК Город", builder.buildRegistrationEmail());
     }
 
-// TODO: 22.01.19 раскометировать после появления сущьности User
-//    public boolean sendRegistrationMail(User user, String password) {
-//        return sendMail(
-//                user.getEmail(),
-//                "регистрация на сайте www.gk-gorod.ru",
-//                buildRegistrationEmail(user));
-//    }
+    public boolean sendRegistrationMail(Contact contact, Communication email) {
+        String url = getCurentURL();
+        return sendMail(email.getIdentify(),
+                "регистрация на сайте ЖК Город",
+                builder.buildRegistrationEmail(contact.getLastName() + " " + contact.getFirstName() + " " + contact.getMiddleName() + " ",
+                        url + "/confirmMail/" + email.getIdentify() + "/" + email.getConfirmCode()));
+    }
+
+    public String getCurentURL() {
+        ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest req = sra.getRequest();
+        req.getServerPort();
+        return "http://" + req.getServerName() + ":" + req.getServerPort();
+
+    }
+
 }

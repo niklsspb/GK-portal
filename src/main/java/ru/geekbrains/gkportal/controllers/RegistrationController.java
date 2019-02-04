@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.geekbrains.gkportal.DTO.House;
 import ru.geekbrains.gkportal.DTO.Porch;
+import ru.geekbrains.gkportal.entities.Contact;
 import ru.geekbrains.gkportal.entities.SystemAccount;
-import ru.geekbrains.gkportal.services.AccountService;
-import ru.geekbrains.gkportal.services.ContactTypeService;
-import ru.geekbrains.gkportal.services.HouseService;
+import ru.geekbrains.gkportal.services.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -25,6 +24,18 @@ public class RegistrationController {
     private HouseService houseService;
     private ContactTypeService contactTypeService;
     private AccountService accountService;
+    private ContactService contactService;
+    private CommunicationService communicationService;
+
+    @Autowired
+    public void setCommunicationService(CommunicationService communicationService) {
+        this.communicationService = communicationService;
+    }
+
+    @Autowired
+    public void setContactService(ContactService contactService) {
+        this.contactService = contactService;
+    }
 
     @Autowired
     public void setAccountService(AccountService accountService) {
@@ -44,10 +55,10 @@ public class RegistrationController {
     @GetMapping("/reg")
     public String reg(Model model) {
         SystemAccount account = new SystemAccount();
+
         model.addAttribute("systemUser", account);
         List<String> housingList = houseService.getHousingNumList();
         housingList.add(0, "");
-
         model.addAttribute("housingList", housingList);
         model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
         return "reg-form";
@@ -55,13 +66,14 @@ public class RegistrationController {
 
     @GetMapping("/showPorch/{build}/{porch}")
     public String showPorch(@PathVariable(name = "build") int build, @PathVariable(name = "porch") int porchNum, Model model) {
+        //todo проверка что юзер зарегистрирован и имеет права на данное действие (надо подумать)
         Porch porch = houseService.build(build, porchNum);
         model.addAttribute("porch", porch);
         return "porch-form";
     }
 
     @GetMapping("/getPorchCount/{build}")
-    public String getPorchCount(@PathVariable(name = "build") int build, Model model) {
+    public String getPorchCount(@ModelAttribute("systemUser") SystemAccount systemAccount, @PathVariable(name = "build") int build, Model model) {
         List<String> porchList = new ArrayList<>();
         porchList.add("");
         int count = houseService.getHousingPorchCount(build);
@@ -70,16 +82,26 @@ public class RegistrationController {
         return "select-porch-form";
     }
 
-
+    @GetMapping("/confirmMail/{mail}/{code}")
+    public String confirmMail(@PathVariable(name = "code") String code, @PathVariable(name = "mail") String mail, Model model) {
+        Contact contact = communicationService.confirmAccountAndGetContact(mail, code);
+        boolean confirm = false;
+        if (contact != null) {
+            accountService.confirmAccount(contact);
+            confirm = true;
+        }
+        model.addAttribute("resultString", confirm ? "Подзравляю, Ваш аккаунт подтверждён!" : "Не удалось подтвердить емайл, попробуйте повторить!");
+        return "confirm-mail";
+    }
 
     @PostMapping(value = "/userRegister")
     public String registerUser(@Valid @ModelAttribute("systemUser") SystemAccount systemAccount, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            createErrorModel(systemAccount, model, "проверьте правильность заполненых полей");
+            createErrorModel(systemAccount, model, "Не все поля заполнены правильно!");
             return "reg-form";
         }
 
-        if (accountService.isLoginExist(systemAccount.getLogin())) {
+        if (accountService.isLoginExist(systemAccount.getEmail())) {
             createErrorModel(systemAccount, model, "Указанный логин уже существует");
             return "reg-form";
         }
@@ -98,7 +120,19 @@ public class RegistrationController {
 
     private void createErrorModel(SystemAccount systemAccount, Model model, String error) {
         House house = houseService.build(systemAccount.getHousingNumber());
-        model.addAttribute("house", house);
+        List<String> housingList = houseService.getHousingNumList();
+        housingList.add(0, "");
+        model.addAttribute("housingList", housingList);
+        if (systemAccount.getHousingNumber() != null && systemAccount.getHousingNumber() != 0) {
+            List<String> porchList = new ArrayList<>();
+            porchList.add("");
+            int count = houseService.getHousingPorchCount(systemAccount.getHousingNumber());
+            for (int i = 1; i <= count; i++) porchList.add(String.valueOf(i));
+            model.addAttribute("porchList", porchList);
+
+        }
+
+
         model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
         model.addAttribute("registrationError", error);
     }
