@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,6 +11,33 @@
     <title>ЖК "Город"</title>
 </head>
 <body>
+<div>
+    <div class="prof" sec:authorize="isAuthenticated()">
+        <div class="prof">
+            <a class="btn btn-success btn-outline-dark" href="/user/profile"
+               th:href="@{/user/profile}"> <i class="fas fa-address-book"></i>
+                <i sec:authentication="principal.username"></i> </a>
+            <i sec:authentication="principal"></i>
+            <form method="POST" th:action="@{/logout}">
+                <input class="btn btn-danger" type="submit" value="Выйти"/>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+<form class="form-inline pull-xs-right d-sm-inline-block input-group-sm" method="post"
+      sec:authorize="isAnonymous()"
+      th:action="@{/authenticateTheUser}">
+    <input class="form-control" id="login" name="username" placeholder="Login" type="text" value="">
+    <input class="form-control" id="password" name="password" placeholder="Password" type="password"
+           value="">
+    <input class="btn btn-primary " th:href="@{/authenticateTheUser}" type="submit" value="Войти"/>
+
+    <a class="btn btn-success btn-outline-light" th:href="@{/reg}">Регистрация</a>
+</form>
+</div>
 <div class="list-group menu-box">
     <a class="list-group-item list-group-item-action active" href="#">
         Тестовая навигация
