@@ -15,7 +15,7 @@ import java.util.Properties;
 public class MailConfig {
 
     private PropertyService propertyService;
-    @Value("mail_password")
+    @Value("${mail_password}")
     private String defaultPrivatePassword;
 
     @Autowired
@@ -28,7 +28,7 @@ public class MailConfig {
     }
 
     private void setPropertyValue(String propertyName, String propertyValue) {
-        propertyService.getPropertyValue(propertyName, PropertyType.MAIL);
+        propertyService.setPropertyValue(propertyName, propertyValue, PropertyType.MAIL);
     }
 
 
@@ -36,7 +36,7 @@ public class MailConfig {
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         String password = getPropertyValue("password");
-        if (!defaultPrivatePassword.isEmpty() && password.isEmpty()) {
+        if ((!defaultPrivatePassword.isEmpty()) && password.isEmpty()) {
             setPropertyValue("password", defaultPrivatePassword);
             password = defaultPrivatePassword;
         }
