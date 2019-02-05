@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -27,6 +28,7 @@ public class Communication extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "contact_id")
     @NotNull(message = "Contact s.b. selected!")
+    @JsonIgnore
     private Contact contact;
 
     @Column(name = "identify")
@@ -43,9 +45,9 @@ public class Communication extends AbstractEntity {
 
     @Column(name = "confirm_code_date")
     @UpdateTimestamp
-//    @NotNull(message = "Couldn't be empty!")
+//    @NotNull(message = "Couldn't be empty!")a
     private LocalDateTime confirmCodeDate;
-
+    // TODO: 05.02.19 вынести в QuestionnaireContactConfirm
     @Column(name = "confirm_code")
     private String confirmCode;
 

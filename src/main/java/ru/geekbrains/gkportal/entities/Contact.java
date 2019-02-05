@@ -1,6 +1,7 @@
 package ru.geekbrains.gkportal.entities;
 
 import lombok.*;
+import ru.geekbrains.gkportal.entities.questionnaire.QuestionnaireContactConfirm;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -40,18 +41,12 @@ public class Contact extends AbstractEntity {
     @JoinColumn(name = "contact_id")
     private Collection<Communication> communications;
 
-    /**
-     * @deprecated because creating a contact from {@link ru.geekbrains.gkportal.entities.SystemAccount}
-     * is the business logic.
-     * Need to consult with Denis Volnenko
-     */
-    @Deprecated
-    public Contact(SystemAccount systemAccount) {
-        contactType = systemAccount.getContactType();
-        firstName = systemAccount.getFirstName();
-        lastName = systemAccount.getLastName();
-        middleName = systemAccount.getMiddleName();
-    }
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "contact_id")
+//    private Collection<RealEstate> realEstates;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_id")
+    private Collection<QuestionnaireContactConfirm> questionnaireContactConfirms;
 
 }
