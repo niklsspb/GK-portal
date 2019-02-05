@@ -21,4 +21,10 @@ public class PropertyService {
         return property.getValue();
     }
 
+    public void setPropertyValue(String propertyName, String value, PropertyType type) {
+        Property property = propertiesRepository.findByNameAndPropertyType(propertyName, type);
+        property.setValue(value);
+        propertiesRepository.save(property);
+    }
+
 }

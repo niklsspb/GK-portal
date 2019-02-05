@@ -1,6 +1,7 @@
 package ru.geekbrains.gkportal.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,6 +15,8 @@ import java.util.Properties;
 public class MailConfig {
 
     private PropertyService propertyService;
+    @Value("mail_password")
+    private String defaultPrivatePassword;
 
     @Autowired
     public void setPropertyService(PropertyService propertyService) {
@@ -24,15 +27,25 @@ public class MailConfig {
         return propertyService.getPropertyValue(propertyName, PropertyType.MAIL);
     }
 
+    private void setPropertyValue(String propertyName, String propertyValue) {
+        propertyService.getPropertyValue(propertyName, PropertyType.MAIL);
+    }
+
+
     @Bean
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        String password = getPropertyValue("password");
+        if (!defaultPrivatePassword.isEmpty() && password.isEmpty()) {
+            setPropertyValue("password", defaultPrivatePassword);
+            password = defaultPrivatePassword;
+        }
 
         mailSender.setDefaultEncoding(getPropertyValue("default_encoding"));
         mailSender.setHost(getPropertyValue("host"));
         mailSender.setPort(Integer.parseInt(getPropertyValue("port")));
         mailSender.setUsername(getPropertyValue("user_name"));
-        mailSender.setPassword(getPropertyValue("password"));
+        mailSender.setPassword(password);
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", getPropertyValue("transport_protocol"));
