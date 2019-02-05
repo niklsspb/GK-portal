@@ -72,6 +72,26 @@
                 <picUrl>https://geekbrains-uploads.s3.amazonaws.com/assets/000/022/280/6c8625c20e05e5cd06046f030c055f3ad512d639.jpg</picUrl>
             </properties>
         </developer>
+        <developer>
+            <id>chertenokru</id>
+            <name>Vladimir Konkov</name>
+            <email>admin@chertenok.ru</email>
+            <url>https://github.com/chertenokru</url>
+            <organization>GeekBrains</organization>
+            <organizationUrl>https://geekbrains.ru/</organizationUrl>
+            <roles>
+                <role>project architect</role>
+                <role>database architect</role>
+                <role>developer backend</role>
+            </roles>
+            <timezone>Europe/Moscow</timezone>
+            <properties>
+                <picUrl>
+                    https://geekbrains-uploads.s3.amazonaws.com/assets/000/287/065/b774fff6c5c973ebf72240647507026d26678990.jpg
+                </picUrl>
+            </properties>
+        </developer>
+
     </developers>
 
     <dependencies>
