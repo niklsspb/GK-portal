@@ -1,7 +1,7 @@
 package ru.geekbrains.gkportal.entities;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity(name = "communication")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @EqualsAndHashCode(callSuper = true)
 public class Communication extends AbstractEntity {
 
@@ -39,12 +42,11 @@ public class Communication extends AbstractEntity {
     private boolean confirmed;
 
     @Column(name = "confirm_code_date")
-    @NotNull(message = "Couldn't be empty!")
+    @UpdateTimestamp
+//    @NotNull(message = "Couldn't be empty!")
     private LocalDateTime confirmCodeDate;
 
     @Column(name = "confirm_code")
     private String confirmCode;
 
-    public Communication() {
-    }
 }

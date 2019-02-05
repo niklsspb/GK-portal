@@ -27,6 +27,13 @@ public class MailMessageBuilder {
         return templateEngine.process(MAIL_REGISTRATION_PAGE, context);
     }
 
+    public String buildRegistrationEmail(String userName, String url) {
+        Context context = new Context();
+        context.setVariable(VARIABLE_REGISTRATION_USER, userName);
+        context.setVariable(VARIABLE_REGISTRATION_PASSWORD, url);
+        return templateEngine.process(MAIL_REGISTRATION_PAGE, context);
+    }
+
 
 // TODO: 22.01.19 раскометировать после появления сущьности User
 //    public String buildRegistrationEmail(User user) {

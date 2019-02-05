@@ -26,7 +26,9 @@ CREATE TABLE `account` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`),
   KEY `fk_account_users1_idx` (`contact_id`),
-  CONSTRAINT `fk_account_users1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_account_users1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `account_role` */
@@ -39,8 +41,12 @@ CREATE TABLE `account_role` (
   PRIMARY KEY (`account_id`,`role_id`),
   KEY `fk_account-roles_account1_idx` (`account_id`),
   KEY `fk_account-roles_roles1_idx` (`role_id`),
-  CONSTRAINT `fk_account-roles_account1` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_account-roles_roles1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_account-roles_account1` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION,
+  CONSTRAINT `fk_account-roles_roles1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `build_porch_config` */
@@ -80,8 +86,12 @@ CREATE TABLE `communication` (
   PRIMARY KEY (`id`),
   KEY `fk_communication_communication_type1_idx` (`communication_type_id`),
   KEY `fk_communication_users1_idx` (`contact_id`),
-  CONSTRAINT `fk_communication_communication_type1` FOREIGN KEY (`communication_type_id`) REFERENCES `communication_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_communication_users1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_communication_communication_type1` FOREIGN KEY (`communication_type_id`) REFERENCES `communication_type` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+  CONSTRAINT `fk_communication_users1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `communication_type` */
@@ -118,8 +128,12 @@ CREATE TABLE `contact_flat` (
   `flat_id` char(36) NOT NULL,
   PRIMARY KEY (`contact_id`,`flat_id`),
   KEY `fk_users_has_flats_flats1_idx` (`flat_id`),
-  CONSTRAINT `fk_users_has_flats_flats1` FOREIGN KEY (`flat_id`) REFERENCES `flat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_has_flats_users1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_users_has_flats_flats1` FOREIGN KEY (`flat_id`) REFERENCES `flat` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION,
+  CONSTRAINT `fk_users_has_flats_users1` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `contact_type` */

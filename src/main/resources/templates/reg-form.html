@@ -10,47 +10,21 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}"/>
     <script th:src="@{/js/main.js}" type="text/javascript"></script>
-    <script th:src="@{/js/regboard.js}" type="text/javascript"></script>
-    <title>Title</title>
+    <title>Регистрация нового пользователя</title>
 
 
 </head>
 <body>
-<div th:each="porch: ${house.porchList}" class="porch" th:fragment="porch-view">
-    <h2 th:text="${porch.description.porchID}+' подъезд'"></h2>
-    <table>
-
-        <tbody th:attr="data-porch-number=${porch.description.porchID}">
-        <tr th:each="floor:${porch.floors}" th:attr="data-floor-number=${floor.number}">
-            <td class="gk-floor-number" th:text="${floor.number}+' этаж'"></td>
-            <td class="gk-flat-holder" th:attr="data-rizer-number=${iter}"
-                th:each="iter: ${#numbers.sequence( 0, porch.description.flatCountOnFloor - 1)}">
-                <div th:class="gk-flat" th:classappend="${flat.accountCount}>0 ? 'gk-occupied' : 'gk'"
-                     th:each="flat:${floor.flats}" th:attr="data-flat-id=${flat.uuid.toString()}"
-                     th:if="${flat.riser==iter }">
-                    <div class="gk-flat-number" th:text="${flat.flatNumber}"></div>
-                    <div class="gk-flat-build-number" th:text="${flat.flatNumberBuild}"></div>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-
-    </table>
-</div>
 
 <div class="gk-form-container">
     <form th:action=" @{'/userRegister'}" th:object="${systemUser}" method="post">
         <div th:if="${registrationError != null}" class="form-group">
             <div class="col-xs-6">
-                <div class="alert alert-danger col-xs-offset-1 col-xs-10">${registrationError}</div>
+                <div class="alert alert-danger col-xs-offset-1 col-xs-10" th:text="${registrationError}"></div>
             </div>
         </div>
-        <div class="form-group row"><label class="col-sm-3 col-form-label" th:for="login">Логин</label>
-            <div class="col-sm-3">
-                <input th:field="*{login}" placeholder="login">
-                <div class="gk-error" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
-            </div>
-        </div>
+        <div><label>Адрес электронной почты<input th:field="*{email}" type="email"></label>
+            <span class="error" th:errors="*{email}"></span></div>
 
         <div><label>Пароль <input th:field="*{password}" type="password" placeholder="Very stRong paSS"></label>
             <span class="error" th:errors="*{password}"></span></div>
@@ -59,14 +33,12 @@
                                         placeholder="Very stRong paSS"></label>
             <span class="error" th:errors="*{matchingPassword}"></span></div>
 
-        <div><label>Адрес электронной почты<input type="email" th:field="*{email}"></label>
-            <span class="error" th:errors="*{email}"></span></div>
 
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label" th:for="phoneNumber">Номер телефона</label>
+            <label class="col-sm-2 col-form-label" th:for="phoneNumber">Номер телефона +7 </label>
             <div class="col-sm-3">
-                <input class="form-control" th:field="*{phoneNumber}" placeholder="+7 999 123-45-67">
-                <div class="gk-error" th:if="${#fields.hasErrors('phoneNumber')}" th:error="*{phoneNumber}"></div>
+                <input class="form-control" placeholder="9151234567" th:field="*{phoneNumber}">
+                <div class="gk-error" th:errors="*{phoneNumber}" th:if="${#fields.hasErrors('phoneNumber')}"></div>
             </div>
         </div>
 
@@ -94,10 +66,23 @@
             </div>
         </div>
 
-        <div><label>Номер Дома<input th:field="*{housingNumber}" readonly="readonly"></label>
+        <div id="div_housing">
+            <label>Номер Дома (почтовый номер, где 3 - колодец)</label>
+            <select id="housingNumber" onChange="onChangeHousing()" th:field="*{housingNumber}" th:name="housingNumber">
+                <option multiple="false" th:each="item: ${housingList}" th:text="${item}" th:value="${item}">Пункт 1
+                </option>
+            </select>
             <span class="error" th:errors="*{housingNumber}"></span></div>
-        <div><label>Номер Подъезда<input th:field="*{porchNumber}" readonly="readonly">
-            <span class="error" th:errors="*{porchNumber}"></span></label></div>
+        <div id="div_porch">
+            <div class="porch" id="div_porch_inner">
+                <label>Номер Подъезда</label>
+                <select id="pochNumber" name="porchNumber" onChange="onChangePorch(this)" th:field="*{porchNumber}">
+                    <option multiple="false" th:each="item: ${porchList}" th:text="${item}" th:value="${item}">Пункт 1
+                    </option>
+                </select>
+                <span class="error" th:errors="*{porchNumber}"></span></div>
+        </div>
+        <div id="div_show_flat"></div>
         <div><label>Номер Этажа<input th:field="*{floorNumber}" readonly="readonly">
             <span class="error" th:errors="*{floorNumber}"></span></label></div>
         <div><label>Номер Квартиры<input th:field="*{flatNumber}" readonly="readonly">

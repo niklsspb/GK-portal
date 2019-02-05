@@ -12,7 +12,16 @@ body {
     border-radius: 3px;
     border: 1px solid;
     text-align: center;
+    cursor: auto;
+    border-color: black;
 }
+
+
+.gk-flat:hover {
+    cursor: pointer;
+    border-color: crimson;
+}
+
 
 .porch {
     display: inline-block;
@@ -106,3 +115,5 @@ width: 300px;
     color: #dc3545;
     margin-left: 5%;
 }
+
+
