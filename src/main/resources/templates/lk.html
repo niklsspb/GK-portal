@@ -19,20 +19,21 @@
     <table class="table"  >
         <tr>
             <td>Фамилия:</td>
-            <td th:text="${contact.getFirstName()}">...</td>
+            <td th:text="${contact.getLastName()}">...</td>
         </tr>
         <tr>
             <td>Имя:</td>
-            <td th:text="${contact.getMiddleName()}">...</td>
+            <td th:text="${contact.getFirstName()}">...</td>
         </tr>
         <tr>
             <td>Отчество:</td>
-            <td th:text="${contact.getLastName()}">...</td>
+            <td th:text="${contact.getMiddleName()}">...</td>
         </tr>
         <tr>
             <td>Вы являетесь:</td>
             <td th:text="${contact.getContactType().getDescription()}">...</td>
         </tr>
+
     </table>
 </div>
 </body>
