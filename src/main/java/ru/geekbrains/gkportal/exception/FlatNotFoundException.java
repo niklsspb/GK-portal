@@ -1,7 +1,7 @@
 package ru.geekbrains.gkportal.exception;
 
-import ru.geekbrains.gkportal.entities.Flat;
-import ru.geekbrains.gkportal.entities.SystemAccount;
+import ru.geekbrains.gkportal.entity.Flat;
+import ru.geekbrains.gkportal.entity.SystemAccount;
 
 import java.util.NoSuchElementException;
 
