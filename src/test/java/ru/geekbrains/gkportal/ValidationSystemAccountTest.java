@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.geekbrains.gkportal.entities.SystemAccount;
+import ru.geekbrains.gkportal.entity.SystemAccount;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
