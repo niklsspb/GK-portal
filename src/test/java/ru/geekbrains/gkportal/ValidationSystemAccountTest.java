@@ -10,10 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.geekbrains.gkportal.entities.SystemAccount;
 
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
-import javax.validation.Validator;
 import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 @Ignore
@@ -37,7 +37,6 @@ public class ValidationSystemAccountTest {
         systemAccount.setFlatNumber(1);
         systemAccount.setFloorNumber(1);
         systemAccount.setHousingNumber(1);
-        systemAccount.setLogin("mytest");
         systemAccount.setPassword("123456");
         systemAccount.setMatchingPassword("123456");
         systemAccount.setPhoneNumber("1234567890");
@@ -106,7 +105,6 @@ public class ValidationSystemAccountTest {
         systemAccount.setFlatNumber(null);
         systemAccount.setFloorNumber(null);
         systemAccount.setHousingNumber(null);
-        systemAccount.setLogin(null);
         systemAccount.setPassword(null);
         systemAccount.setMatchingPassword(null);
         systemAccount.setPorchNumber(null);
