@@ -87,6 +87,7 @@ public class TestRest {
                 .useRealEstate(true)
                 .questionnaireQuestionList(Arrays.asList(qq1, qq2))
                 .build();
+
         qq1.setQuestionnaire(questionnaire);
         qq2.setQuestionnaire(questionnaire);
 
@@ -96,15 +97,15 @@ public class TestRest {
         contactList.forEach(contact -> {
 //            QuestionnaireContactConfirm questionnaireContactConfirm1 = ;
 
-            List<QuestionnaireContactConfirm> questionnaireContactConfirms = new ArrayList<>();
+//            List<QuestionnaireContactConfirm> questionnaireContactConfirms = new ArrayList<>();
             QuestionnaireContactConfirm questionnaireContactConfirm = QuestionnaireContactConfirm.builder().questionnaire(questionnaire).questionnaire(questionnaire).confirmCode(UUID.randomUUID().toString()).contact(contact).build();
-            questionnaireContactConfirms.add(questionnaireContactConfirm);
+//            questionnaireContactConfirms.add(questionnaireContactConfirm);
 
-            if (contact.getQuestionnaireContactConfirms() == null) {
-                contact.setQuestionnaireContactConfirms(questionnaireContactConfirms);
-            } else {
-                contact.getQuestionnaireContactConfirms().add(questionnaireContactConfirm);
-            }
+//            if (contact.getQuestionnaireContactConfirm() == null) {
+            contact.setQuestionnaireContactConfirm(questionnaireContactConfirm);
+//            } else {
+//                contact.getQuestionnaireContactConfirm().add(questionnaireContactConfirm);
+//            }
 
             QuestionnaireQuestionAnswer questionAnswer1 = questionnaireQuestionAnswerList1.get((int) (Math.random() * 3));
             questionAnswer1.setQuestionnaireQuestion(qq1);

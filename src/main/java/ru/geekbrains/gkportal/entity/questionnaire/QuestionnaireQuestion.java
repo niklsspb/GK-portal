@@ -46,7 +46,7 @@ public class QuestionnaireQuestion extends AbstractEntity {
     @JoinColumn(name = "questionnaire_question_id")
     private List<QuestionnaireQuestionAnswer> questionnaireQuestionAnswerList;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "questionnaire_id")
     @JsonIgnore
     private Questionnaire questionnaire;

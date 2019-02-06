@@ -46,9 +46,9 @@ public class Contact extends AbstractEntity {
 //    @JoinColumn(name = "contact_id")
 //    private Collection<RealEstate> realEstates;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "contact")
     @JoinColumn(name = "contact_id")
     @JsonIgnore
-    private Collection<QuestionnaireContactConfirm> questionnaireContactConfirms;
+    private QuestionnaireContactConfirm questionnaireContactConfirm;
 
 }

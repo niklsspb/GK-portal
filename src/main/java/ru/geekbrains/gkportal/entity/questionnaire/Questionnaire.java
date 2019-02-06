@@ -7,7 +7,7 @@ import ru.geekbrains.gkportal.entity.AbstractEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * @author Yuriy Tilman
@@ -55,5 +55,5 @@ public class Questionnaire extends AbstractEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "questionnaire_id")
-    private List<QuestionnaireQuestion> questionnaireQuestionList;
+    private Collection<QuestionnaireQuestion> questionnaireQuestionList;
 }
