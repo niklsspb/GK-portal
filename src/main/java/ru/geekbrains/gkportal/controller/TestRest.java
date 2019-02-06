@@ -1,4 +1,4 @@
-package ru.geekbrains.gkportal.controllers;
+package ru.geekbrains.gkportal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -24,7 +24,7 @@ public class TestRest {
     }
 
     @GetMapping("test")
-    public List<Contact> permitAllPage(Model model) {
+    public Questionnaire permitAllPage(Model model) {
         List<String> uuidList = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
@@ -109,12 +109,12 @@ public class TestRest {
             QuestionnaireQuestionAnswer questionAnswer1 = questionnaireQuestionAnswerList1.get((int) (Math.random() * 3));
             questionAnswer1.setQuestionnaireQuestion(qq1);
             if (questionAnswer1.getQqAnswerResults() == null) questionAnswer1.setQqAnswerResults(new ArrayList<>());
-            QuestionnaireQuestionAnswerResult answerResult1 = new QuestionnaireQuestionAnswerResult(questionAnswer1);
+            QuestionnaireQuestionAnswerResult answerResult1 = new QuestionnaireQuestionAnswerResult(questionAnswer1, contact);
 
             QuestionnaireQuestionAnswer questionAnswer2 = questionnaireQuestionAnswerList2.get((int) (Math.random() * 3));
             questionAnswer2.setQuestionnaireQuestion(qq2);
             if (questionAnswer2.getQqAnswerResults() == null) questionAnswer2.setQqAnswerResults(new ArrayList<>());
-            QuestionnaireQuestionAnswerResult answerResult2 = new QuestionnaireQuestionAnswerResult(questionAnswer2);
+            QuestionnaireQuestionAnswerResult answerResult2 = new QuestionnaireQuestionAnswerResult(questionAnswer2, contact);
 
 
             questionAnswer1.getQqAnswerResults().add(answerResult1);
@@ -123,6 +123,6 @@ public class TestRest {
         });
 
 //        contactService.saveAll(contactList);
-        return contactList;
+        return questionnaire;
     }
 }

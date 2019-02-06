@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 
@@ -47,6 +48,7 @@ public class Contact extends AbstractEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id")
+    @JsonIgnore
     private Collection<QuestionnaireContactConfirm> questionnaireContactConfirms;
 
 }
