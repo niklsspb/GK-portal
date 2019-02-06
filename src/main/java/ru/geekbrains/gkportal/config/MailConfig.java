@@ -1,9 +1,9 @@
 package ru.geekbrains.gkportal.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import ru.geekbrains.gkportal.entity.PropertyType;
@@ -14,13 +14,17 @@ import java.util.Properties;
 @Configuration
 public class MailConfig {
 
+    private Environment env;
     private PropertyService propertyService;
-    @Value("${mail_password}")
-    private String defaultPrivatePassword;
 
     @Autowired
     public void setPropertyService(PropertyService propertyService) {
         this.propertyService = propertyService;
+    }
+
+    @Autowired
+    public void setEnv(Environment env) {
+        this.env = env;
     }
 
     private String getPropertyValue(String propertyName) {
@@ -36,7 +40,8 @@ public class MailConfig {
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         String password = getPropertyValue("password");
-        if ((!defaultPrivatePassword.isEmpty()) && password.isEmpty()) {
+        String defaultPrivatePassword = env.getProperty("mail.password");
+        if (defaultPrivatePassword != null && (!defaultPrivatePassword.isEmpty()) && password.isEmpty()) {
             setPropertyValue("password", defaultPrivatePassword);
             password = defaultPrivatePassword;
         }
