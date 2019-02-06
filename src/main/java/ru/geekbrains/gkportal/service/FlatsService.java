@@ -1,9 +1,9 @@
-package ru.geekbrains.gkportal.service;
+package ru.geekbrains.gkportal.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.gkportal.DTO.FlatRegDTO;
 import ru.geekbrains.gkportal.entity.Flat;
-import ru.geekbrains.gkportal.entity.SystemAccount;
 import ru.geekbrains.gkportal.exception.FlatNotFoundException;
 import ru.geekbrains.gkportal.repository.FlatRepository;
 
@@ -20,14 +20,14 @@ public class FlatsService {
     }
 
 
-    public Flat createFlat(SystemAccount systemAccount) throws Throwable {
+    public Flat createFlat(FlatRegDTO flatRegDTO) throws Throwable {
 
         return flatRepository.findByHouseAndPorchAndFloorAndFlatNumber(
-                systemAccount.getHousingNumber(),
-                systemAccount.getPorchNumber(),
-                systemAccount.getFloorNumber(),
-                systemAccount.getFlatNumber()
-        ).orElseThrow((Supplier<Throwable>) () -> new FlatNotFoundException(systemAccount));
+                flatRegDTO.getHousingNumber(),
+                flatRegDTO.getPorchNumber(),
+                flatRegDTO.getFloorNumber(),
+                flatRegDTO.getFlatNumber()
+        ).orElseThrow((Supplier<Throwable>) () -> new FlatNotFoundException(flatRegDTO));
 
     }
 }

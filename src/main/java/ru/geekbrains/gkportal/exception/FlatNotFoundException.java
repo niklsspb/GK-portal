@@ -1,7 +1,7 @@
 package ru.geekbrains.gkportal.exception;
 
+import ru.geekbrains.gkportal.DTO.FlatRegDTO;
 import ru.geekbrains.gkportal.entity.Flat;
-import ru.geekbrains.gkportal.entity.SystemAccount;
 
 import java.util.NoSuchElementException;
 
@@ -18,12 +18,12 @@ public class FlatNotFoundException extends NoSuchElementException {
         );
     }
 
-    public FlatNotFoundException(SystemAccount systemAccount) {
+    public FlatNotFoundException(FlatRegDTO flatRegDTO) {
         super(String.format(MESSAGE,
-                systemAccount.getHousingNumber(),
-                systemAccount.getPorchNumber(),
-                systemAccount.getFloorNumber(),
-                systemAccount.getFlatNumber())
+                flatRegDTO.getHousingNumber(),
+                flatRegDTO.getPorchNumber(),
+                flatRegDTO.getFloorNumber(),
+                flatRegDTO.getFlatNumber())
         );
     }
 
