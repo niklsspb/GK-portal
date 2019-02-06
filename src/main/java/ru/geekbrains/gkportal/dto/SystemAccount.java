@@ -1,8 +1,8 @@
-package ru.geekbrains.gkportal.entity;
+package ru.geekbrains.gkportal.dto;
 
 
 import lombok.Data;
-import ru.geekbrains.gkportal.dto.FlatRegDTO;
+import ru.geekbrains.gkportal.entity.ContactType;
 import ru.geekbrains.gkportal.validation.PasswordsNotEqual;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
 

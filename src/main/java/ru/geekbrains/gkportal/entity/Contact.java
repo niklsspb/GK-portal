@@ -1,6 +1,7 @@
 package ru.geekbrains.gkportal.entity;
 
 import lombok.*;
+import ru.geekbrains.gkportal.dto.SystemAccount;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -41,7 +42,7 @@ public class Contact extends AbstractEntity {
     private Collection<Communication> communications;
 
     /**
-     * @deprecated because creating a contact from {@link ru.geekbrains.gkportal.entity.SystemAccount}
+     * @deprecated because creating a contact from {@link SystemAccount}
      * is the business logic.
      * Need to consult with Denis Volnenko
      */

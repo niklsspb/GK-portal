@@ -2,9 +2,9 @@ package ru.geekbrains.gkportal.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.gkportal.dto.SystemAccount;
 import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
-import ru.geekbrains.gkportal.entity.SystemAccount;
 import ru.geekbrains.gkportal.repository.CommunicationRepository;
 
 import java.time.LocalDateTime;
