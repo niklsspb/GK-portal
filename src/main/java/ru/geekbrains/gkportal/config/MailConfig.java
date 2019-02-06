@@ -15,7 +15,8 @@ import java.util.Properties;
 public class MailConfig {
 
     private PropertyService propertyService;
-    @Value("${mail_password}")
+
+    @Value("${mail.password}")
     private String defaultPrivatePassword;
 
     @Autowired
