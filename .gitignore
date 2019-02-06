@@ -1,5 +1,8 @@
 target
 
+
+
+
 # Created by https://www.gitignore.io/api/java,windows,intellij
 
 ### Intellij ###
@@ -111,6 +114,11 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+#added exceptions
+.idea
+*.iml
+application-secret.properties
+flyway.conf
 
 #added exceptions
 .idea
