@@ -2,7 +2,7 @@ package ru.geekbrains.gkportal.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.gkportal.DTO.FlatRegDTO;
+import ru.geekbrains.gkportal.dto.FlatRegDTO;
 import ru.geekbrains.gkportal.entity.Flat;
 import ru.geekbrains.gkportal.exception.FlatNotFoundException;
 import ru.geekbrains.gkportal.repository.FlatRepository;
