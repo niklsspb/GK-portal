@@ -2,7 +2,7 @@ package ru.geekbrains.gkportal.entity;
 
 
 import lombok.Data;
-import ru.geekbrains.gkportal.DTO.FlatRegDTO;
+import ru.geekbrains.gkportal.dto.FlatRegDTO;
 import ru.geekbrains.gkportal.validation.PasswordsNotEqual;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
 
