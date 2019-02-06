@@ -1,4 +1,4 @@
-package ru.geekbrains.gkportal.entities.questionnaire;
+package ru.geekbrains.gkportal.entity.questionnaire;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

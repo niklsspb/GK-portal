@@ -1,7 +1,7 @@
 package ru.geekbrains.gkportal.entities;
 
 import lombok.*;
-import ru.geekbrains.gkportal.entities.questionnaire.QuestionnaireContactConfirm;
+import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
