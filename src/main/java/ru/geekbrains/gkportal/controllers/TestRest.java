@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.geekbrains.gkportal.entities.Contact;
 import ru.geekbrains.gkportal.entities.questionnaire.*;
+import ru.geekbrains.gkportal.entity.questionnaire.*;
 import ru.geekbrains.gkportal.services.ContactService;
 
 import java.time.LocalDateTime;
