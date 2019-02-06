@@ -5,10 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.geekbrains.gkportal.entities.Contact;
-import ru.geekbrains.gkportal.entities.questionnaire.*;
+import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.*;
-import ru.geekbrains.gkportal.services.ContactService;
+import ru.geekbrains.gkportal.service.ContactService;
 
 import java.time.LocalDateTime;
 import java.util.*;

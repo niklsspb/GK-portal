@@ -1,4 +1,4 @@
-package ru.geekbrains.gkportal.entities;
+package ru.geekbrains.gkportal.entity;
 
 import lombok.*;
 import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
