@@ -116,4 +116,27 @@ width: 300px;
     margin-left: 5%;
 }
 
+.table-questionnaire-result {
+    border-collapse: collapse;
+    border: 1px solid #dee2e6;
+}
 
+.table-questionnaire-result th {
+    color: #fff;
+    background-color: #307ECC;
+}
+
+.table-questionnaire-result tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, .05);
+}
+
+.table-questionnaire-result tbody tr:hover {
+    background-color: rgba(0, 0, 0, .075);
+    cursor: pointer;
+}
+
+.table-questionnaire-result td,
+.table-questionnaire-result th {
+    border-top: 1px solid #dee2e6;
+    padding: 5px;
+}

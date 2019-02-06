@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="padding-site">
+        <h1 th:text="${questionnaire.name}"></h1>
+        <p style="font-style: italic" th:text="${questionnaire.description}"></p>
+        <table class="table-questionnaire-result">
+            <thead>
+            <tr>
+                <th>Имя собственника</th>
+                <th th:text="${questionnaireQuestion.name}"
+                    th:each="questionnaireQuestion : ${questionnaire.questionnaireQuestionList}"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="contact: ${contactList}">
+                <td th:text="${contact.firstName}"></td>
+                <th:block
+                        th:each="question: ${contact.questionnaireContactConfirm.questionnaire.questionnaireQuestionList}">
+                    <th:block th:each="answer: ${question.questionnaireQuestionAnswerList}">
+                        <th:block th:each="result: ${answer.qqAnswerResults}">
+                            <td th:if="${contact.uuid} == ${result.contact.uuid}" th:text="${answer.name}"></td>
+                        </th:block>
+
+                    </th:block>
+                </th:block>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+</html>
