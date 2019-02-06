@@ -18,4 +18,7 @@ public interface BuildPorchConfigRepository  extends JpaRepository<BuildPorchCon
 
     @Query(value = "select count(porch) from build_porch_config where housing = :housingID", nativeQuery = true)
     Integer getCountporchIDByhousingID(int housingID);
+
+    @Query(value = "select porch from build_porch_config where housing = :housingID", nativeQuery = true)
+    List<Integer> getPorchNumbersByHousingID(int housingID);
 }
