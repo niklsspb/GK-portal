@@ -15,9 +15,14 @@
 
 </head>
 <body>
-    <h1> Добро пожаловать в личный кабинет </h1>
-    <table class="table"  >
-        <tr>
+<p></p>
+<h1 align="center"> Добро пожаловать в личный кабинет </h1>
+<p></p>
+
+<table class="table"  >
+    <tr>
+        <td align="center" class="btn-primary" colspan="5">ФИО :</td>
+    <tr>
             <td>Фамилия:</td>
             <td th:text="${contact.getLastName()}">...</td>
         </tr>
@@ -34,14 +39,14 @@
             <td th:text="${contact.getContactType().getDescription()}">...</td>
         </tr>
         <tr>
-            <td colspan="2" align="center">Контакты :</td>
+            <td align="center" class="btn-primary" colspan="5">Контакты :</td>
         </tr>
         <tr th:each="communication : ${communications}" >
             <td th:text="${communication.getCommunicationType().getDescription()}">...</td>
             <td th:text="${communication.getIdentify()}">...</td>
         </tr>
         <tr>
-            <td colspan="2" align="center">Квартиры :</td>
+            <td align="center" class="btn-primary" colspan="5">Квартиры :</td>
         </tr>
         <tr th:each="flat , iter : ${flats}" >
             <td th:utext="${iter.index + 1 } + '.'">...</td>
@@ -52,6 +57,11 @@
         </tr>
 
     </table>
-</div>
+<p></p>
+<p></p>
+<p></p>
+<a href="/">Вернуться на главную</a>
+
+
 </body>
 </html>

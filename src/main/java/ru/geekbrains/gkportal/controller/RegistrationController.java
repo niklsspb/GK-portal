@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.geekbrains.gkportal.dto.House;
+import ru.geekbrains.gkportal.DTO.FlatRegDTO;
 import ru.geekbrains.gkportal.dto.Porch;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.SystemAccount;
 import ru.geekbrains.gkportal.service.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -55,7 +54,8 @@ public class RegistrationController {
     @GetMapping("/reg")
     public String reg(Model model) {
         SystemAccount account = new SystemAccount();
-
+        account.getFlats().add(new FlatRegDTO());
+        //model.addAttribute("flat", new FlatRegDTO());
         model.addAttribute("systemUser", account);
         List<String> housingList = houseService.getHousingNumList();
         housingList.add(0, "");
@@ -72,7 +72,7 @@ public class RegistrationController {
         return "porch-form";
     }
 
-    @GetMapping("/getPorchCount/{build}")
+    /*@GetMapping("/getPorchCount/{build}")
     public String getPorchCount(@ModelAttribute("systemUser") SystemAccount systemAccount, @PathVariable(name = "build") int build, Model model) {
         List<String> porchList = new ArrayList<>();
         porchList.add("");
@@ -80,7 +80,7 @@ public class RegistrationController {
         for (int i = 1; i <= count; i++) porchList.add(String.valueOf(i));
         model.addAttribute("porchList", porchList);
         return "select-porch-form";
-    }
+    }*/
 
     @GetMapping("/confirmMail/{mail}/{code}")
     public String confirmMail(@PathVariable(name = "code") String code, @PathVariable(name = "mail") String mail, Model model) {
@@ -119,18 +119,18 @@ public class RegistrationController {
     }
 
     private void createErrorModel(SystemAccount systemAccount, Model model, String error) {
-        House house = houseService.build(systemAccount.getHousingNumber());
+        //House house = houseService.build(systemAccount.getHousingNumber());
         List<String> housingList = houseService.getHousingNumList();
         housingList.add(0, "");
         model.addAttribute("housingList", housingList);
-        if (systemAccount.getHousingNumber() != null && systemAccount.getHousingNumber() != 0) {
+       /* if (systemAccount.getHousingNumber() != null && systemAccount.getHousingNumber() != 0) {
             List<String> porchList = new ArrayList<>();
             porchList.add("");
             int count = houseService.getHousingPorchCount(systemAccount.getHousingNumber());
             for (int i = 1; i <= count; i++) porchList.add(String.valueOf(i));
             model.addAttribute("porchList", porchList);
 
-        }
+        }*/
 
 
         model.addAttribute("userTypes", contactTypeService.getAllContactTypes());

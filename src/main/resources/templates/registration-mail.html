@@ -10,7 +10,7 @@
 <p><span>Здравствуйте,  </span><span th:text="${user} + '!'"/></p>
 <p><span> Вы зарегистрировались на сайте ЖК Город, для завершения регистрации перейдите по ссылке</p>
 <p></p>
-<p><span th:text="${password}"/></p>
+<p><a th:href="${password}"><span th:text="${password}"> ссылка</span> </a></p>
 
 
 <!--<p><span th:text="#{mail.page.authentication.hi} + ' ' + ${user.getEmail()} + '!'"/></p>-->

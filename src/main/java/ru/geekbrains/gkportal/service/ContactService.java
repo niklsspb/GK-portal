@@ -2,17 +2,20 @@ package ru.geekbrains.gkportal.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.gkportal.DTO.FlatRegDTO;
 import ru.geekbrains.gkportal.entity.Contact;
+import ru.geekbrains.gkportal.entity.Flat;
 import ru.geekbrains.gkportal.entity.SystemAccount;
 import ru.geekbrains.gkportal.repository.ContactRepository;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ContactService {
 
     private ContactRepository contactRepository;
-    private FlatsService flatsService;
+    private ru.geekbrains.gkportal.services.FlatsService flatsService;
     private CommunicationService communicationService;
 
     @Autowired
@@ -21,7 +24,7 @@ public class ContactService {
     }
 
     @Autowired
-    public void setFlatsService(FlatsService flatsService) {
+    public void setFlatsService(ru.geekbrains.gkportal.services.FlatsService flatsService) {
         this.flatsService = flatsService;
     }
 
@@ -31,13 +34,17 @@ public class ContactService {
     }
 
     public Contact createContact(SystemAccount systemAccount) throws Throwable {
-
+        List<Flat> flatArray = new ArrayList<>();
+        for (FlatRegDTO flatDTO : systemAccount.getFlats()
+        ) {
+            flatArray.add(flatsService.createFlat(flatDTO));
+        }
         Contact contact = Contact.builder()
                 .contactType(systemAccount.getContactType())
                 .firstName(systemAccount.getFirstName())
                 .lastName(systemAccount.getLastName())
                 .middleName(systemAccount.getMiddleName())
-                .flats(Arrays.asList(flatsService.createFlat(systemAccount)))
+                .flats(flatArray)
                 .build();
 
         contact.setCommunications(communicationService.createCommunication(systemAccount, contact));

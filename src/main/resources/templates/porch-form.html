@@ -1,4 +1,4 @@
-<div class="porch" id="porch" th:fragment="porch-view" th:object="${systemUser}" xmlns:th="http://www.thymeleaf.org">
+<div class="porch" id="porch" th:fragment="porch-view" xmlns:th="http://www.thymeleaf.org">
     <h2 th:text="${porch.description.housingID}+ ' корпус '+ ${porch.description.porchID}+' подъезд'"></h2>
     <table>
         <tbody th:attr="data-porch-number=${porch.description.porchID}">
@@ -6,7 +6,7 @@
             <td class="gk-floor-number" th:text="${floor.number}+' этаж'"></td>
             <td class="gk-flat-holder" th:attr="data-rizer-number=${iter}"
                 th:each="iter: ${#numbers.sequence( 0, porch.description.flatCountOnFloor - 1)}">
-                <div onClick="clickFlat(this)" th:attr="data-flat-id=${flat.uuid.toString()}"
+                <div th:attr="data-flat-id=${flat.uuid.toString()}"
                      th:class="gk-flat"
                      th:classappend="${flat.accountCount}>0 ? 'gk-occupied' : 'gk'" th:each="flat:${floor.flats}"
                      th:if="${flat.riser==iter }">

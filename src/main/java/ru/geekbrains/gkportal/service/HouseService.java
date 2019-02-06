@@ -53,8 +53,12 @@ public class HouseService {
         return porchConfigRepository.findallDistinctHousingID();
     }
 
-    public Integer getHousingPorchCount(int housingNum) {
+    /*public Integer getHousingPorchCount(int housingNum) {
         return porchConfigRepository.getCountporchIDByhousingID(housingNum);
+    }*/
+
+    public List<Integer> getHousingPorchNumbers(int housingNumber) {
+        return porchConfigRepository.getPorchNumbersByHousingID(housingNumber);
     }
 
 
