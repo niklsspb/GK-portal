@@ -93,7 +93,7 @@ CREATE TABLE `questionnaire_question_answer_result` (
   #   `questionnaire_id` char(36) NOT NULL COMMENT 'опрос',
   #   `questionnaire_question_id` char(36) NOT NULL COMMENT 'вопрос',
   `questionnaire_question_answer_id` char(36) NOT NULL COMMENT 'ответ',
-  #   `contact_id` char(36) NOT NULL COMMENT 'контакт',
+     `contact_id` char(36) NOT NULL COMMENT 'контакт',
 
   PRIMARY KEY (`id`),
   #   KEY `fk_answer_line_answer_result_idx` (`questionnaire_id`),
