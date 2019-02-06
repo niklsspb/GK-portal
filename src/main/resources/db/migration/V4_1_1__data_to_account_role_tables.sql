@@ -14,12 +14,24 @@ VALUES ('ccd7b370-47ad-473a-ab1f-d1641e096d72', 'Житель'),
 INSERT INTO `support_boot_db`.`contact` (`id`, `contact_type_id`, `first_name`, `middle_name`, `last_name`)
 VALUES ('27fa708c-394d-43b7-8358-b58050ecfdb8',
         'ccd7b370-47ad-473a-ab1f-d1641e096d72',
-        'Contact_first_name',
-        'Contact_middle_name',
-        'Contact_last_name');
-
-
-
+        'Contact1_first_name',
+        'Contact1_middle_name',
+        'Contact1_last_name'),
+       ('2e0865e3-f374-4b13-9a08-6d7c9b6fef3f',
+        'ccd7b370-47ad-473a-ab1f-d1641e096d72',
+        'Contact2_first_name',
+        'Contact2_middle_name',
+        'Contact2_last_name'),
+       ('9ec879aa-5848-414a-88d1-d1a767e6aa64',
+        'ccd7b370-47ad-473a-ab1f-d1641e096d72',
+        'Contact3_first_name',
+        'Contact3_middle_name',
+        'Contact3_last_name'),
+       ('71eff275-9909-4528-b76a-71fffb7c087a',
+        'ccd7b370-47ad-473a-ab1f-d1641e096d72',
+        'Contact4_first_name',
+        'Contact4_middle_name',
+        'Contact4_last_name');
 
 
 INSERT INTO `support_boot_db`.`account` (`id`, `login`, `confirmed`, `active`, `password_hash`, `contact_id`)

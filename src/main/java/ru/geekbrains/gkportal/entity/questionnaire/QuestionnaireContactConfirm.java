@@ -3,8 +3,8 @@ package ru.geekbrains.gkportal.entity.questionnaire;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import ru.geekbrains.gkportal.entities.AbstractEntity;
-import ru.geekbrains.gkportal.entities.Contact;
+import ru.geekbrains.gkportal.entity.AbstractEntity;
+import ru.geekbrains.gkportal.entity.Contact;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

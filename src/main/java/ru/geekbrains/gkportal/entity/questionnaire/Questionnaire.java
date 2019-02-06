@@ -2,7 +2,7 @@ package ru.geekbrains.gkportal.entity.questionnaire;
 
 
 import lombok.*;
-import ru.geekbrains.gkportal.entities.AbstractEntity;
+import ru.geekbrains.gkportal.entity.AbstractEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

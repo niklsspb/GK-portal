@@ -3,7 +3,7 @@ package ru.geekbrains.gkportal.entity.questionnaire;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import ru.geekbrains.gkportal.entities.AbstractEntity;
+import ru.geekbrains.gkportal.entity.AbstractEntity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

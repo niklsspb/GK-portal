@@ -3,7 +3,7 @@ package ru.geekbrains.gkportal.entity.questionnaire;
 
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import ru.geekbrains.gkportal.entities.AbstractEntity;
+import ru.geekbrains.gkportal.entity.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
