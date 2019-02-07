@@ -2,6 +2,7 @@ package ru.geekbrains.gkportal.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.gkportal.dto.AnswerResultDTO;
 import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.SystemAccount;
@@ -75,6 +76,35 @@ public class CommunicationService {
                 .contact(contact)
                 .build();
         mailService.sendRegistrationMail(contact, emailCommunication);
+
+        return Arrays.asList(phoneCommunication, emailCommunication);
+    }
+
+
+    public List<Communication> createCommunication(AnswerResultDTO answerResultDTO, Contact contact) throws Throwable {
+
+        Communication phoneCommunication = Communication.builder()
+                .communicationType(communicationTypeService.findPhoneType())
+                .identify(answerResultDTO.getPhoneNumber())
+                .confirmCode(UUID.randomUUID().toString())
+                .confirmCodeDate(LocalDateTime.now())
+                .confirmed(false)
+                .description(DEFAULT_DESCRIPTION)
+                .contact(contact)
+                .build();
+
+        Communication emailCommunication = Communication.builder()
+                .communicationType(communicationTypeService.findEmailType())
+                .identify(answerResultDTO.getEmail())
+                .confirmCode(UUID.randomUUID().toString())
+                .confirmCodeDate(LocalDateTime.now())
+                .confirmed(false)
+                .description(DEFAULT_DESCRIPTION)
+                .contact(contact)
+                .build();
+
+        // TODO: 07.02.2019
+//        mailService.sendRegistrationMail(contact, emailCommunication);
 
         return Arrays.asList(phoneCommunication, emailCommunication);
     }

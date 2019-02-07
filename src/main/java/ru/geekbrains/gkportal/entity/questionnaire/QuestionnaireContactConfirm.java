@@ -33,7 +33,7 @@ public class QuestionnaireContactConfirm extends AbstractEntity {
     @NotNull(message = "Couldn't be empty!")
     private boolean confirmed;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id")
     @NotNull(message = "Contact s.b. selected!")
     @JsonIgnore

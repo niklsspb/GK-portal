@@ -6,13 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.geekbrains.gkportal.dto.AnswerResultDTO;
-import ru.geekbrains.gkportal.entity.questionnaire.AnswerResult;
+import ru.geekbrains.gkportal.entity.questionnaire.Question;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 import ru.geekbrains.gkportal.service.AnswerResultService;
 import ru.geekbrains.gkportal.service.ContactService;
 import ru.geekbrains.gkportal.service.QuestionnaireService;
 
-import java.util.List;
+import java.util.Comparator;
 
 
 @Controller
@@ -62,6 +62,7 @@ public class QuestionnaireController {
             return "questionnaire";
         }
 
+        questionnaire.getQuestions().sort(Comparator.comparingInt(Question::getSortNumber));
         AnswerResultDTO form = new AnswerResultDTO(questionnaire.getQuestions(), questionnaireId);
         model.addAttribute("questionnaire", questionnaire);
         model.addAttribute("form", form);
@@ -69,12 +70,9 @@ public class QuestionnaireController {
     }
 
     @PostMapping
-    public String getQuestionnaire(@ModelAttribute("form") AnswerResultDTO form, Model model, RedirectAttributes redirectAttributes) {
-        model.addAttribute("completed", new Object());
-        List<AnswerResult> answerResults = form.toAnswerResults(
-                contactService.findAll().get(3),
-                service.findById(form.getQuestionnaireId()));
-        answerResultService.saveAll(answerResults);
+    public String getQuestionnaire(@ModelAttribute("form") AnswerResultDTO form, Model model, RedirectAttributes redirectAttributes) throws Throwable {
+        model.addAttribute("completed", "Данные записаны");
+        answerResultService.saveAll(form);
         return "redirect:/questionnaire";
     }
 

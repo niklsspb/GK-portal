@@ -9,30 +9,70 @@
 <body>
 <div class="container">
     <div class="padding-site">
+        <p th:if="${completed} != null"></p>
         <th:block th:if="${questionnaireList} != null">
-            <ul>
+            <ul style="margin-top: 100px">
                 <li th:each="item :${questionnaireList}">
                     <a th:text="${item.name}" th:href="@{/questionnaire(questionnaireId = ${item.uuid})}"></a>
                 </li>
             </ul>
         </th:block>
 
-
         <th:block th:if="${notFoundNumber} != null">
-            <p><span>Анкета под номером </span><span th:text="${notFound}"></span></p>
+            <p><span>Анкета под номером </span><span th:text="${notFoundNumber}"></span><span> не найдена</span></p>
         </th:block>
 
-        <th:block th:if="${completed} != null"><p>Данные записаны</p></th:block>
         <th:block th:if="${questionnaire} != null">
             <h1 th:text="${questionnaire.name}"></h1>
             <p style="font-style: italic" th:text="${questionnaire.description}"></p>
             <form th:action="@{/questionnaire}" th:object="${form}" method="POST" class="questionnaire-form">
                 <input type="hidden" th:field="*{questionnaireId}" th:value="${form.questionnaireId}">
+
+
+                <div class="form-group">
+                    <label for="inputFullName">ФИО полностью *</label>
+                    <input th:field="*{fullName}" type="text" class="form-control" id="inputFullName"
+                           placeholder="Введите Фамилию Имя отчетство">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail1">Адрес электронной почты</label>
+                    <input th:field="*{email}" type="email" class="form-control" id="inputEmail1"
+                           placeholder="Введите email">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPhone">Ваш контактный номер телефона (мы можем с вами связаться) </label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">+7</div>
+                        </div>
+                        <input th:field="*{phoneNumber}" type="tel" class="form-control" id="inputPhone"
+                               placeholder="Введите телефон">
+                    </div>
+                </div>
+
+                <!--<div class="form-group"></div>-->
+
                 <th:block th:each="question: ${questionnaire.questions}">
+                    <th:block th:if="${question.sortNumber} == 2">
+                        <div class="form-group">
+                            <label for="inputBuildNumber">Строительный номер объекта </label>
+                            <input th:field="*{buildNumber}" type="number" class="form-control" id="inputBuildNumber"
+                                   placeholder="Введите строительный номер объекта" value="357">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputSquare">Площадь помещения без учета балконов и лоджий (как в бюллетене)
+                                *</label>
+                            <input th:field="*{square}" type="text" class="form-control" id="inputSquare"
+                                   placeholder="Введите площадь помещения">
+                        </div>
+                    </th:block>
+
                     <div class="form-group">
                         <label th:text="${question.name}"></label>
                         <th:block th:each="answer, itemStat  : ${question.answers}">
-
                             <div class="form-check">
                                 <input th:id="${answer.uuid}" th:field="*{questionAnswerUuids[__${question.uuid}__]}"
                                        class="form-check-input" type="radio" th:attr="value=${answer.uuid}">
