@@ -16,12 +16,10 @@ body {
     border-color: black;
 }
 
-
 .gk-flat:hover {
     cursor: pointer;
     border-color: crimson;
 }
-
 
 .porch {
     display: inline-block;
@@ -53,8 +51,12 @@ body {
     width: min-content;
 }*/
 
-.login-form{
-width: 300px;
+.login-form {
+    width: 300px;
+}
+
+.questionnaire-form {
+    width: 600px;
 }
 
 .container {
@@ -88,7 +90,8 @@ width: 300px;
 .gk-flat-build-number {
     background-color: #e6f5ff
 }
-.gk-form-container{
+
+.gk-form-container {
     margin-top: 30px;
     margin-left: 50px;
 }
@@ -96,9 +99,11 @@ width: 300px;
 .gk-occupied .gk-flat-number {
     background-color: crimson;
 }
-.gk-occupied .gk-flat-build-number{
-    background-color : darkcyan;
+
+.gk-occupied .gk-flat-build-number {
+    background-color: darkcyan;
 }
+
 .gk-flat-holder {
     min-width: 50px;
 }

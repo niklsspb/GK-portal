@@ -13,13 +13,14 @@ import java.util.List;
  * @author Yuriy Tilman
  */
 
-@Data
 @Entity(name = "questionnaire_question_answer")
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class QuestionnaireQuestionAnswer extends AbstractEntity {
+public class Answer extends AbstractEntity {
 
     @Column(name = "name")
     @NotNull(message = "Couldn't be empty!")
@@ -29,16 +30,16 @@ public class QuestionnaireQuestionAnswer extends AbstractEntity {
     @NotNull(message = "Couldn't be empty!")
     private Integer sortNumber;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "questionnaire_question_answer_id")
-    private List<QuestionnaireQuestionAnswerResult> qqAnswerResults;
+    private List<AnswerResult> answerResults;
 
     @ManyToOne
     @JoinColumn(name = "questionnaire_question_id")
     @JsonIgnore
-    private QuestionnaireQuestion questionnaireQuestion;
+    private Question question;
 
-    public QuestionnaireQuestionAnswer(@NotNull(message = "Couldn't be empty!") String name, @NotNull(message = "Couldn't be empty!") Integer sortNumber) {
+    public Answer(@NotNull(message = "Couldn't be empty!") String name, @NotNull(message = "Couldn't be empty!") Integer sortNumber) {
         this.name = name;
         this.sortNumber = sortNumber;
     }

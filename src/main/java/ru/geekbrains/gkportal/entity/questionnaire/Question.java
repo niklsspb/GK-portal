@@ -12,14 +12,14 @@ import java.util.List;
 /**
  * @author Yuriy Tilman
  */
-
-@Data
 @Entity(name = "questionnaire_question")
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class QuestionnaireQuestion extends AbstractEntity {
+public class Question extends AbstractEntity {
 
     @Column(name = "name")
     @NotNull(message = "Couldn't be empty!")
@@ -44,7 +44,7 @@ public class QuestionnaireQuestion extends AbstractEntity {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "questionnaire_question_id")
-    private List<QuestionnaireQuestionAnswer> questionnaireQuestionAnswerList;
+    private List<Answer> answers;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "questionnaire_id")

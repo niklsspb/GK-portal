@@ -3,12 +3,16 @@ package ru.geekbrains.gkportal.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ru.geekbrains.gkportal.dto.AnswerResultDTO;
+import ru.geekbrains.gkportal.entity.questionnaire.AnswerResult;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
+import ru.geekbrains.gkportal.service.AnswerResultService;
 import ru.geekbrains.gkportal.service.ContactService;
 import ru.geekbrains.gkportal.service.QuestionnaireService;
+
+import java.util.List;
 
 
 @Controller
@@ -17,6 +21,7 @@ public class QuestionnaireController {
 
     private QuestionnaireService service;
     private ContactService contactService;
+    private AnswerResultService answerResultService;
 
     @Autowired
     public void setService(QuestionnaireService service) {
@@ -28,14 +33,50 @@ public class QuestionnaireController {
         this.contactService = contactService;
     }
 
-    @GetMapping//http://localhost:8080/questionnaire?questionnaireId=9342a431-0d1d-413e-9f40-f11c98ba4364
-    public String showQuestionnaire(@RequestParam String questionnaireId, Model model) {
+    @Autowired
+    public void setAnswerResultService(AnswerResultService answerResultService) {
+        this.answerResultService = answerResultService;
+    }
+
+    @GetMapping("result") //http://localhost:8080/questionnaire?questionnaireId=9342a431-0d1d-413e-9f40-f11c98ba4364
+    public String showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
         System.out.println(questionnaireId);
         Questionnaire questionnaire = service.findById(questionnaireId);
         model.addAttribute("questionnaire", questionnaire);
         model.addAttribute("contactList", contactService.findAll());
-        return "questionnaire";
-
-
+        return "questionnaire-result";
     }
+
+    @GetMapping
+    public String showQuestionnaire(@RequestParam(required = false) String questionnaireId, Model model) {
+        if (questionnaireId == null) {
+            model.addAttribute("questionnaireList", service.findAll());
+            return "questionnaire";
+        }
+
+        Questionnaire questionnaire;
+
+        if ((questionnaire = service.findById(questionnaireId)) == null) {
+            model.addAttribute("notFoundNumber", questionnaireId);
+            model.addAttribute("questionnaireList", service.findAll());
+            return "questionnaire";
+        }
+
+        AnswerResultDTO form = new AnswerResultDTO(questionnaire.getQuestions(), questionnaireId);
+        model.addAttribute("questionnaire", questionnaire);
+        model.addAttribute("form", form);
+        return "questionnaire";
+    }
+
+    @PostMapping
+    public String getQuestionnaire(@ModelAttribute("form") AnswerResultDTO form, Model model, RedirectAttributes redirectAttributes) {
+        model.addAttribute("completed", new Object());
+        List<AnswerResult> answerResults = form.toAnswerResults(
+                contactService.findAll().get(3),
+                service.findById(form.getQuestionnaireId()));
+        answerResultService.saveAll(answerResults);
+        return "redirect:/questionnaire";
+    }
+
+
 }
