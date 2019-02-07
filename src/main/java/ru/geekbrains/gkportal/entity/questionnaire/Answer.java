@@ -7,6 +7,7 @@ import ru.geekbrains.gkportal.entity.AbstractEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class Answer extends AbstractEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "questionnaire_question_answer_id")
-    private List<AnswerResult> answerResults;
+    private List<AnswerResult> answerResults = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "questionnaire_question_id")

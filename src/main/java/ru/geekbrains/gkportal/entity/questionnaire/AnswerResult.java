@@ -31,7 +31,7 @@ public class AnswerResult extends AbstractEntity {
     @JsonIgnore
     private Answer answer;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id")
     @NotNull(message = "Contact s.b. selected!")
     private Contact contact;
