@@ -22,6 +22,13 @@ public class OwnershipTypeService {
         return ownershipTypeList;
     }
 
+    public List<OwnershipType> getAllOwnershipTypesByIsUseInQuestionnaire() {
+        List<OwnershipType> ownershipTypeList = ownershipTypeRepository.findAllByIsUseInQuestionnaire(true);
+        return ownershipTypeList;
+    }
+
+
+
     public OwnershipType getOwnershipTypeByName(String name) {
         return ownershipTypeRepository.findByName(name).get();
     }
