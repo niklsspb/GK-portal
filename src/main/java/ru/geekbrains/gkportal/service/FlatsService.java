@@ -1,4 +1,4 @@
-package ru.geekbrains.gkportal.services;
+package ru.geekbrains.gkportal.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

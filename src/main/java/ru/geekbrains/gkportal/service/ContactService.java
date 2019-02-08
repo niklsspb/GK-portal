@@ -15,7 +15,7 @@ import java.util.List;
 public class ContactService {
 
     private ContactRepository contactRepository;
-    private ru.geekbrains.gkportal.services.FlatsService flatsService;
+    private FlatsService flatsService;
     private CommunicationService communicationService;
 
     @Autowired
@@ -24,7 +24,7 @@ public class ContactService {
     }
 
     @Autowired
-    public void setFlatsService(ru.geekbrains.gkportal.services.FlatsService flatsService) {
+    public void setFlatsService(FlatsService flatsService) {
         this.flatsService = flatsService;
     }
 
