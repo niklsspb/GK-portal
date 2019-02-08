@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.geekbrains.gkportal.dto.FlatRegDTO;
-import ru.geekbrains.gkportal.dto.Porch;
-import ru.geekbrains.gkportal.dto.SystemAccount;
+import ru.geekbrains.gkportal.dto.*;
 import ru.geekbrains.gkportal.entity.Contact;
+import ru.geekbrains.gkportal.entity.questionnaire.Question;
+import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 import ru.geekbrains.gkportal.service.*;
 
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -25,10 +26,22 @@ public class RegistrationController {
     private AccountService accountService;
     private ContactService contactService;
     private CommunicationService communicationService;
+    private QuestionnaireService questionnaireService;
+    private OwnershipTypeService ownershipTypeService;
+
+    @Autowired
+    public void setOwnershipTypeService(OwnershipTypeService ownershipTypeService) {
+        this.ownershipTypeService = ownershipTypeService;
+    }
 
     @Autowired
     public void setCommunicationService(CommunicationService communicationService) {
         this.communicationService = communicationService;
+    }
+
+    @Autowired
+    public void setQuestionnaireService(QuestionnaireService questionnaireService) {
+        this.questionnaireService = questionnaireService;
     }
 
     @Autowired
@@ -65,6 +78,92 @@ public class RegistrationController {
         return "reg-form";
     }
 
+    @PostMapping(value = "/userRegister")
+    public String registerUser(@Valid @ModelAttribute("systemUser") SystemAccount systemAccount, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            createErrorModel(systemAccount, model, "Не все поля заполнены правильно!");
+            return "reg-form";
+        }
+
+        if (accountService.isLoginExist(systemAccount.getEmail())) {
+            createErrorModel(systemAccount, model, "Указанный логин уже существует");
+            return "reg-form";
+        }
+
+        try {
+            accountService.createAccount(systemAccount);
+            return "reg-success";
+        } catch (Throwable throwable) {
+            throwable.printStackTrace(); // TODO: 02.02.2019 to Log
+            createErrorModel(systemAccount, model, "Произошла непредвиденная ошибка");
+            return "reg-form";
+        }
+    }
+
+
+    @GetMapping("/regQuestion")
+    public String regQuestion(Model model) {
+        SystemAccountToOwnerShip account = new SystemAccountToOwnerShip();
+        account.getOwnerships().add(new OwnershipRegDTO());
+        //model.addAttribute("flat", new FlatRegDTO());
+
+        //List<String> housingList = houseService.getHousingNumList();
+
+        //housingList.add(0, "");
+        //model.addAttribute("housingList", housingList);
+
+        Questionnaire questionnaire = putQuestionnaireToModel(model);
+        if (questionnaire != null) {
+            AnswerResultDTO form = new AnswerResultDTO(questionnaire.getQuestions(), questionnaire.getUuid());
+            account.setAnswerResultDTO(form);
+        }
+        model.addAttribute("systemUser", account);
+
+        model.addAttribute("ownershipTypes", ownershipTypeService.getAllOwnershipTypes());
+
+        return "reg-question-form";
+    }
+
+
+    @PostMapping(value = "/userQuestionRegister")
+    public String registerQuestionUser(@Valid @ModelAttribute("systemUser") SystemAccountToOwnerShip systemAccount,
+                                       BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            createErrorModel(systemAccount, model, "Не все поля заполнены правильно!");
+            return "reg-question-form";
+        }
+
+        if (accountService.isLoginExist(systemAccount.getEmail())) {
+            createErrorModel(systemAccount, model, "Указанный логин уже существует");
+            return "reg-question-form";
+        }
+
+        try {
+            // accountService.createAccount(systemAccount);
+            return "reg-success";
+        } catch (Throwable throwable) {
+            throwable.printStackTrace(); // TODO: 02.02.2019 to Log
+            createErrorModel(systemAccount, model, "Произошла непредвиденная ошибка");
+            return "reg-question-form";
+        }
+    }
+
+
+    private Questionnaire putQuestionnaireToModel(Model model) {
+        Questionnaire questionnaire;
+        String questionnaireId = "bb2248ae-2d7e-427d-85ef-7b85888f0319";
+
+        if ((questionnaire = questionnaireService.findById(questionnaireId)) == null) {
+            model.addAttribute("notFoundNumber", questionnaireId);
+            model.addAttribute("questionnaireList", questionnaireService.findAll());
+            return null;
+        }
+        questionnaire.getQuestions().sort(Comparator.comparingInt(Question::getSortNumber));
+        model.addAttribute("questionnaire", questionnaire);
+        return questionnaire;
+    }
+
+
     @GetMapping("/showPorch/{build}/{porch}")
     public String showPorch(@PathVariable(name = "build") int build, @PathVariable(name = "porch") int porchNum, Model model) {
         //todo проверка что юзер зарегистрирован и имеет права на данное действие (надо подумать)
@@ -95,29 +194,6 @@ public class RegistrationController {
         return "confirm-mail";
     }
 
-    @PostMapping(value = "/userRegister")
-    public String registerUser(@Valid @ModelAttribute("systemUser") SystemAccount systemAccount, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            createErrorModel(systemAccount, model, "Не все поля заполнены правильно!");
-            return "reg-form";
-        }
-
-        if (accountService.isLoginExist(systemAccount.getEmail())) {
-            createErrorModel(systemAccount, model, "Указанный логин уже существует");
-            return "reg-form";
-        }
-
-        try {
-            accountService.createAccount(systemAccount);
-            return "reg-success";
-        } catch (Throwable throwable) {
-            throwable.printStackTrace(); // TODO: 02.02.2019 to Log
-            createErrorModel(systemAccount, model, "Произошла непредвиденная ошибка");
-            return "reg-form";
-        }
-
-
-    }
 
     private void createErrorModel(SystemAccount systemAccount, Model model, String error) {
         //House house = houseService.build(systemAccount.getHousingNumber());
@@ -138,6 +214,17 @@ public class RegistrationController {
         model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
         model.addAttribute("registrationError", error);
     }
+
+    private void createErrorModel(SystemAccountToOwnerShip systemAccount, Model model, String error) {
+
+        model.addAttribute("ownershipTypes", ownershipTypeService.getAllOwnershipTypes());
+        model.addAttribute("registrationError", error);
+        Questionnaire questionnaire = putQuestionnaireToModel(model);
+
+
+    }
+
+
 
    /* @ModelAttribute("interests")
     public String[] getMultiCheckboxAllValues() {

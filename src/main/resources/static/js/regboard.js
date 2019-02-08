@@ -2,12 +2,16 @@ $(document).ready(function () {
     var currentNum = {num: 0};
     currentNum.num=$('#gk-reg-flats').children('.gk-flat-chooser').length-1;
     var opsList = $('#gk-reg-flats').children('.gk-flat-chooser').first().find('.gk-select-house select').html();
+    var opsListOwnType = $('#gk-reg-flats').children('.gk-flat-chooser').first().find('.gk-select-ownership select').html();
     $.templates("flatTemplate", "#flatTemplate");
     $('#add-flat').click(function () {
         currentNum.num = currentNum.num + 1;
         var html = $.render.flatTemplate(currentNum);
         $('#gk-reg-flats').children('.gk-flat-chooser').last().after(html);
+
         $('#gk-reg-flats').children('.gk-flat-chooser').last().find('.gk-select-house select').html(opsList).val(-3);
+        $('#gk-reg-flats').children('.gk-flat-chooser').last().find('.gk-select-ownership select').html(opsListOwnType).val(-3);
+
     });
     $('#del-flat').click(function () {
         if (currentNum.num==0) return;
@@ -48,7 +52,7 @@ function fillPorchChooser(caller, houseNum) {
             console.log(jsonData);
             var selector = caller.find('.gk-select-porch select');
             selector.empty();
-            selector.append('<option>Выбирай</option>');
+            selector.append('<option>Нужно выбрать!</option>');
             console.log(jsonData);
             for (var i = 0; i < jsonData.length; i++) {
                 var option = '<option multiple="false" value="' + jsonData[i] + '">' + jsonData[i] + '</option>';
