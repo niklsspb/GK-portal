@@ -1,12 +1,13 @@
-package ru.geekbrains.gkportal.entity.questionnaire;
+package ru.geekbrains.gkportal.entity;
 
 
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import ru.geekbrains.gkportal.entity.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -14,28 +15,22 @@ import javax.validation.constraints.NotNull;
  */
 
 @Data
-@Entity(name = "real_estate")
+@Entity(name = "ownership")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class RealEstate extends AbstractEntity { // TODO: 05.02.19
+public class Ownership extends AbstractEntity { // TODO: 05.02.19
 
-    @Column(name = "flats")
-    @NotNull(message = "Couldn't be empty!")
-    private boolean flats;
+    @ManyToOne
+    @JoinColumn(name = "ownership_type_id")
+    @NotNull(message = "Тип должен быть указан!")
+    private OwnershipType ownershipType;
 
-    @Column(name = "commercial")
-    @NotNull(message = "Couldn't be empty!")
-    private boolean commercial;
 
-    @Column(name = "parking")
-    @NotNull(message = "Couldn't be empty!")
-    private boolean parking;
-
-    @Column(name = "build_num")
-    @NotNull(message = "Couldn't be empty!")
-    private boolean build_num;
+    @Column(name = "is_build_num")
+    @NotNull(message = "Поле не должно быть пустым!")
+    private boolean is_build_num;
 
     @Column(name = "house_num")
     private Integer houseNum;
@@ -50,13 +45,15 @@ public class RealEstate extends AbstractEntity { // TODO: 05.02.19
     private Integer buildNumber;
 
     @Column(name = "square")
-    @NotNull(message = "Couldn't be empty!")
     private Double square;
 
     @Column(name = "percentage_of_owner")
-    @NotNull(message = "Couldn't be empty!")
     @ColumnDefault(value = "100")
     private Integer percentageOfOwner;
 
+    @ManyToOne
+    @JoinColumn(name = "contact_id")
+    @NotNull(message = "Тип должен быть указан!")
+    private Contact contact;
 
 }
