@@ -119,7 +119,7 @@ public class RegistrationController {
         }
         model.addAttribute("systemUser", account);
 
-        model.addAttribute("ownershipTypes", ownershipTypeService.getAllOwnershipTypes());
+        model.addAttribute("ownershipTypes", ownershipTypeService.getAllOwnershipTypesByIsUseInQuestionnaire());
 
         return "reg-question-form";
     }
