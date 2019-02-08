@@ -6,5 +6,6 @@ import ru.geekbrains.gkportal.entity.Contact;
 
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, String> {
+    Contact findByFirstNameAndLastNameAndMiddleName(String firstName, String lastName, String middleName);
 
 }

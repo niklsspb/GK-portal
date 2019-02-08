@@ -3,6 +3,7 @@ package ru.geekbrains.gkportal.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.dto.SystemAccount;
+import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
 import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.repository.CommunicationRepository;
@@ -78,6 +79,43 @@ public class CommunicationService {
 
         return Arrays.asList(phoneCommunication, emailCommunication);
     }
+
+    public List<Communication> createIfNotExistCommunication(SystemAccountToOwnerShip systemAccount, Contact contact) throws Throwable {
+
+        Communication phoneCommunication =
+                communicationRepository.findCommunicationByCommunicationTypeAndIdentify(communicationTypeService.findPhoneType(),
+                        systemAccount.getPhoneNumber());
+        if (phoneCommunication == null) {
+            phoneCommunication = Communication.builder()
+                    .communicationType(communicationTypeService.findPhoneType())
+                    .identify(systemAccount.getPhoneNumber())
+                    .confirmCode(UUID.randomUUID().toString())
+                    .confirmCodeDate(LocalDateTime.now())
+                    .confirmed(false)
+                    .description(DEFAULT_DESCRIPTION)
+                    .contact(contact)
+                    .build();
+        }
+
+        Communication emailCommunication =
+                communicationRepository.findCommunicationByCommunicationTypeAndIdentify(communicationTypeService.findEmailType(),
+                        systemAccount.getEmail());
+        if (emailCommunication == null) {
+            emailCommunication = Communication.builder()
+                    .communicationType(communicationTypeService.findEmailType())
+                    .identify(systemAccount.getEmail())
+                    .confirmCode(UUID.randomUUID().toString())
+                    .confirmCodeDate(LocalDateTime.now())
+                    .confirmed(false)
+                    .description(DEFAULT_DESCRIPTION)
+                    .contact(contact)
+                    .build();
+        }
+
+        return Arrays.asList(phoneCommunication, emailCommunication);
+    }
+
+
 
 /*
     public List<Communication> createCommunication(AnswerResultDTO answerResultDTO, Contact contact) throws Throwable {

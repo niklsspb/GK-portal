@@ -11,6 +11,8 @@ import java.util.List;
 public class ContactTypeService {
     private ContactTypeRepository contactTypeRepository;
 
+    public static final String OWNER_TYPE = "Собственник";
+
     @Autowired
     public void setContactTypeRepository(ContactTypeRepository contactTypeRepository) {
         this.contactTypeRepository = contactTypeRepository;

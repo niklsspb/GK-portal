@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
  * @author Yuriy Tilman
  */
 
+//todo Переделать многие к многим, у связки тип собственности и доля
+
 @Data
 @Entity(name = "ownership")
 @Builder
@@ -39,10 +41,10 @@ public class Ownership extends AbstractEntity { // TODO: 05.02.19
     private Integer houseBuildNum;
 
     @Column(name = "number")
-    private Integer number;
+    private String number;
 
     @Column(name = "build_number")
-    private Integer buildNumber;
+    private String buildNumber;
 
     @Column(name = "square")
     private Double square;
