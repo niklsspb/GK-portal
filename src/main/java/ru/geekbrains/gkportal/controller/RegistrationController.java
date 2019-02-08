@@ -58,7 +58,8 @@ public class RegistrationController {
         //model.addAttribute("flat", new FlatRegDTO());
         model.addAttribute("systemUser", account);
         List<String> housingList = houseService.getHousingNumList();
-        housingList.add(0, "");
+
+        //housingList.add(0, "");
         model.addAttribute("housingList", housingList);
         model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
         return "reg-form";
@@ -121,8 +122,9 @@ public class RegistrationController {
     private void createErrorModel(SystemAccount systemAccount, Model model, String error) {
         //House house = houseService.build(systemAccount.getHousingNumber());
         List<String> housingList = houseService.getHousingNumList();
-        housingList.add(0, "");
+        //housingList.add(0, "");
         model.addAttribute("housingList", housingList);
+        model.addAttribute("houseService", houseService);
        /* if (systemAccount.getHousingNumber() != null && systemAccount.getHousingNumber() != 0) {
             List<String> porchList = new ArrayList<>();
             porchList.add("");
