@@ -6,12 +6,7 @@ import lombok.Setter;
 import ru.geekbrains.gkportal.entity.AbstractEntity;
 import ru.geekbrains.gkportal.entity.questionnaire.Answer;
 import ru.geekbrains.gkportal.entity.questionnaire.Question;
-import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,30 +23,8 @@ public class AnswerResultDTO {
     private Map<String, Question> questions = new HashMap<>();
     private String questionnaireId;
 
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 3, max = 255, message = "2-255 символов")
-    private String fullName = "Тильман Юрий Александрович";
-
-    @ValidPhoneNumber(message = "Телефон указан не корректно")
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 10, message = "Минимум 10 символов")
-    private String phoneNumber = "9104668422";
-
-    @Email(message = "Почта указана не корректна")
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 5, max = 25, message = "5-25 символов")
-    private String email = "uatilman@gmail.com";
-
-    @Column(name = "build_number")
-    private Integer buildNumber = 555;
-
-    @Column(name = "square")
-    @NotNull(message = "Couldn't be empty!")
-    private Double square;
-
     public AnswerResultDTO(Collection<Question> questions, String questionnaireId) {
         this.questionnaireId = questionnaireId;
-
 
         for (Question question : questions) {
             questionAnswerUuids.put(question.getUuid(), null);

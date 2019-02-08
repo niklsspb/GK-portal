@@ -92,6 +92,16 @@ public class AccountService implements UserDetailsService {
                 mapRolesToAuthorities(account.getRoles()));
     }
 
+
+    @Transactional
+    public Contact getContactByUsername(String login) throws UsernameNotFoundException {
+        Account account = accountRepository.findOneByLogin(login);
+        if (account == null) {
+            throw new UsernameNotFoundException("Invalid username or password");
+        }
+        return account.getContact();
+    }
+
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getDescription())).collect(Collectors.toList());
     }

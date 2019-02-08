@@ -2,7 +2,6 @@ package ru.geekbrains.gkportal.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.gkportal.dto.AnswerResultDTO;
 import ru.geekbrains.gkportal.dto.FlatRegDTO;
 import ru.geekbrains.gkportal.dto.SystemAccount;
 import ru.geekbrains.gkportal.entity.Contact;
@@ -74,7 +73,7 @@ public class ContactService {
         return contact;
     }
 
-    public Contact createContact(AnswerResultDTO answerResultDTO) throws Throwable {
+    /*public Contact createContact(AnswerResultDTO answerResultDTO) throws Throwable {
 
         Contact contact = Contact.builder()
                 .contactType(contactTypeService.getContactTypeByDescription("Собственник"))
@@ -82,11 +81,11 @@ public class ContactService {
                 .lastName("TOSPLIT")
                 .build();
 
-        contact.setCommunications(communicationService.createCommunication(answerResultDTO, contact));
+        //contact.setCommunications(communicationService.createCommunication(answerResultDTO, contact));
         return contact;
 
 
     }
-
+*/
 }
 

@@ -39,14 +39,14 @@ public class AnswerResultService {
         answerResultRepository.saveAll(answerResults);
     }
 
-    public void saveAll(AnswerResultDTO answerResultDTO) throws Throwable {
-        saveAnswerResultDTO(answerResultDTO);
-    }
+    //public void saveAll(AnswerResultDTO answerResultDTO) throws Throwable {
+    //    saveAnswerResultDTO(answerResultDTO);
+    // }
 
-    public void saveAnswerResultDTO(AnswerResultDTO answerResultDTO) throws Throwable {
+    public void saveAnswerResultDTO(AnswerResultDTO answerResultDTO, Contact contact) throws Throwable {
         Questionnaire questionnaire = questionnaireService.findById(answerResultDTO.getQuestionnaireId());
 
-        Contact contact = contactService.createContact(answerResultDTO);
+        //Contact contact = contactService.createContact(answerResultDTO);
         Collection<Question> questions = questionnaire.getQuestions();
         QuestionnaireContactConfirm questionnaireContactConfirm = QuestionnaireContactConfirm.builder()
                 .questionnaire(questionnaire)

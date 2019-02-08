@@ -33,21 +33,21 @@
                 </div>
                 <div class="div_show_flat"></div>
                 <div class="gk-reg-flat-number form-group row">
-                    <label class="col-sm-5 col-form-label">Номер Объекта</label>
+                    <label class="col-sm-5 col-form-label">Строительный Номер Объекта</label>
                     <div class="col-sm-3">
                         <input class="form-control" required id="ownerships{{:num}}.flatNumber" name="ownerships[{{:num}}].flatNumber" value="">
 
                     </div>
                 </div>
-                <div class="form-group row"><label class="col-sm-5 col-form-label">Площадь объекта</label>
+                <div class="form-group row"><label class="col-sm-5 col-form-label">Площадь объекта (исключая балконы и лоджии), кв м</label>
                     <div class="col-sm-3">
-                    <input class="form-control" id="{ownerships{:num}}.square" name="ownerships[{{:num}}].square" value="">
+                    <input class="form-control" id="{ownerships{:num}}.square" name="ownerships[{{:num}}].square" value="" placeholder="56,3">
 
                     </div>
                 </div>
-                <div class="form-group row"><label class="col-sm-5 col-form-label">Процент собственности)</label>
+                <div class="form-group row"><label class="col-sm-5 col-form-label">Процент собственности, %</label>
                     <div class="col-sm-3">
-                    <input class="form-control" id="{ownerships{:num}}.percentageOfOwner" name="ownerships[{{:num}}].percentageOfOwner" value="">
+                    <input class="form-control" id="{ownerships{:num}}.percentageOfOwner" name="ownerships[{{:num}}].percentageOfOwner" value="" placeholder="100">
 
                     </div>
                 </div>
@@ -57,11 +57,15 @@
 
 
     </script>
-    <title>Регистрация нового пользователя</title>
+    <title th:text="${questionnaire.name}"> Опрос </title>
 
 
 </head>
 <body>
+<th:block th:if="${questionnaire} != null">
+    <h1 th:text="${questionnaire.name}"></h1>
+    <p style="font-style: italic" th:text="${questionnaire.description}"></p>
+</th:block>
 
 <div class="gk-form-container">
     <form method="post" th:action=" @{'/userQuestionRegister'}" th:object="${systemUser}">
@@ -70,7 +74,23 @@
                  <div class="alert alert-danger col-xs-offset-1 col-xs-10" th:text="${registrationError}"></div>
              </div>
          </div>-->
-        <div class="form-group row"><label class="col-sm-2 col-form-label">Адрес электронной почты</label>
+        <h1>Личные данные проголосовавшего</h1>
+
+        <div class="form-group row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-6">
+                <div class="form-check"><input class="form-check-input" required th:field="*{allowContactsSharing}"
+                                               type="checkbox" value="true">
+                    <label class="form-check-label" th:for="allowContactsSharing1">Я даю согласие на хранение и
+                        обработку моих персональных данных</label></div>
+
+
+            </div>
+
+        </div>
+
+        <div class="form-group row"><label class="col-sm-2 col-form-label">Адрес электронной почты (нужен для
+            подтверждения анкеты)</label>
             <div class="col-sm-3"><input class="form-control" th:field="${systemUser.email}" type="email">
                 <div class="gk-error" th:errors="${systemUser.email}"></div>
             </div>
@@ -94,13 +114,19 @@
 
 
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label" th:for="phoneNumber">Номер телефона +7 </label>
-            <div class="col-sm-3">
-                <input class="form-control" placeholder="9151234567" th:field="${systemUser.phoneNumber}">
+            <label class="col-sm-2 col-form-label" th:for="phoneNumber">Номер телефона (по нему будет выборочный
+                обзвон)</label>
+            <div class="form-control col-sm-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">+7</div>
+                </div>
+
+                <input class="" placeholder="9151234567" th:field="${systemUser.phoneNumber}" type="tel">
                 <div class="gk-error" th:errors="${systemUser.phoneNumber}"
                      th:if="${#fields.hasErrors('phoneNumber')}"></div>
             </div>
         </div>
+
 
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" th:for="lastName">Фамилия</label>
@@ -127,6 +153,8 @@
                      th:if="${#fields.hasErrors('middleName')}"></div>
             </div>
         </div>
+
+        <h1>Информация о недвижимости</h1>
         <div id="gk-reg-flats">
 
             <div class="gk-flat-chooser" th:each="ownership, ownershipStat : ${systemUser.ownerships}">
@@ -160,14 +188,15 @@
                              th:errors="${systemUser.ownerships[__${ownershipStat.index}__].flatNumber}"></div>
                     </div>
                 </div>
-                <div class="form-group row"><label class="col-sm-5 col-form-label">Площадь объекта</label>
+                <div class="form-group row"><label class="col-sm-5 col-form-label">Площадь объекта (исключая балконы и
+                    лоджии), кв м</label>
                     <div class="col-sm-3">
                         <input class="form-control"
                                th:field="${systemUser.ownerships[__${ownershipStat.index}__].square}">
 
                     </div>
                 </div>
-                <div class="form-group row"><label class="col-sm-5 col-form-label">Процент собственности</label>
+                <div class="form-group row"><label class="col-sm-5 col-form-label">Процент собственности, %</label>
                     <div class="col-sm-3">
                         <input class="form-control"
                                th:field="${systemUser.ownerships[__${ownershipStat.index}__].percentageOfOwner}">
@@ -177,16 +206,12 @@
 
             </div>
         </div>
+        <p></p>
         <div class="gk-button-group">
             <button class="btn-outline-success" id="add-flat" type="button"> Добавить объект</button>
             <button class="btn-outline-danger" id="del-flat" type="button">Удалить объект</button>
         </div>
 
-        <div class="form-group row"><label class="col-form-label col-sm-2">Вид недвижимости</label>
-            <div class="col-sm-3"><select class="custom-select" th:field="${systemUser.contactType.uuid}">
-                <option th:each="type : ${userTypes}" th:text="${type.description}" th:value="${type.uuid}"></option>
-            </select></div>
-        </div>
 
         <!--/*<div><p>У меня есть место в подземном паркинге</p>
             <label><input type="radio" th:field="*{boughtParkingPlace}" value="true">Да</label>
@@ -210,19 +235,7 @@
             <option value="4">4</option>
             <option value="5">5</option>
         </select></label></div>*/-->
-        <div class="form-group row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-6">
-                <div class="form-check"><input class="form-check-input" th:field="*{allowContactsSharing}"
-                                               type="checkbox" value="true">
-                    <label class="form-check-label" th:for="allowContactsSharing1">Я разрешаю делиться моими
-                        контактами
-                        с соседями</label></div>
-
-
-            </div>
-
-        </div>
+        <h1>Вопросы анкеты</h1>
 
         <!--/* Начало формы анкеты  */-->
 
@@ -243,59 +256,14 @@
                 </th:block>
 
                 <th:block th:if="${questionnaire} != null">
-                    <h1 th:text="${questionnaire.name}"></h1>
-                    <p style="font-style: italic" th:text="${questionnaire.description}"></p>
 
                     <input th:field="${systemUser.answerResultDTO.questionnaireId}"
                            th:value="${systemUser.answerResultDTO.questionnaireId}" type="hidden">
 
 
-                    <div class="form-group">
-                        <label for="inputFullName">ФИО полностью *</label>
-                        <input class="form-control" id="inputFullName" placeholder="Введите Фамилию Имя отчетство"
-                               th:field="${systemUser.answerResultDTO.fullName}"
-                               type="text">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputEmail1">Адрес электронной почты</label>
-                        <input class="form-control" id="inputEmail1" placeholder="Введите email"
-                               th:field="${systemUser.answerResultDTO.email}"
-                               type="email">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputPhone">Ваш контактный номер телефона (мы можем с вами связаться) </label>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">+7</div>
-                            </div>
-                            <input class="form-control" id="inputPhone" placeholder="Введите телефон"
-                                   th:field="${systemUser.answerResultDTO.phoneNumber}"
-                                   type="tel">
-                        </div>
-                    </div>
-
                     <!--<div class="form-group"></div>-->
 
                     <th:block th:each="question: ${questionnaire.questions}">
-                        <th:block th:if="${question.sortNumber} == 2">
-                            <div class="form-group">
-                                <label for="inputBuildNumber">Строительный номер объекта </label>
-                                <input class="form-control" id="inputBuildNumber"
-                                       placeholder="Введите строительный номер объекта"
-                                       th:field="${systemUser.answerResultDTO.buildNumber}"
-                                       type="number" value="357">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputSquare">Площадь помещения без учета балконов и лоджий (как в бюллетене)
-                                    *</label>
-                                <input class="form-control" id="inputSquare" placeholder="Введите площадь помещения"
-                                       th:field="${systemUser.answerResultDTO.square}"
-                                       type="text">
-                            </div>
-                        </th:block>
 
                         <div class="form-group">
                             <label th:text="${question.name}"></label>
