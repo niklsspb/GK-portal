@@ -20,4 +20,8 @@ public class ContactTypeService {
         List<ContactType> contactTypeList = contactTypeRepository.findAll();
         return contactTypeList;
     }
+
+    public ContactType getContactTypeByDescription(String description) {
+        return contactTypeRepository.findByDescription(description);
+    }
 }

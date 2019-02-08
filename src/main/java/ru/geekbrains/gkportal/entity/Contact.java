@@ -1,7 +1,8 @@
 package ru.geekbrains.gkportal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import ru.geekbrains.gkportal.dto.SystemAccount;
+import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -41,18 +42,13 @@ public class Contact extends AbstractEntity {
     @JoinColumn(name = "contact_id")
     private Collection<Communication> communications;
 
-    /**
-     * @deprecated because creating a contact from {@link SystemAccount}
-     * is the business logic.
-     * Need to consult with Denis Volnenko
-     */
-    @Deprecated
-    public Contact(SystemAccount systemAccount) {
-        contactType = systemAccount.getContactType();
-        firstName = systemAccount.getFirstName();
-        lastName = systemAccount.getLastName();
-        middleName = systemAccount.getMiddleName();
-    }
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "contact_id")
+//    private Collection<RealEstate> realEstates;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "contact")
+    @JoinColumn(name = "contact_id")
+    @JsonIgnore
+    private QuestionnaireContactConfirm questionnaireContactConfirm;
 
 }
