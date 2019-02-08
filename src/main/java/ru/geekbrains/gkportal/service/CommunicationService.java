@@ -2,7 +2,6 @@ package ru.geekbrains.gkportal.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.gkportal.dto.AnswerResultDTO;
 import ru.geekbrains.gkportal.dto.SystemAccount;
 import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
@@ -80,7 +79,7 @@ public class CommunicationService {
         return Arrays.asList(phoneCommunication, emailCommunication);
     }
 
-
+/*
     public List<Communication> createCommunication(AnswerResultDTO answerResultDTO, Contact contact) throws Throwable {
 
         Communication phoneCommunication = Communication.builder()
@@ -108,5 +107,5 @@ public class CommunicationService {
 
         return Arrays.asList(phoneCommunication, emailCommunication);
     }
-
+*/
 }
