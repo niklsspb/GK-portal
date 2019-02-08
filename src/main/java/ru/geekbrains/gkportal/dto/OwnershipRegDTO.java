@@ -8,7 +8,7 @@ public class OwnershipRegDTO {
 
     private OwnershipType ownershipType;
     private Integer housingNumber;
-    private Integer flatNumber;
+    private String flatNumber;
     private Double square;
     private Integer percentageOfOwner;
 

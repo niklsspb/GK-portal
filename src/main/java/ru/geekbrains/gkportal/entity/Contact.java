@@ -42,6 +42,11 @@ public class Contact extends AbstractEntity {
     @JoinColumn(name = "contact_id")
     private Collection<Communication> communications;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_id")
+    private Collection<Ownership> ownerships;
+
+
 //    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @JoinColumn(name = "contact_id")
 //    private Collection<Ownership> realEstates;

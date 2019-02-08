@@ -67,6 +67,7 @@ public class RegistrationController {
     @GetMapping("/reg")
     public String reg(Model model) {
         SystemAccount account = new SystemAccount();
+        account.setContactType(contactTypeService.getContactTypeByDescription(ContactTypeService.OWNER_TYPE));
         account.getFlats().add(new FlatRegDTO());
         //model.addAttribute("flat", new FlatRegDTO());
         model.addAttribute("systemUser", account);
@@ -105,6 +106,7 @@ public class RegistrationController {
     public String regQuestion(Model model) {
         SystemAccountToOwnerShip account = new SystemAccountToOwnerShip();
         account.getOwnerships().add(new OwnershipRegDTO());
+        account.setContactType(contactTypeService.getContactTypeByDescription(ContactTypeService.OWNER_TYPE));
         //model.addAttribute("flat", new FlatRegDTO());
 
         //List<String> housingList = houseService.getHousingNumList();
@@ -139,7 +141,10 @@ public class RegistrationController {
         }
 
         try {
-            // accountService.createAccount(systemAccount);
+
+            Contact contact = contactService.getOrCreateContact(systemAccount);
+            contactService.save(contact);
+
             return "reg-success";
         } catch (Throwable throwable) {
             throwable.printStackTrace(); // TODO: 02.02.2019 to Log
