@@ -153,7 +153,7 @@ public class TestRest {
                 .useRealEstate(true)
                 .questions(questionList)
                 .build();
-
+        questionnaire.setUuid("bb2248ae-2d7e-427d-85ef-7b85888f0319");
         question1.setQuestionnaire(questionnaire);
         question2.setQuestionnaire(questionnaire);
         question3.setQuestionnaire(questionnaire);
