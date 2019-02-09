@@ -94,7 +94,7 @@ public class AccountService implements UserDetailsService {
 
 
     @Transactional
-    public Contact getContactByUsername(String login) throws UsernameNotFoundException {
+    public Contact getContactByLogin(String login) throws UsernameNotFoundException {
         Account account = accountRepository.findOneByLogin(login);
         if (account == null) {
             throw new UsernameNotFoundException("Invalid username or password");

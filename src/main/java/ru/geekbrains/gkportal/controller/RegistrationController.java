@@ -220,7 +220,8 @@ public class RegistrationController {
 
     @GetMapping("/confirmMail/{mail}/{code}")
     public String confirmMail(@PathVariable(name = "code") String code, @PathVariable(name = "mail") String mail, Model model) {
-        Contact contact = communicationService.confirmAccountAndGetContact(mail, code);
+
+        Contact contact = communicationService.confirmAccountAndGetContact(mail, code, accountService.getContactByLogin(mail));
         boolean confirm = false;
         if (contact != null) {
             accountService.confirmAccount(contact);
