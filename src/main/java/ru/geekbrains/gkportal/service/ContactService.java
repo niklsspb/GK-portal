@@ -85,9 +85,7 @@ public class ContactService {
     }
 
     public Contact getOrCreateContact(SystemAccountToOwnerShip systemAccount) throws Throwable {
-        //todo обрезать пробелы, первую букву к верхнему регистру, остальные к нижнему
-        Contact contact = contactRepository.findByFirstNameAndLastNameAndMiddleName(systemAccount.getFirstName(),
-                systemAccount.getLastName(), systemAccount.getMiddleName());
+        Contact contact = getContact(systemAccount);
         if (contact == null) {
             //todo обрезать пробелы, первую букву к верхнему регистру, остальные к нижнему
             contact = Contact.builder()
@@ -110,6 +108,12 @@ public class ContactService {
 
 
         return contact;
+    }
+
+    private Contact getContact(SystemAccountToOwnerShip systemAccount) {
+        //todo обрезать пробелы, первую букву к верхнему регистру, остальные к нижнему
+        return contactRepository.findByFirstNameAndLastNameAndMiddleName(systemAccount.getFirstName(),
+                systemAccount.getLastName(), systemAccount.getMiddleName());
     }
 
 

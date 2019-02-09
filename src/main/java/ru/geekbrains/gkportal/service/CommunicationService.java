@@ -10,6 +10,7 @@ import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.repository.CommunicationRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -95,7 +96,10 @@ public class CommunicationService {
                 communicationTypeService.findEmailType(),
                 systemAccount.getEmail());
 
-        return Arrays.asList(phoneCommunication, emailCommunication);
+        List<Communication> communications = new ArrayList<>();
+        communications.add(phoneCommunication);
+        communications.add(emailCommunication);
+        return communications;
     }
 
     private Communication createIfNotExistCommunication(SystemAccountToOwnerShip systemAccount, Contact contact, CommunicationType communicationType, String identify) {
