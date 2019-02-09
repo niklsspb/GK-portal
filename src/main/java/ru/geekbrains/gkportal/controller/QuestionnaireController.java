@@ -87,7 +87,7 @@ public class QuestionnaireController {
     public String getQuestionnaire(@ModelAttribute("form") AnswerResultDTO form, Model model, RedirectAttributes redirectAttributes) throws Throwable {
         model.addAttribute("completed", "Данные записаны");
         if (authenticateService.isCurrentUserAuthenticated()) {
-            Contact contact = accountService.getContactByUsername(authenticateService.getCurrentUser().getUsername());
+            Contact contact = accountService.getContactByLogin(authenticateService.getCurrentUser().getUsername());
             answerResultService.saveAnswerResultDTO(form, contact);
             return "redirect:/questionnaire";
         } else return "403";

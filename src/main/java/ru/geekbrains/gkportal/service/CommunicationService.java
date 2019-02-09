@@ -38,10 +38,10 @@ public class CommunicationService {
         this.communicationTypeService = communicationTypeService;
     }
 
-    public Contact confirmAccountAndGetContact(String mail, String code) {
+    public Contact confirmAccountAndGetContact(String mail, String code, Contact contact) {
         try {
             Communication communication =
-                    communicationRepository.findCommunicationByCommunicationTypeAndIdentify(communicationTypeService.findEmailType(), mail);
+                    communicationRepository.findCommunicationByCommunicationTypeAndIdentifyAndAndContact(communicationTypeService.findEmailType(), mail, contact);
 
             if (communication.getConfirmCode().equals(code)) {
                 communication.setConfirmed(true);
@@ -104,7 +104,7 @@ public class CommunicationService {
 
     private Communication createIfNotExistCommunication(SystemAccountToOwnerShip systemAccount, Contact contact, CommunicationType communicationType, String identify) {
         Communication communication;
-        if ((communication = communicationRepository.findCommunicationByCommunicationTypeAndIdentify(communicationType, identify)) == null) {
+        if ((communication = communicationRepository.findCommunicationByCommunicationTypeAndIdentifyAndAndContact(communicationType, identify, contact)) == null) {
             communication = createCommunication(systemAccount, contact, communicationType);
         }
         return communication;
