@@ -3,7 +3,6 @@ package ru.geekbrains.gkportal.dto;
 
 import lombok.Data;
 import ru.geekbrains.gkportal.entity.ContactType;
-import ru.geekbrains.gkportal.validation.PasswordsNotEqual;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
 
 import javax.validation.constraints.Email;
@@ -14,7 +13,6 @@ import java.util.List;
 
 
 @Data
-@PasswordsNotEqual(passwordFieldName = "password", passwordVerificationFieldName = "matchingPassword", message = "Значения полей пароль и пароль подтверждение должны совпадать")
 public class SystemAccountToOwnerShip {
     List<OwnershipRegDTO> ownerships = new ArrayList<>();
     @NotNull(message = "Поле обязательно")
@@ -26,12 +24,7 @@ public class SystemAccountToOwnerShip {
     @NotNull(message = "Поле обязательно")
     @Size(min = 2, max = 25, message = "от 2 до 25 символов")
     private String middleName;
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 6, max = 25, message = "6-25 символов")
-    private String password;
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 6, max = 25, message = "6-25 символов")
-    private String matchingPassword;
+    @Size(min = 0, max = 25, message = "0-25 символов")
     @Email(message = "Почта указана не корректна")
     @NotNull(message = "Поле обязательно")
     @Size(min = 5, max = 25, message = "5-25 символов")
