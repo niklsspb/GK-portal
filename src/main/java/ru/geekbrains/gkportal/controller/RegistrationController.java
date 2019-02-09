@@ -141,15 +141,20 @@ public class RegistrationController {
             return "reg-question-form";
         }
 
-        if (contactService.isContactExist(systemAccount)){
-            // TODO: 09.02.2019  email to @chertenokru
-            createErrorModel(systemAccount, model, "Вы уже ответили на анкету. " +
-                    "Если в первой анкети вы не указали один из объектов недвижемости или допустили ошибку, " +
-                    "свяжитесь с администратором системы Владимир (+7...). Мы удалим все ваши ответы, " +
-                    "и вы сможите ответить заново" +
-                    "А если в нашем ЖК появилось два тезки, то наша система пока ни такая умная, но мы работаем над этим");
+        Contact contact = contactService.getContact(systemAccount);
+        if (contact != null) {
+            if (questionnaireService.isQuestionnaireContactExist(
+                    questionnaireService.findById(systemAccount.getAnswerResultDTO().getQuestionnaireId()),
+                    contact)) {
+                // TODO: 09.02.2019  email to @chertenokru
+                createErrorModel(systemAccount, model, "Вы уже ответили на анкету. " +
+                        "Если в первой анкети вы не указали один из объектов недвижемости или допустили ошибку, " +
+                        "свяжитесь с администратором системы Владимир (+7 (916) 197-32-36, телеграм - @chertenokru)." +
+                        " Мы удалим все ваши ответы, и вы сможите ответить заново" +
+                        "А если в нашем ЖК появилось два полных тезки, то наша система пока ни такая умная, тоже ссобщите по контактам выше");
 
-            return "reg-question-form";
+                return "reg-question-form";
+            }
         }
         if (accountService.isLoginExist(systemAccount.getEmail())) {
             createErrorModel(systemAccount, model, "Указанный логин уже существует");
@@ -158,7 +163,7 @@ public class RegistrationController {
 
         try {
 
-            Contact contact = contactService.getOrCreateContact(systemAccount);
+            if (contact == null) contact = contactService.getOrCreateContact(systemAccount);
             contactService.save(contact);
             answerResultService.saveAnswerResultDTO(systemAccount.getAnswerResultDTO(), contact);
 
