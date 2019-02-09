@@ -3,9 +3,11 @@ package ru.geekbrains.gkportal.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.Answer;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
+import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 import ru.geekbrains.gkportal.repository.QuestionnaireContactConfirmRepository;
 import ru.geekbrains.gkportal.repository.QuestionnaireRepository;
 
@@ -17,6 +19,12 @@ public class QuestionnaireService {
 
     private QuestionnaireRepository questionnaireRepository;
     private QuestionnaireContactConfirmRepository questionnaireContactConfirmRepository;
+    private MailService mailService;
+
+    @Autowired
+    public void setMailService(MailService mailService) {
+        this.mailService = mailService;
+    }
 
     @Autowired
     public void setQuestionnaireContactConfirmRepository(QuestionnaireContactConfirmRepository questionnaireContactConfirmRepository) {
@@ -48,12 +56,21 @@ public class QuestionnaireService {
     }
 
     public boolean isQuestionnaireContactExist(Questionnaire questionnaire, Contact contact) {
-        return (questionnaireContactConfirmRepository.getByQuestionnaireAndAndContact(questionnaire, contact) != null);
+        return (questionnaireContactConfirmRepository.getByQuestionnaireAndContact(questionnaire, contact) != null);
     }
 
 
 
     public List<Questionnaire> findAll() {
         return questionnaireRepository.findAll();
+    }
+
+    public void sendMail(SystemAccountToOwnerShip systemAccount, Contact contact) {
+
+
+    }
+
+    public QuestionnaireContactConfirm getQuestionnaireContactConfirm(String questionnaireId, Contact contact) {
+        return questionnaireContactConfirmRepository.getByQuestionnaireAndContact(findById(questionnaireId), contact);
     }
 }
