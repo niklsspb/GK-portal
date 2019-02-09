@@ -1,54 +1,82 @@
 package ru.geekbrains.gkportal.dto;
 
-
-import lombok.Data;
+import lombok.*;
 import ru.geekbrains.gkportal.entity.ContactType;
 import ru.geekbrains.gkportal.validation.PasswordsNotEqual;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @PasswordsNotEqual(passwordFieldName = "password", passwordVerificationFieldName = "matchingPassword", message = "Значения полей пароль и пароль подтверждение должны совпадать")
 public class SystemAccount {
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 2, max = 25, message = "2-5 символов")
+
+    @Size(
+            min = 3,
+            max = 25,
+            message = "Имя '${validatedValue}' должно быть от {min} до {max} символов."
+    )
+    @NotBlank(message = "Имя не может быть пустным.")
     private String firstName;
 
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 2, max = 25, message = "2-5 символа")
+    @Size(
+            max = 25,
+            message = "Отчество '${validatedValue}' должно быть меньше {max} символов."
+    )
+    private String middleName;
+
+    @Size(
+            min = 3,
+            max = 25,
+            message = "Фамилия '${validatedValue}' должна быть от {min} до {max} символов."
+    )
+    @NotBlank(message = "Фамилия не может быть пустной.")
     private String lastName;
 
 
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 0, max = 25, message = "от 0 до 25 символов")
-    private String middleName;
-
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 6, max = 25, message = "6-25 символов")
+    @Size(
+            min = 6,
+            max = 25,
+            message = "Пароль '${validatedValue}' должен быть от {min} до {max} символов."
+    )
+    @NotBlank(message = "Пароль не может быть пустной.")
     private String password;
 
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 6, max = 25, message = "6-25 символов")
+    @Size(
+            min = 6,
+            max = 25,
+            message = "Пароль '${validatedValue}' должен быть от {min} до {max} символов."
+    )
+    @NotBlank(message = "Пароль не может быть пустной.")
+//    @PasswordsNotEqual //TODO: Точно ли нам это надо на класс ставить?
     private String matchingPassword;
 
     @Email(message = "Почта указана не корректна")
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 5, max = 25, message = "5-25 символов")
+    //TODO: IMHO not null и size тут лишнее, аннотация @Email всё сделает
+//    @NotNull(message = "Поле обязательно")
+//    @Size(min = 5, max = 25, message = "5-25 символов")
     private String email;
 
+    @Size(
+            min = 10,
+            message = "Телефон '${validatedValue}' должен состоять минимум из {min} символов в формате - 9161234567."
+    )
+    @NotBlank(message = "Телефон не может быть пустной.")
     @ValidPhoneNumber(message = "Телефон указан не корректно")
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 10, message = "Минимум 10 символов")
     private String phoneNumber;
 
+    @Valid
     List<FlatRegDTO> flats = new ArrayList<>();
 
+    @Valid
     private ContactType contactType;
     //private Boolean boughtParkingPlace;
 
@@ -62,10 +90,4 @@ public class SystemAccount {
 
    // private String comments;
 
-
-
-
-    public SystemAccount() {
-
-    }
 }
