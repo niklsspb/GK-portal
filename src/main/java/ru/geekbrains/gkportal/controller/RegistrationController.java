@@ -266,7 +266,7 @@ public class RegistrationController {
 //    }
 
     private void putOwnershipTypes(Model model) {
-        model.addAttribute("ownershipTypes", ownershipTypeService.getAllOwnershipTypes());
+        model.addAttribute("ownershipTypes", ownershipTypeService.getAllOwnershipTypesByIsUseInQuestionnaire());
     }
 
     private Questionnaire putQuestionnaireToModel(Model model) {
