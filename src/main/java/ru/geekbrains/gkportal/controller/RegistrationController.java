@@ -231,6 +231,21 @@ public class RegistrationController {
         return "confirm-mail";
     }
 
+
+    @GetMapping("/confirmQuestion/{contact_uuid}/{code}")
+    public String confirmQuestion(@PathVariable(name = "code") String code, @PathVariable(name = "contact_uuid") String mail, Model model) {
+
+        Contact contact = communicationService.confirmAccountAndGetContact(mail, code, accountService.getContactByLogin(mail));
+        boolean confirm = false;
+        if (contact != null) {
+            accountService.confirmAccount(contact);
+            confirm = true;
+        }
+        model.addAttribute("resultString", confirm ? "Подзравляю, Ваш аккаунт подтверждён!" : "Не удалось подтвердить емайл, попробуйте повторить!");
+        return "confirm-mail";
+    }
+
+
     private void createErrorModel(SystemAccount systemAccount, Model model, String error) {
         //House house = houseService.build(systemAccount.getHousingNumber());
         List<String> housingList = houseService.getHousingNumList();
