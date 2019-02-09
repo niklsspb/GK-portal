@@ -85,7 +85,6 @@ public class MailService {
     public boolean sendRegistrationMail(SystemAccountToOwnerShip systemAccout, Contact contact, QuestionnaireContactConfirm confirm) {
         String email = systemAccout.getEmail();
         String url = getCurentURL();
-
         return sendMail(email,
                 "Регистрация в опросе на сайте ЖК Город",
                 builder.buildRegistrationEmail(systemAccout.getLastName() + " " + systemAccout.getFirstName() + " " + systemAccout.getMiddleName() + " ",
