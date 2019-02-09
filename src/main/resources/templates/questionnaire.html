@@ -44,7 +44,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" th:attr="value=${answer.uuid}"
                                        th:field="*{questionAnswerUuids[__${question.uuid}__]}" th:id="${answer.uuid}"
-                                       type="radio">
+                                       required type="radio">
                                 <label class="form-check-label" th:attr="for=${answer.uuid}"
                                        th:text="${answer.name}"></label>
                             </div>
