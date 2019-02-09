@@ -177,10 +177,6 @@ public class RegistrationController {
                 return "reg-question-form";
             }
         }
-        if (accountService.isLoginExist(systemAccount.getEmail())) {
-            createErrorModel(systemAccount, model, "Указанный логин уже существует");
-            return "reg-question-form";
-        }
 
         try {
             if (contact == null) contact = contactService.getOrCreateContact(systemAccount);
@@ -189,7 +185,7 @@ public class RegistrationController {
             systemAccount.setUuid(UUID.randomUUID().toString());
             session.setAttribute("systemUser", systemAccount);
             model.addAttribute("uuid", systemAccount.getUuid());
-            return "reg-success";
+            return "reg-question-success";
         } catch (Throwable throwable) {
             throwable.printStackTrace(); // TODO: 02.02.2019 to Log
             createErrorModel(systemAccount, model, "Произошла непредвиденная ошибка. Обновите страницу и попробуйте снова");
