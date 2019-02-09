@@ -13,11 +13,12 @@ import java.time.LocalDateTime;
 
 
 @Data
-@Entity(name = "communication")
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "communication")
+@ToString(exclude = "contact")
+@EqualsAndHashCode(exclude = "contact", callSuper = true)
 public class Communication extends AbstractEntity {
 
     @ManyToOne
