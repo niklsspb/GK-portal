@@ -43,13 +43,11 @@ public class Contact extends AbstractEntity {
     private Collection<Flat> flats;
 
     @Valid
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "contact")
     private Collection<Communication> communications;
 
     @Valid
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "contact")
     private Collection<Ownership> ownerships;
 
 //    @Valid

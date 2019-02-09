@@ -7,8 +7,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
 import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
+import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 import ru.geekbrains.gkportal.util.MailMessageBuilder;
 
 import javax.mail.MessagingException;
@@ -75,10 +77,21 @@ public class MailService {
     public boolean sendRegistrationMail(Contact contact, Communication email) {
         String url = getCurentURL();
         return sendMail(email.getIdentify(),
-                "регистрация на сайте ЖК Город",
+                "Регистрация на сайте ЖК Город",
                 builder.buildRegistrationEmail(contact.getLastName() + " " + contact.getFirstName() + " " + contact.getMiddleName() + " ",
                         url + "/confirmMail/" + email.getIdentify() + "/" + email.getConfirmCode()));
     }
+
+    public boolean sendRegistrationMail(SystemAccountToOwnerShip systemAccout, Contact contact, QuestionnaireContactConfirm confirm) {
+        String email = systemAccout.getEmail();
+        String url = getCurentURL();
+
+        return sendMail(email,
+                "Регистрация в опросе на сайте ЖК Город",
+                builder.buildRegistrationEmail(systemAccout.getLastName() + " " + systemAccout.getFirstName() + " " + systemAccout.getMiddleName() + " ",
+                        url + "/confirmQuestion/" + contact.getUuid() + "/" + confirm.getConfirmCode()));
+    }
+
 
     public String getCurentURL() {
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();

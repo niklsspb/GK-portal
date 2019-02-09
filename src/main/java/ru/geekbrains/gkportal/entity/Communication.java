@@ -21,7 +21,8 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = "contact")
+@EqualsAndHashCode(exclude = "contact", callSuper = true)
 public class Communication extends AbstractEntity {
 
     @Valid
@@ -52,10 +53,12 @@ public class Communication extends AbstractEntity {
     private String description;
 
     @Column(name = "confirmed")
+    @NotNull(message = "Couldn't be empty!")
     private boolean confirmed;
 
     @Column(name = "confirm_code_date")
     @UpdateTimestamp
+//    @NotNull(message = "Couldn't be empty!")a
     private LocalDateTime confirmCodeDate;
     // TODO: 05.02.19 вынести в QuestionnaireContactConfirm
 

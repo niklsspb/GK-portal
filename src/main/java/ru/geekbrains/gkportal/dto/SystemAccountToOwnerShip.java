@@ -3,7 +3,6 @@ package ru.geekbrains.gkportal.dto;
 
 import lombok.Data;
 import ru.geekbrains.gkportal.entity.ContactType;
-import ru.geekbrains.gkportal.validation.PasswordsNotEqual;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
 
 import javax.validation.constraints.Email;
@@ -14,38 +13,43 @@ import java.util.List;
 
 
 @Data
-@PasswordsNotEqual(passwordFieldName = "password", passwordVerificationFieldName = "matchingPassword", message = "Значения полей пароль и пароль подтверждение должны совпадать")
+
 public class SystemAccountToOwnerShip {
+
+    private final static String MIN_MAX_VALIDATION_MESSAGE = "от {min} до {max} символов";
+    private final static String MIN_VALIDATION_MESSAGE = "Минимум {min} символов";
+
     List<OwnershipRegDTO> ownerships = new ArrayList<>();
+
     @NotNull(message = "Поле обязательно")
-    @Size(min = 2, max = 25, message = "2-5 символов")
+    @Size(min = 2, max = 25, message = MIN_MAX_VALIDATION_MESSAGE)
     private String firstName;
+
     @NotNull(message = "Поле обязательно")
-    @Size(min = 2, max = 25, message = "2-5 символа")
+    @Size(min = 2, max = 25, message = MIN_MAX_VALIDATION_MESSAGE)
     private String lastName;
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 0, max = 25, message = "от 0 до 25 символов")
+
+//    @Size(min = 2, max = 25, message = MIN_MAX_VALIDATION_MESSAGE)
     private String middleName;
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 6, max = 25, message = "6-25 символов")
-    private String password;
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 6, max = 25, message = "6-25 символов")
-    private String matchingPassword;
+
     @Email(message = "Почта указана не корректна")
     @NotNull(message = "Поле обязательно")
-    @Size(min = 5, max = 25, message = "5-25 символов")
+    @Size(min = 5, max = 25, message = MIN_MAX_VALIDATION_MESSAGE)
     private String email;
+
     @ValidPhoneNumber(message = "Телефон указан не корректно")
     @NotNull(message = "Поле обязательно")
-    @Size(min = 10, message = "Минимум 10 символов")
+    @Size(min = 10, message = MIN_VALIDATION_MESSAGE)
     private String phoneNumber;
+
     private ContactType contactType;
     //private Boolean boughtParkingPlace;
 
     private Boolean allowContactsSharing;
 
     private AnswerResultDTO answerResultDTO;
+
+    private String uuid;
     // Пока бесполезная фигня, но потом прикрутим.
 
     //private List<String> interestedIn;

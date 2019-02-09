@@ -7,6 +7,7 @@ import ru.geekbrains.gkportal.dto.FlatRegDTO;
 import ru.geekbrains.gkportal.dto.OwnershipRegDTO;
 import ru.geekbrains.gkportal.dto.SystemAccount;
 import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
+import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.Flat;
 import ru.geekbrains.gkportal.entity.Ownership;
@@ -62,8 +63,8 @@ public class ContactService {
     }
 
     @Transactional
-    public void save(Contact contact) {
-        contactRepository.save(contact);
+    public Contact save(Contact contact) {
+        return contactRepository.save(contact);
     }
 
     public Contact createContact(SystemAccount systemAccount) throws Throwable {
@@ -85,9 +86,7 @@ public class ContactService {
     }
 
     public Contact getOrCreateContact(SystemAccountToOwnerShip systemAccount) throws Throwable {
-        //todo обрезать пробелы, первую букву к верхнему регистру, остальные к нижнему
-        Contact contact = contactRepository.findByFirstNameAndLastNameAndMiddleName(systemAccount.getFirstName(),
-                systemAccount.getLastName(), systemAccount.getMiddleName());
+        Contact contact = getContact(systemAccount);
         if (contact == null) {
             //todo обрезать пробелы, первую букву к верхнему регистру, остальные к нижнему
             contact = Contact.builder()
@@ -102,8 +101,7 @@ public class ContactService {
 
 
         List<Ownership> ownershipsArray = new ArrayList<>();
-        for (OwnershipRegDTO ownershipRegDTO : systemAccount.getOwnerships()
-        ) {
+        for (OwnershipRegDTO ownershipRegDTO : systemAccount.getOwnerships()) {
             ownershipsArray.add(ownershipService.createOrGetOwnership(ownershipRegDTO, contact, true));
         }
 
@@ -111,6 +109,17 @@ public class ContactService {
 
 
         return contact;
+    }
+
+    public boolean isContactExist(SystemAccountToOwnerShip systemAccount) {
+        return getContact(systemAccount) != null;
+    }
+
+
+    public Contact getContact(SystemAccountToOwnerShip systemAccount) {
+        //todo обрезать пробелы, первую букву к верхнему регистру, остальные к нижнему
+        return contactRepository.findByFirstNameAndLastNameAndMiddleName(systemAccount.getFirstName(),
+                systemAccount.getLastName(), systemAccount.getMiddleName());
     }
 
 

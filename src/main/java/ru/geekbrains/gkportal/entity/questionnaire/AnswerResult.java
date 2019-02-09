@@ -6,10 +6,7 @@ import lombok.*;
 import ru.geekbrains.gkportal.entity.AbstractEntity;
 import ru.geekbrains.gkportal.entity.Contact;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -27,7 +24,7 @@ import javax.validation.constraints.NotNull;
 public class AnswerResult extends AbstractEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "questionnaire_question_answer_id")
+    @JoinColumn(name = "answer_id")
     @JsonIgnore
     private Answer answer;
 
@@ -36,5 +33,13 @@ public class AnswerResult extends AbstractEntity {
     @NotNull(message = "Contact s.b. selected!")
     private Contact contact;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "questionnaire_id")
+    @NotNull(message = "Questionnaire s.b. selected!")
+    private Questionnaire questionnaire;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "question_id")
+    @NotNull(message = "Question s.b. selected!")
+    private Question question;
 }
