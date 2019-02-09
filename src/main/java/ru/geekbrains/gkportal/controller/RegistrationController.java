@@ -29,6 +29,12 @@ public class RegistrationController {
     private QuestionnaireService questionnaireService;
     private OwnershipTypeService ownershipTypeService;
     private AnswerResultService answerResultService;
+    private MailService mailService;
+
+    @Autowired
+    public void setMailService(MailService mailService) {
+        this.mailService = mailService;
+    }
 
     @Autowired
     public void setAnswerResultService(AnswerResultService answerResultService) {
@@ -136,6 +142,8 @@ public class RegistrationController {
     @PostMapping(value = "/userQuestionRegister")
     public String registerQuestionUser(@Valid @ModelAttribute("systemUser") SystemAccountToOwnerShip systemAccount,
                                        BindingResult bindingResult, Model model) {
+
+
         if (bindingResult.hasErrors()) {
             createErrorModel(systemAccount, model, "Не все поля заполнены правильно!");
             return "reg-question-form";
@@ -166,6 +174,8 @@ public class RegistrationController {
             if (contact == null) contact = contactService.getOrCreateContact(systemAccount);
 
             answerResultService.saveAnswerResultDTO(systemAccount.getAnswerResultDTO(), contactService.save(contact));
+            mailService.sendRegistrationMail(systemAccount, contact, questionnaireService.getQuestionnaireContactConfirm(systemAccount.getAnswerResultDTO().getQuestionnaireId(), contact));
+
 
 
             return "reg-success";

@@ -8,6 +8,6 @@ import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 
 @Repository
 public interface QuestionnaireContactConfirmRepository extends JpaRepository<QuestionnaireContactConfirm, String> {
-    QuestionnaireContactConfirm getByQuestionnaireAndAndContact(Questionnaire questionnaire, Contact contact);
+    QuestionnaireContactConfirm getByQuestionnaireAndContact(Questionnaire questionnaire, Contact contact);
 
 }
