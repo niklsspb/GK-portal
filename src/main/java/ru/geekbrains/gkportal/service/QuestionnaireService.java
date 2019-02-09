@@ -3,8 +3,10 @@ package ru.geekbrains.gkportal.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.Answer;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
+import ru.geekbrains.gkportal.repository.QuestionnaireContactConfirmRepository;
 import ru.geekbrains.gkportal.repository.QuestionnaireRepository;
 
 import java.util.Comparator;
@@ -13,15 +15,21 @@ import java.util.List;
 @Service
 public class QuestionnaireService {
 
-    private QuestionnaireRepository repository;
+    private QuestionnaireRepository questionnaireRepository;
+    private QuestionnaireContactConfirmRepository questionnaireContactConfirmRepository;
 
     @Autowired
-    public void setRepository(QuestionnaireRepository repository) {
-        this.repository = repository;
+    public void setQuestionnaireContactConfirmRepository(QuestionnaireContactConfirmRepository questionnaireContactConfirmRepository) {
+        this.questionnaireContactConfirmRepository = questionnaireContactConfirmRepository;
+    }
+
+    @Autowired
+    public void setQuestionnaireRepository(QuestionnaireRepository questionnaireRepository) {
+        this.questionnaireRepository = questionnaireRepository;
     }
 
     public Questionnaire findById(String id) {
-        Questionnaire questionnaire = repository.findById(id).orElse(null);
+        Questionnaire questionnaire = questionnaireRepository.findById(id).orElse(null);
 
         if (questionnaire != null) {
             questionnaire.getQuestions().forEach(questionnaireQuestion ->
@@ -32,10 +40,16 @@ public class QuestionnaireService {
     }
 
     public Questionnaire save(Questionnaire questionnaire) {
-        return repository.save(questionnaire);
+        return questionnaireRepository.save(questionnaire);
     }
 
+    public boolean isQuestionnaireContactExist(Questionnaire questionnaire, Contact contact) {
+        return (questionnaireContactConfirmRepository.getByQuestionnaireAndAndContact(questionnaire, contact) != null);
+    }
+
+
+
     public List<Questionnaire> findAll() {
-        return repository.findAll();
+        return questionnaireRepository.findAll();
     }
 }

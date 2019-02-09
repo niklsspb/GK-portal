@@ -3,7 +3,6 @@ package ru.geekbrains.gkportal.dto;
 
 import lombok.Data;
 import ru.geekbrains.gkportal.entity.ContactType;
-import ru.geekbrains.gkportal.validation.PasswordsNotEqual;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
 
 import javax.validation.constraints.Email;
@@ -14,7 +13,7 @@ import java.util.List;
 
 
 @Data
-@PasswordsNotEqual(passwordFieldName = "password", passwordVerificationFieldName = "matchingPassword", message = "Значения полей пароль и пароль подтверждение должны совпадать")
+
 public class SystemAccountToOwnerShip {
 
     private final static String MIN_MAX_VALIDATION_MESSAGE = "от {min} до {max} символов";
