@@ -54,7 +54,7 @@ public class QuestionnaireController {
     public String showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
         if (!authenticateService.isCurrentUserAuthenticated()) return "403";
         System.out.println(questionnaireId);
-        Questionnaire questionnaire = service.findById(questionnaireId);
+        Questionnaire questionnaire = service.findByIdAndSortAnswers(questionnaireId);
         model.addAttribute("questionnaire", questionnaire);
         model.addAttribute("contactList", contactService.findAll());
         return "questionnaire-result";
@@ -70,7 +70,7 @@ public class QuestionnaireController {
 
         Questionnaire questionnaire;
 
-        if ((questionnaire = service.findById(questionnaireId)) == null) {
+        if ((questionnaire = service.findByIdAndSortAnswers(questionnaireId)) == null) {
             model.addAttribute("notFoundNumber", questionnaireId);
             model.addAttribute("questionnaireList", service.findAll());
             return "questionnaire";

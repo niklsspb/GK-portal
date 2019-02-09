@@ -7,6 +7,7 @@ import ru.geekbrains.gkportal.dto.FlatRegDTO;
 import ru.geekbrains.gkportal.dto.OwnershipRegDTO;
 import ru.geekbrains.gkportal.dto.SystemAccount;
 import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
+import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.Flat;
 import ru.geekbrains.gkportal.entity.Ownership;
@@ -62,8 +63,8 @@ public class ContactService {
     }
 
     @Transactional
-    public void save(Contact contact) {
-        contactRepository.save(contact);
+    public Contact save(Contact contact) {
+        return contactRepository.save(contact);
     }
 
     public Contact createContact(SystemAccount systemAccount) throws Throwable {
