@@ -169,12 +169,11 @@ public class RegistrationController {
                     questionnaireService.findByIdAndSortAnswers(systemAccount.getAnswerResultDTO().getQuestionnaireId()),
                     contact)) {
                 // TODO: 09.02.2019  email to @chertenokru
-                createErrorModel(systemAccount, model, "Вы уже ответили на анкету. " +
-                        "Если в первой анкети вы не указали один из объектов недвижемости или допустили ошибку, " +
-                        "свяжитесь с администратором системы Владимир (+7 (916) 197-32-36, телеграм - @chertenokru)." +
-                        " Мы удалим все ваши ответы, и вы сможите ответить заново" +
-                        "А если в нашем ЖК появилось два полных тезки, то наша система пока ни такая умная, тоже ссобщите по контактам выше");
-
+                createErrorModel(systemAccount, model, "Вы уже ответили на анкету. \n" +
+                        "Если в анкете Вы не указали один из объектов недвижемости или допустили ошибку \n" +
+                        " или это голосовали не Вы, то свяжитесь с администратором системы \n " +
+                        "Владимир (wa - 8 (916) 197-32-36, телеграм - @chertenokru, mail - admin@chertenok.ru)\n" +
+                        " Мы удалим все ваши ответы, и вы сможите ответить заново.");
                 return "reg-question-form";
             }
         }
