@@ -28,8 +28,8 @@ public class QuestionnaireService {
         this.questionnaireRepository = questionnaireRepository;
     }
 
-    public Questionnaire findById(String id) {
-        Questionnaire questionnaire = questionnaireRepository.findById(id).orElse(null);
+    public Questionnaire findByIdAndSortAnswers(String id) {
+        Questionnaire questionnaire = findById(id);
 
         if (questionnaire != null) {
             questionnaire.getQuestions().forEach(questionnaireQuestion ->
@@ -37,6 +37,10 @@ public class QuestionnaireService {
                             .sort(Comparator.comparingInt(Answer::getSortNumber)));
         }
         return questionnaire;
+    }
+
+    public Questionnaire findById(String id) {
+        return questionnaireRepository.findById(id).orElse(null);
     }
 
     public Questionnaire save(Questionnaire questionnaire) {

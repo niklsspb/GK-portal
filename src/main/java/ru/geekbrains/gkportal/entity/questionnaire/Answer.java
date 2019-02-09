@@ -32,7 +32,7 @@ public class Answer extends AbstractEntity {
     private Integer sortNumber;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "questionnaire_question_answer_id")
+    @JoinColumn(name = "answer_id")
     private List<AnswerResult> answerResults = new ArrayList<>();
 
     @ManyToOne

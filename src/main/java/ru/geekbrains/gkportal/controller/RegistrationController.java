@@ -144,7 +144,7 @@ public class RegistrationController {
         Contact contact = contactService.getContact(systemAccount);
         if (contact != null) {
             if (questionnaireService.isQuestionnaireContactExist(
-                    questionnaireService.findById(systemAccount.getAnswerResultDTO().getQuestionnaireId()),
+                    questionnaireService.findByIdAndSortAnswers(systemAccount.getAnswerResultDTO().getQuestionnaireId()),
                     contact)) {
                 // TODO: 09.02.2019  email to @chertenokru
                 createErrorModel(systemAccount, model, "Вы уже ответили на анкету. " +
@@ -164,8 +164,8 @@ public class RegistrationController {
         try {
 
             if (contact == null) contact = contactService.getOrCreateContact(systemAccount);
-            contactService.save(contact);
-            answerResultService.saveAnswerResultDTO(systemAccount.getAnswerResultDTO(), contact);
+
+            answerResultService.saveAnswerResultDTO(systemAccount.getAnswerResultDTO(), contactService.save(contact));
 
 
             return "reg-success";
@@ -181,7 +181,7 @@ public class RegistrationController {
         Questionnaire questionnaire;
         String questionnaireId = "bb2248ae-2d7e-427d-85ef-7b85888f0319";
 
-        if ((questionnaire = questionnaireService.findById(questionnaireId)) == null) {
+        if ((questionnaire = questionnaireService.findByIdAndSortAnswers(questionnaireId)) == null) {
             model.addAttribute("notFoundNumber", questionnaireId);
             model.addAttribute("questionnaireList", questionnaireService.findAll());
             return null;

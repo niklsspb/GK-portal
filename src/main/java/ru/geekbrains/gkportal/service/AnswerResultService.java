@@ -43,10 +43,9 @@ public class AnswerResultService {
     //    saveAnswerResultDTO(answerResultDTO);
     // }
 
-    public void saveAnswerResultDTO(AnswerResultDTO answerResultDTO, Contact contact) throws Throwable {
-        Questionnaire questionnaire = questionnaireService.findById(answerResultDTO.getQuestionnaireId());
+    public void saveAnswerResultDTO(AnswerResultDTO answerResultDTO, Contact contact) {
+        Questionnaire questionnaire = questionnaireService.findByIdAndSortAnswers(answerResultDTO.getQuestionnaireId());
 
-        //Contact contact = contactService.createContact(answerResultDTO);
         Collection<Question> questions = questionnaire.getQuestions();
         QuestionnaireContactConfirm questionnaireContactConfirm = QuestionnaireContactConfirm.builder()
                 .questionnaire(questionnaire)
@@ -56,18 +55,19 @@ public class AnswerResultService {
         contact.setQuestionnaireContactConfirm(questionnaireContactConfirm);
 
         Map<String, Answer> answers = new HashMap<>();
+        Map<String, Question> questionsMap = new HashMap<>();
 
         for (Question question : questions) {
             answers.putAll(question.getAnswers().stream().collect(Collectors.toMap(AbstractEntity::getUuid, Function.identity())));
+            questionsMap.put(question.getUuid(), question);
         }
 
         List<AnswerResult> answerResults = new ArrayList<>();
-        //// TODO: 07.02.19 поиск списка ответов по id  перенести в сервис
+
         for (Map.Entry<String, String> entry : answerResultDTO.getQuestionAnswerUuids().entrySet()) {
             Answer answer = answers.get(entry.getValue());
-
-            answerResults.add(new AnswerResult(answer, contact));
-
+            Question question = questionsMap.get(entry.getKey());
+            answerResults.add(new AnswerResult(answer, contact, questionnaire, question));
         }
 
         saveAll(answerResults);
