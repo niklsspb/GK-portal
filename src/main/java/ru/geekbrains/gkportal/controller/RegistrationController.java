@@ -28,6 +28,12 @@ public class RegistrationController {
     private CommunicationService communicationService;
     private QuestionnaireService questionnaireService;
     private OwnershipTypeService ownershipTypeService;
+    private AnswerResultService answerResultService;
+
+    @Autowired
+    public void setAnswerResultService(AnswerResultService answerResultService) {
+        this.answerResultService = answerResultService;
+    }
 
     @Autowired
     public void setOwnershipTypeService(OwnershipTypeService ownershipTypeService) {
@@ -144,6 +150,8 @@ public class RegistrationController {
 
             Contact contact = contactService.getOrCreateContact(systemAccount);
             contactService.save(contact);
+            answerResultService.saveAnswerResultDTO(systemAccount.getAnswerResultDTO(), contact);
+
 
             return "reg-success";
         } catch (Throwable throwable) {
