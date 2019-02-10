@@ -17,8 +17,13 @@ public interface BuildPorchConfigRepository  extends JpaRepository<BuildPorchCon
     List<String> findallDistinctHousingID();
 
     @Query(value = "select count(porch) from build_porch_config where housing = :housingID", nativeQuery = true)
-    Integer getCountporchIDByhousingID(int housingID);
+    Integer getCountporchIDByHousingID(int housingID);
+
+    @Query(value = "select count(porch) from build_porch_config where build_housing = :housingID", nativeQuery = true)
+    Integer getCountporchIDByBuildHousingID(int housingID);
 
     @Query(value = "select porch from build_porch_config where housing = :housingID", nativeQuery = true)
     List<Integer> getPorchNumbersByHousingID(int housingID);
+
+
 }
