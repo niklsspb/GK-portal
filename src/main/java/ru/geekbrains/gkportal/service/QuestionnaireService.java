@@ -73,4 +73,16 @@ public class QuestionnaireService {
     public QuestionnaireContactConfirm getQuestionnaireContactConfirm(String questionnaireId, Contact contact) {
         return questionnaireContactConfirmRepository.getByQuestionnaireAndContact(findById(questionnaireId), contact);
     }
+
+    public boolean confirmQuetionnaire(Contact contact, String code) {
+        QuestionnaireContactConfirm confirm = questionnaireContactConfirmRepository.getByContactAndConfirmCode(contact, code);
+        if (confirm != null) {
+            confirm.setConfirmed(true);
+            questionnaireContactConfirmRepository.save(confirm);
+            return true;
+
+        }
+
+        return false;
+    }
 }

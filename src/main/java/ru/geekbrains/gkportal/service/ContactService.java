@@ -7,7 +7,6 @@ import ru.geekbrains.gkportal.dto.FlatRegDTO;
 import ru.geekbrains.gkportal.dto.OwnershipRegDTO;
 import ru.geekbrains.gkportal.dto.SystemAccount;
 import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
-import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.Flat;
 import ru.geekbrains.gkportal.entity.Ownership;
@@ -120,6 +119,10 @@ public class ContactService {
         //todo обрезать пробелы, первую букву к верхнему регистру, остальные к нижнему
         return contactRepository.findByFirstNameAndLastNameAndMiddleName(systemAccount.getFirstName(),
                 systemAccount.getLastName(), systemAccount.getMiddleName());
+    }
+
+    public Contact getContactByID(String guid) {
+        return contactRepository.findById(guid).get();
     }
 
 

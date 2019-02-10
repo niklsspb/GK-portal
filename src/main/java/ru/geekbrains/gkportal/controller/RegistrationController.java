@@ -233,15 +233,16 @@ public class RegistrationController {
 
 
     @GetMapping("/confirmQuestion/{contact_uuid}/{code}")
-    public String confirmQuestion(@PathVariable(name = "code") String code, @PathVariable(name = "contact_uuid") String mail, Model model) {
+    public String confirmQuestion(@PathVariable(name = "code") String code, @PathVariable(name = "contact_uuid") String contact_uuid, Model model) {
 
-        Contact contact = communicationService.confirmAccountAndGetContact(mail, code, accountService.getContactByLogin(mail));
+        Contact contact = contactService.getContactByID(contact_uuid);
         boolean confirm = false;
         if (contact != null) {
-            accountService.confirmAccount(contact);
-            confirm = true;
+            if (questionnaireService.confirmQuetionnaire(contact, code)) {//accountService.confirmAccount(contact);
+                confirm = true;
+            }
         }
-        model.addAttribute("resultString", confirm ? "Подзравляю, Ваш аккаунт подтверждён!" : "Не удалось подтвердить емайл, попробуйте повторить!");
+        model.addAttribute("resultString", confirm ? "Поздравляю, Ваш опрос подтверждён!" : "Не удалось подтвердить опрос, попробуйте повторить!");
         return "confirm-mail";
     }
 
