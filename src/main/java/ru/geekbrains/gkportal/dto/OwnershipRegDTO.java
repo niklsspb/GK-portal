@@ -7,9 +7,15 @@ import ru.geekbrains.gkportal.entity.OwnershipType;
 public class OwnershipRegDTO {
 
     private OwnershipType ownershipType;
+    private String ownershipTypeError;
     private Integer housingNumber;
+    private String housingNumberError;
     private String flatNumber;
-    private Double square;
+    private String flatNumberError;
+    private String square;
+    private String squareError;
     private Integer percentageOfOwner;
+    private String percentageOfOwnerError;
+    private boolean hasError;
 
 }

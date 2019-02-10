@@ -28,6 +28,13 @@ public class FlatsService {
                 flatRegDTO.getFloorNumber(),
                 flatRegDTO.getFlatNumber()
         ).orElseThrow((Supplier<Throwable>) () -> new FlatNotFoundException(flatRegDTO));
-
     }
+
+    public Flat getFlatByHouseAndFlatNum(int houseNum, int flatNum, boolean isBiuldNum) {
+        return isBiuldNum ?
+                flatRepository.findByHouseBuildAndFlatNumberBuild(houseNum, flatNum)
+                : flatRepository.findByHouseAndFlatNumber(houseNum, flatNum);
+    }
+
+
 }

@@ -158,7 +158,14 @@
                                                           th:field="${systemUser.ownerships[__${ownershipStat.index}__].ownershipType.uuid}">
                                 <option th:each="type : ${ownershipTypes}" th:text="${type.name}"
                                         th:value="${type.uuid}"></option>
-                            </select></div>
+                            </select>
+                                <div class="gk-error"
+                                     th:errors="${systemUser.ownerships[__${ownershipStat.index}__].housingNumber}">
+                                </div>
+                                <div class="gk-error" th:if="${ownership.getOwnershipTypeError()!=null}"
+                                     th:text="${ownership.getOwnershipTypeError()}"></div>
+
+                            </div>
                         </div>
 
 
@@ -166,9 +173,12 @@
                             <label class="col-sm-5 col-form-label">Номер Дома (строительный номер, где 3 - колодец)</label>
                             <div class="col-sm-3">
                                 <input class="form-control"
-                                       required th:field="${systemUser.ownerships[__${ownershipStat.index}__].housingNumber}">
+                                       th:field="${systemUser.ownerships[__${ownershipStat.index}__].housingNumber}">
                                 <div class="gk-error"
-                                     th:errors="${systemUser.ownerships[__${ownershipStat.index}__].housingNumber}"></div>
+                                     th:errors="${systemUser.ownerships[__${ownershipStat.index}__].housingNumber}">
+                                </div>
+                                <div class="gk-error" th:if="${ownership.getHousingNumberError()!=null}"
+                                     th:text="${ownership.getHousingNumberError()}"></div>
                             </div>
                         </div>
                         <div class="div_show_flat"></div>
@@ -178,7 +188,10 @@
                                 <input class="form-control"
                                        th:field="${systemUser.ownerships[__${ownershipStat.index}__].flatNumber}">
                                 <div class="gk-error"
-                                     th:errors="${systemUser.ownerships[__${ownershipStat.index}__].flatNumber}"></div>
+                                     th:errors="${systemUser.ownerships[__${ownershipStat.index}__].flatNumber}">
+                                </div>
+                                <div class="gk-error" th:if="${ownership.getFlatNumberError()!=null}"
+                                     th:text="${ownership.getFlatNumberError()}"></div>
                             </div>
                         </div>
                         <div class="form-group row"><label class="col-sm-5 col-form-label">Площадь объекта (исключая балконы и
@@ -187,6 +200,11 @@
                                 <input class="form-control"
                                        placeholder="56,3"
                                        th:field="${systemUser.ownerships[__${ownershipStat.index}__].square}">
+                                <div class="gk-error"
+                                     th:errors="${systemUser.ownerships[__${ownershipStat.index}__].square}">
+                                </div>
+                                <div class="gk-error" th:if="${ownership.getSquareError()!=null}"
+                                     th:text="${ownership.getSquareError()}"></div>
 
                             </div>
                         </div>
@@ -195,6 +213,11 @@
                                 <input class="form-control"
                                        placeholder="100"
                                        th:field="${systemUser.ownerships[__${ownershipStat.index}__].percentageOfOwner}">
+                                <div class="gk-error"
+                                     th:errors="${systemUser.ownerships[__${ownershipStat.index}__].percentageOfOwner}">
+                                </div>
+                                <div class="gk-error" th:if="${ownership.getPercentageOfOwnerError()!=null}"
+                                     th:text="${ownership.getPercentageOfOwnerError()}"></div>
 
                             </div>
                         </div>

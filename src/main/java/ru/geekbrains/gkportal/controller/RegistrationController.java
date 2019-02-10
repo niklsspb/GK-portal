@@ -28,8 +28,15 @@ public class RegistrationController {
     private CommunicationService communicationService;
     private QuestionnaireService questionnaireService;
     private OwnershipTypeService ownershipTypeService;
+    private OwnershipService ownershipService;
     private AnswerResultService answerResultService;
     private MailService mailService;
+
+
+    @Autowired
+    public void setOwnershipService(OwnershipService ownershipService) {
+        this.ownershipService = ownershipService;
+    }
 
     @Autowired
     public void setMailService(MailService mailService) {
@@ -158,7 +165,7 @@ public class RegistrationController {
 
                                        BindingResult bindingResult, Model model, HttpSession session) {
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() | ownershipService.checkOwnerships(systemAccount.getOwnerships())) {
             createErrorModel(systemAccount, model, "Не все поля заполнены правильно!");
             return "reg-question-form";
         }
