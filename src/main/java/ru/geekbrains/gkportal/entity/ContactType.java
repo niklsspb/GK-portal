@@ -1,21 +1,21 @@
 package ru.geekbrains.gkportal.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @Entity(name = "contact_type")
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class ContactType extends AbstractEntity {
 
     @Column(name = "description")
-    @NotNull(message = "Couldn't be empty!")
+    @NotBlank(message = "Тип контакта должен быть заполнен.")
     private String description;
 
 }
