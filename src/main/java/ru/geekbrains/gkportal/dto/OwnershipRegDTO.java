@@ -8,13 +8,13 @@ public class OwnershipRegDTO {
 
     private OwnershipType ownershipType;
     private String ownershipTypeError;
-    private Integer housingNumber;
+    private String housingNumber;
     private String housingNumberError;
     private String flatNumber;
     private String flatNumberError;
     private String square;
     private String squareError;
-    private Integer percentageOfOwner;
+    private String percentageOfOwner;
     private String percentageOfOwnerError;
     private boolean hasError;
 

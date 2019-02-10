@@ -27,7 +27,7 @@
                     </select></div>
                 </div>
                 <div class="gk-select-house form-group row">
-                    <label class="col-sm-5 col-form-label">Номер Дома (строительный номер, где 3 - колодец)</label>
+                    <label class="col-sm-5 col-form-label">Номер корпуса (строительный номер, где 3 - колодец)</label>
 
                     <div class="col-sm-3">
                         <input class="form-control"  id="ownerships{{:num}}.housingNumber" name="ownerships[{{:num}}].housingNumber" value="">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="div_show_flat"></div>
                 <div class="gk-reg-flat-number form-group row">
-                    <label class="col-sm-5 col-form-label">Строительный Номер Объекта</label>
+                    <label class="col-sm-5 col-form-label">Строительный Номер Объекта (по АПП)</label>
                     <div class="col-sm-3">
                         <input class="form-control" required id="ownerships{{:num}}.flatNumber" name="ownerships[{{:num}}].flatNumber" value="">
 
@@ -170,7 +170,8 @@
 
 
                         <div class="gk-select-house form-group row">
-                            <label class="col-sm-5 col-form-label">Номер Дома (строительный номер, где 3 - колодец)</label>
+                            <label class="col-sm-5 col-form-label">Номер корпуса (строительный номер, где 3 -
+                                колодец)</label>
                             <div class="col-sm-3">
                                 <input class="form-control"
                                        th:field="${systemUser.ownerships[__${ownershipStat.index}__].housingNumber}">
@@ -183,7 +184,7 @@
                         </div>
                         <div class="div_show_flat"></div>
                         <div class="gk-reg-flat-number form-group row">
-                            <label class="col-sm-5 col-form-label">Номер Объекта</label>
+                            <label class="col-sm-5 col-form-label">Строительный Номер Объекта (по АПП)</label>
                             <div class="col-sm-3">
                                 <input class="form-control"
                                        th:field="${systemUser.ownerships[__${ownershipStat.index}__].flatNumber}">

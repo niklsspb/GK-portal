@@ -64,7 +64,16 @@ public class OwnershipService {
                         ownership.setHousingNumberError("Требуется указать номер дома!");
                         ownership.setHasError(true);
                     } else {
-                        if (!houseService.isHousingNumIsExist(ownership.getHousingNumber(), true)) {
+                        int numFloat = -99999;
+                        try {
+                            numFloat = Integer.valueOf(ownership.getHousingNumber());
+                        } catch (Exception e) {
+                            ownership.setHasError(true);
+                            ownership.setHousingNumberError("Номер дома должен быть числом!");
+                        }
+
+                        if (numFloat != -99999)
+                            if (!houseService.isHousingNumIsExist(numFloat, true)) {
                             ownership.setHousingNumberError("Номер дома не существует!");
                             ownership.setHasError(true);
                         }
@@ -78,7 +87,15 @@ public class OwnershipService {
                         ownership.setPercentageOfOwnerError("Требуется указать % собственности!");
                         ownership.setHasError(true);
                     } else {
-                        if ((ownership.getPercentageOfOwner() <= 0) || (ownership.getPercentageOfOwner() > 100)) {
+                        int percent = -5;
+                        try {
+
+                        } catch (Exception e) {
+                            ownership.setHasError(true);
+                            ownership.setPercentageOfOwnerError("% должен быть числом от 1 до 100");
+                        }
+                        if (percent != -5)
+                            if ((percent <= 0) || (percent > 100)) {
                             ownership.setPercentageOfOwnerError("% собственности должен быть от 1 до 100");
                             ownership.setHasError(true);
                         }
@@ -122,7 +139,7 @@ public class OwnershipService {
                             }
 
                             if (numFlat != -9999) {
-                                if (flatService.getFlatByHouseAndFlatNum(ownership.getHousingNumber(), numFlat, true) == null) {
+                                if (flatService.getFlatByHouseAndFlatNum(Integer.valueOf(ownership.getHousingNumber()), numFlat, true) == null) {
                                     ownership.setFlatNumberError("Такая квартира не существует");
                                     ownership.setHasError(true);
                                 }
@@ -146,19 +163,19 @@ public class OwnershipService {
         Ownership ownership;
         if (isBuildNumbers)
             ownership = ownershipRepository.findByOwnershipTypeAndContactAndHouseBuildNumAndBuildNumber(ownershipRegDTO.getOwnershipType()
-                    , contact, ownershipRegDTO.getHousingNumber(), ownershipRegDTO.getFlatNumber());
+                    , contact, Integer.valueOf(ownershipRegDTO.getHousingNumber()), ownershipRegDTO.getFlatNumber());
         else
             ownership = ownershipRepository.findByOwnershipTypeAndContactAndHouseNumAndNumber(ownershipRegDTO.getOwnershipType()
-                    , contact, ownershipRegDTO.getHousingNumber(), ownershipRegDTO.getFlatNumber());
+                    , contact, Integer.valueOf(ownershipRegDTO.getHousingNumber()), ownershipRegDTO.getFlatNumber());
 
         if (ownership == null) {
             ownership = Ownership.builder().ownershipType(ownershipRegDTO.getOwnershipType()).is_build_num(isBuildNumbers).
-                    contact(contact).percentageOfOwner(ownershipRegDTO.getPercentageOfOwner()).square(Float.valueOf(ownershipRegDTO.getSquare())).build();
+                    contact(contact).percentageOfOwner(Integer.valueOf(ownershipRegDTO.getPercentageOfOwner())).square(Float.valueOf(ownershipRegDTO.getSquare())).build();
             if (isBuildNumbers) {
-                ownership.setHouseBuildNum(ownershipRegDTO.getHousingNumber());
+                ownership.setHouseBuildNum(Integer.valueOf(ownershipRegDTO.getHousingNumber()));
                 ownership.setBuildNumber(ownershipRegDTO.getFlatNumber());
             } else {
-                ownership.setHouseNum(ownershipRegDTO.getHousingNumber());
+                ownership.setHouseNum(Integer.valueOf(ownershipRegDTO.getHousingNumber()));
                 ownership.setNumber(ownershipRegDTO.getFlatNumber());
             }
         }
