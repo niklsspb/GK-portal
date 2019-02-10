@@ -163,6 +163,10 @@ public class RegistrationController {
             return "reg-question-form";
         }
 
+
+        // заплатка - теряется с формы
+        systemAccount.setContactType(contactTypeService.getContactTypeByDescription(ContactTypeService.OWNER_TYPE));
+
         Contact contact = contactService.getContact(systemAccount);
         if (contact != null) {
             if (questionnaireService.isQuestionnaireContactExist(
