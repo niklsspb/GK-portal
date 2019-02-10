@@ -98,13 +98,32 @@ public class ContactService {
 
         contact.setCommunications(communicationService.createIfNotExistCommunication(systemAccount, contact));
 
-
+        //todo А если контакт уже существует и есть недвижимость ?!!
         List<Ownership> ownershipsArray = new ArrayList<>();
         for (OwnershipRegDTO ownershipRegDTO : systemAccount.getOwnerships()) {
             ownershipsArray.add(ownershipService.createOrGetOwnership(ownershipRegDTO, contact, true));
         }
 
         contact.setOwnerships(ownershipsArray);
+
+        if (contact.getFlats() == null) contact.setFlats(new ArrayList<>());
+        for (Ownership ownership : contact.getOwnerships()) {
+
+            if (ownership.getOwnershipType().getUuid().equals(OwnershipTypeService.FLAT_TYPE_UUID)) {
+                Flat flat;
+                if (ownership.is_build_num()) {
+                    flat = flatsService.getFlatByHouseAndFlatNum(ownership.getHouseBuildNum(), Integer.valueOf(ownership.getBuildNumber()), true);
+                } else {
+                    flat = flatsService.getFlatByHouseAndFlatNum(ownership.getHouseNum(), Integer.valueOf(ownership.getNumber()), false);
+                }
+                // todo вот тут хрень наверно,  потом подумать
+                if (flat != null) {
+                    contact.getFlats().add(flat);
+                }
+            }
+
+        }
+
 
 
         return contact;
