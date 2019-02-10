@@ -22,21 +22,21 @@ public class SystemAccount {
     @Size(
             min = 3,
             max = 25,
-            message = "Имя '${validatedValue}' должно быть от {min} до {max} символов."
+            message = "Имя ${validatedValue} должно быть от {min} до {max} символов."
     )
     @NotBlank(message = "Имя не может быть пустным.")
     private String firstName;
 
     @Size(
             max = 25,
-            message = "Отчество '${validatedValue}' должно быть меньше {max} символов."
+            message = "Отчество ${validatedValue} должно быть меньше {max} символов."
     )
     private String middleName;
 
     @Size(
             min = 3,
             max = 25,
-            message = "Фамилия '${validatedValue}' должна быть от {min} до {max} символов."
+            message = "Фамилия ${validatedValue} должна быть от {min} до {max} символов."
     )
     @NotBlank(message = "Фамилия не может быть пустной.")
     private String lastName;
@@ -45,7 +45,7 @@ public class SystemAccount {
     @Size(
             min = 6,
             max = 25,
-            message = "Пароль '${validatedValue}' должен быть от {min} до {max} символов."
+            message = "Пароль ${validatedValue} должен быть от {min} до {max} символов."
     )
     @NotBlank(message = "Пароль не может быть пустной.")
     private String password;
@@ -53,7 +53,7 @@ public class SystemAccount {
     @Size(
             min = 6,
             max = 25,
-            message = "Пароль '${validatedValue}' должен быть от {min} до {max} символов."
+            message = "Пароль ${validatedValue} должен быть от {min} до {max} символов."
     )
     @NotBlank(message = "Пароль не может быть пустной.")
 //    @PasswordsNotEqual //TODO: Точно ли нам это надо на класс ставить?
@@ -67,16 +67,16 @@ public class SystemAccount {
 
     @Size(
             min = 10,
-            message = "Телефон '${validatedValue}' должен состоять минимум из {min} символов в формате - 9161234567."
+            message = "Телефон ${validatedValue} должен состоять минимум из {min} символов в формате - 9161234567."
     )
     @NotBlank(message = "Телефон не может быть пустной.")
     @ValidPhoneNumber(message = "Телефон указан не корректно")
     private String phoneNumber;
 
-    @Valid
+//    @Valid
     List<FlatRegDTO> flats = new ArrayList<>();
 
-    @Valid
+//    @Valid
     private ContactType contactType;
     //private Boolean boughtParkingPlace;
 

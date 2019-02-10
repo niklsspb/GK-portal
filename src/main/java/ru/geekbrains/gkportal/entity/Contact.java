@@ -18,8 +18,8 @@ import java.util.Collection;
 @EqualsAndHashCode(callSuper = true)
 public class Contact extends AbstractEntity {
 
-    @Valid
-    @NotNull
+//    @Valid
+    @NotNull (message = "Тип контакта не может быть пустым")
     @ManyToOne
     @JoinColumn(name = "contact_type_id")
     private ContactType contactType;
@@ -35,18 +35,18 @@ public class Contact extends AbstractEntity {
     @NotBlank(message = "Необходимо ввести фамилию.")
     private String lastName;
 
-    @Valid
+//    @Valid
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "contact_flat",
             joinColumns = @JoinColumn(name = "contact_id"),
             inverseJoinColumns = @JoinColumn(name = "flat_id"))
     private Collection<Flat> flats;
 
-    @Valid
+//    @Valid
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "contact")
     private Collection<Communication> communications;
 
-    @Valid
+//    @Valid
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "contact")
     private Collection<Ownership> ownerships;
 
@@ -55,7 +55,7 @@ public class Contact extends AbstractEntity {
 //    @JoinColumn(name = "contact_id")
 //    private Collection<Ownership> realEstates;
 
-    @Valid
+//    @Valid
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "contact")
     @JoinColumn(name = "contact_id")
     @JsonIgnore

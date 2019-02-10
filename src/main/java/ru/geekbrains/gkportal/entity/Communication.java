@@ -25,13 +25,15 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(exclude = "contact", callSuper = true)
 public class Communication extends AbstractEntity {
 
-    @Valid
+//    TODO: Кто будет тестить сущности раскоментируйте аннотацию @Valid и посмотрите работает ли,
+//     просто может не правильно валидироваться объект, я пока не понял в чем глюк, работаю.
+//    @Valid
     @NotNull(message = "Вид связи должен быть выбран.")
     @ManyToOne
     @JoinColumn(name = "communication_type_id")
     private CommunicationType communicationType;
 
-    @Valid
+//    @Valid
     @NotNull(message = "Контактное лицо должно быть выбрано.")
     @ManyToOne
     @JoinColumn(name = "contact_id")
@@ -41,7 +43,7 @@ public class Communication extends AbstractEntity {
     @Column(name = "identify")
     @Size(
             min = 3, //TODO: Решить про длинну идентификатора пока min=3 символа
-            message = "Идентификатор '${validatedValue}' должен быть более {min} символов."
+            message = "Идентификатор ${validatedValue} должен быть более {min} символов."
     )
     //TODO: Решил пока оставить, надо посмотреть как реагирует на пробелы к примеру 4 штуки
     @NotBlank(message = "Идентификатор не должен быть пустым.")

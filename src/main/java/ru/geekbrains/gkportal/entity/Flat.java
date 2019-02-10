@@ -18,7 +18,7 @@ import java.util.Collection;
 @EqualsAndHashCode(callSuper = true)
 public class Flat extends AbstractEntity {
 
-    @Valid
+//    @Valid
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "contact_flat",
             joinColumns = @JoinColumn(name = "flat_id"),
