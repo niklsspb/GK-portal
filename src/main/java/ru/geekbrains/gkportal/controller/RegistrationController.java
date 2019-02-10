@@ -115,38 +115,38 @@ public class RegistrationController {
 
     @GetMapping("/regQuestion")
     public String regQuestion(@RequestParam(name = "uuid", required = false) String uuid, Model model, HttpSession session) {
-        SystemAccountToOwnerShip account = null;
+        SystemAccountToOwnerShip systemAccount = null;
         Questionnaire questionnaire = putQuestionnaireToModel(model);
 
         if (uuid != null) {
-            account = (SystemAccountToOwnerShip) session.getAttribute("systemUser");
-            if (account != null) {
-                if (!account.getUuid().equals(uuid)) {
-                    account = null;
+            systemAccount = (SystemAccountToOwnerShip) session.getAttribute("systemUser");
+            if (systemAccount != null) {
+                if (!systemAccount.getUuid().equals(uuid)) {
+                    systemAccount = null;
                 } else {
-                    account.setEmail(null);
-                    account.setPhoneNumber(null);
-                    account.setFirstName(null);
-                    account.setMiddleName(null);
-                    account.setLastName(null);
+                    systemAccount.setEmail(null);
+                    systemAccount.setPhoneNumber(null);
+                    systemAccount.setFirstName(null);
+                    systemAccount.setMiddleName(null);
+                    systemAccount.setLastName(null);
                 }
             }
         }
-        if (account == null) {
-            account = new SystemAccountToOwnerShip();
-            account.getOwnerships().add(new OwnershipRegDTO());
-            account.setContactType(contactTypeService.getContactTypeByDescription(ContactTypeService.OWNER_TYPE));
+        if (systemAccount == null) {
+            systemAccount = new SystemAccountToOwnerShip();
+            systemAccount.getOwnerships().add(new OwnershipRegDTO());
+            systemAccount.setContactType(contactTypeService.getContactTypeByDescription(ContactTypeService.OWNER_TYPE));
             //model.addAttribute("flat", new FlatRegDTO());
             //List<String> housingList = houseService.getHousingNumList();
             //housingList.add(0, "");
             //model.addAttribute("housingList", housingList);
             if (questionnaire != null) {
                 AnswerResultDTO form = new AnswerResultDTO(questionnaire.getQuestions(), questionnaire.getUuid());
-                account.setAnswerResultDTO(form);
+                systemAccount.setAnswerResultDTO(form);
             }
         }
 
-        model.addAttribute("systemUser", account);
+        model.addAttribute("systemUser", systemAccount);
         putOwnershipTypes(model);
 
         return "reg-question-form";
