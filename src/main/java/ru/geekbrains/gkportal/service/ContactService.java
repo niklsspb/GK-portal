@@ -118,6 +118,7 @@ public class ContactService {
                 }
                 // todo вот тут хрень наверно,  потом подумать
                 if (flat != null) {
+
                     contact.getFlats().add(flat);
                 }
             }

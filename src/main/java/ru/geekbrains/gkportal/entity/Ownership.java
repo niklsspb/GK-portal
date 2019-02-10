@@ -48,7 +48,7 @@ public class Ownership extends AbstractEntity { // TODO: 05.02.19
     private String buildNumber;
 
     @Column(name = "square")
-    private Double square;
+    private Float square;
 
     @Column(name = "percentage_of_owner")
     @ColumnDefault(value = "100")
