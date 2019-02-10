@@ -15,8 +15,9 @@
 <body>
 <div class="container">
     <div style="width: 800px; margin-top: 50px;">
-        <h1 style="margin-bottom: 50px">Поздравляем. <br>Регистрация прошла успешно</h1>
-        <p>Для завершения регистрации проверьте почту.</p>
+        <h1 style="margin-bottom: 50px">Поздравляем. <br>Голосование успешно сохранено</h1>
+        <p class="text-danger">Для завершения голосования проверьте почту.</p>
+        <p></p>
         <a class="btn btn-primary" role="button" th:href="@{/regQuestion(uuid=${uuid})}">Заполнить за ещё одного
             собственника</a>
     </div>
