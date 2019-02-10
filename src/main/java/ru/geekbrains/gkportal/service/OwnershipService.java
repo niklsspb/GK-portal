@@ -89,6 +89,7 @@ public class OwnershipService {
                     } else {
                         int percent = -5;
                         try {
+                            percent = Integer.valueOf(ownership.getPercentageOfOwner());
 
                         } catch (Exception e) {
                             ownership.setHasError(true);
@@ -161,6 +162,10 @@ public class OwnershipService {
 
     public Ownership createOrGetOwnership(OwnershipRegDTO ownershipRegDTO, Contact contact, boolean isBuildNumbers) {
         Ownership ownership;
+        // заглушка
+        if (ownershipRegDTO.getHousingNumber() == null || ownershipRegDTO.getHousingNumber().isEmpty())
+            ownershipRegDTO.setHousingNumber("0");
+
         if (isBuildNumbers)
             ownership = ownershipRepository.findByOwnershipTypeAndContactAndHouseBuildNumAndBuildNumber(ownershipRegDTO.getOwnershipType()
                     , contact, Integer.valueOf(ownershipRegDTO.getHousingNumber()), ownershipRegDTO.getFlatNumber());

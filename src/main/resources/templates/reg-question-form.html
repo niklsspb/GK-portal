@@ -187,6 +187,7 @@
                             <label class="col-sm-5 col-form-label">Строительный Номер Объекта (по АПП)</label>
                             <div class="col-sm-3">
                                 <input class="form-control"
+                                       required
                                        th:field="${systemUser.ownerships[__${ownershipStat.index}__].flatNumber}">
                                 <div class="gk-error"
                                      th:errors="${systemUser.ownerships[__${ownershipStat.index}__].flatNumber}">
