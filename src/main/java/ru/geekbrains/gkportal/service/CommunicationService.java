@@ -115,7 +115,7 @@ public class CommunicationService {
         Communication emailCommunication;
         emailCommunication = Communication.builder()
                 .communicationType(communicationType)
-                .identify((communicationType.getUuid() == CommunicationTypeService.EMAIL_TYPE_GUID) ? systemAccount.getEmail() : systemAccount.getPhoneNumber())
+                .identify(communicationType.getUuid().equals(CommunicationTypeService.EMAIL_TYPE_GUID) ? systemAccount.getEmail() : systemAccount.getPhoneNumber())
                 .confirmCode(UUID.randomUUID().toString())
                 .confirmCodeDate(LocalDateTime.now())
                 .confirmed(false)
