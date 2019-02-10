@@ -92,7 +92,7 @@ public class OwnershipService {
                     } else {
                         ownership.setSquare(ownership.getSquare().replace(",", "."));
                         try {
-                            Double.valueOf(ownership.getSquare());
+                            Float.valueOf(ownership.getSquare());
                         } catch (Exception e) {
                             ownership.setSquareError("Укажите корректное значение, в качестве разделителя используйте точку!");
                             ownership.setHasError(true);
@@ -153,7 +153,7 @@ public class OwnershipService {
 
         if (ownership == null) {
             ownership = Ownership.builder().ownershipType(ownershipRegDTO.getOwnershipType()).is_build_num(isBuildNumbers).
-                    contact(contact).percentageOfOwner(ownershipRegDTO.getPercentageOfOwner()).square(Double.valueOf(ownershipRegDTO.getSquare())).build();
+                    contact(contact).percentageOfOwner(ownershipRegDTO.getPercentageOfOwner()).square(Float.valueOf(ownershipRegDTO.getSquare())).build();
             if (isBuildNumbers) {
                 ownership.setHouseBuildNum(ownershipRegDTO.getHousingNumber());
                 ownership.setBuildNumber(ownershipRegDTO.getFlatNumber());
