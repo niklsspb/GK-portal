@@ -8,6 +8,6 @@ import ru.geekbrains.gkportal.entity.Contact;
 
 @Repository
 public interface CommunicationRepository extends JpaRepository<Communication, String> {
-    Communication findCommunicationByCommunicationTypeAndIdentifyAndAndContact(CommunicationType communicationType, String identify, Contact contact);
+    Communication findCommunicationByCommunicationTypeAndIdentifyAndContact(CommunicationType communicationType, String identify, Contact contact);
 
 }

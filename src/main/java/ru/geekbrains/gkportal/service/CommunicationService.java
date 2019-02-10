@@ -41,7 +41,7 @@ public class CommunicationService {
     public Contact confirmAccountAndGetContact(String mail, String code, Contact contact) {
         try {
             Communication communication =
-                    communicationRepository.findCommunicationByCommunicationTypeAndIdentifyAndAndContact(communicationTypeService.findEmailType(), mail, contact);
+                    communicationRepository.findCommunicationByCommunicationTypeAndIdentifyAndContact(communicationTypeService.findEmailType(), mail, contact);
 
             if (communication.getConfirmCode().equals(code)) {
                 communication.setConfirmed(true);
@@ -104,7 +104,7 @@ public class CommunicationService {
 
     private Communication createIfNotExistCommunication(SystemAccountToOwnerShip systemAccount, Contact contact, CommunicationType communicationType, String identify) {
         Communication communication;
-        if ((communication = communicationRepository.findCommunicationByCommunicationTypeAndIdentifyAndAndContact(communicationType, identify, contact)) == null) {
+        if ((communication = communicationRepository.findCommunicationByCommunicationTypeAndIdentifyAndContact(communicationType, identify, contact)) == null) {
             communication = createCommunication(systemAccount, contact, communicationType);
         }
         return communication;
@@ -115,7 +115,7 @@ public class CommunicationService {
         Communication emailCommunication;
         emailCommunication = Communication.builder()
                 .communicationType(communicationType)
-                .identify(systemAccount.getEmail())
+                .identify((communicationType.getUuid() == CommunicationTypeService.EMAIL_TYPE_GUID) ? systemAccount.getEmail() : systemAccount.getPhoneNumber())
                 .confirmCode(UUID.randomUUID().toString())
                 .confirmCodeDate(LocalDateTime.now())
                 .confirmed(false)

@@ -13,6 +13,9 @@ public class CommunicationTypeService {
 
     public static final String PHONE_DESCRIPTION = "Телефон";
     public static final String EMAIL_DESCRIPTION = "Email";
+    public static final String EMAIL_TYPE_GUID = "dd2ff57f-901e-4dee-b914-56659187fe85";
+    public static final String PHONE_TYPE_GUID = "b5bc1897-c6f4-4efd-9dbd-cf89002997e4";
+
 
     private CommunicationTypeRepository communicationTypeRepository;
 
