@@ -47,8 +47,6 @@ public class TestControllers {
                 "С Уважением, инициативная группа ЖК Город";
         List<String> mails = Arrays.asList("");
 
-        );
-
 
         mailService.sendMail(mails, subject, text, false);
 
