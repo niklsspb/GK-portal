@@ -1,11 +1,13 @@
 package ru.geekbrains.gkportal.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.geekbrains.gkportal.entity.ContactType;
 import ru.geekbrains.gkportal.validation.PasswordsNotEqual;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -21,7 +23,7 @@ public class SystemAccount {
 
     @Size(
             min = 3,
-            max = 25,
+            max = 100,
             message = "Имя ${validatedValue} должно быть от {min} до {max} символов."
     )
     @NotBlank(message = "Имя не может быть пустным.")
