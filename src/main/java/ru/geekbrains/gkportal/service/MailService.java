@@ -10,6 +10,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
 import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
+import ru.geekbrains.gkportal.entity.PropertyType;
 import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 import ru.geekbrains.gkportal.util.MailMessageBuilder;
 
@@ -26,6 +27,10 @@ public class MailService {
     private JavaMailSender sender;
     private MailMessageBuilder builder;
 
+    private PropertyService propertyService;
+
+
+
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Autowired
@@ -37,6 +42,12 @@ public class MailService {
     public void setBuilder(MailMessageBuilder builder) {
         this.builder = builder;
     }
+
+    @Autowired
+    public void setPropertyService(PropertyService propertyService) {
+        this.propertyService = propertyService;
+    }
+
 
     public void sendMail(List<String> emails, String subject, String text, boolean isHtml) {
         for (String mail : emails) {
@@ -56,6 +67,7 @@ public class MailService {
             helper.setTo(email);
             helper.setText(text, isHtml);
             helper.setSubject(subject);
+            helper.setFrom(propertyService.getPropertyValue("user_name", PropertyType.MAIL));
         } catch (MessagingException e) {
             e.printStackTrace();
             return false;
