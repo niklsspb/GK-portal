@@ -12,6 +12,7 @@ public class MailMessageBuilder {
     private static final String VARIABLE_REGISTRATION_USER = "user";
     private static final String VARIABLE_REGISTRATION_PASSWORD = "password";
     private static final String MAIL_REGISTRATION_PAGE = "registration-mail";
+    private static final String MAIL_REGISTRATION_QUESTION_PAGE = "registration-question-mail";
 
     private TemplateEngine templateEngine;
 
@@ -38,9 +39,10 @@ public class MailMessageBuilder {
     public String buildRegistrationEmail(AnswerResultDTO resault, String userName, String url) {
         Context context = new Context();
         context.setVariable(VARIABLE_REGISTRATION_USER, userName);
-
+        context.setVariable("questions", resault.getQuestions());
+        context.setVariable("answers", resault.getAnswers());
         context.setVariable(VARIABLE_REGISTRATION_PASSWORD, url);
-        return templateEngine.process(MAIL_REGISTRATION_PAGE, context);
+        return templateEngine.process(MAIL_REGISTRATION_QUESTION_PAGE, context);
     }
 
 

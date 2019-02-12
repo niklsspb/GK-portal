@@ -1,12 +1,17 @@
 * {
     margin: 0;
     padding: 0;
-}
 
+}
 html,
 body {
     height: 100%;
 }
+
+.form-control::-webkit-input-placeholder {
+    color: #dee2e6;
+}
+
 
 .gk-flat {
     border-radius: 3px;

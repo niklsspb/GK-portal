@@ -17,6 +17,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
+import static ru.geekbrains.gkportal.service.ContactTypeService.OWNER_TYPE;
+
 @Controller
 public class RegistrationController {
 
@@ -28,8 +30,15 @@ public class RegistrationController {
     private CommunicationService communicationService;
     private QuestionnaireService questionnaireService;
     private OwnershipTypeService ownershipTypeService;
+    private OwnershipService ownershipService;
     private AnswerResultService answerResultService;
     private MailService mailService;
+
+
+    @Autowired
+    public void setOwnershipService(OwnershipService ownershipService) {
+        this.ownershipService = ownershipService;
+    }
 
     @Autowired
     public void setMailService(MailService mailService) {
@@ -79,14 +88,11 @@ public class RegistrationController {
     @GetMapping("/reg")
     public String reg(Model model) {
         SystemAccount account = new SystemAccount();
-        account.setContactType(contactTypeService.getContactTypeByDescription(ContactTypeService.OWNER_TYPE));
+        account.setContactType(contactTypeService.getContactTypeByDescription(OWNER_TYPE));
         account.getFlats().add(new FlatRegDTO());
-        //model.addAttribute("flat", new FlatRegDTO());
-        model.addAttribute("systemUser", account);
-        List<String> housingList = houseService.getHousingNumList();
 
-        //housingList.add(0, "");
-        model.addAttribute("housingList", housingList);
+        model.addAttribute("systemUser", account);
+        model.addAttribute("housingList", houseService.getHousingNumList());
         model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
         return "reg-form";
     }
@@ -115,38 +121,38 @@ public class RegistrationController {
 
     @GetMapping("/regQuestion")
     public String regQuestion(@RequestParam(name = "uuid", required = false) String uuid, Model model, HttpSession session) {
-        SystemAccountToOwnerShip account = null;
+        SystemAccountToOwnerShip systemAccount = null;
         Questionnaire questionnaire = putQuestionnaireToModel(model);
 
         if (uuid != null) {
-            account = (SystemAccountToOwnerShip) session.getAttribute("systemUser");
-            if (account != null) {
-                if (!account.getUuid().equals(uuid)) {
-                    account = null;
+            systemAccount = (SystemAccountToOwnerShip) session.getAttribute("systemUser");
+            if (systemAccount != null) {
+                if (!systemAccount.getUuid().equals(uuid)) {
+                    systemAccount = null;
                 } else {
-                    account.setEmail(null);
-                    account.setPhoneNumber(null);
-                    account.setFirstName(null);
-                    account.setMiddleName(null);
-                    account.setLastName(null);
+                    systemAccount.setEmail(null);
+                    systemAccount.setPhoneNumber(null);
+                    systemAccount.setFirstName(null);
+                    systemAccount.setMiddleName(null);
+                    systemAccount.setLastName(null);
                 }
             }
         }
-        if (account == null) {
-            account = new SystemAccountToOwnerShip();
-            account.getOwnerships().add(new OwnershipRegDTO());
-            account.setContactType(contactTypeService.getContactTypeByDescription(ContactTypeService.OWNER_TYPE));
+        if (systemAccount == null) {
+            systemAccount = new SystemAccountToOwnerShip();
+            systemAccount.getOwnerships().add(new OwnershipRegDTO());
+            systemAccount.setContactType(contactTypeService.getContactTypeByDescription(OWNER_TYPE));
             //model.addAttribute("flat", new FlatRegDTO());
             //List<String> housingList = houseService.getHousingNumList();
             //housingList.add(0, "");
             //model.addAttribute("housingList", housingList);
             if (questionnaire != null) {
                 AnswerResultDTO form = new AnswerResultDTO(questionnaire.getQuestions(), questionnaire.getUuid());
-                account.setAnswerResultDTO(form);
+                systemAccount.setAnswerResultDTO(form);
             }
         }
 
-        model.addAttribute("systemUser", account);
+        model.addAttribute("systemUser", systemAccount);
         putOwnershipTypes(model);
 
         return "reg-question-form";
@@ -155,13 +161,16 @@ public class RegistrationController {
 
     @PostMapping(value = "/userQuestionRegister")
     public String registerQuestionUser(@Valid @ModelAttribute("systemUser") SystemAccountToOwnerShip systemAccount,
-
                                        BindingResult bindingResult, Model model, HttpSession session) {
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() | ownershipService.checkOwnerships(systemAccount.getOwnerships())) {
             createErrorModel(systemAccount, model, "Не все поля заполнены правильно!");
             return "reg-question-form";
         }
+
+
+        // заплатка - теряется с формы
+        systemAccount.setContactType(contactTypeService.getContactTypeByDescription(OWNER_TYPE));
 
         Contact contact = contactService.getContact(systemAccount);
         if (contact != null) {
@@ -177,10 +186,6 @@ public class RegistrationController {
                 return "reg-question-form";
             }
         }
-        if (accountService.isLoginExist(systemAccount.getEmail())) {
-            createErrorModel(systemAccount, model, "Указанный логин уже существует");
-            return "reg-question-form";
-        }
 
         try {
             if (contact == null) contact = contactService.getOrCreateContact(systemAccount);
@@ -189,20 +194,13 @@ public class RegistrationController {
             systemAccount.setUuid(UUID.randomUUID().toString());
             session.setAttribute("systemUser", systemAccount);
             model.addAttribute("uuid", systemAccount.getUuid());
-            return "reg-success";
+            return "reg-question-success";
         } catch (Throwable throwable) {
             throwable.printStackTrace(); // TODO: 02.02.2019 to Log
             createErrorModel(systemAccount, model, "Произошла непредвиденная ошибка. Обновите страницу и попробуйте снова");
             return "reg-question-form";
         }
     }
-
-//    @GetMapping("reg-success")
-//    public String registerSuccess(@Valid @ModelAttribute("systemUser") SystemAccountToOwnerShip systemAccount,
-//                                  BindingResult bindingResult, Model model) {
-//        System.out.println("stop");
-//        return "reg-success";
-//    }
 
     @GetMapping("/showPorch/{build}/{porch}")
     public String showPorch(@PathVariable(name = "build") int build, @PathVariable(name = "porch") int porchNum, Model model) {
@@ -224,7 +222,8 @@ public class RegistrationController {
 
     @GetMapping("/confirmMail/{mail}/{code}")
     public String confirmMail(@PathVariable(name = "code") String code, @PathVariable(name = "mail") String mail, Model model) {
-        Contact contact = communicationService.confirmAccountAndGetContact(mail, code);
+
+        Contact contact = communicationService.confirmAccountAndGetContact(mail, code, accountService.getContactByLogin(mail));
         boolean confirm = false;
         if (contact != null) {
             accountService.confirmAccount(contact);
@@ -233,6 +232,22 @@ public class RegistrationController {
         model.addAttribute("resultString", confirm ? "Подзравляю, Ваш аккаунт подтверждён!" : "Не удалось подтвердить емайл, попробуйте повторить!");
         return "confirm-mail";
     }
+
+
+    @GetMapping("/confirmQuestion/{contact_uuid}/{code}")
+    public String confirmQuestion(@PathVariable(name = "code") String code, @PathVariable(name = "contact_uuid") String contact_uuid, Model model) {
+
+        Contact contact = contactService.getContactByID(contact_uuid);
+        boolean confirm = false;
+        if (contact != null) {
+            if (questionnaireService.confirmQuetionnaire(contact, code)) {//accountService.confirmAccount(contact);
+                confirm = true;
+            }
+        }
+        model.addAttribute("resultString", confirm ? "Поздравляю, Ваш опрос подтверждён!" : "Не удалось подтвердить опрос, попробуйте повторить!");
+        return "confirm-mail";
+    }
+
 
     private void createErrorModel(SystemAccount systemAccount, Model model, String error) {
         //House house = houseService.build(systemAccount.getHousingNumber());

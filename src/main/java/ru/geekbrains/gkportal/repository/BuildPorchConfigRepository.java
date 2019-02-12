@@ -2,6 +2,7 @@ package ru.geekbrains.gkportal.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.geekbrains.gkportal.entity.BuildPorchConfig;
 
@@ -17,8 +18,13 @@ public interface BuildPorchConfigRepository  extends JpaRepository<BuildPorchCon
     List<String> findallDistinctHousingID();
 
     @Query(value = "select count(porch) from build_porch_config where housing = :housingID", nativeQuery = true)
-    Integer getCountporchIDByhousingID(int housingID);
+    Integer getCountporchIDByHousingID(@Param("housingID")int housingID);
+
+    @Query(value = "select count(porch) from build_porch_config where build_housing = :housingID", nativeQuery = true)
+    Integer getCountporchIDByBuildHousingID(@Param("housingID")int housingID);
 
     @Query(value = "select porch from build_porch_config where housing = :housingID", nativeQuery = true)
-    List<Integer> getPorchNumbersByHousingID(int housingID);
+    List<Integer> getPorchNumbersByHousingID(@Param("housingID")int housingID);
+
+
 }

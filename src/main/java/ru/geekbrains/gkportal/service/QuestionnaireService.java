@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.Answer;
+import ru.geekbrains.gkportal.entity.questionnaire.Question;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 import ru.geekbrains.gkportal.repository.QuestionnaireContactConfirmRepository;
@@ -47,6 +48,12 @@ public class QuestionnaireService {
         return questionnaire;
     }
 
+    public Questionnaire findByIdAndSortQuestionsAndAnswers(String id) {
+        Questionnaire questionnaire = findByIdAndSortAnswers(id);
+        questionnaire.getQuestions().sort(Comparator.comparingInt(Question::getSortNumber));
+        return questionnaire;
+    }
+
     public Questionnaire findById(String id) {
         return questionnaireRepository.findById(id).orElse(null);
     }
@@ -60,7 +67,6 @@ public class QuestionnaireService {
     }
 
 
-
     public List<Questionnaire> findAll() {
         return questionnaireRepository.findAll();
     }
@@ -72,5 +78,17 @@ public class QuestionnaireService {
 
     public QuestionnaireContactConfirm getQuestionnaireContactConfirm(String questionnaireId, Contact contact) {
         return questionnaireContactConfirmRepository.getByQuestionnaireAndContact(findById(questionnaireId), contact);
+    }
+
+    public boolean confirmQuetionnaire(Contact contact, String code) {
+        QuestionnaireContactConfirm confirm = questionnaireContactConfirmRepository.getByContactAndConfirmCode(contact, code);
+        if (confirm != null) {
+            confirm.setConfirmed(true);
+            questionnaireContactConfirmRepository.save(confirm);
+            return true;
+
+        }
+
+        return false;
     }
 }

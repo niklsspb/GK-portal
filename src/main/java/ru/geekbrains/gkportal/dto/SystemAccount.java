@@ -1,6 +1,10 @@
 package ru.geekbrains.gkportal.dto;
 
 import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.geekbrains.gkportal.entity.ContactType;
 import ru.geekbrains.gkportal.validation.PasswordsNotEqual;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
@@ -17,11 +21,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @PasswordsNotEqual(passwordFieldName = "password", passwordVerificationFieldName = "matchingPassword", message = "Значения полей пароль и пароль подтверждение должны совпадать")
-public class SystemAccount {
+public class SystemAccount implements SystemAccountDTO {
 
     @Size(
             min = 3,
-            max = 25,
+            max = 100,
             message = "Имя ${validatedValue} должно быть от {min} до {max} символов."
     )
     @NotBlank(message = "Имя не может быть пустным.")

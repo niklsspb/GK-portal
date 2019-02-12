@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.geekbrains.gkportal.entity.Flat;
 
 import java.util.List;
-
 import java.util.Optional;
 
 @Repository
@@ -15,4 +14,8 @@ public interface FlatRepository extends JpaRepository<Flat, String> {
     List<Flat> findAllByHouseAndPorch(int house, int porch);
 
     Optional<Flat> findByHouseAndPorchAndFloorAndFlatNumber(int house, int porch, int floor, int flatNumber);
+
+    Flat findByHouseBuildAndFlatNumberBuild(int house, int flatNumber);
+
+    Flat findByHouseAndFlatNumber(int house, int flatNumber);
 }
