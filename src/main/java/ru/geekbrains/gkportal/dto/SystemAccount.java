@@ -1,11 +1,13 @@
 package ru.geekbrains.gkportal.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.geekbrains.gkportal.entity.ContactType;
 import ru.geekbrains.gkportal.validation.PasswordsNotEqual;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
 
-import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +23,12 @@ import java.util.List;
 )
 public class SystemAccount implements SystemAccountDTO {
 
-    @Size(min = 3, max = 100, message = "{firstName.size}")
+    @Size(min = 2, max = 100, message = "{firstName.size}")
     @Pattern(regexp = "^[А-ЯЁ][а-яё\\s'-]+[А-ЯЁа-яё\\s'-]+$", message = "{firstName.pattern}")
     @NotBlank(message = "{firstName.notBlank}")
     private String firstName;
 
-    @Size(min = 3, max = 100, message = "{lastName.size}")
+    @Size(min = 2, max = 100, message = "{lastName.size}")
     @Pattern(regexp = "^[А-ЯЁ][а-яё\\s'-]+[А-ЯЁа-яё\\s'-]+$", message = "{lastName.pattern}")
     @NotBlank(message = "{lastName.notBlank}")
     private String lastName;
@@ -48,7 +50,7 @@ public class SystemAccount implements SystemAccountDTO {
     @NotEmpty(message = "{email.notEmpty}")
     private String email;
 
-    @Size(min = 10, message = "{phoneNumber.size}")
+    @Size(min = 10, max = 15, message = "{phoneNumber.size}")
     @NotBlank(message = "{phoneNumber.notBlank}")
     @ValidPhoneNumber(message = "{phoneNumber.validPhoneNumber}")
     private String phoneNumber;

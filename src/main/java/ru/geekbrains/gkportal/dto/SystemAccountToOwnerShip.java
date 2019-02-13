@@ -15,12 +15,12 @@ public class SystemAccountToOwnerShip implements SystemAccountDTO {
 
     List<OwnershipRegDTO> ownerships = new ArrayList<>();
 
-    @Size(min = 3, max = 100, message = "{firstName.size}")
+    @Size(min = 2, max = 100, message = "{firstName.size}")
     @Pattern(regexp = "^[А-ЯЁ][а-яё\\s'-]+[А-ЯЁа-яё\\s'-]+$", message = "{firstName.pattern}")
     @NotBlank(message = "{firstName.notBlank}")
     private String firstName;
 
-    @Size(min = 3, max = 100, message = "{lastName.size}")
+    @Size(min = 2, max = 100, message = "{lastName.size}")
     @Pattern(regexp = "^[А-ЯЁ][а-яё\\s'-]+[А-ЯЁа-яё\\s'-]+$", message = "{lastName.pattern}")
     @NotBlank(message = "{lastName.notBlank}")
     private String lastName;
@@ -34,7 +34,7 @@ public class SystemAccountToOwnerShip implements SystemAccountDTO {
     @NotEmpty(message = "{email.notEmpty}")
     private String email;
 
-    @Size(min = 10, max = 10, message = "{phoneNumber.size}")
+    @Size(min = 10, max = 15, message = "{phoneNumber.size}")
     @NotBlank(message = "{phoneNumber.notBlank}")
     @ValidPhoneNumber(message = "{phoneNumber.validPhoneNumber}")
     private String phoneNumber;
