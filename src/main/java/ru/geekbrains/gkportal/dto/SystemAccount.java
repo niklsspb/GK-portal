@@ -22,22 +22,18 @@ import java.util.List;
 public class SystemAccount implements SystemAccountDTO {
 
     @Size(
-            min = 3,
+            min = 2,
             max = 100,
             message = "Имя ${validatedValue} должно быть от {min} до {max} символов."
     )
     @NotBlank(message = "Имя не может быть пустным.")
     private String firstName;
 
-    @Size(
-            max = 25,
-            message = "Отчество ${validatedValue} должно быть меньше {max} символов."
-    )
     private String middleName;
 
     @Size(
-            min = 3,
-            max = 25,
+            min = 2,
+            max = 100,
             message = "Фамилия ${validatedValue} должна быть от {min} до {max} символов."
     )
     @NotBlank(message = "Фамилия не может быть пустной.")
