@@ -1,47 +1,46 @@
 package ru.geekbrains.gkportal.dto;
 
-
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.geekbrains.gkportal.entity.ContactType;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Data
+@NoArgsConstructor
 public class SystemAccountToOwnerShip implements SystemAccountDTO {
-
-    private final static String MIN_MAX_VALIDATION_MESSAGE = "от {min} до {max} символов";
-    private final static String MIN_VALIDATION_MESSAGE = "Минимум {min} символов";
 
     List<OwnershipRegDTO> ownerships = new ArrayList<>();
 
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 2, max = 25, message = MIN_MAX_VALIDATION_MESSAGE)
+    @Size(min = 3, max = 100, message = "{firstName.size}")
+    @Pattern(regexp = "^[А-ЯЁ][а-яё\\s'-]+[А-ЯЁа-яё\\s'-]+$", message = "{firstName.pattern}")
+    @NotBlank(message = "{firstName.notBlank}")
     private String firstName;
 
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 2, max = 25, message = MIN_MAX_VALIDATION_MESSAGE)
+    @Size(min = 3, max = 100, message = "{lastName.size}")
+    @Pattern(regexp = "^[А-ЯЁ][а-яё\\s'-]+[А-ЯЁа-яё\\s'-]+$", message = "{lastName.pattern}")
+    @NotBlank(message = "{lastName.notBlank}")
     private String lastName;
 
-//    @Size(min = 2, max = 25, message = MIN_MAX_VALIDATION_MESSAGE)
+    @Size(max = 100, message = "{middleName.size}")
+    @Pattern(regexp = "^|[А-ЯЁ][а-яё\\s'-]+[А-ЯЁа-яё\\s'-]+$", message = "{middleName.pattern}")
     private String middleName;
 
-    @Email(message = "Почта указана не корректна")
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 5, max = 100, message = MIN_MAX_VALIDATION_MESSAGE)
+    @Size(min = 5, max = 150, message = "{email.size}")
+    @Email(message = "{email.validation}")
+    @NotEmpty(message = "{email.notEmpty}")
     private String email;
 
-    @ValidPhoneNumber(message = "Телефон указан не корректно")
-    @NotNull(message = "Поле обязательно")
-    @Size(min = 10, message = MIN_VALIDATION_MESSAGE)
+    @Size(min = 10, max = 10, message = "{phoneNumber.size}")
+    @NotBlank(message = "{phoneNumber.notBlank}")
+    @ValidPhoneNumber(message = "{phoneNumber.validPhoneNumber}")
     private String phoneNumber;
 
     private ContactType contactType;
+
     //private Boolean boughtParkingPlace;
 
     private Boolean allowContactsSharing;
@@ -59,8 +58,4 @@ public class SystemAccountToOwnerShip implements SystemAccountDTO {
 
     // private String comments;
 
-
-    public SystemAccountToOwnerShip() {
-
-    }
 }
