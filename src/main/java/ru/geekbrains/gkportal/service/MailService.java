@@ -103,7 +103,7 @@ public class MailService {
         String url = getCurentURL();
         return sendMail(email,
                 "Регистрация в опросе на сайте ЖК Город",
-                builder.buildRegistrationEmail(null, contact.getLastName() + " " + contact.getFirstName() + " " + contact.getMiddleName() + " ",
+                builder.buildRegistrationQuestionEmail(contact.getLastName() + " " + contact.getFirstName() + " " + contact.getMiddleName() + " ",
                         url + "/confirmQuestion/" + contact.getUuid() + "/" + confirm.getConfirmCode()));
     }
 

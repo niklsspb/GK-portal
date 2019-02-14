@@ -12,6 +12,6 @@ import java.util.List;
 public interface CommunicationRepository extends JpaRepository<Communication, String> {
     Communication findCommunicationByCommunicationTypeAndIdentifyAndContact(CommunicationType communicationType, String identify, Contact contact);
 
-    List<Contact> findAllContactByCommunicationTypeAndIdentify(CommunicationType communicationType, String identify);
+    List<Communication> findAllByCommunicationTypeAndIdentify(CommunicationType communicationType, String identify);
 
 }

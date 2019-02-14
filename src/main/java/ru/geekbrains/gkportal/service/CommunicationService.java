@@ -112,8 +112,15 @@ public class CommunicationService {
         return null;
     }
 
-    public Collection<Contact> getContactListByIdentify(CommunicationType CommunicationType, String identidy) {
-        return communicationRepository.findAllContactByCommunicationTypeAndIdentify(CommunicationType, identidy);
+    public Collection<Contact> getContactListByIdentify(CommunicationType communicationType, String identidy) {
+        List<Communication> communicationList =
+                communicationRepository.findAllByCommunicationTypeAndIdentify(communicationType, identidy);
+        List<Contact> contacts = new ArrayList<>();
+        for (Communication communication : communicationList) {
+            contacts.add(communication.getContact());
+        }
+        return contacts;
+
     }
 
     public Collection<Contact> getContactListByEmail(String identidy) throws Throwable {
