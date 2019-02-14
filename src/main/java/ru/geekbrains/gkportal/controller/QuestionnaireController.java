@@ -55,20 +55,14 @@ public class QuestionnaireController {
     @IsAdmin
     @GetMapping("result") //http://localhost/questionnaire/result?questionnaireId=bb2248ae-2d7e-427d-85ef-7b85888f0319
     public String showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
-        Questionnaire questionnaire = questionnaireService.findByIdAndSortQuestionsAndAnswers(questionnaireId);
-        model.addAttribute("questionnaire", questionnaire);
-
         List<Contact> contactList = contactService.findAllByQuestionnaireId(questionnaireId);
 
-        int confirmed = 0;
-        for (Contact contact : contactList) {
-            confirmed += contact.getQuestionnaireContactConfirm().isConfirmed() ? 1 : 0;
-        }
-
+        model.addAttribute("questionnaire", questionnaireService.findByIdAndSortQuestionsAndAnswers(questionnaireId));
         model.addAttribute("contactList", contactList);
-        model.addAttribute("confirmed", confirmed);
+        model.addAttribute("confirmed", contactService.countQuestionnaireContactConfirm(contactList));
         return "questionnaire-result";
     }
+
 
     @GetMapping
     public String showQuestionnaire(@RequestParam(required = false) String questionnaireId, Model model) {

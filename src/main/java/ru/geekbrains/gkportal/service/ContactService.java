@@ -57,7 +57,7 @@ public class ContactService {
         return contactRepository.findAll();
     }
 
-    public List<Contact> findAllByQuestionnaireId(String questionnaireId ) {
+    public List<Contact> findAllByQuestionnaireId(String questionnaireId) {
         return contactRepository.findAllByQuestionnaireContactConfirm_QuestionnaireUuid(questionnaireId);
     }
 
@@ -132,6 +132,14 @@ public class ContactService {
         return contact;
     }
 
+    public int countQuestionnaireContactConfirm(List<Contact> contactList) {
+        int confirmed = 0;
+        for (Contact contact : contactList) {
+            confirmed += contact.getQuestionnaireContactConfirm().isConfirmed() ? 1 : 0;
+        }
+        return confirmed;
+    }
+
     public Contact getContact(SystemAccountDTO systemAccount) {
         return contactRepository.findByFirstNameAndLastNameAndMiddleName(
                 systemAccount.getFirstName(),
@@ -155,7 +163,6 @@ public class ContactService {
 //                systemAccount.getMiddleName()
 //        );
 //    }
-
 
     public Contact getContactByID(String guid) {
         return contactRepository.findById(guid).get();
