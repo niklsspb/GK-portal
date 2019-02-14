@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PhoneNumberValidator implements ConstraintValidator<ValidPhoneNumber, String> {
-    private static final String PHONENUMBER_PATTERN = "^$|[0-9]{15}";
+    private static final String PHONENUMBER_PATTERN = "^$|[0-9]{10,15}";
     private Pattern pattern;
     private Matcher matcher;
 
