@@ -3,11 +3,18 @@
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 <body>
 
 <div class="container">
     <h1 th:text="${questionnaire.name}"></h1>
+    <h2>
+        <span th:text="'Проголосовало ' + ${contactList.size()} + ' человек, '"></span>
+        <span style="color: green" th:text="'в т.ч. подтвержденные ' + ${confirmed}+ ', '"></span>
+        <span style="color: red" th:text="'неподтвержденные ' + ${contactList.size()-confirmed}"></span>
+    </h2>
     <p style="font-style: italic" th:text="${questionnaire.description}"></p>
     <table class="table-questionnaire-result">
         <thead>
@@ -21,42 +28,49 @@
         </thead>
 
         <tbody>
-        <tr th:each="contact: ${contactList}">
-            <th:block th:if="${contact.questionnaireContactConfirm} != null">
-                <td th:text="${contact.lastName} + ' ' + ${contact.firstName} +  ' ' + ${contact.middleName}"></td>
-                <td>
-                    <th:block th:each="communication : ${contact.communications}">
-                        <th:block th:switch="${communication.communicationType.description}">
-                            <a th:case="'Email'" th:text="${communication.identify}"
-                               th:href="'mailto:' + ${communication.identify}"></a>
-                            <a th:case="'Телефон'" th:text="${communication.identify}"
-                               th:href="'tel:' + ${communication.identify}"></a>
-                            <span th:case="*" th:text="${communication.identify}"></span>
-                        </th:block>
+        <tr th:styleappend="${contact.questionnaireContactConfirm.confirmed}==true? '': 'background-color: lightpink;'"
+            th:each="contact: ${contactList}">
+            <!--<th:block th:if="${contact.questionnaireContactConfirm} != null">-->
+            <td th:text="${contact.lastName} + ' ' + ${contact.firstName} +  ' ' + ${contact.middleName}"></td>
+            <td>
+                <th:block th:each="communication : ${contact.communications}">
+                    <th:block th:switch="${communication.communicationType.description}">
+                        <a th:case="'Email'" th:text="${communication.identify}"
+                           th:href="'mailto:' + ${communication.identify}"></a>
+                        <a th:case="'Телефон'" th:text="${communication.identify}"
+                           th:href="'tel:' + ${communication.identify}"></a>
+                        <span th:case="*" th:text="${communication.identify}"></span>
                     </th:block>
-                </td>
-                <td>
-                    <th:block th:each="ownership : ${contact.ownerships}">
-                        <div style="margin-bottom: 20px">
-                            <p th:text="'стр. № дома ' + ${ownership.houseBuildNum} + ', '"></p>
-                            <p th:text="'стр. № квартиры ' + ${ownership.buildNumber} + ', '"></p>
-                            <p th:text="'(S' + ${ownership.square} + ' кв.м, ' + ${ownership.percentageOfOwner} + '%)' "></p>
-                        </div>
+                </th:block>
+            </td>
+            <td>
+                <th:block th:each="ownership : ${contact.ownerships}">
+                    <th:block th:switch="${ownership.ownershipType.name} ">
+                        <i th:case="'Квартира'" class="far fa-building"></i>
+                        <i th:case="'Машиноместо'" class="fas fa-parking"></i>
+                        <i th:case="'Автомобиль'" class="fas fa-car"></i>
+                        <i th:case="'Нежилое помещение'" class="fas fa-briefcase"></i>
                     </th:block>
-                </td>
 
-                <th:block th:each="question: ${questionnaire.questions}">
-                    <td>
-                        <th:block th:each="answer: ${question.answers}">
-                            <th:block th:each="result : ${answer.getAnswerResults()}">
-                                <th:block th:if="${result.contact.uuid.equals(contact.uuid)}">
-                                    <span th:text="${answer.name}"></span>
-                                </th:block>
+                    <div style="margin-bottom: 20px">
+                        <p th:text="${ownership.houseBuildNum} + ' корпус, '"></p>
+                        <p th:text="${ownership.buildNumber} + ' объект, '"></p>
+                        <p th:text="'(S' + ${ownership.square} + ' кв.м, ' + ${ownership.percentageOfOwner} + '%)' "></p>
+                    </div>
+                </th:block>
+            </td>
+            <th:block th:each="question: ${questionnaire.questions}">
+                <td>
+                    <th:block th:each="answer: ${question.answers}">
+                        <th:block th:each="result : ${answer.getAnswerResults()}">
+                            <th:block th:if="${result.contact.uuid.equals(contact.uuid)}">
+                                <span th:text="${answer.name}"></span>
                             </th:block>
                         </th:block>
-                    </td>
-                </th:block>
+                    </th:block>
+                </td>
             </th:block>
+            <!--</th:block>-->
         </tr>
         </tbody>
     </table>

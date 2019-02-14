@@ -13,13 +13,14 @@ import ru.geekbrains.gkportal.security.IsAdmin;
 import ru.geekbrains.gkportal.service.*;
 
 import java.util.Comparator;
+import java.util.List;
 
 
 @Controller
 @RequestMapping("questionnaire")
 public class QuestionnaireController {
 
-    private QuestionnaireService service;
+    private QuestionnaireService questionnaireService;
     private ContactService contactService;
     private AnswerResultService answerResultService;
     private AuthenticateService authenticateService;
@@ -37,8 +38,8 @@ public class QuestionnaireController {
     }
 
     @Autowired
-    public void setService(QuestionnaireService service) {
-        this.service = service;
+    public void setQuestionnaireService(QuestionnaireService questionnaireService) {
+        this.questionnaireService = questionnaireService;
     }
 
     @Autowired
@@ -54,9 +55,18 @@ public class QuestionnaireController {
     @IsAdmin
     @GetMapping("result") //http://localhost/questionnaire/result?questionnaireId=bb2248ae-2d7e-427d-85ef-7b85888f0319
     public String showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
-        Questionnaire questionnaire = service.findByIdAndSortQuestionsAndAnswers(questionnaireId);
+        Questionnaire questionnaire = questionnaireService.findByIdAndSortQuestionsAndAnswers(questionnaireId);
         model.addAttribute("questionnaire", questionnaire);
-        model.addAttribute("contactList", contactService.findAll());
+
+        List<Contact> contactList = contactService.findAllByQuestionnaireId(questionnaireId);
+
+        int confirmed = 0;
+        for (Contact contact : contactList) {
+            confirmed += contact.getQuestionnaireContactConfirm().isConfirmed() ? 1 : 0;
+        }
+
+        model.addAttribute("contactList", contactList);
+        model.addAttribute("confirmed", confirmed);
         return "questionnaire-result";
     }
 
@@ -64,15 +74,15 @@ public class QuestionnaireController {
     public String showQuestionnaire(@RequestParam(required = false) String questionnaireId, Model model) {
         if (!authenticateService.isCurrentUserAuthenticated()) return "403";
         if (questionnaireId == null) {
-            model.addAttribute("questionnaireList", service.findAll());
+            model.addAttribute("questionnaireList", questionnaireService.findAll());
             return "questionnaire";
         }
 
         Questionnaire questionnaire;
 
-        if ((questionnaire = service.findByIdAndSortAnswers(questionnaireId)) == null) {
+        if ((questionnaire = questionnaireService.findByIdAndSortAnswers(questionnaireId)) == null) {
             model.addAttribute("notFoundNumber", questionnaireId);
-            model.addAttribute("questionnaireList", service.findAll());
+            model.addAttribute("questionnaireList", questionnaireService.findAll());
             return "questionnaire";
         }
 
