@@ -111,7 +111,10 @@ public class MailService {
     public String getCurentURL() {
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest req = sra.getRequest();
-        return (req.getServerPort() == 80) ? "http://" + req.getServerName() : "http://" + req.getServerName() + ":" + req.getServerPort();
+        int port = req.getServerPort();
+        if (port == 80) return "http://" + req.getServerName();
+        else if (port == 443) return "https://" + req.getServerName();
+        else return "http://" + req.getServerName() + ":" + req.getServerPort();
 
 
     }
