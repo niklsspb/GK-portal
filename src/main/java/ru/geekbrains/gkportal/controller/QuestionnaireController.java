@@ -10,7 +10,11 @@ import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.Question;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 import ru.geekbrains.gkportal.security.IsAdmin;
-import ru.geekbrains.gkportal.service.*;
+import ru.geekbrains.gkportal.security.IsAuthenticated;
+import ru.geekbrains.gkportal.service.AccountService;
+import ru.geekbrains.gkportal.service.AnswerResultService;
+import ru.geekbrains.gkportal.service.ContactService;
+import ru.geekbrains.gkportal.service.QuestionnaireService;
 
 import java.util.Comparator;
 import java.util.List;
@@ -23,14 +27,7 @@ public class QuestionnaireController {
     private QuestionnaireService questionnaireService;
     private ContactService contactService;
     private AnswerResultService answerResultService;
-    private AuthenticateService authenticateService;
     private AccountService accountService;
-
-
-    @Autowired
-    public void setAuthenticateService(AuthenticateService authenticateService) {
-        this.authenticateService = authenticateService;
-    }
 
     @Autowired
     public void setAccountService(AccountService accountService) {
@@ -63,10 +60,10 @@ public class QuestionnaireController {
         return "questionnaire-result";
     }
 
-
+    @IsAuthenticated
     @GetMapping
     public String showQuestionnaire(@RequestParam(required = false) String questionnaireId, Model model) {
-        if (!authenticateService.isCurrentUserAuthenticated()) return "403";
+//        if (!authenticateService.isCurrentUserAuthenticated()) return "403";
         if (questionnaireId == null) {
             model.addAttribute("questionnaireList", questionnaireService.findAll());
             return "questionnaire";
@@ -87,16 +84,14 @@ public class QuestionnaireController {
         return "questionnaire";
     }
 
+    @IsAuthenticated
     @PostMapping
-    public String getQuestionnaire(@ModelAttribute("form") AnswerResultDTO form, Model model, RedirectAttributes redirectAttributes) throws Throwable {
+    public String getQuestionnaire(@ModelAttribute("form") AnswerResultDTO form, Model model) throws Throwable {
         model.addAttribute("completed", "Данные записаны");
-        if (authenticateService.isCurrentUserAuthenticated()) {
-            Contact contact = accountService.getContactByLogin(authenticateService.getCurrentUser().getUsername());
-            answerResultService.saveAnswerResultDTO(form, contact);
-            return "redirect:/questionnaire";
-        } else return "403";
+        Contact contact = accountService.getCurrentContact();
+        answerResultService.saveAnswerResultDTO(form, contact);
+        return "redirect:/questionnaire";
     }
-
 
 }
 
