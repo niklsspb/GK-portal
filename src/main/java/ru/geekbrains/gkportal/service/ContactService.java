@@ -57,6 +57,10 @@ public class ContactService {
         return contactRepository.findAll();
     }
 
+    public List<Contact> findAllByQuestionnaireId(String questionnaireId ) {
+        return contactRepository.findAllByQuestionnaireContactConfirm_QuestionnaireUuid(questionnaireId);
+    }
+
     public void saveAll(List<Contact> contactList) {
         contactRepository.saveAll(contactList);
     }
