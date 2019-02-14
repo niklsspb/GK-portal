@@ -10,6 +10,7 @@ import ru.geekbrains.gkportal.repository.CommunicationRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -101,4 +102,25 @@ public class CommunicationService {
                 .build();
     }
 
+    public String getMail(Collection<Communication> communications) {
+        for (Communication communication : communications) {
+            if (communication.getCommunicationType().getUuid().equals(CommunicationTypeService.EMAIL_TYPE_GUID)) {
+                return communication.getIdentify();
+            }
+
+        }
+        return null;
+    }
+
+    public Collection<Contact> getContactListByIdentify(CommunicationType CommunicationType, String identidy) {
+        return communicationRepository.findAllContactByCommunicationTypeAndIdentify(CommunicationType, identidy);
+    }
+
+    public Collection<Contact> getContactListByEmail(String identidy) throws Throwable {
+        return getContactListByIdentify(communicationTypeService.findEmailType(), identidy);
+    }
+
+    public Collection<Contact> getContactListByPhone(String identidy) throws Throwable {
+        return getContactListByIdentify(communicationTypeService.findPhoneType(), identidy);
+    }
 }
