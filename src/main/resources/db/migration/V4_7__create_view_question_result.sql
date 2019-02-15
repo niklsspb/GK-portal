@@ -10,7 +10,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`support_boot`@`localhost` SQL SECURITY DEFIN
 SELECT r.questionnaire_id,`r`.`question_id`,`r`.`answer_id`,
 MIN(`q`.`name`) AS `question_name`,
   MIN(`a`.`name`) AS `answer_name`,
-  COUNT(0) AS `q` as `vote_count`,
+  COUNT(0)  as `vote_count`,
   SUM(csq.square) as `summ_square`
 FROM ((`questionnaire_question` `q`
     LEFT JOIN `questionnaire_question_answer` `a`
