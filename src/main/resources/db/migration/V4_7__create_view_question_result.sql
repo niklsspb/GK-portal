@@ -8,9 +8,10 @@ DELIMITER $$
 CREATE ALGORITHM=UNDEFINED DEFINER=`support_boot`@`localhost` SQL SECURITY DEFINER VIEW `questionnaire_result_view` AS (
 
 SELECT r.questionnaire_id,`r`.`question_id`,`r`.`answer_id`,
-MIN(`q`.`name`) AS `qu`,
-  MIN(`a`.`name`) AS `ans`,
-  COUNT(0) AS `q`,SUM(csq.square)
+MIN(`q`.`name`) AS `question_name`,
+  MIN(`a`.`name`) AS `answer_name`,
+  COUNT(0) AS `q` as `vote_count`,
+  SUM(csq.square) as `summ_square`
 FROM ((`questionnaire_question` `q`
     LEFT JOIN `questionnaire_question_answer` `a`
       ON ((`q`.`id` = `a`.`questionnaire_question_id`)))
@@ -25,7 +26,7 @@ GROUP BY contact_id
 
 ) csq ON r.`contact_id`=csq.contact_id
 GROUP BY r.questionnaire_id,`r`.`question_id`,`r`.`answer_id`
-ORDER BY `qu`,`ans`
+
 
   )$$
 
