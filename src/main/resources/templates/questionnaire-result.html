@@ -30,7 +30,6 @@
         <tbody>
         <tr th:styleappend="${contact.questionnaireContactConfirm.confirmed}==true? '': 'background-color: lightpink;'"
             th:each="contact: ${contactList}">
-            <!--<th:block th:if="${contact.questionnaireContactConfirm} != null">-->
             <td th:text="${contact.lastName} + ' ' + ${contact.firstName} +  ' ' + ${contact.middleName}"></td>
             <td>
                 <th:block th:each="communication : ${contact.communications}">
@@ -51,7 +50,6 @@
                         <i th:case="'Автомобиль'" class="fas fa-car"></i>
                         <i th:case="'Нежилое помещение'" class="fas fa-briefcase"></i>
                     </th:block>
-
                     <div style="margin-bottom: 20px">
                         <p th:text="${ownership.houseBuildNum} + ' корпус, '"></p>
                         <p th:text="${ownership.buildNumber} + ' объект, '"></p>
@@ -70,7 +68,6 @@
                     </th:block>
                 </td>
             </th:block>
-            <!--</th:block>-->
         </tr>
         </tbody>
     </table>
