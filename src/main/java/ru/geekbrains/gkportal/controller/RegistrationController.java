@@ -9,10 +9,12 @@ import ru.geekbrains.gkportal.dto.*;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.Question;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
+import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 import ru.geekbrains.gkportal.service.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -190,7 +192,7 @@ public class RegistrationController {
         try {
             if (contact == null) contact = contactService.getOrCreateContact(systemAccount);
             answerResultService.saveAnswerResultDTO(systemAccount.getAnswerResultDTO(), contactService.save(contact));
-            mailService.sendRegistrationMail(systemAccount, contact, questionnaireService.getQuestionnaireContactConfirm(systemAccount.getAnswerResultDTO().getQuestionnaireId(), contact));
+            mailService.sendRegistrationMail(contact, questionnaireService.getQuestionnaireContactConfirm(systemAccount.getAnswerResultDTO().getQuestionnaireId(), contact));
             systemAccount.setUuid(UUID.randomUUID().toString());
             session.setAttribute("systemUser", systemAccount);
             model.addAttribute("uuid", systemAccount.getUuid());
@@ -219,6 +221,40 @@ public class RegistrationController {
         model.addAttribute("porchList", porchList);
         return "select-porch-form";
     }*/
+
+    @GetMapping("/getQuestionConfirmMail/{mail}")
+    public String getQuestionConfirmMail(@PathVariable(name = "mail") String mail, Model model) {
+        boolean result = false;
+        boolean questionnaireResultNotFound = true;
+        boolean questionnaireResultNotFoundNotConfirm = true;
+
+        String resultText = "Контакты с таким емайлом не найдены";
+
+        Collection<Contact> contaсtList = null;
+        try {
+            contaсtList = contactService.getContaсtListByEmail(mail);
+            for (Contact contact : contaсtList) {
+                QuestionnaireContactConfirm questionnaireContactConfirm = questionnaireService.getQuestionnaireContactConfirm(QUESTIONNAIRE_ID, contact);
+                if (questionnaireContactConfirm != null) {
+                    questionnaireResultNotFound = false;
+                    if (!questionnaireContactConfirm.isConfirmed()) {
+                        questionnaireResultNotFoundNotConfirm = false;
+                        mailService.sendRegistrationMail(contact, questionnaireContactConfirm);
+                    }
+                }
+            }
+
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        if (questionnaireResultNotFound) resultText = "Пройденные опросы не найдены";
+        if (questionnaireResultNotFoundNotConfirm && !questionnaireResultNotFound)
+            resultText = "Все опросы уже подтверждены";
+        if (!questionnaireResultNotFoundNotConfirm) resultText = "Подтверждаюшие письма отправлены!";
+
+        model.addAttribute("result", resultText);
+        return "request-confirm-mail";
+    }
 
     @GetMapping("/confirmMail/{mail}/{code}")
     public String confirmMail(@PathVariable(name = "code") String code, @PathVariable(name = "mail") String mail, Model model) {

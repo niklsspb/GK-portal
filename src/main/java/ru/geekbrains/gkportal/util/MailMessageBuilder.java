@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import ru.geekbrains.gkportal.dto.AnswerResultDTO;
 
 @Service
 public class MailMessageBuilder {
@@ -36,11 +35,9 @@ public class MailMessageBuilder {
         return templateEngine.process(MAIL_REGISTRATION_PAGE, context);
     }
 
-    public String buildRegistrationEmail(AnswerResultDTO resault, String userName, String url) {
+    public String buildRegistrationQuestionEmail(String userName, String url) {
         Context context = new Context();
         context.setVariable(VARIABLE_REGISTRATION_USER, userName);
-        context.setVariable("questions", resault.getQuestions());
-        context.setVariable("answers", resault.getAnswers());
         context.setVariable(VARIABLE_REGISTRATION_PASSWORD, url);
         return templateEngine.process(MAIL_REGISTRATION_QUESTION_PAGE, context);
     }

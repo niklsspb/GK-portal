@@ -7,7 +7,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
 import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.PropertyType;
@@ -26,10 +25,13 @@ public class MailService {
 
     private JavaMailSender sender;
     private MailMessageBuilder builder;
-
     private PropertyService propertyService;
+    private ContactService contactService;
 
-
+    @Autowired
+    public void setContactService(ContactService contactService) {
+        this.contactService = contactService;
+    }
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
@@ -94,12 +96,14 @@ public class MailService {
                         url + "/confirmMail/" + email.getIdentify() + "/" + email.getConfirmCode()));
     }
 
-    public boolean sendRegistrationMail(SystemAccountToOwnerShip systemAccout, Contact contact, QuestionnaireContactConfirm confirm) {
-        String email = systemAccout.getEmail();
+
+    public boolean sendRegistrationMail(Contact contact, QuestionnaireContactConfirm confirm) {
+        String email = contactService.getEmail(contact);
+        if (email == null) return false;
         String url = getCurentURL();
         return sendMail(email,
                 "Регистрация в опросе на сайте ЖК Город",
-                builder.buildRegistrationEmail(systemAccout.getAnswerResultDTO(), systemAccout.getLastName() + " " + systemAccout.getFirstName() + " " + systemAccout.getMiddleName() + " ",
+                builder.buildRegistrationQuestionEmail(contact.getLastName() + " " + contact.getFirstName() + " " + contact.getMiddleName() + " ",
                         url + "/confirmQuestion/" + contact.getUuid() + "/" + confirm.getConfirmCode()));
     }
 
@@ -107,8 +111,11 @@ public class MailService {
     public String getCurentURL() {
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest req = sra.getRequest();
-        req.getServerPort();
-        return "http://" + req.getServerName() + ":" + req.getServerPort();
+        int port = req.getServerPort();
+        if (port == 80) return "http://" + req.getServerName();
+        else if (port == 443) return "https://" + req.getServerName();
+        else return "http://" + req.getServerName() + ":" + req.getServerPort();
+
 
     }
 
