@@ -42,4 +42,5 @@ public class AnswerResult extends AbstractEntity {
     @JoinColumn(name = "question_id")
     @NotNull(message = "Question s.b. selected!")
     private Question question;
+
 }

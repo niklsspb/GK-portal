@@ -12,8 +12,8 @@
     <h1 th:text="${questionnaire.name}"></h1>
     <h2>
         <span th:text="'Проголосовало ' + ${contactList.size()} + ' человек, '"></span>
-        <span style="color: green" th:text="'в т.ч. подтвержденные ' + ${confirmed}+ ', '"></span>
-        <span style="color: red" th:text="'неподтвержденные ' + ${contactList.size()-confirmed}"></span>
+        <span style="color: green" th:text="'в т.ч. подтвержденные ' + ${confirmedCount}+ ', '"></span>
+        <span style="color: red" th:text="'неподтвержденные ' + ${contactList.size()-confirmedCount}"></span>
     </h2>
     <p style="font-style: italic" th:text="${questionnaire.description}"></p>
     <table class="table-questionnaire-result">

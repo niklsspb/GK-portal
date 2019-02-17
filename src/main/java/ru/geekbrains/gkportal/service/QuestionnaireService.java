@@ -5,15 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
 import ru.geekbrains.gkportal.entity.Contact;
-import ru.geekbrains.gkportal.entity.questionnaire.Answer;
-import ru.geekbrains.gkportal.entity.questionnaire.Question;
-import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
-import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
+import ru.geekbrains.gkportal.entity.questionnaire.*;
 import ru.geekbrains.gkportal.repository.QuestionnaireContactConfirmRepository;
 import ru.geekbrains.gkportal.repository.QuestionnaireRepository;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionnaireService {
@@ -54,6 +54,10 @@ public class QuestionnaireService {
         return questionnaire;
     }
 
+    public QuestionnaireDTO findQuestionnaireDTOById(String uuid) {
+        return questionnaireRepository.findByUuid(uuid);
+    }
+
     public Questionnaire findById(String id) {
         return questionnaireRepository.findById(id).orElse(null);
     }
@@ -78,6 +82,10 @@ public class QuestionnaireService {
 
     public QuestionnaireContactConfirm getQuestionnaireContactConfirm(String questionnaireId, Contact contact) {
         return questionnaireContactConfirmRepository.getByQuestionnaireAndContact(findById(questionnaireId), contact);
+    }
+
+    public List<QuestionnaireContactConfirmDTO> getQuestionnaireContactConfirmDTO(String questionnaireId) {
+        return questionnaireContactConfirmRepository.findAllByQuestionnaire_UuidOrderByContact(questionnaireId);
     }
 
     public boolean confirmQuetionnaire(Contact contact, String code) {

@@ -10,6 +10,7 @@ import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.Flat;
 import ru.geekbrains.gkportal.entity.Ownership;
+import ru.geekbrains.gkportal.entity.questionnaire.ContactDTO;
 import ru.geekbrains.gkportal.repository.ContactRepository;
 
 import java.util.ArrayList;
@@ -60,6 +61,10 @@ public class ContactService {
 
     public List<Contact> findAllByQuestionnaireId(String questionnaireId) {
         return contactRepository.findAllByQuestionnaireContactConfirm_QuestionnaireUuid(questionnaireId);
+    }
+
+    public List<ContactDTO> findAllDTOByQuestionnaireId(String questionnaireUuid) {
+        return contactRepository.findAllByQuestionnaireContactConfirm_QuestionnaireUuidOrderByLastNameAsc(questionnaireUuid);
     }
 
     public void saveAll(List<Contact> contactList) {

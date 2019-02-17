@@ -43,6 +43,10 @@ public class AnswerResultService {
     //    saveAnswerResultDTO(answerResultDTO);
     // }
 
+    public List<AnswerResultDTO1> findAllByQuestionnaireUuid(String questionnaireUuid){
+        return answerResultRepository.findAllByQuestionnaire_UuidOrderByQuestion_SortNumber(questionnaireUuid);
+    }
+
     public void saveAnswerResultDTO(AnswerResultDTO answerResultDTO, Contact contact) {
         Questionnaire questionnaire = questionnaireService.findByIdAndSortAnswers(answerResultDTO.getQuestionnaireId());
 

@@ -15,7 +15,8 @@ import java.util.Collection;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = "questionnaireContactConfirm", callSuper = true)
+@ToString(exclude = "questionnaireContactConfirm", callSuper = true)
 public class Contact extends AbstractEntity {
 
 //    @Valid

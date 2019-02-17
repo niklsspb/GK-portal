@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.geekbrains.gkportal.dto.AnswerResultDTO;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.Question;
@@ -50,15 +49,33 @@ public class QuestionnaireController {
     }
 
     @IsAdmin
-    @GetMapping("result") //http://localhost/questionnaire/result?questionnaireId=bb2248ae-2d7e-427d-85ef-7b85888f0319
+    @GetMapping("result")
     public String showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
         List<Contact> contactList = contactService.findAllByQuestionnaireId(questionnaireId);
 
         model.addAttribute("questionnaire", questionnaireService.findByIdAndSortQuestionsAndAnswers(questionnaireId));
         model.addAttribute("contactList", contactList);
-        model.addAttribute("confirmed", contactService.countQuestionnaireContactConfirm(contactList));
-        return "questionnaire-result";
+        model.addAttribute("confirmedCount", contactService.countQuestionnaireContactConfirm(contactList));
+        return "questionnaire-result/result";
     }
+
+    @IsAdmin
+    @GetMapping("questionnaire-result-datatable")
+    public String showQuestionnaireResultsDataTable(@RequestParam String questionnaireId, Model model) {
+
+
+
+        return "questionnaire-result/datatable";
+    }
+
+
+
+
+
+
+
+
+
 
     @IsAuthenticated
     @GetMapping

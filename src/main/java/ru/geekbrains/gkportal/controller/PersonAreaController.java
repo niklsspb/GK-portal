@@ -10,8 +10,6 @@ import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.Flat;
 import ru.geekbrains.gkportal.repository.AccountRepository;
-import ru.geekbrains.gkportal.repository.CommunicationRepository;
-import ru.geekbrains.gkportal.repository.FlatRepository;
 import ru.geekbrains.gkportal.service.AuthenticateService;
 
 import java.util.Collection;
