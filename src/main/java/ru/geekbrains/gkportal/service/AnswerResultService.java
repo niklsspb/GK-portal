@@ -4,11 +4,13 @@ package ru.geekbrains.gkportal.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.dto.AnswerResultDTO;
+import ru.geekbrains.gkportal.dto.QuestionnaireContactResult;
 import ru.geekbrains.gkportal.entity.AbstractEntity;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.*;
 import ru.geekbrains.gkportal.repository.AnswerResultRepository;
 
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -71,6 +73,44 @@ public class AnswerResultService {
         }
 
         saveAll(answerResults);
+    }
+
+    public List<QuestionnaireContactResult> getAllByContact(Contact contact)
+    {
+        List<QuestionnaireContactResult> questionnaireContactResults = new ArrayList<>();
+
+        Optional<AnswerResult> answerResultOptional = answerResultRepository.findAllByContact(contact);
+
+        if (answerResultOptional.isPresent()){
+
+            List<AnswerResult> answerResultList = answerResultOptional.map(v-> new ArrayList<>(Arrays.asList(v)))
+                    .orElseGet(() -> new ArrayList<>());
+
+            for (AnswerResult answerResult: answerResultList) {
+
+                QuestionnaireContactResult questionnaireContactResult = QuestionnaireContactResult.builder()
+                        .firstNameContact(answerResult.getContact().getFirstName())
+                        .middleNameContact(answerResult.getContact().getMiddleName())
+                        .lastNameContact(answerResult.getContact().getLastName())
+                        .nameQuestionnaire(answerResult.getQuestionnaire().getName())
+                        .descriptionQuestionnaire(answerResult.getQuestionnaire().getDescription())
+                        .isOpenQuestionnaire(answerResult.getQuestionnaire().isOpen())
+                        .startDateQuestionnaire(answerResult.getQuestionnaire().getFrom().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")))
+                        .endDateQuestionnaire(answerResult.getQuestionnaire().getTo().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")))
+                        .isActiveQuestionnaire(answerResult.getQuestionnaire().isActive())
+                        .isInBuildNumQuestionnaire(answerResult.getQuestionnaire().isInBuildNum())
+                        .isUseRealEstateQuestionnaire(answerResult.getQuestionnaire().isUseRealEstate())
+                        .nameQuestion(answerResult.getQuestion().getName())
+                        .externalNumberQuestion(answerResult.getQuestion().getExternalNumber().toString())
+                        .sortNumberQuestion(answerResult.getQuestion().getSortNumber())
+                        .nameQuestionAnswer(answerResult.getAnswer().getName())
+                        .sortNumberQuestionAnswer(answerResult.getAnswer().getSortNumber()).build();
+
+                questionnaireContactResults.add(questionnaireContactResult);
+            }
+        }
+
+       return questionnaireContactResults;
     }
 
 }
