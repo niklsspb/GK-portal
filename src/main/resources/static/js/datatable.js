@@ -21,7 +21,8 @@ $(document).ready(function () {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
         },
         lengthMenu: [[3, 5, 10, 15, -1], [3, 5, 10, 15, "Все"]],
-        order: [0, 'asc'],
+        // order: [0, 'asc'],
+        ordering: false,
         fixedHeader: {
             "footer": "false"
         },
@@ -33,6 +34,43 @@ $(document).ready(function () {
                         return data.lastName + ' ' + data.firstName + ' ' + data.middleName + ' ';
                     }
                 },
+
+                {
+                    data: "contactDTO",
+                    render: function (data, type, row) {
+                        var res = "";
+
+
+                        $.each(data.ownerships, function (index, ownership) {
+
+                            var style = "<i class=\"";
+                            switch (ownership.ownershipType.name) {
+                                case 'Квартира':
+                                    style += "far fa-building\"></i>";
+                                    break;
+                                case 'Машиноместо':
+                                    style += "fas fa-parking\"></i>";
+                                    break;
+                                case 'Автомобиль':
+                                    style += "fas fa-car\"></i>";
+                                    break;
+                                case 'Нежилое помещение':
+                                    style += "fas fa-briefcase\"></i>";
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            res += '<p>' + style + '</br>' +
+                                ownership.houseBuildNum + ' корпус, ' + '</br>' +
+                                ownership.buildNumber + ' объект, ' + '</br>' +
+                                '(S' + ownership.square + 'м<sup>2</sup>, ' + ownership.percentageOfOwner + '%)' +
+                                '</p>';
+                        });
+                        return res;
+                    }
+                },
+
                 {
                     "data": "integerAnswerResultDTO1Map.2",
                     "render": $.fn.dataTable.render.answerResult()

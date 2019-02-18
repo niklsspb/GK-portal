@@ -1,5 +1,9 @@
 package ru.geekbrains.gkportal.entity.questionnaire;
 
+import ru.geekbrains.gkportal.entity.OwnershipDTO;
+
+import java.util.Collection;
+
 public interface ContactDTO {
 
     String getUuid();
@@ -12,5 +16,6 @@ public interface ContactDTO {
 
     QuestionnaireContactConfirmDTO getQuestionnaireContactConfirm();
 
+    Collection<OwnershipDTO> getOwnerships();
 
 }
