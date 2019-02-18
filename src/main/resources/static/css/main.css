@@ -167,3 +167,7 @@ body {
 .lightpink {
     background-color: lightpink !important
 }
+
+.result-table thead input {
+    width: 100%;
+}
