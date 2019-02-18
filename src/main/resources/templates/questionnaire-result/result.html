@@ -37,7 +37,7 @@
                         <a th:case="'Email'" th:text="${communication.identify}"
                            th:href="'mailto:' + ${communication.identify}"></a>
                         <a th:case="'Телефон'" th:text="${communication.identify}"
-                           th:href="'tel:' + ${communication.identify}"></a>
+                           th:href="'tel:+7' + ${communication.identify}"></a>
                         <span th:case="*" th:text="${communication.identify}"></span>
                     </th:block>
                 </th:block>

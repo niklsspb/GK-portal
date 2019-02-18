@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
-import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirmDTO;
+import ru.geekbrains.gkportal.dto.interfaces.QuestionnaireContactConfirmDTO;
 
 import java.util.List;
 

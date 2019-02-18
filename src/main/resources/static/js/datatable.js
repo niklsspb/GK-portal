@@ -39,10 +39,29 @@ $(document).ready(function () {
                     data: "contactDTO",
                     render: function (data, type, row) {
                         var res = "";
+                        $.each(data.communications, function (index, communication) {
+                            switch (communication.communicationType.description) {
+                                case 'Email':
+                                    res += "<a href=\"mailto:";
+                                    break;
+                                case 'Телефон':
+                                    res += "<a href=\"tel:+7";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            res += communication.identify + "\">" + communication.identify + "</a></br>";
+                        });
+                        return res;
+                    }
+                },
 
+                {
+                    data: "contactDTO",
+                    render: function (data, type, row) {
+                        var res = "";
 
                         $.each(data.ownerships, function (index, ownership) {
-
                             var style = "<i class=\"";
                             switch (ownership.ownershipType.name) {
                                 case 'Квартира':
@@ -113,8 +132,9 @@ $(document).ready(function () {
 
     $('#resultTable thead tr').clone(true).appendTo('#resultTable thead');
     $('#resultTable thead tr:eq(1) th').each(function (i) {
-        var title = $(this).text();
-        $(this).html('<input type="text" placeholder="Поиск ' + title + '" />');
+        // var title = $(this).text();
+        // $(this).html('<input type="text" placeholder="Поиск ' + title + '" />');
+        $(this).html('<input type="text" placeholder="Поиск"/>');
 
         $('input', this).on('keyup change', function () {
             if (table.column(i).search() !== this.value) {

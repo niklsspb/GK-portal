@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ru.geekbrains.gkportal.dto.interfaces.AnswerResultDTO1;
+import ru.geekbrains.gkportal.dto.interfaces.ContactDTO;
 import ru.geekbrains.gkportal.entity.questionnaire.*;
 import ru.geekbrains.gkportal.service.AnswerResultService;
 import ru.geekbrains.gkportal.service.AnswerService;

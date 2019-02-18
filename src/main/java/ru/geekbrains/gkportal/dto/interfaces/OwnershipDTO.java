@@ -1,4 +1,4 @@
-package ru.geekbrains.gkportal.entity;
+package ru.geekbrains.gkportal.dto.interfaces;
 
 public interface OwnershipDTO {
 

@@ -3,7 +3,7 @@ package ru.geekbrains.gkportal.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.geekbrains.gkportal.entity.Contact;
-import ru.geekbrains.gkportal.entity.questionnaire.ContactDTO;
+import ru.geekbrains.gkportal.dto.interfaces.ContactDTO;
 
 import java.util.List;
 

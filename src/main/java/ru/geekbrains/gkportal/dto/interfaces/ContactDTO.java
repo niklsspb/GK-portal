@@ -1,6 +1,4 @@
-package ru.geekbrains.gkportal.entity.questionnaire;
-
-import ru.geekbrains.gkportal.entity.OwnershipDTO;
+package ru.geekbrains.gkportal.dto.interfaces;
 
 import java.util.Collection;
 
@@ -17,5 +15,7 @@ public interface ContactDTO {
     QuestionnaireContactConfirmDTO getQuestionnaireContactConfirm();
 
     Collection<OwnershipDTO> getOwnerships();
+
+    Collection<CommunicationDTO> getCommunications();
 
 }

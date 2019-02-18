@@ -1,4 +1,4 @@
-package ru.geekbrains.gkportal.entity.questionnaire;
+package ru.geekbrains.gkportal.dto.interfaces;
 
 import java.util.List;
 

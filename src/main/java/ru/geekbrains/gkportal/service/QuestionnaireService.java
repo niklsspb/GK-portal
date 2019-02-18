@@ -4,6 +4,8 @@ package ru.geekbrains.gkportal.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
+import ru.geekbrains.gkportal.dto.interfaces.QuestionnaireContactConfirmDTO;
+import ru.geekbrains.gkportal.dto.interfaces.QuestionnaireDTO;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.*;
 import ru.geekbrains.gkportal.repository.QuestionnaireContactConfirmRepository;
@@ -11,9 +13,6 @@ import ru.geekbrains.gkportal.repository.QuestionnaireRepository;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 public class QuestionnaireService {

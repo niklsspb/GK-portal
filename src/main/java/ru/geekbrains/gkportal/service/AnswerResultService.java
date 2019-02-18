@@ -4,6 +4,7 @@ package ru.geekbrains.gkportal.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.dto.AnswerResultDTO;
+import ru.geekbrains.gkportal.dto.interfaces.AnswerResultDTO1;
 import ru.geekbrains.gkportal.entity.AbstractEntity;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.*;

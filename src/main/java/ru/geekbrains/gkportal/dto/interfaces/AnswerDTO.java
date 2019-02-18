@@ -1,6 +1,4 @@
-package ru.geekbrains.gkportal.entity.questionnaire;
-
-import java.util.List;
+package ru.geekbrains.gkportal.dto.interfaces;
 
 public interface AnswerDTO {
 

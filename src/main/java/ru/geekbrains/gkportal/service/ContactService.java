@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.gkportal.dto.OwnershipRegDTO;
 import ru.geekbrains.gkportal.dto.SystemAccount;
-import ru.geekbrains.gkportal.dto.SystemAccountDTO;
+import ru.geekbrains.gkportal.dto.interfaces.SystemAccountDTO;
 import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.Flat;
 import ru.geekbrains.gkportal.entity.Ownership;
-import ru.geekbrains.gkportal.entity.questionnaire.ContactDTO;
+import ru.geekbrains.gkportal.dto.interfaces.ContactDTO;
 import ru.geekbrains.gkportal.repository.ContactRepository;
 
 import java.util.ArrayList;

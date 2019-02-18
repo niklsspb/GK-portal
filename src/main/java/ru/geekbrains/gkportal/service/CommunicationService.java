@@ -2,7 +2,7 @@ package ru.geekbrains.gkportal.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.gkportal.dto.SystemAccountDTO;
+import ru.geekbrains.gkportal.dto.interfaces.SystemAccountDTO;
 import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.CommunicationType;
 import ru.geekbrains.gkportal.entity.Contact;
