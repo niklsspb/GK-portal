@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface CommunicationTypeRepository extends JpaRepository<CommunicationType, String> {
+
     Optional<CommunicationType> findByDescription(String description);
 }

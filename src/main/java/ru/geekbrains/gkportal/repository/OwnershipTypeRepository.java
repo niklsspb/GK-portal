@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface OwnershipTypeRepository extends JpaRepository<OwnershipType, String> {
+
     Optional<OwnershipType> findByName(String name);
 
     List<OwnershipType> findAllByIsUseInQuestionnaire(boolean InQuestionnaire);

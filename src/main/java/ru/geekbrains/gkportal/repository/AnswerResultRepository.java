@@ -9,6 +9,8 @@ import ru.geekbrains.gkportal.entity.questionnaire.AnswerResult;
 import java.util.Optional;
 
 @Repository
-public interface AnswerResultRepository extends CrudRepository<AnswerResult, String>, JpaRepository<AnswerResult, String> {
+public interface AnswerResultRepository
+        extends CrudRepository<AnswerResult, String>, JpaRepository<AnswerResult, String> {
+
     Optional<AnswerResult> findAllByContact(Contact contact);
 }

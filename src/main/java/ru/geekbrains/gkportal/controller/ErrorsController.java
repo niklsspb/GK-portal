@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping
 public class ErrorsController implements ErrorController {
+
+    private static final Logger logger = Logger.getLogger(ErrorsController.class);
 
     @Override
     public String getErrorPath() {
@@ -25,12 +28,24 @@ public class ErrorsController implements ErrorController {
             int statusCode = Integer.parseInt(status.toString());
 
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
+                if (logger.isDebugEnabled()){
+                    logger.debug("404");
+                }
                 return "404";
             } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+                if (logger.isDebugEnabled()){
+                    logger.debug("500");
+                }
                 return "500";
             } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
+                if (logger.isDebugEnabled()){
+                    logger.debug("403");
+                }
                 return "403";
             }
+        }
+        if (logger.isDebugEnabled()){
+            logger.debug("404");
         }
         return "404";
     }

@@ -1,6 +1,7 @@
 package ru.geekbrains.gkportal.service;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.dto.OwnershipRegDTO;
@@ -13,6 +14,8 @@ import java.util.List;
 
 @Service
 public class OwnershipService {
+
+    private static final Logger logger = Logger.getLogger(OwnershipService.class);
 
     private OwnershipRepository ownershipRepository;
     private OwnershipTypeService ownershipTypeService;

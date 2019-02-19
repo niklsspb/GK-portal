@@ -5,7 +5,6 @@ import lombok.*;
 import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -60,5 +59,4 @@ public class Contact extends AbstractEntity {
     @JoinColumn(name = "contact_id")
     @JsonIgnore
     private QuestionnaireContactConfirm questionnaireContactConfirm;
-
 }

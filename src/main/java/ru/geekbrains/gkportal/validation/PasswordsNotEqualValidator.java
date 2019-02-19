@@ -1,10 +1,14 @@
 package ru.geekbrains.gkportal.validation;
 
+import org.apache.log4j.Logger;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 
 public class PasswordsNotEqualValidator implements ConstraintValidator<PasswordsNotEqual, Object> {
+
+    private static final Logger logger = Logger.getLogger(PasswordsNotEqualValidator.class);
 
     private String passwordFieldName;
 

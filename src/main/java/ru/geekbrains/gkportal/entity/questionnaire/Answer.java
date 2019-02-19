@@ -3,6 +3,8 @@ package ru.geekbrains.gkportal.entity.questionnaire;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.apache.log4j.Logger;
+import ru.geekbrains.gkportal.GkPortalApplication;
 import ru.geekbrains.gkportal.entity.AbstractEntity;
 
 import javax.persistence.*;
@@ -22,6 +24,8 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Answer extends AbstractEntity {
+
+    private static final Logger logger = Logger.getLogger(GkPortalApplication.class);
 
     @Column(name = "name")
     @NotNull(message = "Couldn't be empty!")

@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,8 @@ import java.util.List;
 
 @Service
 public class ContactService {
+
+    private static final Logger logger = Logger.getLogger(ContactService.class);
 
     private ContactRepository contactRepository;
     private FlatsService flatsService;

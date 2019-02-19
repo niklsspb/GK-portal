@@ -16,7 +16,6 @@ import javax.validation.constraints.NotNull;
 
 //todo Переделать многие к многим, у связки тип собственности и доля
 
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -58,5 +57,4 @@ public class Ownership extends AbstractEntity { // TODO: 05.02.19
     @JoinColumn(name = "contact_id")
     @NotNull(message = "Contact s.b. selected!")
     private Contact contact;
-
 }

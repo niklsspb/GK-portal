@@ -8,8 +8,13 @@ import java.util.List;
 
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, String> {
-    Contact findByFirstNameAndLastNameAndMiddleName(String firstName, String lastName, String middleName);
+
+    Contact findByFirstNameAndLastNameAndMiddleName
+            (
+                    String firstName,
+                    String lastName,
+                    String middleName
+            );
 
     List<Contact> findAllByQuestionnaireContactConfirm_QuestionnaireUuid(String questionnaireId);
-
 }
