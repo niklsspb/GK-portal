@@ -28,6 +28,7 @@ public class ErrorsController implements ErrorController {
             int statusCode = Integer.parseInt(status.toString());
 
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
+
                 if (logger.isDebugEnabled()){
                     logger.debug("404");
                 }
@@ -48,5 +49,6 @@ public class ErrorsController implements ErrorController {
             logger.debug("404");
         }
         return "404";
+
     }
 }

@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.dto.AnswerResultDTO;
+import ru.geekbrains.gkportal.dto.interfaces.AnswerResultDTO1;
 import ru.geekbrains.gkportal.dto.QuestionnaireContactResult;
 import ru.geekbrains.gkportal.entity.AbstractEntity;
 import ru.geekbrains.gkportal.entity.Contact;
@@ -48,6 +49,10 @@ public class AnswerResultService {
     //    saveAnswerResultDTO(answerResultDTO);
     // }
 
+    public List<AnswerResultDTO1> findAllByQuestionnaireUuid(String questionnaireUuid){
+        return answerResultRepository.findAllByQuestionnaire_UuidOrderByQuestion_SortNumber(questionnaireUuid);
+    }
+
     public void saveAnswerResultDTO(AnswerResultDTO answerResultDTO, Contact contact) {
         Questionnaire questionnaire = questionnaireService.findByIdAndSortAnswers(answerResultDTO.getQuestionnaireId());
 
@@ -56,6 +61,7 @@ public class AnswerResultService {
                 .questionnaire(questionnaire)
                 .confirmCode(UUID.randomUUID().toString())
                 .contact(contact)
+                .questionnaireConfirmedType(questionnaireService.findQuestionnaireConfirmedTypeByName("не искали"))
                 .build();
         contact.setQuestionnaireContactConfirm(questionnaireContactConfirm);
 

@@ -3,8 +3,10 @@ package ru.geekbrains.gkportal.service;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import ru.geekbrains.gkportal.GkPortalApplication;
 import ru.geekbrains.gkportal.dto.SystemAccountDTO;
+
 import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.CommunicationType;
 import ru.geekbrains.gkportal.entity.Contact;
@@ -59,7 +61,8 @@ public class CommunicationService {
         return null;
     }
 
-    public List<Communication> getOrCreateCommunications(SystemAccountDTO systemAccount, Contact contact) throws Throwable {
+    public List<Communication> getOrCreateCommunications(
+      systemAccount, Contact contact) throws Throwable {
 
         Communication phoneCommunication = getOrCreateCommunication(
                 systemAccount,

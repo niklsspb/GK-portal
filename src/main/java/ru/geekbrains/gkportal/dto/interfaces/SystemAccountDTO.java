@@ -1,4 +1,4 @@
-package ru.geekbrains.gkportal.dto;
+package ru.geekbrains.gkportal.dto.interfaces;
 
 
 import ru.geekbrains.gkportal.entity.ContactType;

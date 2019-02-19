@@ -1,23 +1,26 @@
 package ru.geekbrains.gkportal.controller;
 
+
+import lombok.Data;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.geekbrains.gkportal.dto.interfaces.AnswerResultDTO1;
+import ru.geekbrains.gkportal.dto.interfaces.ContactDTO;
 import ru.geekbrains.gkportal.entity.questionnaire.Answer;
 import ru.geekbrains.gkportal.entity.questionnaire.Question;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
+import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
+import ru.geekbrains.gkportal.service.AnswerResultService;
 import ru.geekbrains.gkportal.service.AnswerService;
 import ru.geekbrains.gkportal.service.ContactService;
 import ru.geekbrains.gkportal.service.QuestionnaireService;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rest")
@@ -28,6 +31,7 @@ public class TestRest {
     private ContactService contactService;
     private AnswerService answerService;
     private QuestionnaireService questionnaireService;
+    private AnswerResultService answerResultService;
 
     @Autowired
     public void setContactService(ContactService contactService) {
@@ -42,6 +46,69 @@ public class TestRest {
     @Autowired
     public void setQuestionnaireService(QuestionnaireService questionnaireService) {
         this.questionnaireService = questionnaireService;
+    }
+
+    @Autowired
+    public void setAnswerResultService(AnswerResultService answerResultService) {
+        this.answerResultService = answerResultService;
+    }
+
+    @GetMapping("questionnaire-result")
+    public List<ContactResultDTO> showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
+        List<AnswerResultDTO1> answerResultDTO1s = answerResultService.findAllByQuestionnaireUuid(questionnaireId);
+        List<ContactResultDTO> resultDTOList = new ArrayList<>();
+
+        List<Integer> sortQuestionsNumbersList =
+                questionnaireService.findByIdAndSortAnswers(questionnaireId).getQuestions()
+                        .stream()
+                        .map(Question::getSortNumber)
+                        .collect(Collectors.toList());
+
+        // заготовка ContactResultDTO с контактами
+        for (AnswerResultDTO1 ard : answerResultDTO1s) {
+            boolean isContains = false;
+            if (resultDTOList.size() == 0) {
+                ContactResultDTO contactResultDTO = new ContactResultDTO(ard.getContact(), sortQuestionsNumbersList);
+                resultDTOList.add(contactResultDTO);
+                continue;
+            }
+            for (ContactResultDTO contactResultDTO : resultDTOList) {
+                if (contactResultDTO.containContact(ard.getContact().getUuid())) {
+                    isContains = true;
+                    break;
+                }
+            }
+            if (!isContains) resultDTOList.add(new ContactResultDTO(ard.getContact(), sortQuestionsNumbersList));
+        }
+
+
+        for (AnswerResultDTO1 ard : answerResultDTO1s) {
+            for (ContactResultDTO contactResultDTO : resultDTOList) {
+                if (contactResultDTO.getContactUuid().equals(ard.getContact().getUuid())) {
+                    contactResultDTO.getAnswerResultDTO1List().add(ard);
+                    contactResultDTO.getIntegerAnswerResultDTO1Map().put(ard.getAnswer().getQuestion().getSortNumber(), ard);
+                }
+            }
+        }
+
+
+        // TODO: 17.02.2019 искать в  integerAnswerResultDTO1Map номера по списку всех номеров, и если их нет, ставить Null
+
+        return resultDTOList;
+    }
+
+    @PostMapping("change-questionnaireConfirmedType")
+    public int changeQuestionnaireConfirmedType(@RequestParam String questionnaireContactConfirmId, @RequestParam String questionnaireConfirmedTypeId) throws Throwable {
+
+        try {
+            questionnaireService.changeQuestionnaireConfirmedType(questionnaireContactConfirmId, questionnaireConfirmedTypeId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return HttpStatus.NO_CONTENT.value();
+        }
+
+        return HttpStatus.OK.value();
+
     }
 
     @GetMapping("test")
@@ -150,5 +217,28 @@ public class TestRest {
         questionnaireService.save(questionnaire);
 
         return questionnaire;
+    }
+
+    @Data
+    public class ContactResultDTO {
+        String contactUuid;
+        ContactDTO contactDTO;
+        List<AnswerResultDTO1> answerResultDTO1List = new ArrayList<>();
+        Map<Integer, AnswerResultDTO1> integerAnswerResultDTO1Map = new HashMap<>();
+
+        ContactResultDTO(ContactDTO contactDTO) {
+            this.contactUuid = contactDTO.getUuid();
+            this.contactDTO = contactDTO;
+        }
+
+        ContactResultDTO(ContactDTO contactDTO, List<Integer> sortQuestionsNumbersList) {
+            this.contactUuid = contactDTO.getUuid();
+            this.contactDTO = contactDTO;
+            sortQuestionsNumbersList.forEach(integer -> integerAnswerResultDTO1Map.put(integer, null));
+        }
+
+        public boolean containContact(String contactUuid) {
+            return this.contactUuid.equals(contactUuid);
+        }
     }
 }

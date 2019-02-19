@@ -49,4 +49,5 @@ public class Answer extends AbstractEntity {
         this.sortNumber = sortNumber;
     }
 
+
 }

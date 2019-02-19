@@ -6,11 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.gkportal.dto.OwnershipRegDTO;
 import ru.geekbrains.gkportal.dto.SystemAccount;
-import ru.geekbrains.gkportal.dto.SystemAccountDTO;
+import ru.geekbrains.gkportal.dto.interfaces.SystemAccountDTO;
 import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.Flat;
 import ru.geekbrains.gkportal.entity.Ownership;
+import ru.geekbrains.gkportal.dto.interfaces.ContactDTO;
 import ru.geekbrains.gkportal.repository.ContactRepository;
 
 import java.util.ArrayList;
@@ -61,8 +62,12 @@ public class ContactService {
         return contactRepository.findAll();
     }
 
-    public List<Contact> findAllByQuestionnaireId(String questionnaireId ) {
+    public List<Contact> findAllByQuestionnaireId(String questionnaireId) {
         return contactRepository.findAllByQuestionnaireContactConfirm_QuestionnaireUuid(questionnaireId);
+    }
+
+    public List<ContactDTO> findAllDTOByQuestionnaireId(String questionnaireUuid) {
+        return contactRepository.findAllByQuestionnaireContactConfirm_QuestionnaireUuidOrderByLastNameAsc(questionnaireUuid);
     }
 
     public void saveAll(List<Contact> contactList) {
@@ -136,6 +141,14 @@ public class ContactService {
         return contact;
     }
 
+    public int countQuestionnaireContactConfirm(List<Contact> contactList) {
+        int confirmed = 0;
+        for (Contact contact : contactList) {
+            confirmed += contact.getQuestionnaireContactConfirm().isConfirmed() ? 1 : 0;
+        }
+        return confirmed;
+    }
+
     public Contact getContact(SystemAccountDTO systemAccount) {
         return contactRepository.findByFirstNameAndLastNameAndMiddleName(
                 systemAccount.getFirstName(),
@@ -159,7 +172,6 @@ public class ContactService {
 //                systemAccount.getMiddleName()
 //        );
 //    }
-
 
     public Contact getContactByID(String guid) {
         return contactRepository.findById(guid).get();

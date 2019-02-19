@@ -38,4 +38,9 @@ public class QuestionnaireContactConfirm extends AbstractEntity {
     @NotNull(message = "Contact s.b. selected!")
     @JsonIgnore
     private Contact contact;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "questionnaire_confirmed_type_id")
+    private QuestionnaireConfirmedType questionnaireConfirmedType;
+
 }

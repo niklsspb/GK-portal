@@ -5,13 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.geekbrains.gkportal.dto.AnswerResultDTO;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.Question;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 import ru.geekbrains.gkportal.security.IsAdmin;
-import ru.geekbrains.gkportal.service.*;
+import ru.geekbrains.gkportal.security.IsAuthenticated;
+import ru.geekbrains.gkportal.service.AccountService;
+import ru.geekbrains.gkportal.service.AnswerResultService;
+import ru.geekbrains.gkportal.service.ContactService;
+import ru.geekbrains.gkportal.service.QuestionnaireService;
 
 import java.util.Comparator;
 import java.util.List;
@@ -26,8 +29,8 @@ public class QuestionnaireController {
     private QuestionnaireService questionnaireService;
     private ContactService contactService;
     private AnswerResultService answerResultService;
-    private AuthenticateService authenticateService;
     private AccountService accountService;
+
 
     @Autowired
     public void setAuthenticateService(AuthenticateService authenticateService) {
@@ -55,26 +58,29 @@ public class QuestionnaireController {
     }
 
     @IsAdmin
-    @GetMapping("result") //http://localhost/questionnaire/result?questionnaireId=bb2248ae-2d7e-427d-85ef-7b85888f0319
+    @GetMapping("result")
     public String showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
-        Questionnaire questionnaire = questionnaireService.findByIdAndSortQuestionsAndAnswers(questionnaireId);
-        model.addAttribute("questionnaire", questionnaire);
-
         List<Contact> contactList = contactService.findAllByQuestionnaireId(questionnaireId);
 
-        int confirmed = 0;
-        for (Contact contact : contactList) {
-            confirmed += contact.getQuestionnaireContactConfirm().isConfirmed() ? 1 : 0;
-        }
-
+        model.addAttribute("questionnaire", questionnaireService.findByIdAndSortQuestionsAndAnswers(questionnaireId));
         model.addAttribute("contactList", contactList);
-        model.addAttribute("confirmed", confirmed);
-        return "questionnaire-result";
+        model.addAttribute("confirmedCount", contactService.countQuestionnaireContactConfirm(contactList));
+        return "questionnaire-result/result";
     }
 
+    @IsAdmin
+    @GetMapping("questionnaire-result-datatable")
+    public String showQuestionnaireResultsDataTable(@RequestParam String questionnaireId, Model model) {
+
+
+
+        return "questionnaire-result/datatable";
+    }
+
+    @IsAuthenticated
     @GetMapping
     public String showQuestionnaire(@RequestParam(required = false) String questionnaireId, Model model) {
-        if (!authenticateService.isCurrentUserAuthenticated()) return "403";
+//        if (!authenticateService.isCurrentUserAuthenticated()) return "403";
         if (questionnaireId == null) {
             model.addAttribute("questionnaireList", questionnaireService.findAll());
             return "questionnaire";
@@ -95,9 +101,11 @@ public class QuestionnaireController {
         return "questionnaire";
     }
 
+    @IsAuthenticated
     @PostMapping
-    public String getQuestionnaire(@ModelAttribute("form") AnswerResultDTO form, Model model, RedirectAttributes redirectAttributes) throws Throwable {
+    public String getQuestionnaire(@ModelAttribute("form") AnswerResultDTO form, Model model) throws Throwable {
         model.addAttribute("completed", "Данные записаны");
+
         if (authenticateService.isCurrentUserAuthenticated()) {
             Contact contact = accountService.getContactByLogin(authenticateService.getCurrentUser().getUsername());
             answerResultService.saveAnswerResultDTO(form, contact);
@@ -109,5 +117,6 @@ public class QuestionnaireController {
             return "403";
         }
     }
+
 }
 
