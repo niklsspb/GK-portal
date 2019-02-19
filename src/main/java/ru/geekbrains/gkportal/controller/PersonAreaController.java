@@ -77,15 +77,17 @@ public class PersonAreaController {
     }
 
     @GetMapping("/lk/questionnaire-answer-result")
-    public String showAnswerResult(Model model) {
+
+    public String showAnswerResult(Model model, Principal principal) {
         Account account = accountRepository.findOneByLogin(authenticateService.getCurrentUser().getUsername());
         if (account == null) {
             return "redirect:/login";
         }
 
-//        if (account != null && !account.isActive()) {
-//            return "redirect:/login";
-//        }
+        if (account != null && !account.isActive()) {
+            return "redirect:/login";
+        }
+
         Contact contact = account.getContact();
 
         List<QuestionnaireContactResult> questionnaireContactResultList = answerResultService.getAllByContact(contact);
