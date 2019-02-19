@@ -124,13 +124,36 @@ $(document).ready(function () {
                 },
 
                 {
-                    "data": "contactDTO.questionnaireContactConfirm.questionnaireConfirmedType.name",
+                    "data": "contactDTO.questionnaireContactConfirm",
                     "render": function (data, type, row) {
-                        return data;
+                        var classNotFind = "btn-outline-secondary";
+                        var classMatches = "btn-outline-success";
+                        var classNotMatch = "btn-outline-danger";
+                        var res = "";
+                        switch (data.questionnaireConfirmedType.name) {
+                            case 'не искали':
+                                classNotFind = "btn-secondary";
+                                break;
+                            case 'совпадает':
+                                classMatches = "btn-success";
+                                break;
+                            case 'не совпадает':
+                                classNotMatch = "btn-danger";
+                                break;
+                            default:
+                                break;
+                        }
+                        res += '<button type="button" class="btn ' + classNotFind + ' add-item-btn" confirmId="' + data.uuid + '" typeId="1b4976f3-8a81-45d0-b3b1-9f31dfafaad5">не искали</button>';
+                        res += '<button type="button" class="btn ' + classMatches + ' add-item-btn" confirmId="' + data.uuid + '" typeId="6973e035-5196-48ed-bfba-2ca2935d47da">совпадает</button>';
+                        res += '<button type="button" class="btn ' + classNotMatch + ' add-item-btn" confirmId="' + data.uuid + '" typeId="fff634b9-f5ae-4342-9135-1c086b75c39a">не совпадает</button>';
+
+                        return res;
                     }
                 }
 
             ],
+        // "initComplete": questionnaireConfirmedTypesListener(settings, json, table),
+
         "createdRow": function (row, data, dataIndex) {
             if (data.contactDTO.questionnaireContactConfirm.confirmed === false) {
                 $(row).addClass('lightpink');
@@ -153,7 +176,28 @@ $(document).ready(function () {
             }
         });
     });
+    $('#resultTable').on('click', '.add-item-btn', function questionnaireConfirmedTypesListener() {
+            var confirmId = $(this).attr('confirmId');
+            var typeId = $(this).attr('typeId');
+            $.ajax({
+                url: "/rest/change-questionnaireConfirmedType",
+                type: "POST",
+                data: {
+                    "questionnaireContactConfirmId": confirmId,
+                    "questionnaireConfirmedTypeId": typeId
+                },
+                complete: function (e, xhr, settings) {
+                    if (e.status === 200) {
+                        alert('данные обновлены');
+                        table.ajax.reload();
+                    } else if (e.status === 204) {
+                        alert('контент не найден');
+                    } else {
+                        alert('неизвестная ошибка, код ' + e.status);
+                    }
+                }
+            })
+        }
+    );
+});
 
-
-})
-;

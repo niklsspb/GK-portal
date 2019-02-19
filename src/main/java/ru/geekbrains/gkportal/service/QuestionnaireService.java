@@ -8,12 +8,14 @@ import ru.geekbrains.gkportal.dto.interfaces.QuestionnaireContactConfirmDTO;
 import ru.geekbrains.gkportal.dto.interfaces.QuestionnaireDTO;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.*;
+import ru.geekbrains.gkportal.exception.QuestionnaireContactConfirmNotFoundException;
 import ru.geekbrains.gkportal.repository.QuestionnaireConfirmedTypeRepository;
 import ru.geekbrains.gkportal.repository.QuestionnaireContactConfirmRepository;
 import ru.geekbrains.gkportal.repository.QuestionnaireRepository;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Supplier;
 
 @Service
 public class QuestionnaireService {
@@ -94,8 +96,25 @@ public class QuestionnaireService {
         return questionnaireContactConfirmRepository.getByQuestionnaireAndContact(findById(questionnaireId), contact);
     }
 
-    public List<QuestionnaireContactConfirmDTO> getQuestionnaireContactConfirmDTO(String questionnaireId) {
+    public List<QuestionnaireContactConfirmDTO> findQuestionnaireContactConfirmDTO(String questionnaireId) {
         return questionnaireContactConfirmRepository.findAllByQuestionnaire_UuidOrderByContact(questionnaireId);
+    }
+
+    public QuestionnaireContactConfirm changeQuestionnaireConfirmedType(String questionnaireContactConfirmId, String questionnaireConfirmedTypeId) throws Throwable {
+
+        QuestionnaireContactConfirm questionnaireContactConfirm = questionnaireContactConfirmRepository
+                .findById(questionnaireContactConfirmId)
+                .orElseThrow((Supplier<Throwable>) () -> new QuestionnaireContactConfirmNotFoundException(questionnaireContactConfirmId));
+
+        QuestionnaireConfirmedType questionnaireConfirmedType = questionnaireConfirmedTypeRepository
+                .findById(questionnaireConfirmedTypeId)
+                .orElseThrow((Supplier<Throwable>) () -> new QuestionnaireContactConfirmNotFoundException(questionnaireContactConfirmId));
+
+        questionnaireContactConfirm.setQuestionnaireConfirmedType(questionnaireConfirmedType);
+
+        return questionnaireContactConfirmRepository.save(questionnaireContactConfirm);
+
+
     }
 
     public boolean confirmQuetionnaire(Contact contact, String code) {

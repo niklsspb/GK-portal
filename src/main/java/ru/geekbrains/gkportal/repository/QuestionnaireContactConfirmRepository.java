@@ -17,4 +17,6 @@ public interface QuestionnaireContactConfirmRepository extends JpaRepository<Que
     QuestionnaireContactConfirm getByContactAndConfirmCode(Contact contact, String code);
 
     List<QuestionnaireContactConfirmDTO> findAllByQuestionnaire_UuidOrderByContact(String questionnaire_Uuid);
+
+
 }

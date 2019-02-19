@@ -3,6 +3,7 @@
     padding: 0;
 
 }
+
 html,
 body {
     height: 100%;
@@ -11,7 +12,6 @@ body {
 .form-control::-webkit-input-placeholder {
     color: #dee2e6;
 }
-
 
 .gk-flat {
     border-radius: 3px;
@@ -88,9 +88,10 @@ body {
     white-space: nowrap;
 }*/
 
-.gk-button-group{
+.gk-button-group {
     margin-bottom: 15px;
 }
+
 .gk-flat-chooser {
     padding: 10px;
     border-style: solid;
@@ -170,4 +171,9 @@ body {
 
 .result-table thead input {
     width: 100%;
+}
+
+.add-item-btn {
+    margin-bottom: 10px;
+    width: 120px;
 }

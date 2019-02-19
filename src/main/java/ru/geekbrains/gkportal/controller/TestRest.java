@@ -2,14 +2,15 @@ package ru.geekbrains.gkportal.controller;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.gkportal.dto.interfaces.AnswerResultDTO1;
 import ru.geekbrains.gkportal.dto.interfaces.ContactDTO;
-import ru.geekbrains.gkportal.entity.questionnaire.*;
+import ru.geekbrains.gkportal.entity.questionnaire.Answer;
+import ru.geekbrains.gkportal.entity.questionnaire.Question;
+import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
+import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 import ru.geekbrains.gkportal.service.AnswerResultService;
 import ru.geekbrains.gkportal.service.AnswerService;
 import ru.geekbrains.gkportal.service.ContactService;
@@ -92,29 +93,19 @@ public class TestRest {
         return resultDTOList;
     }
 
-    @Data
-    public class ContactResultDTO {
-        String contactUuid;
-        ContactDTO contactDTO;
-        List<AnswerResultDTO1> answerResultDTO1List = new ArrayList<>();
-        Map<Integer, AnswerResultDTO1> integerAnswerResultDTO1Map = new HashMap<>();
+    @PostMapping("change-questionnaireConfirmedType")
+    public int changeQuestionnaireConfirmedType(@RequestParam String questionnaireContactConfirmId, @RequestParam String questionnaireConfirmedTypeId) throws Throwable {
 
-        ContactResultDTO(ContactDTO contactDTO) {
-            this.contactUuid = contactDTO.getUuid();
-            this.contactDTO = contactDTO;
+        try {
+            questionnaireService.changeQuestionnaireConfirmedType(questionnaireContactConfirmId, questionnaireConfirmedTypeId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return HttpStatus.NO_CONTENT.value();
         }
 
-        ContactResultDTO(ContactDTO contactDTO, List<Integer> sortQuestionsNumbersList) {
-            this.contactUuid = contactDTO.getUuid();
-            this.contactDTO = contactDTO;
-            sortQuestionsNumbersList.forEach(integer -> integerAnswerResultDTO1Map.put(integer, null));
-        }
+        return HttpStatus.OK.value();
 
-        public boolean containContact(String contactUuid) {
-            return this.contactUuid.equals(contactUuid);
-        }
     }
-
 
     @GetMapping("test")
     public Questionnaire permitAllPage(Model model) {
@@ -226,5 +217,28 @@ public class TestRest {
 
 
         return questionnaire;
+    }
+
+    @Data
+    public class ContactResultDTO {
+        String contactUuid;
+        ContactDTO contactDTO;
+        List<AnswerResultDTO1> answerResultDTO1List = new ArrayList<>();
+        Map<Integer, AnswerResultDTO1> integerAnswerResultDTO1Map = new HashMap<>();
+
+        ContactResultDTO(ContactDTO contactDTO) {
+            this.contactUuid = contactDTO.getUuid();
+            this.contactDTO = contactDTO;
+        }
+
+        ContactResultDTO(ContactDTO contactDTO, List<Integer> sortQuestionsNumbersList) {
+            this.contactUuid = contactDTO.getUuid();
+            this.contactDTO = contactDTO;
+            sortQuestionsNumbersList.forEach(integer -> integerAnswerResultDTO1Map.put(integer, null));
+        }
+
+        public boolean containContact(String contactUuid) {
+            return this.contactUuid.equals(contactUuid);
+        }
     }
 }
