@@ -10,10 +10,15 @@ import java.util.List;
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, String> {
 
-    Contact findByFirstNameAndLastNameAndMiddleName(String firstName, String lastName, String middleName);
-
-    List<Contact> findAllByQuestionnaireContactConfirm_QuestionnaireUuid(String questionnaireId);
+  Contact findByFirstNameAndLastNameAndMiddleName
+            (
+                    String firstName,
+                    String lastName,
+                    String middleName
+            );
 
     List<ContactDTO> findAllByQuestionnaireContactConfirm_QuestionnaireUuidOrderByLastNameAsc(String questionnaireId);
+
+    List<Contact> findAllByQuestionnaireContactConfirm_QuestionnaireUuid(String questionnaireId);
 
 }

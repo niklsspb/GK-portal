@@ -1,6 +1,7 @@
 package ru.geekbrains.gkportal.service;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.dto.AnswerResultDTO;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class AnswerResultService {
+
+    private static final Logger logger = Logger.getLogger(AnswerResultService.class);
 
     private AnswerResultRepository answerResultRepository;
     private QuestionnaireService questionnaireService;

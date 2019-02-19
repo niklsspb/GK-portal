@@ -58,5 +58,4 @@ public class SystemAccountToOwnerShip implements SystemAccountDTO {
     //private Integer carsInFamily;
 
     // private String comments;
-
 }

@@ -41,5 +41,4 @@ public class Account extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     @NotNull(message = "Role s.b. selected!")
     private Collection<Role> roles;
-
 }

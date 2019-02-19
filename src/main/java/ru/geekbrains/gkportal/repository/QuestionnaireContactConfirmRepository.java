@@ -12,7 +12,12 @@ import java.util.List;
 @Repository
 public interface QuestionnaireContactConfirmRepository extends JpaRepository<QuestionnaireContactConfirm, String> {
 
-    QuestionnaireContactConfirm getByQuestionnaireAndContact(Questionnaire questionnaire, Contact contact);
+
+    QuestionnaireContactConfirm getByQuestionnaireAndContact
+            (
+                    Questionnaire questionnaire,
+                    Contact contact
+            );
 
     QuestionnaireContactConfirm getByContactAndConfirmCode(Contact contact, String code);
 

@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +24,18 @@ import java.util.List;
 @RequestMapping("questionnaire")
 public class QuestionnaireController {
 
+    private static final Logger logger = Logger.getLogger(QuestionnaireController.class);
+
     private QuestionnaireService questionnaireService;
     private ContactService contactService;
     private AnswerResultService answerResultService;
     private AccountService accountService;
+
+
+    @Autowired
+    public void setAuthenticateService(AuthenticateService authenticateService) {
+        this.authenticateService = authenticateService;
+    }
 
     @Autowired
     public void setAccountService(AccountService accountService) {
@@ -68,15 +77,6 @@ public class QuestionnaireController {
         return "questionnaire-result/datatable";
     }
 
-
-
-
-
-
-
-
-
-
     @IsAuthenticated
     @GetMapping
     public String showQuestionnaire(@RequestParam(required = false) String questionnaireId, Model model) {
@@ -105,9 +105,17 @@ public class QuestionnaireController {
     @PostMapping
     public String getQuestionnaire(@ModelAttribute("form") AnswerResultDTO form, Model model) throws Throwable {
         model.addAttribute("completed", "Данные записаны");
-        Contact contact = accountService.getCurrentContact();
-        answerResultService.saveAnswerResultDTO(form, contact);
-        return "redirect:/questionnaire";
+
+        if (authenticateService.isCurrentUserAuthenticated()) {
+            Contact contact = accountService.getContactByLogin(authenticateService.getCurrentUser().getUsername());
+            answerResultService.saveAnswerResultDTO(form, contact);
+            return "redirect:/questionnaire";
+        } else {
+            if (logger.isDebugEnabled()) {
+                logger.debug("403");
+            }
+            return "403";
+        }
     }
 
 }

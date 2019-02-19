@@ -1,6 +1,8 @@
 package ru.geekbrains.gkportal.controller;
 
+
 import lombok.Data;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -23,6 +25,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/rest")
 public class TestRest {
+
+    private static final Logger logger = Logger.getLogger(TestRest.class);
 
     private ContactService contactService;
     private AnswerService answerService;
@@ -117,7 +121,6 @@ public class TestRest {
 
         model.addAttribute("uuids", uuidList);
 
-
         List<Answer> answerList1 = new ArrayList<>(Arrays.asList(
                 new Answer("ЗА", 1),
                 new Answer("ПРОТИВ", 2),
@@ -180,7 +183,6 @@ public class TestRest {
                 .answers(answerList5)
                 .build();
 
-
         answerList1.forEach(answer -> answer.setQuestion(question1));
         answerList2.forEach(answer -> answer.setQuestion(question2));
         answerList3.forEach(answer -> answer.setQuestion(question3));
@@ -212,9 +214,7 @@ public class TestRest {
         question4.setQuestionnaire(questionnaire);
         question5.setQuestionnaire(questionnaire);
 
-
         questionnaireService.save(questionnaire);
-
 
         return questionnaire;
     }

@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.dto.FlatRegDTO;
@@ -14,6 +15,8 @@ import java.util.function.Supplier;
 
 @Service
 public class FlatsService {
+
+    private static final Logger logger = Logger.getLogger(FlatsService.class);
 
     private FlatRepository flatRepository;
 
@@ -46,6 +49,4 @@ public class FlatsService {
                 flatRepository.findByHouseBuildAndFlatNumberBuild(houseNum, flatNum)
                 : flatRepository.findByHouseAndFlatNumber(houseNum, flatNum);
     }
-
-
 }

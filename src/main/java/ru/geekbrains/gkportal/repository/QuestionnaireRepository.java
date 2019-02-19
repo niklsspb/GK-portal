@@ -7,5 +7,7 @@ import ru.geekbrains.gkportal.dto.interfaces.QuestionnaireDTO;
 
 @Repository
 public interface QuestionnaireRepository extends JpaRepository<Questionnaire, String> {
-    QuestionnaireDTO findByUuid(String uuid);
+   
+  QuestionnaireDTO findByUuid(String uuid);
+
 }

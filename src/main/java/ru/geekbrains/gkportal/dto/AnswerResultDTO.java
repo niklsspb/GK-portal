@@ -3,6 +3,7 @@ package ru.geekbrains.gkportal.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.log4j.Logger;
 import ru.geekbrains.gkportal.entity.AbstractEntity;
 import ru.geekbrains.gkportal.entity.questionnaire.Answer;
 import ru.geekbrains.gkportal.entity.questionnaire.Question;
@@ -17,6 +18,8 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 public class AnswerResultDTO {
+
+    private static final Logger logger = Logger.getLogger(AnswerResultDTO.class);
 
     private Map<String, String> questionAnswerUuids = new HashMap<>();
     private Map<String, Answer> answers = new HashMap<>();
@@ -57,6 +60,4 @@ public class AnswerResultDTO {
 ////        questionAnswerUuids.forEach((s, s2) -> answerResults.add(new AnswerResult(answers.get(s), contact)));
 //        return answerResults;
 //    }
-
-
 }

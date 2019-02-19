@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface AnswerResultRepository extends JpaRepository<AnswerResult, String> {
+public interface AnswerResultRepository 
+        extends JpaRepository<AnswerResult, String> {
 
     Optional<AnswerResult> findAllByContact(Contact contact);
 

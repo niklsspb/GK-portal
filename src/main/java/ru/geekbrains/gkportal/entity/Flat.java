@@ -4,7 +4,6 @@ import lombok.*;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -17,7 +16,6 @@ import java.util.Collection;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Flat extends AbstractEntity {
-
 //    @Valid
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "contact_flat",
@@ -79,5 +77,4 @@ public class Flat extends AbstractEntity {
 
     @Formula("(SELECT count(*) FROM contact_flat cf WHERE cf.flat_id=id)")
     private Integer accountCount;
-
 }
