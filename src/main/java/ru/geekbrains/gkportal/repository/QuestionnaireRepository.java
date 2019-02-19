@@ -6,5 +6,4 @@ import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 
 @Repository
 public interface QuestionnaireRepository extends JpaRepository<Questionnaire, String> {
-
 }

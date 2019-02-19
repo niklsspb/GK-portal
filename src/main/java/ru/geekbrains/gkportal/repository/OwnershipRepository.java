@@ -8,11 +8,26 @@ import ru.geekbrains.gkportal.entity.OwnershipType;
 
 @Repository
 public interface OwnershipRepository extends JpaRepository<Ownership, String> {
-    Ownership findByBuildNumberAndHouseBuildNum(Integer buildNumber, Integer houseBuildNum);
 
-    Ownership findByOwnershipTypeAndContactAndHouseBuildNumAndBuildNumber(OwnershipType ownershipType,
-                                                                          Contact contact, Integer houseBuildNum, String buildNumber);
+    Ownership findByBuildNumberAndHouseBuildNum
+            (
+                    Integer buildNumber,
+                    Integer houseBuildNum
+            );
 
-    Ownership findByOwnershipTypeAndContactAndHouseNumAndNumber(OwnershipType ownershipType,
-                                                                Contact contact, Integer houseNum, String Number);
+    Ownership findByOwnershipTypeAndContactAndHouseBuildNumAndBuildNumber
+            (
+                    OwnershipType ownershipType,
+                    Contact contact,
+                    Integer houseBuildNum,
+                    String buildNumber
+            );
+
+    Ownership findByOwnershipTypeAndContactAndHouseNumAndNumber
+            (
+                    OwnershipType ownershipType,
+                    Contact contact,
+                    Integer houseNum,
+                    String Number
+            );
 }

@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.entity.Property;
@@ -8,6 +9,8 @@ import ru.geekbrains.gkportal.repository.PropertiesRepository;
 
 @Service
 public class PropertyService {
+
+    private static final Logger logger = Logger.getLogger(PropertyService.class);
 
     private PropertiesRepository propertiesRepository;
 
@@ -26,5 +29,4 @@ public class PropertyService {
         property.setValue(value);
         propertiesRepository.save(property);
     }
-
 }

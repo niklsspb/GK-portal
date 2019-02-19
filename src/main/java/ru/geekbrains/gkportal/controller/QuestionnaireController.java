@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +21,13 @@ import java.util.List;
 @RequestMapping("questionnaire")
 public class QuestionnaireController {
 
+    private static final Logger logger = Logger.getLogger(QuestionnaireController.class);
+
     private QuestionnaireService questionnaireService;
     private ContactService contactService;
     private AnswerResultService answerResultService;
     private AuthenticateService authenticateService;
     private AccountService accountService;
-
 
     @Autowired
     public void setAuthenticateService(AuthenticateService authenticateService) {
@@ -100,9 +102,12 @@ public class QuestionnaireController {
             Contact contact = accountService.getContactByLogin(authenticateService.getCurrentUser().getUsername());
             answerResultService.saveAnswerResultDTO(form, contact);
             return "redirect:/questionnaire";
-        } else return "403";
+        } else {
+            if (logger.isDebugEnabled()) {
+                logger.debug("403");
+            }
+            return "403";
+        }
     }
-
-
 }
 

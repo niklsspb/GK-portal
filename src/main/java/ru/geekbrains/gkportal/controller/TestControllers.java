@@ -1,6 +1,7 @@
 package ru.geekbrains.gkportal.controller;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/test")
 public class TestControllers {
+
+    private static final Logger logger = Logger.getLogger(TestControllers.class);
 
     private MailService mailService;
 
@@ -49,12 +52,8 @@ public class TestControllers {
                 "С Уважением, инициативная группа ЖК Город";
         List<String> mails = Arrays.asList("");
 
-
         mailService.sendMail(mails, subject, text, false);
-
 
         return HttpStatus.OK.value();
     }
-
-
 }

@@ -38,5 +38,4 @@ public class QuestionnaireContactConfirm extends AbstractEntity {
     @NotNull(message = "Contact s.b. selected!")
     @JsonIgnore
     private Contact contact;
-
 }

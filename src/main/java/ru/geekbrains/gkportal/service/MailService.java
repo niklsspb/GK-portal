@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -22,6 +23,8 @@ import java.util.concurrent.Executors;
 
 @Service
 public class MailService {
+
+    private static final Logger logger = Logger.getLogger(MailService.class);
 
     private JavaMailSender sender;
     private MailMessageBuilder builder;
@@ -96,7 +99,6 @@ public class MailService {
                         url + "/confirmMail/" + email.getIdentify() + "/" + email.getConfirmCode()));
     }
 
-
     public boolean sendRegistrationMail(Contact contact, QuestionnaireContactConfirm confirm) {
         String email = contactService.getEmail(contact);
         if (email == null) return false;
@@ -107,7 +109,6 @@ public class MailService {
                         url + "/confirmQuestion/" + contact.getUuid() + "/" + confirm.getConfirmCode()));
     }
 
-
     public String getCurentURL() {
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest req = sra.getRequest();
@@ -115,8 +116,5 @@ public class MailService {
         if (port == 80) return "http://" + req.getServerName();
         else if (port == 443) return "https://" + req.getServerName();
         else return "http://" + req.getServerName() + ":" + req.getServerPort();
-
-
     }
-
 }

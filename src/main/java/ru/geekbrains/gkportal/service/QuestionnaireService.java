@@ -1,6 +1,7 @@
 package ru.geekbrains.gkportal.service;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
@@ -17,6 +18,8 @@ import java.util.List;
 
 @Service
 public class QuestionnaireService {
+
+    private static final Logger logger = Logger.getLogger(QuestionnaireService.class);
 
     private QuestionnaireRepository questionnaireRepository;
     private QuestionnaireContactConfirmRepository questionnaireContactConfirmRepository;
@@ -66,14 +69,11 @@ public class QuestionnaireService {
         return (questionnaireContactConfirmRepository.getByQuestionnaireAndContact(questionnaire, contact) != null);
     }
 
-
     public List<Questionnaire> findAll() {
         return questionnaireRepository.findAll();
     }
 
     public void sendMail(SystemAccountToOwnerShip systemAccount, Contact contact) {
-
-
     }
 
     public QuestionnaireContactConfirm getQuestionnaireContactConfirm(String questionnaireId, Contact contact) {
@@ -86,9 +86,7 @@ public class QuestionnaireService {
             confirm.setConfirmed(true);
             questionnaireContactConfirmRepository.save(confirm);
             return true;
-
         }
-
         return false;
     }
 }

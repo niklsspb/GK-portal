@@ -21,5 +21,4 @@ public @interface PasswordsNotEqual {
     Class<? extends Payload>[] payload() default {};
     String passwordFieldName() default "";
     String passwordVerificationFieldName() default "";
-
 }
