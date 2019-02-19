@@ -11,10 +11,7 @@ import ru.geekbrains.gkportal.entity.questionnaire.Question;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 import ru.geekbrains.gkportal.security.IsAdmin;
 import ru.geekbrains.gkportal.security.IsAuthenticated;
-import ru.geekbrains.gkportal.service.AccountService;
-import ru.geekbrains.gkportal.service.AnswerResultService;
-import ru.geekbrains.gkportal.service.ContactService;
-import ru.geekbrains.gkportal.service.QuestionnaireService;
+import ru.geekbrains.gkportal.service.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -30,6 +27,7 @@ public class QuestionnaireController {
     private ContactService contactService;
     private AnswerResultService answerResultService;
     private AccountService accountService;
+    private AuthenticateService authenticateService;
 
 
     @Autowired
@@ -71,7 +69,6 @@ public class QuestionnaireController {
     @IsAdmin
     @GetMapping("questionnaire-result-datatable")
     public String showQuestionnaireResultsDataTable(@RequestParam String questionnaireId, Model model) {
-
 
 
         return "questionnaire-result/datatable";
