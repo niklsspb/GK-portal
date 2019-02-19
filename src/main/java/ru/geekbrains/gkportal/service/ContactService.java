@@ -13,6 +13,7 @@ import ru.geekbrains.gkportal.entity.Ownership;
 import ru.geekbrains.gkportal.repository.ContactRepository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -55,6 +56,10 @@ public class ContactService {
 
     public List<Contact> findAll() {
         return contactRepository.findAll();
+    }
+
+    public List<Contact> findAllByQuestionnaireId(String questionnaireId ) {
+        return contactRepository.findAllByQuestionnaireContactConfirm_QuestionnaireUuid(questionnaireId);
     }
 
     public void saveAll(List<Contact> contactList) {
@@ -157,5 +162,12 @@ public class ContactService {
         return contactRepository.findById(guid).get();
     }
 
+    public String getEmail(Contact contact) {
+        return communicationService.getMail(contact.getCommunications());
+    }
+
+    public Collection<Contact> getContaсtListByEmail(String mail) throws Throwable {
+        return communicationService.getContactListByEmail(mail);
+    }
 }
 

@@ -3,6 +3,7 @@ package ru.geekbrains.gkportal.entity.questionnaire;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.data.annotation.Id;
 import ru.geekbrains.gkportal.entity.AbstractEntity;
 import ru.geekbrains.gkportal.entity.Contact;
 
@@ -42,4 +43,5 @@ public class AnswerResult extends AbstractEntity {
     @JoinColumn(name = "question_id")
     @NotNull(message = "Question s.b. selected!")
     private Question question;
+
 }

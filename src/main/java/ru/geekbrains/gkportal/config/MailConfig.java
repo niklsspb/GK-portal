@@ -52,11 +52,16 @@ public class MailConfig {
         mailSender.setUsername(getPropertyValue("user_name"));
         mailSender.setPassword(password);
 
+
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", getPropertyValue("transport_protocol"));
         props.put("mail.smtp.auth", getPropertyValue("smtp_auth"));
         props.put("mail.smtp.starttls.enable", getPropertyValue("smtp_starttls_enable"));
-        props.put("mail.debug", getPropertyValue("debug"));
+        // поддержка ssl yandex mail
+        props.put("mail.smtps.ssl.checkserveridentity", "true");
+        props.put("mail.smtps.ssl.trust", "*");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
 
         return mailSender;
     }
