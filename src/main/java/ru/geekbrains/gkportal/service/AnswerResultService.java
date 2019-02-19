@@ -56,6 +56,7 @@ public class AnswerResultService {
                 .questionnaire(questionnaire)
                 .confirmCode(UUID.randomUUID().toString())
                 .contact(contact)
+                .questionnaireConfirmedType(questionnaireService.findQuestionnaireConfirmedTypeByName("не искали"))
                 .build();
         contact.setQuestionnaireContactConfirm(questionnaireContactConfirm);
 

@@ -8,6 +8,7 @@ import ru.geekbrains.gkportal.dto.interfaces.QuestionnaireContactConfirmDTO;
 import ru.geekbrains.gkportal.dto.interfaces.QuestionnaireDTO;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.*;
+import ru.geekbrains.gkportal.repository.QuestionnaireConfirmedTypeRepository;
 import ru.geekbrains.gkportal.repository.QuestionnaireContactConfirmRepository;
 import ru.geekbrains.gkportal.repository.QuestionnaireRepository;
 
@@ -19,6 +20,7 @@ public class QuestionnaireService {
 
     private QuestionnaireRepository questionnaireRepository;
     private QuestionnaireContactConfirmRepository questionnaireContactConfirmRepository;
+    private QuestionnaireConfirmedTypeRepository questionnaireConfirmedTypeRepository;
     private MailService mailService;
 
     @Autowired
@@ -36,6 +38,11 @@ public class QuestionnaireService {
         this.questionnaireRepository = questionnaireRepository;
     }
 
+    @Autowired
+    public void setQuestionnaireConfirmedTypeRepository(QuestionnaireConfirmedTypeRepository questionnaireConfirmedTypeRepository) {
+        this.questionnaireConfirmedTypeRepository = questionnaireConfirmedTypeRepository;
+    }
+
     public Questionnaire findByIdAndSortAnswers(String id) {
         Questionnaire questionnaire = findById(id);
 
@@ -51,6 +58,10 @@ public class QuestionnaireService {
         Questionnaire questionnaire = findByIdAndSortAnswers(id);
         questionnaire.getQuestions().sort(Comparator.comparingInt(Question::getSortNumber));
         return questionnaire;
+    }
+
+    public QuestionnaireConfirmedType findQuestionnaireConfirmedTypeByName(String name) {
+        return questionnaireConfirmedTypeRepository.findByName(name);
     }
 
     public QuestionnaireDTO findQuestionnaireDTOById(String uuid) {

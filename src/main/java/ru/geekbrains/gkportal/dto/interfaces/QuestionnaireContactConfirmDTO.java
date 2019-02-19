@@ -1,5 +1,7 @@
 package ru.geekbrains.gkportal.dto.interfaces;
 
+import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireConfirmedType;
+
 public interface QuestionnaireContactConfirmDTO {
 
     String getUuid();
@@ -9,5 +11,7 @@ public interface QuestionnaireContactConfirmDTO {
 //    ContactDTO getContact();
 
     boolean isConfirmed();
+
+    QuestionnaireConfirmedType getQuestionnaireConfirmedType();
 
 }

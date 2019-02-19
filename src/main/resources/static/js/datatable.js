@@ -121,7 +121,15 @@ $(document).ready(function () {
                         if (data) return 'да';
                         else return 'нет';
                     }
+                },
+
+                {
+                    "data": "contactDTO.questionnaireContactConfirm.questionnaireConfirmedType.name",
+                    "render": function (data, type, row) {
+                        return data;
+                    }
                 }
+
             ],
         "createdRow": function (row, data, dataIndex) {
             if (data.contactDTO.questionnaireContactConfirm.confirmed === false) {
