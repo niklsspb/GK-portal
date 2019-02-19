@@ -2,10 +2,10 @@ DELIMITER $$
 
 
 
-DROP VIEW IF EXISTS `questionnaire_result_view`$$
+ DROP VIEW IF EXISTS `questionnaire_result_view`$$
 
 
-CREATE ALGORITHM=UNDEFINED VIEW `questionnaire_result_view` AS (
+CREATE  VIEW `questionnaire_result_view` AS (
 
 SELECT r.questionnaire_id,`r`.`question_id`,`r`.`answer_id`,
 MIN(`q`.`name`) AS `question_name`,
