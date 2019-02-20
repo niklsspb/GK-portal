@@ -62,12 +62,18 @@ public class TestRest {
         long t = System.currentTimeMillis();
         List<AnswerResultDTO1> answerResultDTO1s = answerResultService.findAllByQuestionnaireUuid(questionnaireId);
         List<ContactResultDTO> resultDTOList = new ArrayList<>();
+// 223
+        logger.log(Level.toLevel(Priority.WARN_INT), "findAllByQuestionnaireUuid: " + (System.currentTimeMillis() - t));
+        t = System.currentTimeMillis();
 
         List<Integer> sortQuestionsNumbersList =
                 questionnaireService.findByIdAndSortAnswers(questionnaireId).getQuestions()
                         .stream()
                         .map(Question::getSortNumber)
                         .collect(Collectors.toList());
+ //+14
+        logger.log(Level.toLevel(Priority.WARN_INT), "sortQuestionsNumbersList: " + (System.currentTimeMillis() - t));
+        t = System.currentTimeMillis();
 
         // заготовка ContactResultDTO с контактами
         for (AnswerResultDTO1 ard : answerResultDTO1s) {
@@ -77,6 +83,7 @@ public class TestRest {
                 resultDTOList.add(contactResultDTO);
                 continue;
             }
+
             for (ContactResultDTO contactResultDTO : resultDTOList) {
                 if (contactResultDTO.containContact(ard.getContact().getUuid())) {
                     isContains = true;
@@ -85,7 +92,9 @@ public class TestRest {
             }
             if (!isContains) resultDTOList.add(new ContactResultDTO(ard.getContact(), sortQuestionsNumbersList));
         }
-
+//9035
+        logger.log(Level.toLevel(Priority.WARN_INT), "answerResultDTO1s 1st iterator: " + (System.currentTimeMillis() - t));
+        t = System.currentTimeMillis();
 
         for (AnswerResultDTO1 ard : answerResultDTO1s) {
             for (ContactResultDTO contactResultDTO : resultDTOList) {
@@ -95,8 +104,9 @@ public class TestRest {
                 }
             }
         }
+//20876
+        logger.log(Level.toLevel(Priority.WARN_INT), "answerResultDTO1s 1st iterator: " + (System.currentTimeMillis() - t));
 
-        logger.log(Level.toLevel(Priority.WARN_INT), "Время обработки showQuestionnaireResults" + (System.currentTimeMillis() - t));
         return resultDTOList;
     }
 
