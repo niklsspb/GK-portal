@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.geekbrains.gkportal.dto.AnswerResultDTO;
+import ru.geekbrains.gkportal.dto.QuestionResultFromView;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.Question;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
@@ -68,6 +69,12 @@ public class QuestionnaireController {
         model.addAttribute("contactList", contactList);
         model.addAttribute("confirmed", confirmed);
         return "questionnaire-result";
+    }
+    @GetMapping("pie")
+    public String showQuestionnairePieResults(@RequestParam String questionnaireId, Model model){
+        List<QuestionResultFromView> qr = questionnaireService.getQuestionaryResultsForPieDiograms(questionnaireId);
+        model.addAttribute("results", qr);
+        return "pie-diog";
     }
 
     @GetMapping

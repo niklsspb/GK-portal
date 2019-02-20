@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <div th:each="question : ${results}">
+        <p th:text="${question.questionName}"></p>
+        <table>
+            <thead>
+            <tr>
+                <td>Ответ</td>
+                <td>Число проголосовавших</td>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="answer : ${question.answers}">
+                <td th:text="${answer.answerName}"></td>
+                <td th:text="${answer.voteCount}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+</html>
