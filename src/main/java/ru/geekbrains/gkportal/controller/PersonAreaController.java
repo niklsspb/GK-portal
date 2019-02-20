@@ -12,10 +12,10 @@ import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.Flat;
 import ru.geekbrains.gkportal.repository.AccountRepository;
+import ru.geekbrains.gkportal.security.IsAuthenticated;
 import ru.geekbrains.gkportal.service.AnswerResultService;
 import ru.geekbrains.gkportal.service.AuthenticateService;
 
-import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class PersonAreaController {
     }
 
     @Autowired
-    public void setAnswerResultService(AnswerResultService answerResultService){
+    public void setAnswerResultService(AnswerResultService answerResultService) {
         this.answerResultService = answerResultService;
     }
 
@@ -59,7 +59,7 @@ public class PersonAreaController {
                     return "lk";
                 }
             }
-            if (logger.isDebugEnabled()){
+            if (logger.isDebugEnabled()) {
                 logger.debug("404");
             }
             return "404";
@@ -81,16 +81,16 @@ public class PersonAreaController {
     }
 
     @GetMapping("/lk/questionnaire-answer-result")
-
-    public String showAnswerResult(Model model, Principal principal) {
+    @IsAuthenticated
+    public String showAnswerResult(Model model) {
         Account account = accountRepository.findOneByLogin(authenticateService.getCurrentUser().getUsername());
         if (account == null) {
             return "redirect:/login";
         }
 
-        if (account != null && !account.isActive()) {
-            return "redirect:/login";
-        }
+//        if (account != null && !account.isActive()) {
+//            return "redirect:/login";
+//        }
 
         Contact contact = account.getContact();
 
