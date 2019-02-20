@@ -4,6 +4,8 @@ package ru.geekbrains.gkportal.service;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.gkportal.dto.AnswerFromViewDTO;
+import ru.geekbrains.gkportal.dto.QuestionResultFromView;
 import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
 import ru.geekbrains.gkportal.dto.interfaces.QuestionnaireContactConfirmDTO;
 import ru.geekbrains.gkportal.dto.interfaces.QuestionnaireDTO;
@@ -14,6 +16,7 @@ import ru.geekbrains.gkportal.repository.QuestionnaireConfirmedTypeRepository;
 import ru.geekbrains.gkportal.repository.QuestionnaireContactConfirmRepository;
 import ru.geekbrains.gkportal.repository.QuestionnaireRepository;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
@@ -43,6 +46,35 @@ public class QuestionnaireService {
         this.questionnaireRepository = questionnaireRepository;
     }
 
+    public List<QuestionResultFromView> getQuestionaryResultsForPieDiograms(String questionaryId){
+        List<QuestionnaireRepository.QuestAns> questAnses = questionnaireRepository.getQuestionaryResultByQuestionaryId(questionaryId);
+        System.out.println(questAnses.size());
+        List<QuestionResultFromView> resultList = new ArrayList<>();
+        for (QuestionnaireRepository.QuestAns qa: questAnses
+             ) {
+            String question = qa.getQuestion_name();
+            AnswerFromViewDTO answerDTO = new AnswerFromViewDTO();
+            answerDTO.setAnswerName(qa.getAnswer_name());
+            answerDTO.setVoteCount(qa.getVote_count());
+            boolean isAdded = false;
+            for (QuestionResultFromView qr: resultList
+                 ) {
+                if(qr.getQuestionName().equals(question)){
+                    qr.getAnswers().add(answerDTO);
+                    isAdded = true;
+                    break;
+                }
+            }
+            if(!isAdded){
+                QuestionResultFromView questionResultFromView = new QuestionResultFromView();
+                questionResultFromView.setQuestionName(question);
+                questionResultFromView.getAnswers().add(answerDTO);
+                resultList.add(questionResultFromView);
+            }
+        }
+        System.out.println(resultList.size());
+        return resultList;
+    }
     @Autowired
     public void setQuestionnaireConfirmedTypeRepository(QuestionnaireConfirmedTypeRepository questionnaireConfirmedTypeRepository) {
         this.questionnaireConfirmedTypeRepository = questionnaireConfirmedTypeRepository;
