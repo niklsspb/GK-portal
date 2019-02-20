@@ -17,6 +17,7 @@ $(document).ready(function () {
             "url": "/rest/questionnaire-result?questionnaireId=bb2248ae-2d7e-427d-85ef-7b85888f0319",
             "dataSrc": ""
         },
+        deferRender: true,
         language: {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
         },
