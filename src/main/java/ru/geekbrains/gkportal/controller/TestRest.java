@@ -107,6 +107,7 @@ public class TestRest {
 //20876
         logger.log(Level.toLevel(Priority.WARN_INT), "answerResultDTO1s 1st iterator: " + (System.currentTimeMillis() - t));
 
+        logger.log(Level.toLevel(Priority.WARN_INT), "Время обработки showQuestionnaireResults" + (System.currentTimeMillis() - t));
         return resultDTOList;
     }
 
