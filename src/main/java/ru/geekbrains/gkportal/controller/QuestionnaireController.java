@@ -69,7 +69,13 @@ public class QuestionnaireController {
     @IsAdmin
     @GetMapping("questionnaire-result-datatable")
     public String showQuestionnaireResultsDataTable(@RequestParam String questionnaireId, Model model) {
+        List<Contact> contactList = contactService.findAllByQuestionnaireId(questionnaireId);
 
+        model.addAttribute("questionnaireName", questionnaireService.findQuestionnaireNameById(questionnaireId));
+
+        // TODO: 20.02.19 облегчить запросы , вероятно сделать нативными
+        model.addAttribute("contactList", contactList);
+        model.addAttribute("confirmedCount", contactService.countQuestionnaireContactConfirm(contactList));
 
         return "questionnaire-result/datatable";
     }

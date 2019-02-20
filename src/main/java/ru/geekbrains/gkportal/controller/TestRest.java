@@ -14,7 +14,9 @@ import ru.geekbrains.gkportal.entity.questionnaire.Answer;
 import ru.geekbrains.gkportal.entity.questionnaire.Question;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 import ru.geekbrains.gkportal.security.IsAdmin;
-import ru.geekbrains.gkportal.service.*;
+import ru.geekbrains.gkportal.service.AnswerResultService;
+import ru.geekbrains.gkportal.service.AnswerService;
+import ru.geekbrains.gkportal.service.QuestionnaireService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -27,16 +29,9 @@ public class TestRest {
 
     private static final Logger logger = Logger.getLogger(TestRest.class);
 
-    private ContactService contactService;
     private AnswerService answerService;
     private QuestionnaireService questionnaireService;
     private AnswerResultService answerResultService;
-    private AuthenticateService authenticateService;
-
-    @Autowired
-    public void setContactService(ContactService contactService) {
-        this.contactService = contactService;
-    }
 
     @Autowired
     public void setAnswerService(AnswerService answerService) {
@@ -51,11 +46,6 @@ public class TestRest {
     @Autowired
     public void setAnswerResultService(AnswerResultService answerResultService) {
         this.answerResultService = answerResultService;
-    }
-
-    @Autowired
-    public void setAuthenticateService(AuthenticateService authenticateService) {
-        this.authenticateService = authenticateService;
     }
 
     @IsAdmin
@@ -96,9 +86,6 @@ public class TestRest {
                 }
             }
         }
-
-
-        // TODO: 17.02.2019 искать в  integerAnswerResultDTO1Map номера по списку всех номеров, и если их нет, ставить Null
 
         return resultDTOList;
     }
