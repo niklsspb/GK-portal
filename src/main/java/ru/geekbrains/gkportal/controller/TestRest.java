@@ -2,7 +2,9 @@ package ru.geekbrains.gkportal.controller;
 
 
 import lombok.Data;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +59,7 @@ public class TestRest {
     @IsAdmin
     @GetMapping("questionnaire-result")
     public List<ContactResultDTO> showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
+        long t = System.currentTimeMillis();
         List<AnswerResultDTO1> answerResultDTO1s = answerResultService.findAllByQuestionnaireUuid(questionnaireId);
         List<ContactResultDTO> resultDTOList = new ArrayList<>();
 
@@ -93,6 +96,7 @@ public class TestRest {
             }
         }
 
+        logger.log(Level.toLevel(Priority.WARN_INT), "Время обработки showQuestionnaireResults" + (System.currentTimeMillis() - t));
         return resultDTOList;
     }
 

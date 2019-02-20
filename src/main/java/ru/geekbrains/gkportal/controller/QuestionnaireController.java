@@ -1,6 +1,8 @@
 package ru.geekbrains.gkportal.controller;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,13 +72,15 @@ public class QuestionnaireController {
     @IsAdmin
     @GetMapping("questionnaire-result-datatable")
     public String showQuestionnaireResultsDataTable(@RequestParam String questionnaireId, Model model) {
+        long t = System.currentTimeMillis();
+
         List<Contact> contactList = contactService.findAllByQuestionnaireId(questionnaireId);
 
         model.addAttribute("questionnaireName", questionnaireService.findQuestionnaireNameById(questionnaireId));
-
-        // TODO: 20.02.19 облегчить запросы , вероятно сделать нативными
-        model.addAttribute("contactList", contactList);
+        model.addAttribute("contactList", contactList);        // TODO: 20.02.19 облегчить запросы , вероятно сделать нативными
         model.addAttribute("confirmedCount", contactService.countQuestionnaireContactConfirm(contactList));
+
+        logger.log(Level.toLevel(Priority.WARN_INT), "Время обработки showQuestionnaireResultsDataTable " + (System.currentTimeMillis() - t));
 
         return "questionnaire-result/datatable";
     }
