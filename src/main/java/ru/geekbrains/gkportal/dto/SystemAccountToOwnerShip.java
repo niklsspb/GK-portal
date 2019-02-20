@@ -2,6 +2,7 @@ package ru.geekbrains.gkportal.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.geekbrains.gkportal.dto.interfaces.SystemAccountDTO;
 import ru.geekbrains.gkportal.entity.ContactType;
 import ru.geekbrains.gkportal.validation.ValidPhoneNumber;
 
@@ -57,5 +58,4 @@ public class SystemAccountToOwnerShip implements SystemAccountDTO {
     //private Integer carsInFamily;
 
     // private String comments;
-
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 @Data
 public class Floor {
+
     private int number;
     List<Flat> flats = new ArrayList<>();
 }

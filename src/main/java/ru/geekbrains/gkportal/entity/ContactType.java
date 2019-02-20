@@ -17,5 +17,4 @@ public class ContactType extends AbstractEntity {
     @Column(name = "description")
     @NotBlank(message = "Тип контакта должен быть заполнен.")
     private String description;
-
 }

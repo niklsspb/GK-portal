@@ -17,5 +17,4 @@ public class CommunicationType extends AbstractEntity {
     @Column(name = "description")
     @NotBlank(message = "Тип связи должен быть задан.")
     private String description;
-
 }

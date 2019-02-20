@@ -1,6 +1,7 @@
 package ru.geekbrains.gkportal.controller;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ import java.util.List;
 @RequestMapping("/rest")
 public class HouseRestController {
 
-
+    private static final Logger logger = Logger.getLogger(HouseRestController.class);
 
     private HouseService houseService;
 
@@ -22,7 +23,6 @@ public class HouseRestController {
     public void setHouseService(HouseService houseService) {
         this.houseService = houseService;
     }
-
 
     @PutMapping(value = "/flat")
     public int changeFlat (@RequestBody FlatDTO flatDTO, HttpServletResponse response) {
@@ -34,7 +34,6 @@ public class HouseRestController {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return HttpStatus.BAD_REQUEST.value();
         }
-
     }
 
     @GetMapping(value = "/house/{houseNumber}/porches")
@@ -42,6 +41,4 @@ public class HouseRestController {
     public List<Integer> getPorchNums(@PathVariable(name = "houseNumber") int housingId) {
         return houseService.getHousingPorchNumbers(housingId);
     }
-
-
 }

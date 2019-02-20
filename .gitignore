@@ -1,8 +1,3 @@
-target
-
-
-
-
 # Created by https://www.gitignore.io/api/java,windows,intellij
 
 ### Intellij ###
@@ -123,7 +118,10 @@ flyway.conf
 #added exceptions
 .idea
 *.iml
+
+#Application related
 application-secret.properties
 flyway.conf
+*.log
 # End of https://www.gitignore.io/api/java,windows,intellij
 

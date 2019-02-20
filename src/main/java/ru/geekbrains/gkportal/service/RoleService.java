@@ -1,6 +1,7 @@
 package ru.geekbrains.gkportal.service;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.gkportal.entity.Role;
@@ -13,6 +14,8 @@ import java.util.function.Supplier;
 
 @Service
 public class RoleService {
+
+    private static final Logger logger = Logger.getLogger(RoleService.class);
 
     private static final String DEFAULT_ROLE_DESCRIPTION = "user";
 
@@ -41,5 +44,4 @@ public class RoleService {
         roleList.add(getDefaultRole());
         return roleList;
     }
-
 }

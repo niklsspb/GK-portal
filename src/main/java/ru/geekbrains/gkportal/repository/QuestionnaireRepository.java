@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.geekbrains.gkportal.dto.QuestionResultFromView;
+import ru.geekbrains.gkportal.dto.interfaces.QuestionnaireDTO;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 
 import java.util.List;
@@ -22,4 +23,12 @@ public interface QuestionnaireRepository extends JpaRepository<Questionnaire, St
         String getAnswer_name();
         Integer getVote_count();
     }
+    QuestionnaireDTO findByUuid(String uuid);
+
+    @Query(
+            value = "SELECT q.name FROM support_boot_db.questionnaire  q WHERE id = :uuid",
+            nativeQuery = true
+    )
+    String findNameByUuid(@Param("uuid") String uuid);
+
 }

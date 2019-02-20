@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +11,10 @@ import ru.geekbrains.gkportal.entity.Account;
 import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.Flat;
-import ru.geekbrains.gkportal.entity.questionnaire.AnswerResult;
 import ru.geekbrains.gkportal.repository.AccountRepository;
-import ru.geekbrains.gkportal.repository.AnswerResultRepository;
+import ru.geekbrains.gkportal.security.IsAuthenticated;
 import ru.geekbrains.gkportal.service.AnswerResultService;
 import ru.geekbrains.gkportal.service.AuthenticateService;
-import java.security.Principal;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,6 +22,8 @@ import java.util.List;
 
 @Controller
 public class PersonAreaController {
+
+    private static final Logger logger = Logger.getLogger(PersonAreaController.class);
 
     private AccountRepository accountRepository;
     private AuthenticateService authenticateService;
@@ -39,7 +40,7 @@ public class PersonAreaController {
     }
 
     @Autowired
-    public void setAnswerResultService(AnswerResultService answerResultService){
+    public void setAnswerResultService(AnswerResultService answerResultService) {
         this.answerResultService = answerResultService;
     }
 
@@ -57,6 +58,9 @@ public class PersonAreaController {
                     model.addAttribute("flats", flats);
                     return "lk";
                 }
+            }
+            if (logger.isDebugEnabled()) {
+                logger.debug("404");
             }
             return "404";
         } else {
@@ -77,15 +81,17 @@ public class PersonAreaController {
     }
 
     @GetMapping("/lk/questionnaire-answer-result")
-    public String showAnswerResult(Model model, Principal principal) {
+    @IsAuthenticated
+    public String showAnswerResult(Model model) {
         Account account = accountRepository.findOneByLogin(authenticateService.getCurrentUser().getUsername());
         if (account == null) {
             return "redirect:/login";
         }
 
-        if (account != null && !account.isActive()) {
-            return "redirect:/login";
-        }
+//        if (account != null && !account.isActive()) {
+//            return "redirect:/login";
+//        }
+
         Contact contact = account.getContact();
 
         List<QuestionnaireContactResult> questionnaireContactResultList = answerResultService.getAllByContact(contact);
@@ -94,5 +100,4 @@ public class PersonAreaController {
 
         return "lk-questionnaire-answer-result";
     }
-
 }

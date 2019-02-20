@@ -12,8 +12,8 @@
     <h1 th:text="${questionnaire.name}"></h1>
     <h2>
         <span th:text="'Проголосовало ' + ${contactList.size()} + ' человек, '"></span>
-        <span style="color: green" th:text="'в т.ч. подтвержденные ' + ${confirmed}+ ', '"></span>
-        <span style="color: red" th:text="'неподтвержденные ' + ${contactList.size()-confirmed}"></span>
+        <span style="color: green" th:text="'в т.ч. подтвержденные ' + ${confirmedCount}+ ', '"></span>
+        <span style="color: red" th:text="'неподтвержденные ' + ${contactList.size()-confirmedCount}"></span>
     </h2>
     <p style="font-style: italic" th:text="${questionnaire.description}"></p>
     <table class="table-questionnaire-result">
@@ -30,7 +30,6 @@
         <tbody>
         <tr th:styleappend="${contact.questionnaireContactConfirm.confirmed}==true? '': 'background-color: lightpink;'"
             th:each="contact: ${contactList}">
-            <!--<th:block th:if="${contact.questionnaireContactConfirm} != null">-->
             <td th:text="${contact.lastName} + ' ' + ${contact.firstName} +  ' ' + ${contact.middleName}"></td>
             <td>
                 <th:block th:each="communication : ${contact.communications}">
@@ -38,7 +37,7 @@
                         <a th:case="'Email'" th:text="${communication.identify}"
                            th:href="'mailto:' + ${communication.identify}"></a>
                         <a th:case="'Телефон'" th:text="${communication.identify}"
-                           th:href="'tel:' + ${communication.identify}"></a>
+                           th:href="'tel:+7' + ${communication.identify}"></a>
                         <span th:case="*" th:text="${communication.identify}"></span>
                     </th:block>
                 </th:block>
@@ -51,7 +50,6 @@
                         <i th:case="'Автомобиль'" class="fas fa-car"></i>
                         <i th:case="'Нежилое помещение'" class="fas fa-briefcase"></i>
                     </th:block>
-
                     <div style="margin-bottom: 20px">
                         <p th:text="${ownership.houseBuildNum} + ' корпус, '"></p>
                         <p th:text="${ownership.buildNumber} + ' объект, '"></p>
@@ -70,7 +68,6 @@
                     </th:block>
                 </td>
             </th:block>
-            <!--</th:block>-->
         </tr>
         </tbody>
     </table>

@@ -36,6 +36,4 @@ public class OwnershipType extends AbstractEntity {
     @Column(name = "is_use_on_questionnaire")
     @NotNull(message = "Поле не должно быть пустым!")
     private boolean isUseInQuestionnaire;
-
-
 }

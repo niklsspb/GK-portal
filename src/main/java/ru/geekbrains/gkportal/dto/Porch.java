@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 public class Porch {
+
     private BuildPorchConfig description;
     private List<Floor> floors = new ArrayList<>();
-
 }
