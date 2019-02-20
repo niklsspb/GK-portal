@@ -59,7 +59,7 @@ public class TestRest {
     @IsAdmin
     @GetMapping("questionnaire-result")
     public List<ContactResultDTO> showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
-        Long t = System.currentTimeMillis();
+        long t = System.currentTimeMillis();
         List<AnswerResultDTO1> answerResultDTO1s = answerResultService.findAllByQuestionnaireUuid(questionnaireId);
         List<ContactResultDTO> resultDTOList = new ArrayList<>();
 
@@ -96,8 +96,7 @@ public class TestRest {
             }
         }
 
-        System.out.println(System.currentTimeMillis() - t);
-        logger.log(Level.toLevel(Priority.WARN_INT), (System.currentTimeMillis() - t));
+        logger.log(Level.toLevel(Priority.WARN_INT), "Время обработки showQuestionnaireResults" + (System.currentTimeMillis() - t));
         return resultDTOList;
     }
 
