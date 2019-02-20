@@ -5,6 +5,7 @@ import lombok.Data;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.gkportal.dto.interfaces.AnswerResultDTO1;
@@ -12,12 +13,12 @@ import ru.geekbrains.gkportal.dto.interfaces.ContactDTO;
 import ru.geekbrains.gkportal.entity.questionnaire.Answer;
 import ru.geekbrains.gkportal.entity.questionnaire.Question;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
-import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
+import ru.geekbrains.gkportal.security.IsAdmin;
 import ru.geekbrains.gkportal.service.AnswerResultService;
 import ru.geekbrains.gkportal.service.AnswerService;
-import ru.geekbrains.gkportal.service.ContactService;
 import ru.geekbrains.gkportal.service.QuestionnaireService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,15 +29,9 @@ public class TestRest {
 
     private static final Logger logger = Logger.getLogger(TestRest.class);
 
-    private ContactService contactService;
     private AnswerService answerService;
     private QuestionnaireService questionnaireService;
     private AnswerResultService answerResultService;
-
-    @Autowired
-    public void setContactService(ContactService contactService) {
-        this.contactService = contactService;
-    }
 
     @Autowired
     public void setAnswerService(AnswerService answerService) {
@@ -53,6 +48,7 @@ public class TestRest {
         this.answerResultService = answerResultService;
     }
 
+    @IsAdmin
     @GetMapping("questionnaire-result")
     public List<ContactResultDTO> showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
         List<AnswerResultDTO1> answerResultDTO1s = answerResultService.findAllByQuestionnaireUuid(questionnaireId);
@@ -91,23 +87,29 @@ public class TestRest {
             }
         }
 
-
-        // TODO: 17.02.2019 искать в  integerAnswerResultDTO1Map номера по списку всех номеров, и если их нет, ставить Null
-
         return resultDTOList;
     }
 
     @PostMapping("change-questionnaireConfirmedType")
-    public int changeQuestionnaireConfirmedType(@RequestParam String questionnaireContactConfirmId, @RequestParam String questionnaireConfirmedTypeId) throws Throwable {
+    public ResponseEntity changeQuestionnaireConfirmedType(
+            @RequestParam String questionnaireContactConfirmId,
+            @RequestParam String questionnaireConfirmedTypeId,
+            HttpServletRequest request
+    ) throws Throwable {
+
+        if (!request.isUserInRole("admin")) {
+            return new ResponseEntity(HttpStatus.FORBIDDEN);
+        }
+
 
         try {
             questionnaireService.changeQuestionnaireConfirmedType(questionnaireContactConfirmId, questionnaireConfirmedTypeId);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
-            return HttpStatus.NO_CONTENT.value();
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
 
-        return HttpStatus.OK.value();
+        return new ResponseEntity(HttpStatus.OK);
 
     }
 

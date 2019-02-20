@@ -186,12 +186,16 @@ $(document).ready(function () {
                     "questionnaireContactConfirmId": confirmId,
                     "questionnaireConfirmedTypeId": typeId
                 },
-                complete: function (e, xhr, settings) {
+                complete: function (e, data, xhr, settings) {
                     if (e.status === 200) {
-                        alert('данные обновлены');
                         table.ajax.reload();
                     } else if (e.status === 204) {
                         alert('контент не найден');
+                    } else if (e.status === 403) {
+                        alert('доступ запрещен');
+                        window.location.href = "/login"
+                    } else if (e.status === 302) {
+                        alert('необходимо авторизироваться');
                     } else {
                         alert('неизвестная ошибка, код ' + e.status);
                     }

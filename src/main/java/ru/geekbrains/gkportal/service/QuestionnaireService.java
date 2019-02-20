@@ -59,11 +59,17 @@ public class QuestionnaireService {
         return questionnaire;
     }
 
+    public String findQuestionnaireNameById(String id) {
+        return questionnaireRepository.findNameByUuid(id);
+
+    }
+
     public Questionnaire findByIdAndSortQuestionsAndAnswers(String id) {
         Questionnaire questionnaire = findByIdAndSortAnswers(id);
         questionnaire.getQuestions().sort(Comparator.comparingInt(Question::getSortNumber));
         return questionnaire;
     }
+
 
     public QuestionnaireConfirmedType findQuestionnaireConfirmedTypeByName(String name) {
         return questionnaireConfirmedTypeRepository.findByName(name);
