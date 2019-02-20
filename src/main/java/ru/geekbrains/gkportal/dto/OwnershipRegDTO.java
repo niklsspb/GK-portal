@@ -17,5 +17,4 @@ public class OwnershipRegDTO {
     private String percentageOfOwner;
     private String percentageOfOwnerError;
     private boolean hasError;
-
 }

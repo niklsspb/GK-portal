@@ -1,9 +1,11 @@
 package ru.geekbrains.gkportal.service;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,12 +24,14 @@ import java.util.stream.Collectors;
 @Service
 public class AccountService implements UserDetailsService {
 
+    private static final Logger logger = Logger.getLogger(AccountService.class);
+
     private AccountRepository accountRepository;
     private BCryptPasswordEncoder encoder;
     private ContactService contactService;
 
     private RoleService roleService;
-
+    private AuthenticateService authenticateService;
 
     @Autowired
     public void setContactService(ContactService contactService) {
@@ -48,6 +52,12 @@ public class AccountService implements UserDetailsService {
     public void setRoleService(RoleService roleService) {
         this.roleService = roleService;
     }
+
+    @Autowired
+    public void setAuthenticateService(AuthenticateService authenticateService) {
+        this.authenticateService = authenticateService;
+    }
+
 
     public Account save(Account account) {
         return accountRepository.save(account);
@@ -85,6 +95,9 @@ public class AccountService implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         Account account = accountRepository.findOneByLogin(login);
         if (account == null) {
+            if (logger.isDebugEnabled()){
+                logger.debug("Invalid username or password");
+            }
             throw new UsernameNotFoundException("Invalid username or password");
         }
         return new org.springframework.security.core.userdetails.User(account.getLogin(), account.getPasswordHash(),
@@ -95,10 +108,22 @@ public class AccountService implements UserDetailsService {
     @Transactional
     public Contact getContactByLogin(String login) throws UsernameNotFoundException {
         Account account = accountRepository.findOneByLogin(login);
+
         if (account == null) {
+            if (logger.isDebugEnabled()){
+                logger.debug("Invalid username or password");
+            }
             throw new UsernameNotFoundException("Invalid username or password");
         }
+
         return account.getContact();
+    }
+
+
+    public Contact getCurrentContact() throws UsernameNotFoundException {
+        User user = authenticateService.getCurrentUser();
+        if (user == null) throw new UsernameNotFoundException("Пользователь не авторизирован");
+        return getContactByLogin(user.getUsername());
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {

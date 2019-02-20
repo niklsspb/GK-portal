@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.config;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,8 @@ import ru.geekbrains.gkportal.service.AccountService;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private static final Logger logger = Logger.getLogger(SecurityConfig.class);
 
     private AccountService accountService;
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;

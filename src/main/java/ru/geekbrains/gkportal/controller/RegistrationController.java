@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,8 @@ import static ru.geekbrains.gkportal.service.ContactTypeService.OWNER_TYPE;
 @Controller
 public class RegistrationController {
 
+    private static final Logger logger = Logger.getLogger(RegistrationController.class);
+
     private final static String QUESTIONNAIRE_ID = "bb2248ae-2d7e-427d-85ef-7b85888f0319";
     private HouseService houseService;
     private ContactTypeService contactTypeService;
@@ -35,7 +38,6 @@ public class RegistrationController {
     private OwnershipService ownershipService;
     private AnswerResultService answerResultService;
     private MailService mailService;
-
 
     @Autowired
     public void setOwnershipService(OwnershipService ownershipService) {

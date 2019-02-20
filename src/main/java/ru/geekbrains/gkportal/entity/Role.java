@@ -18,5 +18,4 @@ public class Role extends AbstractEntity {
 
     public Role() {
     }
-
 }

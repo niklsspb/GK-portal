@@ -1,5 +1,6 @@
 package ru.geekbrains.gkportal.config;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,8 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
 public class CustomMessageSourceConfiguration {
+
+    private static final Logger logger = Logger.getLogger(CustomMessageSourceConfiguration.class);
 
     @Bean
     public MessageSource messageSource() {
@@ -23,5 +26,4 @@ public class CustomMessageSourceConfiguration {
         bean.setValidationMessageSource(messageSource());
         return bean;
     }
-
 }

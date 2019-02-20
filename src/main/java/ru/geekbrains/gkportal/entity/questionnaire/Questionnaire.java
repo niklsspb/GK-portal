@@ -56,4 +56,6 @@ public class Questionnaire extends AbstractEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "questionnaire_id")
     private List<Question> questions;
+
+
 }

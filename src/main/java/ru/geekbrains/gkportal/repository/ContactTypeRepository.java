@@ -6,5 +6,6 @@ import ru.geekbrains.gkportal.entity.ContactType;
 
 @Repository
 public interface ContactTypeRepository extends JpaRepository<ContactType, String> {
+
     ContactType findByDescription(String description);
 }

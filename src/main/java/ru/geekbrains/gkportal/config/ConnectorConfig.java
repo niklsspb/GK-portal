@@ -2,6 +2,7 @@ package ru.geekbrains.gkportal.config;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
+import org.apache.log4j.Logger;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import org.springframework.core.env.Environment;
 
 @Configuration
 public class ConnectorConfig {
+
+    private static final Logger logger = Logger.getLogger(ConnectorConfig.class);
+
     private Environment env;
 
     @Autowired
@@ -23,7 +27,7 @@ public class ConnectorConfig {
     @Bean
     public TomcatServletWebServerFactory servletContainer() {
         Boolean isRedirectEnabled = env.getProperty("server.ssl.enabled", Boolean.class, false);
-
+        logger.info("server.ssl.enabled: " + isRedirectEnabled);
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
             @Override
             protected void postProcessContext(Context context) {
@@ -45,8 +49,10 @@ public class ConnectorConfig {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setScheme("http");
         connector.setPort(env.getProperty("server.http.port", Integer.class, 8888));
+        logger.info("server.http.port: " + connector.getPort());
         connector.setSecure(false);
         connector.setRedirectPort(env.getProperty("server.port", Integer.class, 8080));
+        logger.info("server.port: " + connector.getRedirectPort());
         return connector;
     }
 }

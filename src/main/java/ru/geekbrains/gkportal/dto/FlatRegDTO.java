@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class FlatRegDTO {
+
     @NotNull(message = "Поле обязательно")
     @Range(min = 1, max = 99, message = "Значение 1-99")
     private Integer housingNumber;
