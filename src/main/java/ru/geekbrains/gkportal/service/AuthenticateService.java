@@ -31,4 +31,12 @@ public class AuthenticateService {
         else return null;
 
     }
+
+    public boolean hasRole(String roleName) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        return auth.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals(roleName));
+    }
+
 }

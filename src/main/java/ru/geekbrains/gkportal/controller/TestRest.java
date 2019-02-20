@@ -16,9 +16,9 @@ import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 import ru.geekbrains.gkportal.security.IsAdmin;
 import ru.geekbrains.gkportal.service.AnswerResultService;
 import ru.geekbrains.gkportal.service.AnswerService;
+import ru.geekbrains.gkportal.service.AuthenticateService;
 import ru.geekbrains.gkportal.service.QuestionnaireService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,6 +32,7 @@ public class TestRest {
     private AnswerService answerService;
     private QuestionnaireService questionnaireService;
     private AnswerResultService answerResultService;
+    private AuthenticateService authenticateService;
 
     @Autowired
     public void setAnswerService(AnswerService answerService) {
@@ -46,6 +47,11 @@ public class TestRest {
     @Autowired
     public void setAnswerResultService(AnswerResultService answerResultService) {
         this.answerResultService = answerResultService;
+    }
+
+    @Autowired
+    public void setAuthenticateService(AuthenticateService authenticateService) {
+        this.authenticateService = authenticateService;
     }
 
     @IsAdmin
@@ -93,11 +99,11 @@ public class TestRest {
     @PostMapping("change-questionnaireConfirmedType")
     public ResponseEntity changeQuestionnaireConfirmedType(
             @RequestParam String questionnaireContactConfirmId,
-            @RequestParam String questionnaireConfirmedTypeId,
-            HttpServletRequest request
+            @RequestParam String questionnaireConfirmedTypeId
     ) throws Throwable {
 
-        if (!request.isUserInRole("admin")) {
+
+        if (!authenticateService.hasRole("admin")) {
             return new ResponseEntity(HttpStatus.FORBIDDEN);
         }
 
