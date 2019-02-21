@@ -72,6 +72,14 @@ body {
     min-height: 100%;
 }
 
+.container-gk-portal {
+    max-width: 1366px;
+    flex-direction: column;
+    margin: 0 auto;
+    display: flex;
+    min-height: 100%;
+}
+
 .padding-site {
     padding-left: 110px;
     padding-right: 110px;

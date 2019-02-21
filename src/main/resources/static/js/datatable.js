@@ -19,7 +19,7 @@ $(document).ready(function () {
         language: {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Russian.json"
         },
-        lengthMenu: [[3, 5, 10, 15, -1], [3, 5, 10, 15, "Все"]],
+        lengthMenu: [[15, 30, 50, -1], [15, 30, 50, "Все"]],
         // order: [0, 'asc'],
         ordering: false,
         fixedHeader: {
