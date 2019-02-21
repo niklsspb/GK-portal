@@ -58,12 +58,15 @@ public class TestRest {
     }
 
     @IsAdmin
-    @Cacheable("contactResultDTO")
+//    @Cacheable("contactResultDTO")
     @GetMapping("questionnaire-result")
     public List<ContactResultDTO> showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
         long t = System.currentTimeMillis();
         List<AnswerResultDTO1> answerResultDTO1s = answerResultService.findAllByQuestionnaireUuid(questionnaireId);
-        List<ContactResultDTO> resultDTOList = new ArrayList<>();
+        Map<String, ContactResultDTO> contactUuidResultDTOHashMap = new HashMap<>();
+
+        logger.log(Level.toLevel(Priority.WARN_INT), "findAllByQuestionnaireUuid: " + (System.currentTimeMillis() - t));// 223 - 267 - 224 - 218 -217-323
+        t = System.currentTimeMillis();
 
         List<Integer> sortQuestionsNumbersList =
                 questionnaireService.findByIdAndSortAnswers(questionnaireId).getQuestions()
@@ -71,35 +74,33 @@ public class TestRest {
                         .map(Question::getSortNumber)
                         .collect(Collectors.toList());
 
+        logger.log(Level.toLevel(Priority.WARN_INT), "sortQuestionsNumbersList: " + (System.currentTimeMillis() - t)); //+14 - 17  - 36 - 15 -15-15
+        t = System.currentTimeMillis();
+
         // заготовка ContactResultDTO с контактами
         for (AnswerResultDTO1 ard : answerResultDTO1s) {
-            boolean isContains = false;
-            if (resultDTOList.size() == 0) {
+            if (contactUuidResultDTOHashMap.size() == 0) {
                 ContactResultDTO contactResultDTO = new ContactResultDTO(ard.getContact(), sortQuestionsNumbersList);
-                resultDTOList.add(contactResultDTO);
+                contactUuidResultDTOHashMap.put(contactResultDTO.contactUuid, contactResultDTO);
                 continue;
             }
-            for (ContactResultDTO contactResultDTO : resultDTOList) {
-                if (contactResultDTO.containContact(ard.getContact().getUuid())) {
-                    isContains = true;
-                    break;
-                }
+
+            if (!contactUuidResultDTOHashMap.containsKey(ard.getContact().getUuid())) {
+                contactUuidResultDTOHashMap.put(ard.getContact().getUuid(), new ContactResultDTO(ard.getContact(), sortQuestionsNumbersList));
             }
-            if (!isContains) resultDTOList.add(new ContactResultDTO(ard.getContact(), sortQuestionsNumbersList));
         }
 
+        logger.log(Level.toLevel(Priority.WARN_INT), "answerResultDTO1s 1 iterator: " + (System.currentTimeMillis() - t));//9035 - 8782 - 8668 - 8725 - 131 -128
+        t = System.currentTimeMillis();
 
         for (AnswerResultDTO1 ard : answerResultDTO1s) {
-            for (ContactResultDTO contactResultDTO : resultDTOList) {
-                if (contactResultDTO.getContactUuid().equals(ard.getContact().getUuid())) {
-                    contactResultDTO.getAnswerResultDTO1List().add(ard);
-                    contactResultDTO.getIntegerAnswerResultDTO1Map().put(ard.getAnswer().getQuestion().getSortNumber(), ard);
-                }
-            }
+            contactUuidResultDTOHashMap.get(ard.getContact().getUuid()).getIntegerAnswerResultDTO1Map()
+                    .put(ard.getAnswer().getQuestion().getSortNumber(), ard.getAnswer().getName());
         }
 
-        logger.log(Level.toLevel(Priority.WARN_INT), "Время обработки showQuestionnaireResults" + (System.currentTimeMillis() - t));
-        return resultDTOList;
+        logger.log(Level.toLevel(Priority.WARN_INT), "answerResultDTO1s 2 iterator: " + (System.currentTimeMillis() - t)); //20876 - 17773 - 17020 - 16981 - 17417 - 235
+
+        return new ArrayList<>(contactUuidResultDTOHashMap.values());
     }
 
     @PostMapping("change-questionnaireConfirmedType")
@@ -237,13 +238,8 @@ public class TestRest {
     public class ContactResultDTO {
         String contactUuid;
         ContactDTO contactDTO;
-        List<AnswerResultDTO1> answerResultDTO1List = new ArrayList<>();
-        Map<Integer, AnswerResultDTO1> integerAnswerResultDTO1Map = new HashMap<>();
-
-        ContactResultDTO(ContactDTO contactDTO) {
-            this.contactUuid = contactDTO.getUuid();
-            this.contactDTO = contactDTO;
-        }
+        //        List<AnswerResultDTO1> answerResultDTO1List = new ArrayList<>();
+        Map<Integer, String> integerAnswerResultDTO1Map = new HashMap<>();
 
         ContactResultDTO(ContactDTO contactDTO, List<Integer> sortQuestionsNumbersList) {
             this.contactUuid = contactDTO.getUuid();
@@ -251,8 +247,25 @@ public class TestRest {
             sortQuestionsNumbersList.forEach(integer -> integerAnswerResultDTO1Map.put(integer, null));
         }
 
-        public boolean containContact(String contactUuid) {
-            return this.contactUuid.equals(contactUuid);
-        }
+//        public ContactResultDTO(String contactUuid) {
+//            this.contactUuid = contactUuid;
+//        }
+
+//        public boolean containContact(String contactUuid) {
+//            return this.contactUuid.equals(contactUuid);
+//        }
+
+//        @Override
+//        public boolean equals(Object o) {
+//            if (this == o) return true;
+//            if (!(o instanceof ContactResultDTO)) return false;
+//            ContactResultDTO that = (ContactResultDTO) o;
+//            return Objects.equals(contactUuid, that.contactUuid);
+//        }
+//
+//        @Override
+//        public int hashCode() {
+//            return Objects.hash(contactUuid);
+//        }
     }
 }

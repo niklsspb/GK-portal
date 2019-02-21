@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
-@EnableCaching
+//@EnableCaching
 public class GkPortalApplication {
     private static final Logger logger = Logger.getLogger(GkPortalApplication.class);
 
