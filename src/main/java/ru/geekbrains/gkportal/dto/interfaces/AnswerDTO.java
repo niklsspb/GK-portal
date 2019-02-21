@@ -2,7 +2,7 @@ package ru.geekbrains.gkportal.dto.interfaces;
 
 public interface AnswerDTO {
 
-    String getUuid();
+//    String getUuid();
 
     String getName();
 

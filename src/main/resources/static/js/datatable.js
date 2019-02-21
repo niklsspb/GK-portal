@@ -2,10 +2,10 @@
 
 
 $.fn.dataTable.render.answerResult = function () {
-    return function (data, type, row) {
+    return function (data) {
         //строка для тестирвоания вывода данных по нужным столбцам
         // if (data != null) return data.answer.question.name + '</br>' + data.answer.name;
-        if (data != null) return data.answer.name;
+        if (data != null) return data;
         else return "-";
     };
 };
@@ -126,7 +126,8 @@ $(document).ready(function () {
 
                 {
                     "data": "contactDTO.questionnaireContactConfirm",
-                    "render": function (data, type, row) {
+                    "render": function (data, type, row, meta) {
+                        // if (type === 'display') {
                         var classNotFind = "btn-outline-secondary";
                         var classMatches = "btn-outline-success";
                         var classNotMatch = "btn-outline-danger";
@@ -149,6 +150,12 @@ $(document).ready(function () {
                         res += '<button type="button" class="btn ' + classNotMatch + ' add-item-btn" confirmId="' + data.uuid + '" typeId="fff634b9-f5ae-4342-9135-1c086b75c39a">не совпадает</button>';
 
                         return res;
+                        // } else if (type === 'sort' || type === 'filter') {
+                        //     return data.name;
+                        // } else {
+                        //     return type;
+                        // }
+
                     }
                 }
 
