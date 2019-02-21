@@ -6,6 +6,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -57,6 +58,7 @@ public class TestRest {
     }
 
     @IsAdmin
+    @Cacheable("contactResultDTO")
     @GetMapping("questionnaire-result")
     public List<ContactResultDTO> showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
         long t = System.currentTimeMillis();
