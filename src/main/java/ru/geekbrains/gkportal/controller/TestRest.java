@@ -36,6 +36,7 @@ public class TestRest {
     private QuestionnaireService questionnaireService;
     private AnswerResultService answerResultService;
     private AuthenticateService authenticateService;
+//    private CacheManager cacheManager;
 
     @Autowired
     public void setAnswerService(AnswerService answerService) {
@@ -57,8 +58,13 @@ public class TestRest {
         this.authenticateService = authenticateService;
     }
 
+//    @Autowired
+//    public void setCacheManager(CacheManager cacheManager) {
+//        this.cacheManager = cacheManager;
+//    }
+
     @IsAdmin
-//    @Cacheable("contactResultDTO")
+    @Cacheable("contactResultDTO")
     @GetMapping("questionnaire-result")
     public List<ContactResultDTO> showQuestionnaireResults(@RequestParam String questionnaireId, Model model) {
         long t = System.currentTimeMillis();
@@ -117,6 +123,10 @@ public class TestRest {
 
         try {
             questionnaireService.changeQuestionnaireConfirmedType(questionnaireContactConfirmId, questionnaireConfirmedTypeId);
+
+//            Cache cache = cacheManager.getCache("contactResultDTO");
+//            if (cache != null) cache.clear();
+
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return new ResponseEntity(HttpStatus.NO_CONTENT);
