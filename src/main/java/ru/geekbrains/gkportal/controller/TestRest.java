@@ -6,7 +6,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -36,6 +35,7 @@ public class TestRest {
     private QuestionnaireService questionnaireService;
     private AnswerResultService answerResultService;
     private AuthenticateService authenticateService;
+//    private CacheManager cacheManager;
 
     @Autowired
     public void setAnswerService(AnswerService answerService) {
@@ -56,6 +56,11 @@ public class TestRest {
     public void setAuthenticateService(AuthenticateService authenticateService) {
         this.authenticateService = authenticateService;
     }
+
+//    @Autowired
+//    public void setCacheManager(CacheManager cacheManager) {
+//        this.cacheManager = cacheManager;
+//    }
 
     @IsAdmin
 //    @Cacheable("contactResultDTO")
@@ -117,6 +122,10 @@ public class TestRest {
 
         try {
             questionnaireService.changeQuestionnaireConfirmedType(questionnaireContactConfirmId, questionnaireConfirmedTypeId);
+
+//            Cache cache = cacheManager.getCache("contactResultDTO");
+//            if (cache != null) cache.clear();
+
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return new ResponseEntity(HttpStatus.NO_CONTENT);
