@@ -17,6 +17,7 @@ import ru.geekbrains.gkportal.util.MailMessageBuilder;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -54,10 +55,12 @@ public class MailService {
     }
 
 
-    public void sendMail(List<String> emails, String subject, String text, boolean isHtml) {
+    public List<Boolean> sendMail(List<String> emails, String subject, String text, boolean isHtml) {
+        List<Boolean> res = new ArrayList<>();
         for (String mail : emails) {
-            sendMail(mail, subject, text, isHtml);
+            res.add(sendMail(mail, subject, text, isHtml));
         }
+        return res;
     }
 
     public boolean sendMail(String email, String subject, String text) {
