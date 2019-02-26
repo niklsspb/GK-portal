@@ -94,8 +94,10 @@ public class MailService {
         return sendMail(email, "Регистрация на сайте  ЖК Город", builder.buildRegistrationEmail());
     }
 
-    public boolean sendRegistrationMail(Contact contact, Communication email) {
+    public boolean sendRegistrationMail(Contact contact) {
         String url = getCurentURL();
+        Communication email = contactService.getEmailCommunication(contact);
+
         return sendMail(email.getIdentify(),
                 "Регистрация на сайте ЖК Город",
                 builder.buildRegistrationEmail(contact.getLastName() + " " + contact.getFirstName() + " " + contact.getMiddleName() + " ",

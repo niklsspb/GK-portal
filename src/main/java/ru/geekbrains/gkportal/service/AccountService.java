@@ -68,8 +68,8 @@ public class AccountService implements UserDetailsService {
     }
 
     @Transactional
-    public void createAccount(SystemAccount systemAccount) throws Throwable {
-        accountRepository.save(Account.builder()
+    public Account createAccount(SystemAccount systemAccount) throws Throwable {
+        return accountRepository.save(Account.builder()
                 .confirmed(false)
                 .active(false)
                 .login(systemAccount.getEmail())

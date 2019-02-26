@@ -10,6 +10,7 @@ import ru.geekbrains.gkportal.dto.SystemAccount;
 import ru.geekbrains.gkportal.dto.SystemAccountToOwnerShip;
 import ru.geekbrains.gkportal.dto.interfaces.ContactDTO;
 import ru.geekbrains.gkportal.dto.interfaces.SystemAccountDTO;
+import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.Flat;
 import ru.geekbrains.gkportal.entity.Ownership;
@@ -194,6 +195,11 @@ public class ContactService {
     public String getEmail(Contact contact) {
         return communicationService.getMail(contact.getCommunications());
     }
+
+    public Communication getEmailCommunication(Contact contact) {
+        return communicationService.getMailCommunication(contact.getCommunications());
+    }
+
 
     public Collection<Contact> getContaсtListByEmail(String mail) throws Throwable {
         return communicationService.getContactListByEmail(mail);
