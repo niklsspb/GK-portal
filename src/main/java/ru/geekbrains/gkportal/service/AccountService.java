@@ -90,6 +90,13 @@ public class AccountService implements UserDetailsService {
         } else return false;
     }
 
+    /**
+     * Процедура авторизации юзера по логину
+     *
+     * @param login логин
+     * @return Spring UserDetail
+     * @throws UsernameNotFoundException
+     */
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
@@ -98,13 +105,24 @@ public class AccountService implements UserDetailsService {
             if (logger.isDebugEnabled()){
                 logger.debug("Invalid username or password");
             }
-            throw new UsernameNotFoundException("Invalid username or password");
+            throw new UsernameNotFoundException("Ошибка в имени пользователя или пароле!");
+        } else if (!account.isActive()) {
+            throw new UsernameNotFoundException("Пользователь не активен!");
+        } else if (!account.isConfirmed()) {
+            throw new UsernameNotFoundException("Сначала подтвердите регистрацию по почте!");
         }
         return new org.springframework.security.core.userdetails.User(account.getLogin(), account.getPasswordHash(),
                 mapRolesToAuthorities(account.getRoles()));
     }
 
 
+    /** Ищет пользователя по логину,
+     *  если не находит выбрасывает экцепшен,
+     *  если находит то возвращает контакт
+     * @param login логин
+     * @return Contact
+     * @throws UsernameNotFoundException
+     */
     @Transactional
     public Contact getContactByLogin(String login) throws UsernameNotFoundException {
         Account account = accountRepository.findOneByLogin(login);
@@ -113,7 +131,7 @@ public class AccountService implements UserDetailsService {
             if (logger.isDebugEnabled()){
                 logger.debug("Invalid username or password");
             }
-            throw new UsernameNotFoundException("Invalid username or password");
+            throw new UsernameNotFoundException("Ошибка в имени пользователя или пароле!");
         }
 
         return account.getContact();
