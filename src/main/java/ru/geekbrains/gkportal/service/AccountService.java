@@ -100,6 +100,7 @@ public class AccountService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        //todo прокинуть на фронт сообщения об ошибке
         Account account = accountRepository.findOneByLogin(login);
         if (account == null) {
             if (logger.isDebugEnabled()){
