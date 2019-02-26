@@ -173,7 +173,7 @@ public class RegistrationController {
         }
 
 
-        // заплатка - теряется с формы
+        // заплатка - теряется с формы ?!
         systemAccount.setContactType(contactTypeService.getContactTypeByDescription(OWNER_TYPE));
 
         Contact contact = contactService.getContact(systemAccount);
@@ -192,7 +192,7 @@ public class RegistrationController {
         }
 
         try {
-            if (contact == null) contact = contactService.getOrCreateContact(systemAccount);
+            contact = contactService.getOrCreateContact(systemAccount, contact);
             answerResultService.saveAnswerResultDTO(systemAccount.getAnswerResultDTO(), contactService.save(contact));
             mailService.sendRegistrationMail(contact, questionnaireService.getQuestionnaireContactConfirm(systemAccount.getAnswerResultDTO().getQuestionnaireId(), contact));
             systemAccount.setUuid(UUID.randomUUID().toString());
