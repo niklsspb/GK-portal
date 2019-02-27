@@ -97,15 +97,21 @@ public class RegistrationController {
      * @return
      */
     @GetMapping("/reg")
-    public String reg(Model model) {
+    public String reg(Model model, @RequestParam(name = "fast", required = false) Boolean fast) {
+        if (fast == null) fast = false;
+
         SystemAccount account = new SystemAccount();
+        account.setFastRegistration(fast);
+
         // по умолчанию собственник
         account.setContactType(contactTypeService.getContactTypeByDescription(OWNER_TYPE));
         account.getFlats().add(new FlatRegDTO());
         model.addAttribute("systemUser", account);
         model.addAttribute("housingList", houseService.getHousingNumList());
         model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
-        return "reg-form";
+
+
+        return fast ? "reg-form-fast" : "reg-form";
     }
 
 
@@ -118,6 +124,50 @@ public class RegistrationController {
      */
     @PostMapping(value = "/userRegister")
     public String registerUser(@Valid @ModelAttribute("systemUser") SystemAccount systemAccount, BindingResult bindingResult, Model model) {
+
+        if (systemAccount.getFastRegistration()) {
+
+            if (bindingResult.hasFieldErrors("email") || bindingResult.hasFieldErrors("password") ||
+                    bindingResult.hasFieldErrors("matchingPassword")) {
+                return "reg-form-fast";
+            } else {
+                if (accountService.isLoginExist(systemAccount.getEmail())) {
+                    createErrorModel(systemAccount, model, "Эта почта уже использована для регистрации");
+                    return "reg-form";
+                }
+
+                Collection<Contact> contactList;
+                try {
+                    contactList = contactService.getContaсtListByEmail(systemAccount.getEmail());
+                } catch (Throwable throwable) {
+                    createErrorModel(systemAccount, model, "Ошибка при поиске контактов по этой почте");
+                    return "reg-form";
+                }
+
+                if (contactList == null || contactList.isEmpty()) {
+                    createErrorModel(systemAccount, model, "Не найдено контактов по этой почте");
+                    return "reg-form";
+                }
+
+                try {
+                    // создаём аккаунт
+                    //todo если несколько аккаунтов то нужна дополнительная форма выборв
+                    Account account = accountService.createAccount(systemAccount, contactList.stream().findFirst().get());
+                    // отправляем подтверждающее письмо
+                    mailService.sendRegistrationMail(account.getContact());
+
+                    return "reg-success";
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace(); // TODO: 02.02.2019 to Log
+                    createErrorModel(systemAccount, model, "Произошла непредвиденная ошибка");
+                    return "reg-form";
+                }
+            }
+
+
+        }
+
+
         if (bindingResult.hasErrors()) {
             createErrorModel(systemAccount, model, "Не все поля заполнены правильно!");
             return "reg-form";

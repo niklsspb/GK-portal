@@ -3,6 +3,7 @@ package ru.geekbrains.gkportal.service;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -69,15 +70,21 @@ public class AccountService implements UserDetailsService {
 
     @Transactional
     public Account createAccount(SystemAccount systemAccount) throws Throwable {
+        return createAccount(systemAccount, null);
+    }
+
+    @Transactional
+    public Account createAccount(SystemAccount systemAccount, @Nullable Contact contact) throws Throwable {
         return accountRepository.save(Account.builder()
                 .confirmed(false)
                 .active(false)
                 .login(systemAccount.getEmail())
                 .passwordHash(encoder.encode(systemAccount.getPassword()))
-                .contact(contactService.getOrCreateContact(systemAccount))
+                .contact((contact == null) ? contactService.getOrCreateContact(systemAccount) : contact)
                 .roles(roleService.getDefaultRoleList())
                 .build());
     }
+
 
 
     public boolean confirmAccount(Contact contact) {
