@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.gkportal.dto.*;
+import ru.geekbrains.gkportal.entity.Account;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.questionnaire.Question;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
@@ -89,32 +90,98 @@ public class RegistrationController {
         this.houseService = houseService;
     }
 
+    /**
+     * Начальная форма регистрации пользователя
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/reg")
-    public String reg(Model model) {
+    public String reg(Model model, @RequestParam(name = "fast", required = false) Boolean fast) {
+        if (fast == null) fast = false;
+
         SystemAccount account = new SystemAccount();
+        account.setFastRegistration(fast);
+
+        // по умолчанию собственник
         account.setContactType(contactTypeService.getContactTypeByDescription(OWNER_TYPE));
         account.getFlats().add(new FlatRegDTO());
-
         model.addAttribute("systemUser", account);
         model.addAttribute("housingList", houseService.getHousingNumList());
         model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
-        return "reg-form";
+
+
+        return fast ? "reg-form-fast" : "reg-form";
     }
 
+
+    /** Регистрация пользователя,
+     *  обработка заполнения полей
+     * @param systemAccount служебный класс с полями регистрации
+     * @param bindingResult результат валидации
+     * @param model
+     * @return
+     */
     @PostMapping(value = "/userRegister")
     public String registerUser(@Valid @ModelAttribute("systemUser") SystemAccount systemAccount, BindingResult bindingResult, Model model) {
+
+        if (systemAccount.getFastRegistration()) {
+
+            if (bindingResult.hasFieldErrors("email") || bindingResult.hasFieldErrors("password") ||
+                    bindingResult.hasFieldErrors("matchingPassword")) {
+                return "reg-form-fast";
+            } else {
+                if (accountService.isLoginExist(systemAccount.getEmail())) {
+                    createErrorModel(systemAccount, model, "Эта почта уже использована для регистрации");
+                    return "reg-form";
+                }
+
+                Collection<Contact> contactList;
+                try {
+                    contactList = contactService.getContaсtListByEmail(systemAccount.getEmail());
+                } catch (Throwable throwable) {
+                    createErrorModel(systemAccount, model, "Ошибка при поиске контактов по этой почте");
+                    return "reg-form";
+                }
+
+                if (contactList == null || contactList.isEmpty()) {
+                    createErrorModel(systemAccount, model, "Не найдено контактов по этой почте");
+                    return "reg-form";
+                }
+
+                try {
+                    // создаём аккаунт
+                    //todo если несколько аккаунтов то нужна дополнительная форма выборв
+                    Account account = accountService.createAccount(systemAccount, contactList.stream().findFirst().get());
+                    // отправляем подтверждающее письмо
+                    mailService.sendRegistrationMail(account.getContact());
+
+                    return "reg-success";
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace(); // TODO: 02.02.2019 to Log
+                    createErrorModel(systemAccount, model, "Произошла непредвиденная ошибка");
+                    return "reg-form";
+                }
+            }
+
+
+        }
+
+
         if (bindingResult.hasErrors()) {
             createErrorModel(systemAccount, model, "Не все поля заполнены правильно!");
             return "reg-form";
         }
-
         if (accountService.isLoginExist(systemAccount.getEmail())) {
             createErrorModel(systemAccount, model, "Указанный логин уже существует");
             return "reg-form";
         }
-
         try {
-            accountService.createAccount(systemAccount);
+            // создаём аккаунт
+            Account account = accountService.createAccount(systemAccount);
+            // отправляем подтверждающее письмо
+            mailService.sendRegistrationMail(account.getContact());
+
             return "reg-success";
         } catch (Throwable throwable) {
             throwable.printStackTrace(); // TODO: 02.02.2019 to Log
@@ -123,12 +190,20 @@ public class RegistrationController {
         }
     }
 
+    /** Регистрация с опросом, начальная форма
+     *  если задан uuid юзера,  то данные начальные берём с него
+     * @param uuid guid предыдущего юзера, с которого копируем данные
+     * @param model
+     * @param session
+     * @return
+     */
     @GetMapping("/regQuestion")
     public String regQuestion(@RequestParam(name = "uuid", required = false) String uuid, Model model, HttpSession session) {
         SystemAccountToOwnerShip systemAccount = null;
-        Questionnaire questionnaire = putQuestionnaireToModel(model);
+        Questionnaire questionnaire = putQuestionnaireToModel(model, QUESTIONNAIRE_ID);
 
         if (uuid != null) {
+            // используем сохранненные данные из сессиии
             systemAccount = (SystemAccountToOwnerShip) session.getAttribute("systemUser");
             if (systemAccount != null) {
                 if (!systemAccount.getUuid().equals(uuid)) {
@@ -142,6 +217,7 @@ public class RegistrationController {
                 }
             }
         }
+        // новый юзер
         if (systemAccount == null) {
             systemAccount = new SystemAccountToOwnerShip();
             systemAccount.getOwnerships().add(new OwnershipRegDTO());
@@ -155,28 +231,35 @@ public class RegistrationController {
                 systemAccount.setAnswerResultDTO(form);
             }
         }
-
         model.addAttribute("systemUser", systemAccount);
         putOwnershipTypes(model);
-
         return "reg-question-form";
     }
 
 
+    /** Регистрация пользователя с вопросами,
+     *  обработка полей
+     * @param systemAccount
+     * @param bindingResult
+     * @param model
+     * @param session
+     * @return
+     */
     @PostMapping(value = "/userQuestionRegister")
     public String registerQuestionUser(@Valid @ModelAttribute("systemUser") SystemAccountToOwnerShip systemAccount,
                                        BindingResult bindingResult, Model model, HttpSession session) {
-
+        // есть ли ошибки
         if (bindingResult.hasErrors() | ownershipService.checkOwnerships(systemAccount.getOwnerships())) {
             createErrorModel(systemAccount, model, "Не все поля заполнены правильно!");
             return "reg-question-form";
         }
 
 
-        // заплатка - теряется с формы
+        // заплатка - теряется с формы ?!
         systemAccount.setContactType(contactTypeService.getContactTypeByDescription(OWNER_TYPE));
 
         Contact contact = contactService.getContact(systemAccount);
+        // по фио смотрим участвовал ли уже пользователь в опросе
         if (contact != null) {
             if (questionnaireService.isQuestionnaireContactExist(
                     questionnaireService.findByIdAndSortAnswers(systemAccount.getAnswerResultDTO().getQuestionnaireId()),
@@ -191,8 +274,9 @@ public class RegistrationController {
             }
         }
 
+        // пытаемся создать контакт и сохранить данные
         try {
-            if (contact == null) contact = contactService.getOrCreateContact(systemAccount);
+            contact = contactService.getOrCreateContact(systemAccount, contact);
             answerResultService.saveAnswerResultDTO(systemAccount.getAnswerResultDTO(), contactService.save(contact));
             mailService.sendRegistrationMail(contact, questionnaireService.getQuestionnaireContactConfirm(systemAccount.getAnswerResultDTO().getQuestionnaireId(), contact));
             systemAccount.setUuid(UUID.randomUUID().toString());
@@ -206,6 +290,15 @@ public class RegistrationController {
         }
     }
 
+    //todo сделать опционным отображение строительного адреса
+
+    /** Возращает визуализацию шахматки подъезда
+     *
+     * @param build дом
+     * @param porchNum подъезд
+     * @param model
+     * @return
+     */
     @GetMapping("/showPorch/{build}/{porch}")
     public String showPorch(@PathVariable(name = "build") int build, @PathVariable(name = "porch") int porchNum, Model model) {
         //todo проверка что юзер зарегистрирован и имеет права на данное действие (надо подумать)
@@ -214,16 +307,13 @@ public class RegistrationController {
         return "porch-form";
     }
 
-    /*@GetMapping("/getPorchCount/{build}")
-    public String getPorchCount(@ModelAttribute("systemUser") SystemAccount systemAccount, @PathVariable(name = "build") int build, Model model) {
-        List<String> porchList = new ArrayList<>();
-        porchList.add("");
-        int count = houseService.getHousingPorchCount(build);
-        for (int i = 1; i <= count; i++) porchList.add(String.valueOf(i));
-        model.addAttribute("porchList", porchList);
-        return "select-porch-form";
-    }*/
 
+    /** Отправляет повторное письмо подтверждение опроса
+     *  по емайлу
+     * @param mail почтовый адрес
+     * @param model
+     * @return
+     */
     @GetMapping("/getQuestionConfirmMail/{mail}")
     public String getQuestionConfirmMail(@PathVariable(name = "mail") String mail, Model model) {
         boolean result = false;
@@ -233,6 +323,7 @@ public class RegistrationController {
         String resultText = "Контакты с таким емайлом не найдены";
 
         Collection<Contact> contaсtList = null;
+        // выбираем все контакты с такой почтой и ищем есть ли у них не подтвержденные опросы
         try {
             contaсtList = contactService.getContaсtListByEmail(mail);
             for (Contact contact : contaсtList) {
@@ -258,6 +349,13 @@ public class RegistrationController {
         return "request-confirm-mail";
     }
 
+    /** Обрабатывает ссылку подтверждающую почту при регистрации
+     *  активирует привязанный аккаунт
+     * @param code  код подтверждения
+     * @param mail почта
+     * @param model
+     * @return
+     */
     @GetMapping("/confirmMail/{mail}/{code}")
     public String confirmMail(@PathVariable(name = "code") String code, @PathVariable(name = "mail") String mail, Model model) {
 
@@ -272,6 +370,13 @@ public class RegistrationController {
     }
 
 
+    /** Обрабатывает ссылку подтверждающую результат опроса
+     *
+     * @param code
+     * @param contact_uuid
+     * @param model
+     * @return
+     */
     @GetMapping("/confirmQuestion/{contact_uuid}/{code}")
     public String confirmQuestion(@PathVariable(name = "code") String code, @PathVariable(name = "contact_uuid") String contact_uuid, Model model) {
 
@@ -288,21 +393,9 @@ public class RegistrationController {
 
 
     private void createErrorModel(SystemAccount systemAccount, Model model, String error) {
-        //House house = houseService.build(systemAccount.getHousingNumber());
         List<String> housingList = houseService.getHousingNumList();
-        //housingList.add(0, "");
         model.addAttribute("housingList", housingList);
         model.addAttribute("houseService", houseService);
-       /* if (systemAccount.getHousingNumber() != null && systemAccount.getHousingNumber() != 0) {
-            List<String> porchList = new ArrayList<>();
-            porchList.add("");
-            int count = houseService.getHousingPorchCount(systemAccount.getHousingNumber());
-            for (int i = 1; i <= count; i++) porchList.add(String.valueOf(i));
-            model.addAttribute("porchList", porchList);
-
-        }*/
-
-
         model.addAttribute("userTypes", contactTypeService.getAllContactTypes());
         model.addAttribute("registrationError", error);
     }
@@ -310,21 +403,28 @@ public class RegistrationController {
     private void createErrorModel(SystemAccountToOwnerShip systemAccount, Model model, String error) {
         putOwnershipTypes(model);
         model.addAttribute("registrationError", error);
-        putQuestionnaireToModel(model);
+        putQuestionnaireToModel(model, QUESTIONNAIRE_ID);
     }
 
-//    private void createModel(SystemAccountToOwnerShip systemAccount, Model model) {
-//        putOwnershipTypes(model);
-//        putQuestionnaireToModel(model);
-//    }
 
+    /** Помещает в модель список типов собственности
+     *
+     * @param model
+     */
     private void putOwnershipTypes(Model model) {
         model.addAttribute("ownershipTypes", ownershipTypeService.getAllOwnershipTypesByIsUseInQuestionnaire());
     }
 
-    private Questionnaire putQuestionnaireToModel(Model model) {
+    /**
+     * Размещает в модели опрос и
+     * вопросы с ответами
+     *
+     * @param model
+     * @param questionnaireId ID  голосования
+     * @return
+     */
+    private Questionnaire putQuestionnaireToModel(Model model, String questionnaireId) {
         Questionnaire questionnaire;
-        String questionnaireId = QUESTIONNAIRE_ID;
 
         if ((questionnaire = questionnaireService.findByIdAndSortAnswers(questionnaireId)) == null) {
             model.addAttribute("notFoundNumber", questionnaireId);
@@ -336,10 +436,5 @@ public class RegistrationController {
         return questionnaire;
     }
 
-   /* @ModelAttribute("interests")
-    public String[] getMultiCheckboxAllValues() {
-        return new String[] {
-                "Место в паркинге", "Детский сад", "Школа"
-        };
-    }*/
+
 }

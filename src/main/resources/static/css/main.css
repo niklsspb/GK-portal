@@ -110,6 +110,16 @@ body {
     width: 70%;
 }
 
+
+.gk-reg-conteiner {
+    padding: 10px;
+    border-style: none;
+    border-width: thin;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 70%;
+}
+
 .gk-flat-number {
     background-color: #ffe0c8
 }
