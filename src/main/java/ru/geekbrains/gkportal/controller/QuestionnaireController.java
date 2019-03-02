@@ -10,14 +10,17 @@ import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.gkportal.dto.AnswerResultDTO;
 import ru.geekbrains.gkportal.dto.QuestionResultFromView;
 import ru.geekbrains.gkportal.entity.Contact;
+import ru.geekbrains.gkportal.entity.questionnaire.Answer;
 import ru.geekbrains.gkportal.entity.questionnaire.Question;
 import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 import ru.geekbrains.gkportal.security.IsAdmin;
 import ru.geekbrains.gkportal.security.IsAuthenticated;
 import ru.geekbrains.gkportal.service.*;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
 
 
 @Controller
@@ -84,8 +87,9 @@ public class QuestionnaireController {
 
         return "questionnaire-result/datatable";
     }
+
     @GetMapping("pie")
-    public String showQuestionnairePieResults(@RequestParam String questionnaireId, Model model){
+    public String showQuestionnairePieResults(@RequestParam String questionnaireId, Model model) {
         List<QuestionResultFromView> qr = questionnaireService.getQuestionaryResultsForPieDiograms(questionnaireId);
         model.addAttribute("results", qr);
         return "pie-diog";
@@ -130,6 +134,52 @@ public class QuestionnaireController {
             }
             return "403";
         }
+    }
+
+
+    //    @IsAdmin
+    @GetMapping("add")
+    public String addQuestionnaire(Model model) {
+        Questionnaire questionnaire = Questionnaire.builder()
+                .name("Опрос о голосовании ЖК Город")
+                .description("Члены инициативной группы ...")
+                .build();
+
+        model.addAttribute("questionnaire", questionnaire);
+        return "add-questionnaire";
+    }
+
+    @PostMapping("saveQuestionnaire")
+    public String saveQuestionnaire(@ModelAttribute("questionnaire") Questionnaire questionnaire, Model model) {
+        questionnaire.setFrom(LocalDateTime.now());
+
+        questionnaire.setTo(LocalDateTime.now().plusMonths(1L));
+        questionnaire.setOpen(true);
+        questionnaire.setActive(true);
+        questionnaire.setInBuildNum(true);
+        questionnaire.setUseRealEstate(true);
+
+        int[] idxQuestion = {1};
+        questionnaire.getQuestions().forEach(question -> {
+            question.setSortNumber(0);
+            question.setRequired(true);
+            question.setSingle(true);
+            question.setQuestionnaire(questionnaire);
+            question.setExternalNumber(idxQuestion[0]);
+            idxQuestion[0]++;
+
+            int[] idxAnswer = {1};
+            question.getAnswers().forEach(answer -> {
+                answer.setQuestion(question);
+                answer.setSortNumber(idxAnswer[0]);
+                idxAnswer[0]++;
+            });
+        });
+
+        questionnaireService.save(questionnaire);
+
+
+        return "add-questionnaire";
     }
 
 }
