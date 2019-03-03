@@ -64,6 +64,26 @@ public class MailService {
         return res;
     }
 
+    /**
+     * Отправка писем через сайт по списку контактов
+     *
+     * @param toEmails
+     * @param fromEmail
+     * @param subject
+     * @param text
+     * @param isHtml
+     * @return
+     */
+    public boolean sendMail(List<Contact> toEmails, Contact fromEmail, String subject, String text, boolean isHtml) {
+
+        for (Contact contact : toEmails) {
+            //res.add(sendMail(mail, subject, text, isHtml));
+        }
+        return false;
+    }
+
+
+
     public boolean sendMail(String email, String subject, String text) {
         return sendMail(email, subject, text, true);
     }
