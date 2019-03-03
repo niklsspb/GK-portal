@@ -19,13 +19,14 @@ public class TemplateNameConst {
     public static final String REGISTRATION_FAST_FORM = "registration/reg-form-fast";
     // Форма регистрация завершена, проверьте почту
     public static final String REGISTRATION_SUCCESS_FROM = "registration/reg-success";
+    // Письмо для подтверждения регистрации
+    public static final String REGISTRATION_MAIL = "registration/reg-question-success";
 
     // ============= регистрация с опросом ======================
     // Форма регистрации с опросом
     public static final String REGISTRATION_QUESTIONNAIRE_FORM = "registration/reg-question-form";
-    // Форма регистрация с опросом завершена, проверьте почту
-    public static final String REGISTRATION_QUESTIONNAIRE_SUCCES_FORM = "registration/reg-question-success";
-
+    // Письмо для подтверждения регистрации с опросом
+    public static final String REGISTRATION_QUESTIONNAIRE_MAIL = "registration/mail/registration-question-mail";
     // ============= опросы ==================================
     // Форма результата запроса отправки повторного подтверждающего письма о голосовании
     public static final String QUESTIONNAIRE_CONFIRM_MAIL = "questionnaire/request-confirm-mail";
@@ -33,14 +34,17 @@ public class TemplateNameConst {
     public static final String QUESTIONNAIRE_RESULT_FORM = "questionnaire-result/result";
     // форма результата опроса с поиском
     public static final String QUESTIONNAIRE_RESULT_FIND_FORM = "questionnaire-result/datatable";
+    // Форма регистрация с опросом завершена, проверьте почту
+    public static final String REGISTRATION_QUESTIONNAIRE_SUCCES_FORM = "registration/reg-question-success";
     // список голосований
     public static final String QUESTIONNAIRE_LIST_FORM = "questionnaire/questionnaire";
     public static final String QUESTIONNAIRE_PIE = "questionnaire/pie-diog";
-
     // ============= ШАХМАТКА ===================================
     // форма шахматка подъезда
     public static final String SCHEME_PORCH_FORM = "scheme/porch-form";
-
+    // = Админка =
+    // просмотр/редактирование шахматки дома
+    public static final String SCHEME_ADMIN_EDIT_HOUSE_FORM = "scheme/edit-house-form";
     // ============= Личный кабинет =====================================
     // Главная форма
     public static final String LK_MAIN_FORM = "lk/lk";

@@ -6,8 +6,10 @@
 <body>
 <div class="container card shadow-base" th:fragment="body">
     <div style="width: 800px; margin-top: 50px;">
-        <h1 style="margin-bottom: 50px">Поздравляем. <br>Регистрация прошла успешно</h1>
-        <p class="text-danger">Для завершения регистрации проверьте почту.</p>
+        <div th:replace="fragment/page-content::pageTitle
+    (title='Поздравляем. <br>Регистрация прошла успешно',description='Для завершения регистрации проверьте почту',iconClass='icon ion-ios-email-outline') "/>
+
+
     </div>
 
 

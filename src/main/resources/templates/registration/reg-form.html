@@ -56,13 +56,10 @@
 <body>
 <div class="card shadow-base container" th:fragment="body">
 
-    <div class="d-sm-flex align-items-center pd-t-15 pd-sm-t-25 pd-x-20 pd-sm-x-30 ">
-        <i class="icon ion-ios-compose tx-70 lh-0 tx-gray-800"></i>
-        <div class="pd-sm-l-20">
-            <h4 class="tx-gray-800 mg-b-5 card-title">Полная регистрация </h4>
-            <p class="mg-b-0">для новых пользователей</p>
-        </div>
-    </div><!-- d-flex -->
+
+    <div th:replace="fragment/page-content::pageTitle
+    (title='Полная регистрация',description='для новых пользователей',iconClass='ion-ios-compose') "/>
+
 
     <div class="gk-reg-conteiner gk-form-container br-pagebody ">
         <form th:action=" @{'/userRegister'}" th:object="${systemUser}" method="post">

@@ -7,7 +7,10 @@
 
 <div class="container card shadow-base" th:fragment="body">
     <div style="width: 800px; margin-top: 50px;">
-        <h1 style="margin-bottom: 50px" th:text="${resultString}"> Спасибо, регистрация подтверждена!</H1>
+        <div th:replace="fragment/page-content::pageTitle
+    (title='Спасибо, регистрация подтверждена!',description='Теперь можно авторизироваться',iconClass='ion-checkmark-round') "/>
+
+
         <p></p>
         <a th:href="@{/}">Вернуться на главную</a>
     </div>

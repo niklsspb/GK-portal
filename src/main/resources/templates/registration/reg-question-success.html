@@ -6,8 +6,10 @@
 <body>
 <div class="container card shadow-base" th:fragment="body">
     <div style="width: 800px; margin-top: 50px;">
-        <h1 style="margin-bottom: 50px">Поздравляем. <br>Голосование успешно сохранено</h1>
-        <p class="text-danger">Для завершения голосования проверьте почту.</p>
+
+        <div th:replace="fragment/page-content::pageTitle
+    (title='Поздравляем. <br>Голосование успешно сохранено',description='Для завершения голосования проверьте почту',iconClass='icon ion-ios-email-outline') "/>
+
         <p></p>
         <a class="btn btn-primary" role="button" th:href="@{/regQuestion(uuid=${uuid})}">Заполнить за ещё одного
             собственника</a>
