@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="header">
+    <title>Подтверждение</title>
+</header>
+<body>
+<div class="container card shadow-base" th:fragment="body">
+    <div style="width: 800px; margin-top: 50px;">
+        <h1 style="margin-bottom: 50px">Поздравляем. <br>Голосование успешно сохранено</h1>
+        <p class="text-danger">Для завершения голосования проверьте почту.</p>
+        <p></p>
+        <a class="btn btn-primary" role="button" th:href="@{/regQuestion(uuid=${uuid})}">Заполнить за ещё одного
+            собственника</a>
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

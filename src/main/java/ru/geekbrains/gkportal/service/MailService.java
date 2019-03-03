@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import ru.geekbrains.gkportal.config.MailConfig;
 import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.PropertyType;
@@ -65,6 +66,10 @@ public class MailService {
 
     public boolean sendMail(String email, String subject, String text) {
         return sendMail(email, subject, text, true);
+    }
+
+    public boolean sendMailToAdmin(String subject, String text) {
+        return sendMail(MailConfig.ADMIN_MAIL, subject, text, true);
     }
 
     public boolean sendMail(String email, String subject, String text, boolean isHtml) {
