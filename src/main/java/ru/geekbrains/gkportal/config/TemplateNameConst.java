@@ -29,11 +29,23 @@ public class TemplateNameConst {
     // ============= опросы ==================================
     // Форма результата запроса отправки повторного подтверждающего письма о голосовании
     public static final String QUESTIONNAIRE_CONFIRM_MAIL = "questionnaire/request-confirm-mail";
+    // форма результата опроса
+    public static final String QUESTIONNAIRE_RESULT_FORM = "questionnaire-result/result";
+    // форма результата опроса с поиском
+    public static final String QUESTIONNAIRE_RESULT_FIND_FORM = "questionnaire-result/datatable";
+    // список голосований
+    public static final String QUESTIONNAIRE_LIST_FORM = "questionnaire/questionnaire";
+    public static final String QUESTIONNAIRE_PIE = "questionnaire/pie-diog";
 
     // ============= ШАХМАТКА ===================================
     // форма шахматка подъезда
     public static final String SCHEME_PORCH_FORM = "scheme/porch-form";
 
+    // ============= Личный кабинет =====================================
+    // Главная форма
+    public static final String LK_MAIN_FORM = "lk/lk";
+    // результаты опросов в лк
+    public static final String LK_QUESTIONNAIRE_RESULT = "lk/lk-questionnaire-answer-result";
 
     /**
      * Автоматизация возврата шаблона

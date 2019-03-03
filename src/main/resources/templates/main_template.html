@@ -64,11 +64,29 @@
 
 
         <div sec:authorize="isAuthenticated()">
+
+
+            <a class="br-menu-link" th:href="@{/user/profile}">
+                <div class="br-menu-item">
+                    <i class="menu-item-icon icon ion-information tx-20"></i>
+                    <span class="menu-item-label">Личный кабинет</span>
+
+                </div><!-- menu-item -->
+            </a><!-- br-menu-link -->
+
+            <a class="br-menu-link" th:href="@{/questionnaire}">
+                <div class="br-menu-item">
+                    <i class="menu-item-icon icon ion-help tx-20"></i>
+                    <span class="menu-item-label">Опросы</span>
+
+                </div><!-- menu-item -->
+            </a><!-- br-menu-link -->
+
             <a class="br-menu-link" th:href="@{/logout}">
                 <div class="br-menu-item">
-                    <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+                    <i class="menu-item-icon icon ion-power tx-20"></i>
                     <span class="menu-item-label">Выход</span>
-                    <i class="menu-item-arrow fa fa-angle-down"></i>
+
                 </div><!-- menu-item -->
             </a><!-- br-menu-link -->
         </div>
@@ -91,7 +109,7 @@
                 <div class="br-menu-item">
                     <i class="menu-item-icon icon ion-android-contact tx-20"></i>
                     <span class="menu-item-label">Войти</span>
-                    <i class="menu-item-arrow fa fa-angle-down"></i>
+
                 </div><!-- menu-item -->
             </a><!-- br-menu-link -->
 
@@ -120,18 +138,6 @@
 
     </div><!-- br-header-left -->
 
-
-    <div class="br-header-right">
-        <nav>...</nav>
-        <div class="navicon-right">
-            <a class="pos-relative" href="" id="btnRightMenu">
-                <i class="icon ion-ios-chatboxes-outline"></i>
-                <!-- start: if statement -->
-                <span class="square-8 bg-danger pos-absolute t-10 r--5 rounded-circle"></span>
-                <!-- end: if statement -->
-            </a>
-        </div><!-- navicon-right -->
-    </div><!-- br-header-right -->
 
 </div><!-- br-header -->
 <!-- End Header Panel -->

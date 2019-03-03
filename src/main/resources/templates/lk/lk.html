@@ -1,28 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}"/>
-    <script th:src="@{/js/main.js}" type="text/javascript"></script>
+<header th:fragment="header">
     <title>Личный кабинет</title>
-
-
-</head>
+</header>
 <body>
+<div class="card" th:fragment="body">
 <p></p>
 <h1 align="center"> Добро пожаловать в личный кабинет </h1>
 <p></p>
 
-<table class="table"  >
-    <tr>
-        <td align="center" class="btn-primary" colspan="5">ФИО :</td>
-    <tr>
+    <table class="table"  >
+        <tr>
+            <td align="center" class="btn-primary" colspan="5">ФИО :</td>
+        <tr>
             <td>Фамилия:</td>
             <td th:text="${contact.getLastName()}">...</td>
         </tr>
@@ -61,9 +51,9 @@
 <p></p>
 <a type="button" class="btn btn-primary btn-sm btn-block" th:href="@{/lk/questionnaire-answer-result}">Показать результаты ваших голосования</a>
 
-<p></p>
+    <p></p>
 <a href="/">Вернуться на главную</a>
-
+</div>
 
 </body>
 </html>
