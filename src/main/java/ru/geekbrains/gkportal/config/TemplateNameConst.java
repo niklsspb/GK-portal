@@ -50,6 +50,8 @@ public class TemplateNameConst {
     public static final String LK_MAIN_FORM = "lk/lk";
     // результаты опросов в лк
     public static final String LK_QUESTIONNAIRE_RESULT = "lk/lk-questionnaire-answer-result";
+    // шаблон письма от пользователя к пользователю
+    public static final String LK_MESSAGE_USER_TO_USER_MAIL = "lk/lk-message-user-to-user";
 
     /**
      * Автоматизация возврата шаблона
