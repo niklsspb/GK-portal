@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org"
+>
 <header th:fragment="header">
     <title>Список голосований</title>
 </header>
@@ -9,6 +11,12 @@
         <p th:if="${completed} != null"></p>
         <th:block th:if="${questionnaireList} != null">
             <ul style="margin-top: 100px">
+                <div sec:authorize="hasAuthority('admin')">
+                    <p>
+                        <a th:href="@{/questionnaire/add}">Создать новый опрос</a><br>
+
+                </div>
+
                 <li th:each="item :${questionnaireList}">
                     <p th:text="${item.name}"></p>
                     <p>
