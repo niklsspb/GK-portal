@@ -11,7 +11,7 @@
 
     <table class="table"  >
         <tr>
-            <td align="center" class="btn-primary" colspan="5">ФИО :</td>
+            <td align="center" class="btn-primary" colspan="8">ФИО :</td>
         <tr>
             <td>Фамилия:</td>
             <td th:text="${contact.getLastName()}">...</td>
@@ -29,20 +29,41 @@
             <td th:text="${contact.getContactType().getDescription()}">...</td>
         </tr>
         <tr>
-            <td align="center" class="btn-primary" colspan="5">Контакты :</td>
+            <td align="center" class="btn-primary" colspan="8">Контакты :</td>
         </tr>
         <tr th:each="communication : ${communications}" >
             <td th:text="${communication.getCommunicationType().getDescription()}">...</td>
             <td th:text="${communication.getIdentify()}">...</td>
         </tr>
+
+        <td align="center" class="btn-primary" colspan="8">Объекты :</td>
+        <tr th:each="ownership,iter : ${ownerships}">
+            <td th:utext="${iter.index+1} + '.'">...</td>
+            <td>Тип: <p th:text="${ownership.getOwnershipType().getDescription()}">...</p></td>
+            <div th:if="${ownership.is_build_num()}">
+                <td> Строительный номер дома:</td>
+                <td th:text="${ownership.getHouseBuildNum()}">...</td>
+                <td> Строительный номер объекта:</td>
+                <td th:text="${ownership.getBuildNumber()}">...</td>
+            </div>
+            <div th:unless="${ownership.is_build_num()}">
+                <td> Номер дома:</td>
+                <td th:text="${ownership.getHouseNum()}">...</td>
+                <td> Номер объекта:</td>
+                <td th:text="${ownership.getNumber()}">...</td>
+            </div>
+            <td>Доля владения:</td>
+            <td th:text="${ownership.getPercentageOfOwner()}">...%</td>
+        </tr>
+
         <tr>
-            <td align="center" class="btn-primary" colspan="5">Квартиры :</td>
+            <td align="center" class="btn-primary" colspan="8">Квартиры :</td>
         </tr>
         <tr th:each="flat , iter : ${flats}" >
             <td th:utext="${iter.index + 1 } + '.'">...</td>
-            <td >Номер Дома:</td>
+            <td>Номер Дома :</td>
             <td th:text="${flat.getHouseBuild()}">...</td>
-            <td >Номер квартиры:</td>
+            <td>Номер квартиры :</td>
             <td th:text="${flat.getFlatNumber()}">...</td>
         </tr>
 

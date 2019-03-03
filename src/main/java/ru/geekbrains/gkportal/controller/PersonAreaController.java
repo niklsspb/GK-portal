@@ -7,10 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import ru.geekbrains.gkportal.dto.QuestionnaireContactResult;
-import ru.geekbrains.gkportal.entity.Account;
-import ru.geekbrains.gkportal.entity.Communication;
-import ru.geekbrains.gkportal.entity.Contact;
-import ru.geekbrains.gkportal.entity.Flat;
+import ru.geekbrains.gkportal.entity.*;
 import ru.geekbrains.gkportal.repository.AccountRepository;
 import ru.geekbrains.gkportal.security.IsAuthenticated;
 import ru.geekbrains.gkportal.service.AnswerResultService;
@@ -55,9 +52,11 @@ public class PersonAreaController {
                 if (contact != null) {
                     Collection<Communication> communications = contact.getCommunications();
                     Collection<Flat> flats = contact.getFlats();
+                    Collection<Ownership> ownerships = contact.getOwnerships();
                     model.addAttribute("contact", contact);
                     model.addAttribute("communications", communications);
                     model.addAttribute("flats", flats);
+                    model.addAttribute("ownerships", ownerships);
                     return returnShablon(model, LK_MAIN_FORM);
                 }
             }
