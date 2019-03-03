@@ -110,7 +110,6 @@ body {
     width: 70%;
 }
 
-
 .gk-reg-conteiner {
     padding: 10px;
     border-style: none;
@@ -194,4 +193,8 @@ body {
 .add-item-btn {
     margin-bottom: 10px;
     width: 120px;
+}
+
+.question-create-block {
+    margin-bottom: 30px;
 }
