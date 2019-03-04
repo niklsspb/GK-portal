@@ -20,7 +20,7 @@ public class TemplateNameConst {
     // Форма регистрация завершена, проверьте почту
     public static final String REGISTRATION_SUCCESS_FROM = "registration/reg-success";
     // Письмо для подтверждения регистрации
-    public static final String REGISTRATION_MAIL = "registration/reg-question-success";
+    public static final String REGISTRATION_MAIL = "registration/mail/registration-mail";
 
     // ============= регистрация с опросом ======================
     //Форма создания опроса

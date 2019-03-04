@@ -63,11 +63,11 @@
             <div class="card-body bd bd-t-0 rounded-bottom">
                 <div th:each="ownership,iter : ${ownerships}">
                     <div th:if="${ownership.is_build_num()}">
-                        <p th:text="${iter.index+1} + '. ('+${ownership.getPercentageOfOwner()} +'%) '+ ${ownership.getOwnershipType().getDescription()}+ ' д. '+${ownership.getHouseBuildNum()}
+                        <p th:text="${iter.index+1} + '. '+ ${ownership.getSquare()} +' кв.м. ('+${ownership.getPercentageOfOwner()} +'%) '+ ${ownership.getOwnershipType().getDescription()}+ ' : д. '+${ownership.getHouseBuildNum()}
                     + ' № '+  ${ownership.getBuildNumber()}"></p>
                     </div>
                     <div th:unless="${ownership.is_build_num()}">
-                        <p th:text="${iter.index+1} + '. ('+${ownership.getPercentageOfOwner()} +'%) '+  ${ownership.getOwnershipType().getDescription()}+ ' д. '+${ownership.getHouseNum()}
+                        <p th:text="${iter.index+1} + '. '+ ${ownership.getSquare()} +' кв.м. ('+${ownership.getPercentageOfOwner()} +'%) '+  ${ownership.getOwnershipType().getDescription()}+ ' : д. '+${ownership.getHouseNum()}
                     + ' № '+  ${ownership.getNumber()} "></p>
                     </div>
                 </div>
