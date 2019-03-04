@@ -10,13 +10,10 @@
 
 <body>
 <div class="container card shadow-base" th:fragment="body">
-    <div class="d-sm-flex align-items-center pd-t-15 pd-sm-t-25 pd-x-20 pd-sm-x-30 ">
-        <i class="icon ion-android-contact tx-70 lh-0 tx-gray-800"></i>
-        <div class="pd-sm-l-20">
-            <h4 class="tx-gray-800 mg-b-5 card-title">Авторизация</h4>
-            <p class="mg-b-0">вход для зарегистрированных пользователей</p>
-        </div>
-    </div><!-- d-flex -->
+
+    <div th:replace="fragment/page-content::pageTitle
+    (title='Авторизация',description='вход для зарегистрированных пользователей',iconClass='ion-android-contact') "/>
+
 
     <div class="padding-site">
 
@@ -42,7 +39,7 @@
                 <div class="form-group col-md-6">
                     <input class="form-check-input" id="inputRemember" name="remember-me" type="checkbox">
                     <label class="form-check-label" for="inputRemember">
-                        Запомнить вход
+                        Запомнить меня на этом устройстве
                     </label>
                 </div>
             </div>
