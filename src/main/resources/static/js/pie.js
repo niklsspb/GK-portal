@@ -13,7 +13,8 @@ $(document).ready(function () {
             });
             var targetdiv=$(this).find('.diogram').get(0);
             var options = {
-                title: question
+                title: question,
+                is3D: true
             };
             var chart = new google.visualization.PieChart(targetdiv);
             chart.draw(data, options);
