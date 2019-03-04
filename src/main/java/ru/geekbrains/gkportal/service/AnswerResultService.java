@@ -57,12 +57,19 @@ public class AnswerResultService {
         Questionnaire questionnaire = questionnaireService.findByIdAndSortAnswers(answerResultDTO.getQuestionnaireId());
 
         Collection<Question> questions = questionnaire.getQuestions();
-        QuestionnaireContactConfirm questionnaireContactConfirm = QuestionnaireContactConfirm.builder()
-                .questionnaire(questionnaire)
-                .confirmCode(UUID.randomUUID().toString())
-                .contact(contact)
-                .questionnaireConfirmedType(questionnaireService.findQuestionnaireConfirmedTypeByName("не искали"))
-                .build();
+        QuestionnaireContactConfirm questionnaireContactConfirm;
+        // пытаемся убрать баг про несколько подтверждений на один контакт и голосование
+        if (contact.getQuestionnaireContactConfirm() == null) {
+            questionnaireContactConfirm = QuestionnaireContactConfirm.builder()
+                    .questionnaire(questionnaire)
+                    .confirmCode(UUID.randomUUID().toString())
+                    .contact(contact)
+                    .questionnaireConfirmedType(questionnaireService.findQuestionnaireConfirmedTypeByName("не искали"))
+                    .build();
+        } else {
+            questionnaireContactConfirm = contact.getQuestionnaireContactConfirm();
+            questionnaireContactConfirm.setConfirmCode(UUID.randomUUID().toString());
+        }
         contact.setQuestionnaireContactConfirm(questionnaireContactConfirm);
 
         Map<String, Answer> answers = new HashMap<>();
