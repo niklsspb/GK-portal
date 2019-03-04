@@ -6,7 +6,14 @@
     <title>Список голосований</title>
 </header>
 <body>
+
 <div class="container card " th:fragment="body">
+
+    <div th:replace="fragment/page-content::pageTitle
+    (title='Опросы',description='участвуем, смотрим результаты и тд',iconClass='ion-help') ">
+    </div>
+
+
     <div class="padding-site">
         <p th:if="${completed} != null"></p>
         <th:block th:if="${questionnaireList} != null">
@@ -37,7 +44,7 @@
         <th:block th:if="${questionnaire} != null">
             <h1 th:text="${questionnaire.name}"></h1>
             <p style="font-style: italic" th:text="${questionnaire.description}"></p>
-            <form class="questionnaire-form" method="POST" th:action="@{/templates/questionnaire}" th:object="${form}">
+            <form class="questionnaire-form" method="POST" th:action="@{/questionnaire}" th:object="${form}">
                 <input th:field="*{questionnaireId}" th:value="${form.questionnaireId}" type="hidden">
 
 
