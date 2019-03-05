@@ -152,10 +152,14 @@ public class PersonAreaController {
                     Collection<Flat> flats = contact.getFlats();
                     List<Porch> porches = new ArrayList<>();
                     for (Flat flat:flats) {
-                        porches.add(houseService.build(flat.getHouse(), flat.getPorch()));
+                        Porch porch = houseService.build(flat.getHouse(), flat.getPorch());
+                        // временно, надо список уникальных значений дом, подъезд
+                        if (!porches.contains(porch))
+                            porches.add(porch);
                     }
 //                    Porch porch = houseService.build(2, 1);
                     model.addAttribute("porches", porches);
+                    model.addAttribute("showType", "post");
                     return returnShablon(model, LK_SHOW_FLATS);
                 }
             }
