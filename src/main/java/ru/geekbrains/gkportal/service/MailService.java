@@ -86,7 +86,7 @@ public class MailService {
         }
         contacts.append("\n");
         for (Flat flat : fromEmail.getFlats()) {
-            contacts.append("\n Корпус " + flat.getHouse() + " подьезд " + flat.getPorch() + " этаж " + flat.getFloor() + " квартира " + flat.getFlatNumber());
+            contacts.append("\n Корпус " + flat.getHouse() + ", подьезд " + flat.getPorch() + ", этаж " + flat.getFloor() + ", квартира " + flat.getFlatNumber());
         }
 
 
