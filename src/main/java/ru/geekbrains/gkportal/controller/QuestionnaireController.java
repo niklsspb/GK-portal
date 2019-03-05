@@ -138,7 +138,7 @@ public class QuestionnaireController {
     //    @IsAdmin
     @GetMapping("add")
     public String addQuestionnaire(Model model) { //todo добавить редактирование @RequestParam (required = false) String questionnaireId,
-        model.addAttribute("questionnaire", questionnaireService.createEmptyQuestion(2, 2));
+        model.addAttribute("questionnaire", questionnaireService.createEmptyQuestion(1, 2));
         return returnShablon(model, QUESTIONNAIRE_ADD_FORM);
     }
 
