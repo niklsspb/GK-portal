@@ -28,7 +28,6 @@ public class Flat extends AbstractEntity {
     private Float square;
 
     @Column(name = "rooms")
-    @Positive
     private Integer rooms;
 
     @Column(name = "owners_count")
