@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 </head>
 <body>
 
+<!--<h2 th:text="#{mail.page.authentication.head}"/>-->
+<h2 th:text="${toFIO}+' Вам письмо от соседа из ЖК Город!'">Вам письмо, ЖК Город </h2>
+<p><span>Здравствуйте,  </span><span th:text="${toFIO} + '!'"/></p>
+<p><span> Ваш сосед из ЖК Город - </span> <span th:text="${fromFIO}">FIO</span>, написал Вам письмо с сайта.</p>
+<p></p>
+<p>Обратите внимание, что Ваш сосед не имеет Ваших контактных данных, если Вы захотите ему ответить,</p>
+<p>то используйте один из перечисленных в разделе контакты способов для связи с ним, не отвечайте на это письмо!</p>
+<br>
+<br>
+<p th:utext="${messageText}"></p>
+<br>
+<br>
+<p>Используйте вот эти контакты для связи с автором письма:</p>
+<p></p>
+<p th:utext="${fromContact}"></p>
+
+<br><br>
+<p> Если письмо содержит рекламу или несёт некорректное содержание или автор навязчив, то сообщите на почту
+    admin@d107a.ru </p>
+
+<p></p>
+<p>С Уважением, инициативная группа ЖК Город</p>
+
+
 </body>
 </html>
+

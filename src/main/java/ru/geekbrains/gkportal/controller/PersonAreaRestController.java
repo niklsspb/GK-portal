@@ -5,12 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.gkportal.dto.FilterUserProfileFlat;
 import ru.geekbrains.gkportal.dto.FlatDTO;
-import ru.geekbrains.gkportal.entity.Account;
-import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
 import ru.geekbrains.gkportal.entity.Flat;
-import ru.geekbrains.gkportal.repository.AccountRepository;
 import ru.geekbrains.gkportal.security.IsAuthenticated;
+import ru.geekbrains.gkportal.service.AccountService;
 import ru.geekbrains.gkportal.service.AuthenticateService;
 import ru.geekbrains.gkportal.service.FlatsService;
 import ru.geekbrains.gkportal.service.MailService;
@@ -24,11 +22,17 @@ import java.util.List;
 @RequestMapping("/rest/lk")
 public class PersonAreaRestController {
 
-    private AccountRepository accountRepository;
+
     private AuthenticateService authenticateService;
     private FlatsService flatsService;
+    private AccountService accountService;
 
     private MailService mailService;
+
+    @Autowired
+    public void setAccountService(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @Autowired
     public void setMailService(MailService mailService) {
@@ -41,10 +45,6 @@ public class PersonAreaRestController {
         this.authenticateService = authenticateService;
     }
 
-    @Autowired
-    public void setAccountRepository(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
 
     @Autowired
     public void setFlatsService(FlatsService flatsService) {
@@ -55,12 +55,8 @@ public class PersonAreaRestController {
     @RequestMapping(value = "/neighbors-flats/{filterTypeId}", method = RequestMethod.GET)
     public List<FlatDTO> showNeighbors(@PathVariable(name = "filterTypeId") int filterId) {
 
-        Account account = accountRepository.findOneByLogin(authenticateService.getCurrentUser().getUsername());
-        if (account == null) {
-            return null;
-        }
+        Contact contact = accountService.getCurrentContact();
 
-        Contact contact = account.getContact();
         Collection<Flat> flats = contact.getFlats();
 
 
@@ -113,21 +109,10 @@ public class PersonAreaRestController {
         for (String id : idFlatArray) {
 
             Flat flat = flatsService.getById(id);
-            Collection<Contact> contacts = flat.getContacts();
+            List<Contact> contacts = (List<Contact>) flat.getContacts();
 
-            for (Contact contact : contacts) {
+            mailService.sendMail(contacts, accountService.getCurrentContact(), "Сообщение от соседей ЖК Город", msg, true);
 
-                Collection<Communication> communications = contact.getCommunications();
-
-                for (Communication communication : communications) {
-
-                    if (communication.getCommunicationType().getDescription().equals("Email")) {
-
-                        mailService.sendMail(communication.getIdentify(), "Сообщение от соседей ЖК Город", msg, true);
-                        System.out.println(communication.getIdentify() + " " + msg);
-                    }
-                }
-            }
         }
 
         return HttpStatus.OK.value();

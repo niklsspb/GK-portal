@@ -40,7 +40,8 @@ public class TemplateNameConst {
     public static final String REGISTRATION_QUESTIONNAIRE_SUCCES_FORM = "registration/reg-question-success";
     // список голосований
     public static final String QUESTIONNAIRE_LIST_FORM = "questionnaire/questionnaire";
-    public static final String QUESTIONNAIRE_PIE = "questionnaire/pie-diog";
+    // форма вывода графического отображения результата голосования
+    public static final String QUESTIONNAIRE_PIE_FORM = "questionnaire/pie-diog";
     // ============= ШАХМАТКА ===================================
     // форма шахматка подъезда
     public static final String SCHEME_PORCH_FORM = "scheme/porch-form";

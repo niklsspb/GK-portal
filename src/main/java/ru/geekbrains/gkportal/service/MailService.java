@@ -11,6 +11,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import ru.geekbrains.gkportal.config.MailConfig;
 import ru.geekbrains.gkportal.entity.Communication;
 import ru.geekbrains.gkportal.entity.Contact;
+import ru.geekbrains.gkportal.entity.Flat;
 import ru.geekbrains.gkportal.entity.PropertyType;
 import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 import ru.geekbrains.gkportal.util.MailMessageBuilder;
@@ -76,8 +77,25 @@ public class MailService {
      */
     public boolean sendMail(List<Contact> toEmails, Contact fromEmail, String subject, String text, boolean isHtml) {
 
+        String mailFrom = contactService.getEmail(fromEmail);
+        String fiofrom = fromEmail.getLastName() + ' ' + fromEmail.getFirstName() + ' ' + fromEmail.getMiddleName();
+        StringBuilder contacts = new StringBuilder(fiofrom);
+
+        for (Communication communication : fromEmail.getCommunications()) {
+            contacts.append("\n" + communication.getCommunicationType().getDescription() + ": " + communication.getIdentify());
+        }
+        contacts.append("\n");
+        for (Flat flat : fromEmail.getFlats()) {
+            contacts.append("\n Корпус " + flat.getHouse() + " подьезд " + flat.getPorch() + " этаж " + flat.getFloor() + " квартира " + flat.getFlatNumber());
+        }
+
+
         for (Contact contact : toEmails) {
-            //res.add(sendMail(mail, subject, text, isHtml));
+
+
+            sendMail(contactService.getEmail(contact), subject,
+                    builder.buildUserToUserMessage(fiofrom, contact.getLastName() + ' ' + contact.getFirstName() + ' ' + contact.getMiddleName(),
+                            contacts.toString(), text), isHtml);
         }
         return false;
     }

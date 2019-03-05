@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import static ru.geekbrains.gkportal.config.TemplateNameConst.REGISTRATION_MAIL;
-import static ru.geekbrains.gkportal.config.TemplateNameConst.REGISTRATION_QUESTIONNAIRE_MAIL;
+import static ru.geekbrains.gkportal.config.TemplateNameConst.*;
 
 @Service
 public class MailMessageBuilder {
@@ -16,6 +15,7 @@ public class MailMessageBuilder {
 
     private static final String VARIABLE_REGISTRATION_USER = "user";
     private static final String VARIABLE_REGISTRATION_PASSWORD = "password";
+
 
 
     private TemplateEngine templateEngine;
@@ -46,8 +46,16 @@ public class MailMessageBuilder {
         return templateEngine.process(REGISTRATION_QUESTIONNAIRE_MAIL, context);
     }
 
-    public String buildUserToUserMessage() {
-        return "";
+    public String buildUserToUserMessage(String fromFIO, String toFIO, String fromContact, String messageText) {
+        Context context = new Context();
+        messageText = messageText.replace("\n", "<br>");
+        fromContact = fromContact.replace("\n", "<br>");
+
+        context.setVariable("fromFIO", fromFIO);
+        context.setVariable("toFIO", toFIO);
+        context.setVariable("fromContact", fromContact);
+        context.setVariable("messageText", messageText);
+        return templateEngine.process(LK_MESSAGE_USER_TO_USER_MAIL, context);
     }
 
 }

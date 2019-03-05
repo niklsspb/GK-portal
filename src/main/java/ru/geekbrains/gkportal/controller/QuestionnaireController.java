@@ -99,7 +99,7 @@ public class QuestionnaireController {
     public String showQuestionnairePieResults(@RequestParam String questionnaireId, Model model) {
         List<QuestionResultFromView> qr = questionnaireService.getQuestionaryResultsForPieDiograms(questionnaireId);
         model.addAttribute("results", qr);
-        return returnShablon(model, QUESTIONNAIRE_PIE);
+        return returnShablon(model, QUESTIONNAIRE_PIE_FORM);
     }
 
     @IsAuthenticated
