@@ -24,7 +24,11 @@
     </div><!-- d-flex -->
 
 
-
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var questionnaireId = /*[[${param.questionnaireId}]]*/ '';
+        /*]]>*/
+    </script>
     <table id="resultTable" class="result-table display" style="width:100%">
         <thead>
         <tr>
