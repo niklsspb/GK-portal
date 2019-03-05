@@ -129,4 +129,12 @@ public class AnswerResultService {
         return questionnaireContactResults;
     }
 
+    public List<Contact> findAllContactByQuestionnaireID(String questionnaireID) {
+        List<String> list = answerResultRepository.findAllDistinctContactByQuestionnaire_Uuid(questionnaireID);
+        List<Contact> contactList = new ArrayList<>();
+        for (String c : list) {
+            contactList.add(contactService.findById(c));
+        }
+        return contactList;
+    }
 }
