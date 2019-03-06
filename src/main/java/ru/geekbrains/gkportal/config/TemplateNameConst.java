@@ -71,6 +71,4 @@ public class TemplateNameConst {
         model.addAttribute("content", template);
         return TEMPLATE_MAIN;
     }
-
-
 }
