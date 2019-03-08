@@ -19,11 +19,8 @@
         <p th:if="${completed} != null"></p>
         <th:block th:if="${questionnaireList} != null">
             <ul style="margin-top: 100px">
-                <div sec:authorize="hasAuthority('admin')">
-                    <p>
-                        <a th:href="@{/questionnaire/add}">Создать новый опрос</a><br>
 
-                </div>
+                <a sec:authorize="hasAuthority('admin')" th:href="@{/questionnaire/add}">Создать новый опрос</a><br>
 
                 <li th:each="item :${questionnaireList}">
                     <div class="card br-pagebody">
@@ -34,8 +31,10 @@
                         <p th:text="${item.name}"></p>
                     <p>
                         <a th:href="@{/questionnaire(questionnaireId = ${item.uuid})}">Участвовать </a><br>
-                        <a th:href="@{/questionnaire/result(questionnaireId = ${item.uuid})}">Результаты </a><br>
-                        <a th:href="@{/questionnaire/questionnaire-result-datatable(questionnaireId = ${item.uuid})}">Сверка
+                        <a sec:authorize="hasAuthority('admin')"
+                           th:href="@{/questionnaire/result(questionnaireId = ${item.uuid})}">Результаты </a><br>
+                        <a sec:authorize="hasAuthority('admin')"
+                           th:href="@{/questionnaire/questionnaire-result-datatable(questionnaireId = ${item.uuid})}">Сверка
                             с документами</a><br>
                         <a th:href="@{/questionnaire/pie(questionnaireId = ${item.uuid})}">Графики</a><br>
                     </p>
