@@ -60,6 +60,11 @@ public class TemplateNameConst {
     // шахматка для ЛК
     public static final String LK_SHOW_FLATS = "lk/lk-show-flats";
 
+    // ============== Ошибки ==========================
+    public static final String ERROR_404 = "errors/404";
+    public static final String ERROR_403 = "errors/403";
+    public static final String ERROR_500 = "errors/500";
+
     /**
      * Автоматизация возврата шаблона
      *
@@ -68,7 +73,8 @@ public class TemplateNameConst {
      * @return Имя общего шаблона
      */
     public static String returnShablon(Model model, String template) {
-        model.addAttribute("content", template);
-        return TEMPLATE_MAIN;
+        // null - заглушка для теста, не знаю как правильно передать из теста не нулл
+        if (model != null) model.addAttribute("content", template);
+        return (model == null) ? template : TEMPLATE_MAIN;
     }
 }

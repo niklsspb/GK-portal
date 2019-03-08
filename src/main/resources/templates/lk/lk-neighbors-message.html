@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <header th:fragment="header">
-    <title>Отправка сообщений соседям</title>
+    <title th:text="#{page.siteTitle}+'.'+#{page.lk.sendMail.title}"></title>
 
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -13,22 +13,26 @@
 <body>
 <div class="container card" th:fragment="body">
     <div th:replace="fragment/page-content::pageTitle
-    (title='Личный кабинет, сообщение соседям',description='тут можно отправить сообщение соседям',iconClass='ion-ios-email-outline') "/>
+    (title=#{page.lk.sendMail.welcome},description=#{page.lk.sendMail.welcomeDescrition},iconClass='ion-ios-email-outline') ">
+    </div>
 
     <div class="ht-md-60 pd-x-20 bg-dark rounded d-flex align-items-center justify-content-center mg-t-20">
         <ul class="nav nav-outline nav-outline-for-dark active-info align-items-center flex-column flex-md-row"
             role="tablist">
             <li class="nav-item"><a aria-selected="false" class="nav-link" role="tab"
-                                    th:href="@{/user/profile}">Home</a></li>
+                                    th:href="@{/user/profile}" th:text="#{page.lk.submenu.home}">Home</a></li>
 
             <li class="nav-item"><a aria-selected="false" class="nav-link" role="tab"
-                                    th:href="@{/lk/questionnaire-answer-result}">Результаты Ваших голосований</a></li>
+                                    th:href="@{/lk/questionnaire-answer-result}" th:text="#{page.lk.submenu.question}">Результаты
+                Ваших голосований</a></li>
 
             <li class="nav-item"><a aria-selected="false" class="nav-link"
-                                    th:href="@{/lk/show-flats}" role="tab">Шахматка</a></li>
+                                    role="tab" th:href="@{/lk/show-flats}"
+                                    th:text="#{page.lk.submenu.scheme}">Шахматка</a></li>
 
             <li class="nav-item"><a aria-selected="true" class="nav-link active show" role="tab"
-                                    th:href="@{/lk/neighbors-message}">Соседи</a></li>
+                                    th:href="@{/lk/neighbors-message}"
+                                    th:text="#{page.lk.submenu.message-to-neighbors}">Соседи</a></li>
         </ul>
     </div>
 
@@ -38,11 +42,12 @@
 
                 <div class="row margin-top-10">
                     <div class="col form-group">
-                        <h5 class="panel-title">Выберите один из вариантов отображения</h5>
+                        <h5 class="panel-title" th:text="#{page.lk.sendMail.selectView}">Выберите один из вариантов
+                            отображения</h5>
                         <table class="table table-bordered table-hover">
                             <thead>
                             <tr class="table-primary">
-                                <th class="font-weight-bold">Наименование</th>
+                                <th class="font-weight-bold" th:text="#{page.lk.sendMail.selectName}">Наименование</th>
                             </thead>
                             </tr>
                             <tbody>
@@ -61,10 +66,10 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Квартира</th>
-                                <th>Дом</th>
-                                <th>Подъезд</th>
-                                <th>Этаж</th>
+                                <th th:text="#{page.lk.sendMail.flat}">Квартира</th>
+                                <th th:text="#{page.lk.sendMail.house}">Дом</th>
+                                <th th:text="#{page.lk.sendMail.porch}">Подъезд</th>
+                                <th th:text="#{page.lk.sendMail.floor}">Этаж</th>
                             </tr>
                             </thead>
                         </table>
@@ -75,12 +80,15 @@
                 <hr>
                 <br>
                 <div class="form-group">
-                    <label class="control-label " for="message">Написать сообщение</label>
+                    <label class="control-label " for="message"
+                           th:text="#{page.lk.sendMail.sendMessage}">Написать сообщение</label>
                     <textarea class="form-control" id="message" name="message" rows="5"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-primary " name="submit" type="submit">Отправить</button>
+                    <button class="btn btn-primary " name="submit" th:text="#{page.lk.sendMail.send}" type="submit">
+                        Отправить
+                    </button>
                 </div>
             </form>
         </div>

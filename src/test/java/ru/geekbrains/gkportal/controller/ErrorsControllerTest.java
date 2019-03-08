@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static ru.geekbrains.gkportal.config.TemplateNameConst.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @AutoConfigureMockMvc
@@ -21,9 +23,9 @@ public class ErrorsControllerTest {
     private ErrorsController errorsController;
 
     private static final Map<String, String> myMap = new HashMap<String, String>() {{
-        put("404", "errors/404");
-        put("500", "errors/500");
-        put("403", "errors/403");
+        put("404", ERROR_404);
+        put("500", ERROR_500);
+        put("403", ERROR_403);
     }};
 
     @Autowired
@@ -34,10 +36,13 @@ public class ErrorsControllerTest {
     @Test
     public void handleErrorTest() {
         MockHttpServletRequest request = new MockHttpServletRequest();
+        MockHttpServletResponse rer;
+
+
         for (Map.Entry<String, String> m : myMap.entrySet()) {
             request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, m.getKey());
             assertEquals(
-                    errorsController.handleError(request),
+                    errorsController.handleError(request, null),
                     m.getValue()
             );
             request.clearAttributes();

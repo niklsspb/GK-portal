@@ -3,14 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <header th:fragment="header">
-    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
     <title>ЖК "Город"</title>
 </header>
 <body>
 <div th:fragment="body">
 
     <div th:replace="fragment/page-content::pageTitle
-    (title='Добро пожаловать на сайт ЖК Город',description='сайт для собственников недвижимости в ЖК Город',iconClass='ion-ios-people-outline') "/>
+    (title=#{page.index.title},description=#{page.index.description},iconClass='ion-ios-people-outline') "/>
 
     <div class="d-sm-flex align-items-center pd-t-15 pd-sm-t-25 pd-x-20 pd-sm-x-30">
 
