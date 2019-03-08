@@ -2,19 +2,22 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-<header th:fragment="header">
+<head>
+    <th:block th:fragment="header">
     <title>ЖК "Город"</title>
-</header>
+    </th:block>
+</head>
 <body>
 <div th:fragment="body">
 
     <div th:replace="fragment/page-content::pageTitle
-    (title=#{page.index.title},description=#{page.index.description},iconClass='ion-ios-people-outline') "/>
+    (title=#{page.index.title},description=#{page.index.description},iconClass='ion-ios-people-outline') ">
+    </div>
 
     <div class="d-sm-flex align-items-center pd-t-15 pd-sm-t-25 pd-x-20 pd-sm-x-30">
 
     <img class="img-fit-cover " th:src="@{/img/main.jpg}">
-
+    </div>
 
 </div>
 </body>

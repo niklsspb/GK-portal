@@ -3,8 +3,8 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <div th:replace="~{fragment/header :: header}"/>
-    <div th:replace="~{${content}::header}"/>
+    <th:block th:replace="~{fragment/header :: header}"/>
+    <th:block th:replace="~{${content}::header}"/>
 </head>
 
 
@@ -21,23 +21,23 @@
 
 
 <!--  Left Panel -->
-<div class="br-sideleft overflow-y-auto" th:replace="~{fragment/panel :: left}"/>
+<th:block class="br-sideleft overflow-y-auto" th:replace="~{fragment/panel :: left}"/>
 
 <!-- Header Panel -->
-<div class="br-header" th:replace="~{fragment/panel :: top}"/>
+<th:block class="br-header" th:replace="~{fragment/panel :: top}"/>
 
 
 <!-- Start Main Panel -->
 <div class="br-mainpanel">
 
     <div class="card br-pagebody pd-t-30 pd-b-30">
-        <div class="br-pagebody" th:replace="~{${content}::body}">
+        <th:block class="br-pagebody" th:replace="~{${content}::body}">
             <!-- this is where your contents will be added -->
-        </div>
+        </th:block>
     </div><!-- br-pagebody -->
 
     <!-- Footer Panel -->
-    <div class="br-header" th:replace="~{fragment/panel :: bottom}"/>
+    <th:block class="br-header" th:replace="~{fragment/panel :: bottom}"/>
 
 </div><!-- br-mainpanel -->
 <!-- End Main Panel -->

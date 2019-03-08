@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script th:src="@{/js/regboard.js}" type="text/javascript"></script>
-    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <th:block th:fragment="header">
     <title>Запрос подтверждения</title>
+    </th:block>
 </head>
 <body>
-<div class="container">
+<div class="container" th:fragment="body">
     <div style="width: 800px; margin-top: 50px;">
         <h1 style="margin-bottom: 50px" th:text="${result}">Поздравляем. <br>Регистрация прошла успешно</h1>
         <p></p>

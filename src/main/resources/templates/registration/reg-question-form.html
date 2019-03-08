@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="header">
+<head>
+    <th:block th:fragment="header">
 
     <script th:src="@{/js/main.js}" type="text/javascript"></script>
     <script th:src="@{/js/regboard.js}" type="text/javascript"></script>
@@ -44,7 +45,8 @@
     <th:block th:if="${questionnaire} != null">
         <title th:text="${questionnaire.name}"> Опрос </title>
     </th:block>
-</header>
+    </th:block>
+</head>
 <body>
 <div class="container br-pagebody" th:fragment="body">
         <th:block th:if="${questionnaire} != null">

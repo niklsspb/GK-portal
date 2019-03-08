@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="header">
+<head>
+    <th:block th:fragment="header">
     <link type="text/css" rel="stylesheet" th:href="@{/css/lk-show-flats.css}"/>
     <title th:text="#{page.siteTitle}+'.'+#{page.lk.scheme.title}">Личный кабинет - Шахматка</title>
-</header>
+    </th:block>
+</head>
 <body>
 <div class="br-pagebody card" th:fragment="body">
 

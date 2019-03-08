@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="header">
+<head>
+    <th:block th:fragment="header">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script th:src="@{/js/pie.js}"></script>
     <title>Графики по голосованиям</title>
-
-</header>
+    </th:block>
+</head>
 <body>
 
 <div class="container card" th:fragment="body">

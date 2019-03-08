@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-<header th:fragment="header">
+<head>
+    <th:block th:fragment="header">
     <title th:text="#{page.siteTitle}+'.'+#{page.p404}"></title>
-</header>
+    </th:block>
+</head>
 
 <body>
 <div class="container" th:fragment="body">

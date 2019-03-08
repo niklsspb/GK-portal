@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="header">
+<head>
+    <th:block th:fragment="header">
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/fh-3.1.4/datatables.min.css"/>
     <script type="text/javascript"
             src="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/fh-3.1.4/datatables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css"/>
     <script type="text/javascript" th:src="@{/js/datatable.js}"></script>
-</header>
+    </th:block>
+</head>
 <body>
 <div class="container-gk-portal card br-pagebody" th:fragment="body">
 

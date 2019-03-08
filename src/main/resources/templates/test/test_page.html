@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="header">
-
-</header>
+<head>
+    <th:block th:fragment="header">
+    </th:block>
+</head>
 <body>
 <div class="br-pagebody  card" th:fragment="body">
     <div th:replace="fragment/page-content::pageTitle

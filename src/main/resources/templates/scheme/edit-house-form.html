@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="hedaer">
+<head>
+    <th:block th:fragment="hedaer">
     <script th:src="@{/js/editboard.js}" type="text/javascript"></script>
     <title>Просмотр/редактирование дома</title>
-</header>
+    </th:block>
+</head>
 <body>
 <div th:fragment="body">
     <div th:replace="fragment/page-content::pageTitle
