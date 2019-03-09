@@ -9,11 +9,12 @@
 <body>
 <!-- Start Left Panel -->
 
+
 <div class="br-sideleft overflow-y-auto" th:fragment="left">
+
+
     <label class="sidebar-label pd-x-15 mg-t-20" th:text="#{page.navigationMenu.titleText}">Навигация</label>
     <div class="br-sideleft-menu">
-
-
         <div sec:authorize="isAuthenticated()">
             <a class="br-menu-link" th:href="@{/user/profile}">
                 <div class="br-menu-item">

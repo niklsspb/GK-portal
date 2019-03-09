@@ -1,5 +1,5 @@
 /*!
- * Bracket Plus v1.0.0 (https://themetrace.com/bracketplus)
+ * Bracket Plus v1.1.0 (https://themetrace.com/bracketplus)
  * Copyright 2017-2018 ThemePixels
  * Licensed under ThemeForest License
  */
@@ -8,14 +8,9 @@
 
 $(document).ready(function () {
 
-    // This will auto show sub menu using the slideDown()
-    // when top level menu have a class of .show-sub
-    $('.show-sub + .br-menu-sub').slideDown();
-
-
     // This will collapsed sidebar menu on left into a mini icon menu
     $('#btnLeftMenu').on('click', function () {
-        var menuText = $('.menu-item-label,.menu-item-arrow');
+        var menuText = $('.menu-item-label');
 
         if ($('body').hasClass('collapsed-menu')) {
             $('body').removeClass('collapsed-menu');
@@ -57,7 +52,7 @@ $(document).ready(function () {
                 // show current shown sub menu that was hidden from collapsed
                 $('.show-sub + .br-menu-sub').slideDown();
 
-                var menuText = $('.menu-item-label,.menu-item-arrow');
+                var menuText = $('.menu-item-label');
                 menuText.removeClass('d-lg-none');
                 menuText.removeClass('op-lg-0-force');
 
@@ -67,7 +62,7 @@ $(document).ready(function () {
                 // hide current shown menu
                 $('.show-sub + .br-menu-sub').slideUp();
 
-                var menuText = $('.menu-item-label,.menu-item-arrow');
+                var menuText = $('.menu-item-label');
                 menuText.addClass('op-lg-0-force');
                 menuText.addClass('d-lg-none');
             }
@@ -77,7 +72,7 @@ $(document).ready(function () {
 
     // This will show sub navigation menu on left sidebar
     // only when that top level menu have a sub menu on it.
-    $('.br-menu-link').on('click', function () {
+    $('.br-sideleft').on('click', '.br-menu-link', function () {
         var nextElem = $(this).next();
         var thisLink = $(this);
 
@@ -122,7 +117,7 @@ $(document).ready(function () {
 
 
     // This will hide sidebar when it's clicked outside of it
-    $(document).on('click', function (e) {
+    $(document).on('click touchstart', function (e) {
         e.stopPropagation();
 
         // closing left sidebar
@@ -143,6 +138,15 @@ $(document).ready(function () {
     });
 
 
+    // displaying time and date in right sidebar
+    // var interval = setInterval(function() {
+    //   var momentNow = moment();
+    //   $('#brDate').html(momentNow.format('MMMM DD, YYYY') + ' '
+    //     + momentNow.format('dddd')
+    //     .substring(0,3).toUpperCase());
+    //     $('#brTime').html(momentNow.format('HH:mm:ss'));
+    // }, 100);
+
     // Datepicker
     if ($().datepicker) {
         $('.form-control-datepicker').datepicker()
@@ -152,9 +156,16 @@ $(document).ready(function () {
     }
 
 
-
     // jquery ui datepicker
     $('.datepicker').datepicker();
+
+    // switch button
+    $('.br-switchbutton').on('click', function () {
+        $(this).toggleClass('checked');
+    });
+
+    // peity charts
+//  $('.peity-bar').peity('bar');
 
     // highlight syntax highlighter
     $('pre code').each(function (i, block) {
@@ -187,7 +198,8 @@ $(document).ready(function () {
     // Select2 without the search
     if ($().select2) {
         $('.select2').select2({
-            minimumResultsForSearch: Infinity
+            minimumResultsForSearch: Infinity,
+            placeholder: 'Choose one'
         });
 
         // Select2 by showing the search

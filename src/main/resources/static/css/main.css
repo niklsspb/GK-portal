@@ -107,7 +107,7 @@ body {
     border-color: darkgrey;
     margin-top: 5px;
     margin-bottom: 5px;
-    width: 70%;
+
 }
 
 .gk-reg-conteiner {
@@ -116,7 +116,6 @@ body {
     border-width: thin;
     margin-top: 5px;
     margin-bottom: 5px;
-    width: 70%;
 }
 
 .gk-flat-number {
@@ -208,4 +207,17 @@ body {
 .input-question-sort-number {
     width: 5em;
     text-align: center;
+}
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
 }
