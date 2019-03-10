@@ -31,13 +31,13 @@
 <div class="br-mainpanel">
 
     <div class="card br-pagebody pd-t-30 pd-b-30">
-        <th:block class="br-pagebody" th:replace="~{${content}::body}">
+        <th:block class="br-pagebody" th:replace="~{${content} :: main}">
             <!-- this is where your contents will be added -->
         </th:block>
     </div><!-- br-pagebody -->
 
     <!-- Footer Panel -->
-    <th:block class="br-header" th:replace="~{fragment/panel :: bottom}"/>
+    <th:block class="br-footer" th:replace="~{fragment/panel :: bottom}"/>
 
 </div><!-- br-mainpanel -->
 <!-- End Main Panel -->

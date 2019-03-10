@@ -4,7 +4,7 @@
     <title th:text="#{page.siteTitle}+'.'+#{page.lk.title}">Личный кабинет</title>
 </header>
 <body>
-<div class="br-pagebody card" th:fragment="body">
+<div class="br-pagebody card" th:fragment="main">
 
     <div th:replace="fragment/page-content::pageTitle
     (title=#{page.lk.welcome},description=#{page.lk.welcomeDescription},iconClass='icon ion-ios-wineglass') ">

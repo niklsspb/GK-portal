@@ -14,6 +14,14 @@
                     <div class="gk-flat-number" th:text="${flat.flatNumber}"></div>
                     <div class="gk-flat-build-number" th:text="${flat.flatNumberBuild}"></div>
                 </div>
+                <div th:attr="data-flat-id=${flat.uuid.toString()}"
+                     th:class="gk-flat"
+                     th:classappend="${flat.accountCount}>0 ? 'gk-occupied' : 'gk'" th:each="flat:${floor.flats}"
+                     th:if="${flat.riser==iter }">
+                    <div class="gk-flat-number" th:text="${flat.flatNumber}"></div>
+                    <div class="gk-flat-build-number" th:text="${flat.flatNumberBuild}"></div>
+                </div>
+
             </td>
         </tr>
         </tbody>

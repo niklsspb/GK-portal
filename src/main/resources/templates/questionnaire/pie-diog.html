@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div class="container card" th:fragment="body">
+<div class="container card" th:fragment="main">
     <div th:each="question : ${results}" class="question-container">
         <p th:text="${question.questionName}"></p>
         <table border="1">

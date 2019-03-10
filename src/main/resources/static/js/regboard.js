@@ -29,6 +29,7 @@ $(document).ready(function () {
         var houseNum = caller.find('.gk-select-house select').val();
         var porchNum = $(this).val();
         showFlatChooser(caller, houseNum, porchNum);
+        7
     });
     $('#gk-reg-flats').on('click', '.gk-flat', function () {
         var caller = $(this).parents('.gk-flat-chooser');

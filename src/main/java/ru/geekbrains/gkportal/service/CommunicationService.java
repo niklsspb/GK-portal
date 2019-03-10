@@ -127,22 +127,24 @@ public class CommunicationService {
         return null;
     }
 
-    public Collection<Contact> getContactListByIdentify(CommunicationType communicationType, String identidy) {
+    public List<Contact> getContactListByIdentify(CommunicationType communicationType, String identidy) {
         List<Communication> communicationList =
                 communicationRepository.findAllByCommunicationTypeAndIdentify(communicationType, identidy);
         List<Contact> contacts = new ArrayList<>();
         for (Communication communication : communicationList) {
-            contacts.add(communication.getContact());
+            // возвращаем только основной контракт
+            if (communication.getDescription().equals(DEFAULT_DESCRIPTION))
+                contacts.add(communication.getContact());
         }
         return contacts;
 
     }
 
-    public Collection<Contact> getContactListByEmail(String identidy) throws Throwable {
+    public List<Contact> getContactListByEmail(String identidy) throws Throwable {
         return getContactListByIdentify(communicationTypeService.findEmailType(), identidy);
     }
 
-    public Collection<Contact> getContactListByPhone(String identidy) throws Throwable {
+    public List<Contact> getContactListByPhone(String identidy) throws Throwable {
         return getContactListByIdentify(communicationTypeService.findPhoneType(), identidy);
     }
 }

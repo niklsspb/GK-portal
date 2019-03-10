@@ -14,6 +14,7 @@ import ru.geekbrains.gkportal.entity.questionnaire.Questionnaire;
 import ru.geekbrains.gkportal.entity.questionnaire.QuestionnaireContactConfirm;
 import ru.geekbrains.gkportal.service.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Collection;
@@ -126,8 +127,11 @@ public class RegistrationController {
      * @return
      */
     @PostMapping(value = "/userRegister")
-    public String registerUser(@Valid @ModelAttribute("systemUser") SystemAccount systemAccount, BindingResult bindingResult, Model model) {
+    public String registerUser(@Valid @ModelAttribute("systemUser") SystemAccount systemAccount,
+                               BindingResult bindingResult, HttpServletRequest request, Model model) {
 
+        List<Contact> contactList = null;
+        String contactID = systemAccount.getPhoneNumber();
         if (systemAccount.getFastRegistration() == null) systemAccount.setFastRegistration(false);
         String returnFailShablon = systemAccount.getFastRegistration() ? REGISTRATION_FAST_FORM : REGISTRATION_FULL_FORM;
         StringBuilder errorText = new StringBuilder();
@@ -136,8 +140,11 @@ public class RegistrationController {
         // быстрая регистрация, только 3 ошибки из валидации + свои ошибки
         if (systemAccount.getFastRegistration()) {
 
-            if (bindingResult.hasFieldErrors("email") || bindingResult.hasFieldErrors("password") ||
-                    bindingResult.hasFieldErrors("matchingPassword")) {
+
+            if (contactID != null && (bindingResult.hasFieldErrors("email") || bindingResult.hasFieldErrors("password") ||
+                    bindingResult.hasFieldErrors("matchingPassword"))) {
+                isError = true;
+            } else if (bindingResult.hasFieldErrors("email")) {
                 isError = true;
             }
 
@@ -146,7 +153,7 @@ public class RegistrationController {
                 isError = true;
             }
 
-            Collection<Contact> contactList = null;
+
             try {
                 contactList = contactService.getContaсtListByEmail(systemAccount.getEmail());
             } catch (Throwable throwable) {
@@ -161,12 +168,22 @@ public class RegistrationController {
 
             if (!isError) {
                 try {
-                    // создаём аккаунт
-                    //todo если несколько аккаунтов то нужна дополнительная форма выборв
-                    Account account = accountService.createAccount(systemAccount, contactList.stream().findFirst().get());
-                    // отправляем подтверждающее письмо
-                    mailService.sendRegistrationMail(account.getContact());
-                    return returnShablon(model, REGISTRATION_SUCCESS_FROM);
+                    if (contactID == null) {
+
+                        model.addAttribute("contactList", contactList);
+                        errorText.append("Выберите контакт, который будет привязан к этой почте !");
+
+
+                    } else {
+                        // создаём аккаунт
+                        Contact contact = contactService.getContactByID(contactID);
+                        if (contact != null) {
+                            Account account = accountService.createAccount(systemAccount, contactService.getContactByID(contactID));
+                            // отправляем подтверждающее письмо
+                            mailService.sendRegistrationMail(account.getContact());
+                            return returnShablon(model, REGISTRATION_SUCCESS_FROM);
+                        }
+                    }
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                     errorText.append("Произошла непредвиденная ошибка");

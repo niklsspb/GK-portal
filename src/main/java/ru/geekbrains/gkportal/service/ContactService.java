@@ -17,7 +17,6 @@ import ru.geekbrains.gkportal.entity.Ownership;
 import ru.geekbrains.gkportal.repository.ContactRepository;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -202,7 +201,7 @@ public class ContactService {
     }
 
 
-    public Collection<Contact> getContaсtListByEmail(String mail) throws Throwable {
+    public List<Contact> getContaсtListByEmail(String mail) throws Throwable {
         return communicationService.getContactListByEmail(mail);
     }
 }

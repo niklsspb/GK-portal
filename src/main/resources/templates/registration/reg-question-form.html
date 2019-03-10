@@ -56,7 +56,7 @@
 <body>
 
 
-<div class="card br-pagebody container" th:fragment="body">
+<div class="card br-pagebody container" th:fragment="main">
 
     <div th:replace="fragment/page-content::pageTitle
     (title=${(questionnaire==null)?'':questionnaire.name},description=${(questionnaire==null)?'':questionnaire.description},iconClass='ion-ios-compose') ">

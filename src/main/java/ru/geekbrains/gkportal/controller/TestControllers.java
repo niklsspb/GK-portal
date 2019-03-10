@@ -32,7 +32,7 @@ public class TestControllers {
     @IsAdmin
     @GetMapping("/email")
     public int sendMail() {
-        mailService.sendRegistrationMail("admin@chertenok.ru");
+        mailService.sendRegistrationMail("");
         return HttpStatus.OK.value();
     }
 
@@ -46,12 +46,17 @@ public class TestControllers {
 
                 "\n\n" +
 
-                "Уважаемые собственники квартир 10 секции корпуса 1, \n\n" +
+                "Уважаемые собственники квартир 2 секции корпуса 1, \n\n" +
+                "В воскресенье 17.03.19 в 14-00 состоится \n" +
+                "СОБРАНИЕ ПОДЪЕЗДА.\n" +
+                "Один из вопросов: обшивка МОПов.\n\n" +
                 "Заранее спасибо за понимание!\n\n" +
                 "С Уважением,\n" +
-                "Инициативная группа Вашего под'езда\n";
+                "Инициативная группа Вашего подъезда\n";
 
-        List<String> mails = Arrays.asList("");
+        List<String> mails = Arrays.asList(
+                "");
+
 
 
         return mailService.sendMail(mails, subject, text, false);

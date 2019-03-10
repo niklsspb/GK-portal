@@ -9,7 +9,7 @@
         </head>
     </th:block>
 <body>
-<div class="card br-pagebody container " th:fragment="body">
+<div class="card br-pagebody container " th:fragment="main">
     <div th:replace="fragment/page-content::pageTitle
     (title='Быстрая регистрация',description='если Вы уже участвовали в опросе',iconClass='ion-ios-compose') "/>
 
@@ -26,24 +26,45 @@
                 </div>
             </div>
 
-            <div class="form-group row"><label class="col-sm-4 col-form-label">Пароль</label>
-                <div class="col-sm-7"><input class="form-control" placeholder="Very stRong paSS" required
-                                             th:field="*{password}" type="password">
-                    <div class="gk-error" th:errors="*{password}"></div>
-                </div>
-            </div>
+            <th:block th:if="${contactList != null}">
+                <div class="form-group row"><label class="col-sm-4 col-form-label">Выберите контакт</label>
+                    <div class="col-sm-7">
+                        <th:block th:each="contact:${contactList}">
 
-            <div class="form-group row"><label class="col-sm-4 col-form-label">Повтор пароля</label>
-                <div class="col-sm-7"><input class="form-control" placeholder="Very stRong paSS" required
-                                             th:field="*{matchingPassword}" type="password">
-                    <div class="gk-error" th:errors="*{matchingPassword}"></div>
+
+                            <label class="rdiobox">
+                                <input class="" required
+                                       th:field="*{phoneNumber}"
+                                       th:value="${contact.uuid}" type="radio">
+                                <span th:text="${contact.lastName+' '+contact.firstName+' '+contact.middleName}"></span>
+                            </label>
+
+
+                        </th:block>
+                    </div>
                 </div>
-            </div>
+
+                <div class="form-group row"><label class="col-sm-4 col-form-label">Пароль</label>
+                    <div class="col-sm-7"><input class="form-control" placeholder="Very stRong paSS" required
+                                                 th:field="*{password}" type="password">
+                        <div class="gk-error" th:errors="*{password}"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row"><label class="col-sm-4 col-form-label">Повтор пароля</label>
+                    <div class="col-sm-7"><input class="form-control" placeholder="Very stRong paSS" required
+                                                 th:field="*{matchingPassword}" type="password">
+                        <div class="gk-error" th:errors="*{matchingPassword}"></div>
+                    </div>
+                </div>
+            </th:block>
             <input th:field="*{fastRegistration}"
                    type="hidden">
             <div class="form-group row">
                 <div class="col-sm-5">
-                    <button class="btn btn-primary" type="submit">Я участвовал в опросе</button>
+                    <button class="btn btn-primary" th:text="${contactList == null}?'Поиск':'Регистрация'"
+                            type="submit">Регистрация
+                    </button>
                 </div>
             </div>
         </form>
