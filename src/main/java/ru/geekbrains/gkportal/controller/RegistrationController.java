@@ -169,11 +169,8 @@ public class RegistrationController {
             if (!isError) {
                 try {
                     if (contactID == null) {
-
                         model.addAttribute("contactList", contactList);
                         errorText.append("Выберите контакт, который будет привязан к этой почте !");
-
-
                     } else {
                         // создаём аккаунт
                         Contact contact = contactService.getContactByID(contactID);

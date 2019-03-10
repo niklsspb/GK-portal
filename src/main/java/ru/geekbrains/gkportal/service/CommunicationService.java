@@ -22,6 +22,7 @@ public class CommunicationService {
     private static final Logger logger = Logger.getLogger(GkPortalApplication.class);
 
     private static final String DEFAULT_DESCRIPTION = "Основной контакт";
+    private static final String OTHER_DESCRIPTION = "Дополнительный контакт";
     private CommunicationRepository communicationRepository;
     private CommunicationTypeService communicationTypeService;
     private MailService mailService;
@@ -80,12 +81,12 @@ public class CommunicationService {
         return communications;
     }
 
-    private Communication getOrCreateCommunication(SystemAccountDTO systemAccount, Contact contact, CommunicationType communicationType, String identify) {
+    private Communication getOrCreateCommunication(SystemAccountDTO systemAccount, Contact contact,
+                                                   CommunicationType communicationType, String identify) {
         Communication communication;
-        if ((communication = communicationRepository.findCommunicationByCommunicationTypeAndIdentifyAndContact(communicationType, identify, contact)) == null) {
+        if ((communication = communicationRepository.findCommunicationByCommunicationTypeAndIdentifyAndContact
+                (communicationType, identify, contact)) == null) {
             communication = createCommunication(systemAccount, contact, communicationType);
-
-
         }
         if (communicationType.getDescription().equals(CommunicationTypeService.EMAIL_DESCRIPTION) && !communication.isConfirmed()) {
 //            mailService.sendRegistrationMail(contact, communication);
@@ -95,7 +96,7 @@ public class CommunicationService {
     }
 
     public Communication createCommunication(SystemAccountDTO systemAccount, Contact contact, CommunicationType communicationType) {
-        return Communication.builder()
+        Communication communication = Communication.builder()
                 .communicationType(communicationType)
                 .identify(communicationType.getUuid().equals(CommunicationTypeService.EMAIL_TYPE_GUID) ? systemAccount.getEmail() : systemAccount.getPhoneNumber())
                 .confirmCode(UUID.randomUUID().toString())
@@ -104,6 +105,13 @@ public class CommunicationService {
                 .description(DEFAULT_DESCRIPTION)
                 .contact(contact)
                 .build();
+        // проверяем, что если есть другие емайл или почта, то их описание надо сменить с основного на другое
+        for (Communication com : contact.getCommunications()) {
+            if (com.getCommunicationType().getUuid().equals(communicationType.getUuid()) && !com.getIdentify().equals(communication.getIdentify())) {
+                com.setDescription(OTHER_DESCRIPTION);
+            }
+        }
+        return communication;
     }
 
     public String getMail(Collection<Communication> communications) {

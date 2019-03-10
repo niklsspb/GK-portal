@@ -82,7 +82,7 @@ public class MailService {
         StringBuilder contacts = new StringBuilder(fiofrom);
 
         for (Communication communication : fromEmail.getCommunications()) {
-            contacts.append("\n" + communication.getCommunicationType().getDescription() + ": " + communication.getIdentify());
+            contacts.append("\n" + communication.getCommunicationType().getDescription() + ": " + communication.getIdentify() + " (" + communication.getDescription() + ')');
         }
         contacts.append("\n");
         for (Flat flat : fromEmail.getFlats()) {
