@@ -41,8 +41,8 @@
                    th:text="${contact.getLastName()} +' ' + ${contact.getFirstName()}+' '+ ${contact.getMiddleName()} ">
                     ...</p>
                 <div th:each="communication : ${communications}">
-                    <p +th:text="${communication.getCommunicationType().getDescription()}+' : '+${communication.getIdentify()}+
-                    ' ('+${communication.getDescription()}"')'>
+                    <p th:text="${communication.getCommunicationType().getDescription()}+' : '+${communication.getIdentify()}+
+                    ' ('+${communication.getDescription()}+')'">
                         ...</p>
             </div>
 
