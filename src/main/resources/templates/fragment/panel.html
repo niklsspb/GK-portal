@@ -135,8 +135,64 @@
         <div class="br-logo"><a th:href="@{/}"><span>[</span>[[#{page.siteTitle}]]<span>]</span></a>
         </div>
     </div><!-- br-header-left -->
+    <div sec:authorize="isAuthenticated()">
+        <div class="br-header-right">
+            <nav class="nav">
+                <div class="dropdown">
+                    <a class="nav-link pd-x-7 pos-relative" data-toggle="dropdown" href="">
+                        <i class="icon ion-ios-email-outline tx-24"></i>
+                        <!-- start: if statement -->
+                        <!--<span class="square-8 bg-danger pos-absolute t-15 r-0 rounded-circle"></span>-->
+                        <!-- end: if statement -->
+                    </a>
 
+                </div><!-- dropdown -->
+                <div class="dropdown">
+                    <a class="nav-link pd-x-7 pos-relative" data-toggle="dropdown" href="">
+                        <i class="icon ion-ios-bell-outline tx-24"></i>
+                        <!-- start: if statement -->
+                        <!--         <span class="square-8 bg-danger pos-absolute t-15 r-5 rounded-circle"></span>-->
+                        <!-- end: if statement -->
+                    </a>
 
+                </div><!-- dropdown -->
+                <div class="dropdown">
+                    <a class="nav-link nav-link-profile" data-toggle="dropdown" href="">
+                        <span class="logged-name hidden-md-down"
+                              sec:authentication="principal.username">Katherine</span>
+
+                        <img alt="" class="wd-32 rounded-circle" src="https://via.placeholder.com/500">
+                        <span class="square-10 bg-success"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-250">
+                        <div class="tx-center">
+                            <a href=""><img alt="" class="wd-80 rounded-circle"
+                                            src="https://via.placeholder.com/500"></a>
+                            <h6 class="logged-fullname">Katherine P. Lumaad</h6>
+                            <p>youremail@domain.com</p>
+                        </div>
+                        <hr>
+                        <div class="tx-center">
+                            <span class="profile-earning-label">Earnings After Taxes</span>
+                            <h3 class="profile-earning-amount">$13,230 <i
+                                    class="icon ion-ios-arrow-thin-up tx-success"></i></h3>
+                            <span class="profile-earning-text">Based on list price.</span>
+                        </div>
+                        <hr>
+                        <ul class="list-unstyled user-profile-nav">
+                            <li><a href=""><i class="icon ion-ios-person"></i> Edit Profile</a></li>
+                            <li><a href=""><i class="icon ion-ios-gear"></i> Settings</a></li>
+                            <li><a href=""><i class="icon ion-ios-download"></i> Downloads</a></li>
+                            <li><a href=""><i class="icon ion-ios-star"></i> Favorites</a></li>
+                            <li><a href=""><i class="icon ion-ios-folder"></i> Collections</a></li>
+                            <li><a href=""><i class="icon ion-power"></i> Sign Out</a></li>
+                        </ul>
+                    </div><!-- dropdown-menu -->
+                </div><!-- dropdown -->
+            </nav>
+
+        </div>
+    </div>
 </div><!-- br-header -->
 <!-- End Header Panel -->
 
