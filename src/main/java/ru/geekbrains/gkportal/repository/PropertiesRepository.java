@@ -9,4 +9,6 @@ import ru.geekbrains.gkportal.entity.PropertyType;
 public interface PropertiesRepository extends CrudRepository<Property, String> {
 
     Property findByNameAndPropertyType(String name, PropertyType type);
+
+    Integer deleteAllByNameAndPropertyType(String name, PropertyType type);
 }

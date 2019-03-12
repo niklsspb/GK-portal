@@ -25,4 +25,10 @@ public class Property extends AbstractEntity {
 
     public Property() {
     }
+
+    public Property(String key, String value, PropertyType type) {
+        this.name = key;
+        this.value = value;
+        this.propertyType = type;
+    }
 }
