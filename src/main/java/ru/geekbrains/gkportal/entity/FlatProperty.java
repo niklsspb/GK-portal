@@ -18,7 +18,19 @@ public class FlatProperty extends AbstractEntity {
     private String styleNameCSS;
     @Column
     private Integer position;
-    //@Column(name = "d")
+    @Column(name = "date1_enabled")
+    private Boolean enabledDate1;
+    @Column(name = "date2_enabled")
+    private Boolean enabledDate2;
+    @Column(name = "comment_enabled")
+    private Boolean enablesComment;
+    @Column(name = "date1_description")
+    private String descriptionDate1;
+    @Column(name = "date2_description")
+    private String descriptionDate2;
+    @Column
+    // пока всегда отбираем только = 1
+    private Integer type;
 
 
 }
