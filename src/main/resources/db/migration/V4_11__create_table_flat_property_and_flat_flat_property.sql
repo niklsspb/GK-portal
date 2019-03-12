@@ -13,11 +13,11 @@ create TABLE `flat_property` (
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'описание',
   `css_style_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'css style',
   `position` int(11) NOT NULL COMMENT 'позиция для отображения',
-  `data1_enabled` bit(1) NOT NULL COMMENT 'нужна ли дата 1',
-  `data2_enabled` bit(1) NOT NULL COMMENT 'нужна ли дата 2',
+  `date1_enabled` bit(1) NOT NULL COMMENT 'нужна ли дата 1',
+  `date2_enabled` bit(1) NOT NULL COMMENT 'нужна ли дата 2',
   `comment_enabled` bit(1) NOT NULL COMMENT 'нужны ли комментарии',
-  `data1_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'описание к дата1',
-  `data2_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'описание к дата2',
+  `date1_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'описание к дата1',
+  `date2_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'описание к дата2',
   `type` int(11) NOT NULL DEFAULT '1' COMMENT 'на будущее, всегда отбираем только =1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

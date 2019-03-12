@@ -9,7 +9,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*Data for the table `flat_property` */
 
-insert  into `flat_property`(`id`,`description`,`css_style_name`,`position`,`data1_enabled`,`data2_enabled`,`comment_enabled`,`data1_description`,`data2_description`,`type`) values
+insert  into `flat_property`(`id`,`description`,`css_style_name`,`position`,`date1_enabled`,`date2_enabled`,`comment_enabled`,`date1_description`,`date2_description`,`type`) values
 ('3b210521-26b8-4b08-8660-c31134faaaa0','Ремонт','circle_red',2,'','','','Дата начала','Ожидаемая дата конца',1),
 ('6534ecc6-d920-482e-b1e8-1f36d77289d8','Есть в вотсап','square_green',5,'\0','\0','','','',1),
 ('910525ae-b9ad-416e-aaac-f1f595908d81','Заселена','circle_green',3,'','\0','','Дата заселения','',1),
