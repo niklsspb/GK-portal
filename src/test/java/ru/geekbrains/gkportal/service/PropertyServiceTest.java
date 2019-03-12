@@ -1,4 +1,4 @@
-package ru.geekbrains.gkportal.service.mail;
+package ru.geekbrains.gkportal.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.geekbrains.gkportal.entity.PropertyType;
-import ru.geekbrains.gkportal.service.PropertyService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +18,7 @@ import static org.junit.Assert.assertNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest
-public class PropertiesTest {
+public class PropertyServiceTest {
     private static Random r = new Random();
     private PropertyService propertyService;
     private static final Map<String, String> myMap = new HashMap<String, String>() {{
