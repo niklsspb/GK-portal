@@ -15,6 +15,13 @@
 
     <label class="sidebar-label pd-x-15 mg-t-20" th:text="#{page.navigationMenu.titleText}">Навигация</label>
     <div class="br-sideleft-menu">
+        <a class="br-menu-link" href="/oss4">
+            <div class="br-menu-item">
+                <i class="menu-item-icon icon ion-help tx-20"></i>
+                <span class="menu-item-label" th:text="#{page.navigationMenu.docs.oss4}">Документы к ОСС-4</span>
+            </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+    </div>
         <div sec:authorize="isAuthenticated()">
             <a class="br-menu-link" th:href="@{/user/profile}">
                 <div class="br-menu-item">
@@ -94,13 +101,6 @@
                                         th:text="#{page.navigationMenu.registration.questionnaireUser}">Участвовал в
                     опросе</a></li>
             </ul>
-            <a class="br-menu-link" href="/regQuestion">
-                <div class="br-menu-item">
-                    <i class="menu-item-icon icon ion-help tx-20"></i>
-                    <span class="menu-item-label" th:text="#{page.navigationMenu.registration.questionnaire.oss1}">Голосование ОСС-1</span>
-
-                </div><!-- menu-item -->
-            </a><!-- br-menu-link -->
 
             <a class="br-menu-link" href="\login">
                 <div class="br-menu-item">

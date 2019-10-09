@@ -9,6 +9,7 @@ public class TemplateNameConst {
     // ============= Главная страницв =========================
     public static final String INDEX_FORM = "index";
     public static final String LOGIN_FORM = "login";
+    public static final String OSS4_FORM = "docs/oss4";
 
     // ============= обычная регистрация =======================
     // Форма подтверждения аккаунта или опроса по почте

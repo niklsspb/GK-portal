@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="header">
+    <title th:text="#{page.siteTitle}+'.'+#{page.navigationMenu.docs.oss4}">Документы к ОСС 4</title>
+</header>
+<body>
+<div class="br-pagebody card" th:fragment="main">
+
+    <div th:replace="fragment/page-content::pageTitle
+    (title=#{page.docs.oss4},description=#{page.docs.oss4Description},iconClass='icon ion-ios-compose tx-70 lh-0 tx-info-800') ">
+    </div>
+
+
+    <div>
+        <!-- card-->
+        <div class="card bd-0 br-pagebody">
+            <div class="card-header tx-medium bd-0 tx-white bg-info">
+                <p class="mg-b-0" th:text="#{page.docs.oss4.corp1}">Персональные данные</p>
+            </div><!-- card-header -->
+            <div class="card-body bd bd-t-0 rounded-bottom">
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1RR4-tXlIzyUWO0tt6oPlZSwIZ8iU1-mI" target="_blank">Извещение
+                        о ОСС4</a>
+                </p>
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1cjtCwiTI71YVIh6GhD8wtbif9Rgpx6TG" target="_blank">Положение
+                        о координационном совете</a>
+                </p>
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1gXTCtiv4RTz-xCpCMOCksWHLiCbMUfGl" target="_blank">Положение
+                        о совете дома</a>
+                </p>
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1hlRZq76nMdEX3YGy3VjbLcFnT-PSJ9sR" target="_blank">Решение
+                        об ЭГ</a>
+                </p>
+
+
+            </div><!-- card-body -->
+        </div><!-- card -->
+    </div>
+
+    <div>
+        <div class="card bd-0 br-pagebody">
+            <div class="card-header tx-medium bd-0 tx-white bg-info">
+                <p class="mg-b-0" th:text="#{page.docs.oss4.corp2}">Квартиры</p>
+            </div><!-- card-header -->
+            <div class="card-body bd bd-t-0 rounded-bottom">
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1p1AlPb2Up1kQR7hAzTDpP9y6LGVh7iPE" target="_blank">Извещение
+                        о ОСС4</a>
+                </p>
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1j16kN6tIefXhNJcLw9iMQ_SMvbPJ_WVb" target="_blank">Положение
+                        о координационном совете</a>
+                </p>
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1YVX4sb_NZtyRV61GY9VqdEUdy7bsb0kA" target="_blank">Положение
+                        о совете дома</a>
+                </p>
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1oUfQrTTn7cXVMf30d61k9X6apsz905XW" target="_blank">Решение
+                        об ЭГ</a>
+                </p>
+
+            </div><!-- card-body -->
+        </div><!-- card -->
+    </div>
+
+    <div>
+        <div class="card bd-0 br-pagebody">
+            <div class="card-header tx-medium bd-0 tx-white bg-info">
+                <p class="mg-b-0" th:text="#{page.docs.oss4.corp3}">Данные для подсчёта веса голоса</p>
+            </div><!-- card-header -->
+            <div class="card-body bd bd-t-0 rounded-bottom">
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1W1kV8cqluriGwyrfGiKmMvR_kP5glRm9" target="_blank">Извещение
+                        о ОСС4</a>
+                </p>
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=10zF6LPjwhG4V21tLNi4fdMv276b51vmv" target="_blank">Положение
+                        о координационном совете</a>
+                </p>
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1zCmJ63N7YsY19REMu45XW8nMo9MdN9Zz" target="_blank">Положение
+                        о совете дома</a>
+                </p>
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1jS8l3ZvsvP6mMWguZQiUj-YqLPA3VOX_" target="_blank">Решение
+                        об ЭГ</a>
+                </p>
+
+            </div><!-- card-body -->
+        </div><!-- card -->
+    </div>
+
+
+    <p></p>
+
+</div>
+
+</body>
+</html>

@@ -9,11 +9,10 @@ import static ru.geekbrains.gkportal.config.TemplateNameConst.OSS4_FORM;
 import static ru.geekbrains.gkportal.config.TemplateNameConst.returnShablon;
 
 @Controller
-public class MainController {
+public class OSS4Controller {
+    private static final Logger logger = Logger.getLogger(OSS4Controller.class);
 
-    private static final Logger logger = Logger.getLogger(MainController.class);
-
-    @GetMapping("/")
+    @GetMapping("/oss4")
     public String login(Model model) {
         return returnShablon(model, OSS4_FORM);
     }
