@@ -1,6 +1,9 @@
 package ru.geekbrains.gkportal.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.geekbrains.gkportal.dto.interfaces.SystemAccountDTO;
 import ru.geekbrains.gkportal.entity.ContactType;
 
@@ -12,6 +15,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SystemAccountToOwnerShip extends AbstractSystemAccount implements SystemAccountDTO {
+
+    private String password;
+    private String matchingPassword;
+    private Boolean isRegistration;
 
     List<OwnershipRegDTO> ownerships = new ArrayList<>();
 
@@ -33,4 +40,9 @@ public class SystemAccountToOwnerShip extends AbstractSystemAccount implements S
     //private Integer carsInFamily;
 
     // private String comments;
+
+
+    public SystemAccountToOwnerShip(Boolean isRegistration) {
+        this.isRegistration = isRegistration;
+    }
 }

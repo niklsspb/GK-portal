@@ -267,7 +267,7 @@ public class RegistrationController {
         }
         // новый юзер
         if (systemAccount == null) {
-            systemAccount = new SystemAccountToOwnerShip();
+            systemAccount = new SystemAccountToOwnerShip(true);
             systemAccount.getOwnerships().add(new OwnershipRegDTO());
             systemAccount.setContactType(contactTypeService.getContactTypeByDescription(OWNER_TYPE));
             //model.addAttribute("flat", new FlatRegDTO());
@@ -301,6 +301,7 @@ public class RegistrationController {
 
         // заплатка - теряется с формы ?! todo разобраться
         systemAccount.setContactType(contactTypeService.getContactTypeByDescription(OWNER_TYPE));
+
 
         StringBuilder errorText = new StringBuilder();
         boolean isError = false;
