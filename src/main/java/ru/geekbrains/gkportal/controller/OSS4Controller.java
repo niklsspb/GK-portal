@@ -13,7 +13,7 @@ public class OSS4Controller {
     private static final Logger logger = Logger.getLogger(OSS4Controller.class);
 
     @GetMapping("/oss4")
-    public String login(Model model) {
+    public String oss4(Model model) {
         return returnShablon(model, OSS4_FORM);
     }
 }

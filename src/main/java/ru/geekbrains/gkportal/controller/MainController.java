@@ -14,7 +14,7 @@ public class MainController {
     private static final Logger logger = Logger.getLogger(MainController.class);
 
     @GetMapping("/")
-    public String login(Model model) {
+    public String main(Model model) {
         return returnShablon(model, OSS4_FORM);
     }
 }
