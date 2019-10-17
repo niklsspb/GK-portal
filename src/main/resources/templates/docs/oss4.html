@@ -11,11 +11,11 @@
     </div>
 
     <div class="row row-sm">
-        <div col-sm-6 col-xl-4>
+        <div class="col-sm-6 col-xl-4">
         <!-- card-->
         <div class="card bd-0 br-pagebody">
             <div class="card-header tx-medium bd-0 tx-white bg-info">
-                <p class="mg-b-0" th:text="#{page.docs.oss4.corp1}">Персональные данные</p>
+                <p class="mg-b-0" th:text="#{page.docs.oss4.corp1}">Корп 1</p>
             </div><!-- card-header -->
             <div class="card-body bd bd-t-0 rounded-bottom">
                 <p class="card-text">
@@ -42,13 +42,16 @@
                     <a href="https://drive.google.com/open?id=1QX4s6VldwpxcBdYGjFRV0c_9fWJWvwGs" target="_blank"
                     >Договор на обслуживание ЖК Город МС Сервис корп 1</a>
                 </p>
-
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1qSZ76rZy4vcZ7ebbGOdKkiQsVHszfjNd" target="_blank"
+                    >Договор на обслуживание паркинга с МС Сервис, корп 1</a>
+                </p>
 
             </div><!-- card-body -->
         </div><!-- card -->
     </div>
 
-        <div col-sm-6 col-xl-4>
+        <div class="col-sm-6 col-xl-4">
         <div class="card bd-0 br-pagebody">
             <div class="card-header tx-medium bd-0 tx-white bg-info">
                 <p class="mg-b-0" th:text="#{page.docs.oss4.corp2}">Квартиры</p>
@@ -78,13 +81,17 @@
                     <a href="https://drive.google.com/open?id=1D13IF1p_NCkN2jDs9mHAFeVheFeKVvSu" target="_blank"
                     >Договор на обслуживание ЖК Город МС Сервис корп 2</a>
                 </p>
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1XJQyiYeiCSgLks2ggu2VpYvWE6pfNc04" target="_blank"
+                    >Договор на обслуживание паркинга с МС Сервис, корп 2</a>
+                </p>
 
 
             </div><!-- card-body -->
         </div><!-- card -->
     </div>
 
-        <div col-sm-6 col-xl-4>
+        <div class="col-sm-6 col-xl-4">
         <div class="card bd-0 br-pagebody">
             <div class="card-header tx-medium bd-0 tx-white bg-info">
                 <p class="mg-b-0" th:text="#{page.docs.oss4.corp3}">Данные для подсчёта веса голоса</p>
@@ -113,6 +120,10 @@
                 <p class="card-text">
                     <a href="https://drive.google.com/open?id=19mrHvQ5ZbH6C0VoJhkCmo9Jh-2m1SPyg" target="_blank"
                     >Договор на обслуживание ЖК Город МС Сервис корп 3</a>
+                </p>
+                <p class="card-text">
+                    <a href="https://drive.google.com/open?id=1TrIqoIztYZjcKWypQ3x-eszU5UIrQZKS" target="_blank"
+                    >Договор на обслуживание паркинга с МС Сервис, корп 3</a>
                 </p>
 
             </div><!-- card-body -->
@@ -144,15 +155,23 @@
                 </p>
 
                 <a href="https://tlgg.ru/@d107a" target="_blank"
-                >Новостной канал ЖК в телеграмме (или наберите @d107a в поиске месседжера)</a>
+                ><i class="fab fa-2x fa-telegram-plane" style="color: #55a6f8"></i> Новостной канал ЖК в телеграмме (или
+                    наберите @d107a в поиске месседжера)</a>
                 <p class="card-text">
                     Всё самое важное о жизни ЖК!
                 </p>
 
                 <a href="https://tlgg.ru/joinchat/DWOf2UdmISPCoWyiMUIYZA" target="_blank"
-                >Общий чат ЖК Город</a>
+                ><i class="fab fa-2x fa-telegram-plane" style="color: #55a6f8"></i> Общий чат ЖК Город в телеграмме</a>
                 <p class="card-text">
                     Через него можно найти чат своего корпуса (ну или ремонта например), а в нём чат подъезда
+                </p>
+
+                <a href="https://chat.whatsapp.com/I2oEjph0gst3yGNFltSnKS" target="_blank"
+                ><i class="fab fa-2x fa-whatsapp" style="color: green"></i> Резервный чат ЖК Город в вотсапе</a>
+                <p class="card-text">
+                    Рекомендуется вместо него чат в телеграмм <br>
+                    (в телеграмм 1200 человек в основном чате, в вотсапе - 140)
                 </p>
 
 
@@ -166,7 +185,28 @@
                 <p class="mg-b-0" th:text="#{page.docs.oss4.NewsInfo}">Архив новостей</p>
             </div><!-- card-header -->
             <div class="card-body bd bd-t-0 rounded-bottom">
-
+                <h6 class="card-title">17.10.2019</h6>
+                <p class="card-text">
+                    Выложили договор с МС Сервис по паркингу
+                </p>
+                <br>
+                <p class="card-text">
+                    Очное обсуждение вопросов повестки состоится 19.10.2019 в 18:00 в подъезде № 4, корпуса 1
+                </p>
+                <h6 class="card-title">16.10.2019</h6>
+                <p class="card-text">
+                    Сообщаю, что инициаторами собрания по смене ук,<br>
+                    9 октября были поданы заявления в ук еврогород, о предоставлении реестра собственников помещений
+                    согласно части 3.1 статьи 45 жк рф, требуемых для проведения собрания, заполнения бланков и учета
+                    голосов.
+                    <br>
+                    По прошествии отведённых 5 дней запрошенный реестр так и не был предоставлен.<br>
+                    Такими противозаконными методами действующая ук еврогород препятствует проведению собрания
+                    собственников.<br>
+                    Тем не менее, благодаря заранее сделанному запросу в егрн, сложившаяся ситуация никак не скажется на
+                    проводимом собрании и его результатах.<br>
+                    По факту нарушения ук статьи 7.23.2 коап рф будет направлено заявление в прокуратуру.
+                </p>
                 <h6 class="card-title">15.10.2019</h6>
                 <p class="card-text">
                     Выложили договор с МС Сервис по корпусам, <br>
