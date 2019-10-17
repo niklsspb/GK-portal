@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="header">
+    <title th:text="#{page.siteTitle}+'.'+#{page.docs.sd2}">совет дома2</title>
+</header>
+<body>
+<div class="br-pagebody card" th:fragment="main">
+
+    <div th:replace="fragment/page-content::pageTitle
+    (title=#{page.docs.sd2},description=#{page.docs.sd1Description},iconClass='icon ion-ios-compose tx-70 lh-0 tx-info-800') ">
+    </div>
+
+    <div class="row row-sm">
+
+        <div class="col-sm-6 col-xl-10">
+            <!-- card -->
+            <div class="card ">
+                <div class="card-body rounded-top bd-0 bg-success tx-white">
+                    <h6 class="mg-b-3"><a class="tx-white hover-white-8" href="">Ланщикова Вера Ростиславовна</a></h6>
+                    <span class="tx-12 tx-white-8">3 секция - кандидат в председатели</span>
+                </div>
+
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/sd/2-1.jpg}">
+                <div class="card-body">
+                    <p class="card-text" style="margin-block-end: 0 !important">
+                        Есть опыт работы в энергосбыте. Планирует сделать проживание жильцов в нашем ЖК комфортным, а
+                        деятельность УК
+                        прозрачной.</br>
+                        В качестве ПСД не даст спуску УК, на сколько хватит сил и времени. Считает, что человека должны
+                        знать по
+                        делам, а не по разговорам.
+                    </p>
+                    <br>
+                    <i class="fab fa-2x fa-telegram-plane" style="color: #55a6f8"></i> Vera L.
+
+                </div>
+            </div>
+            <!-- card -->
+        </div>
+
+        <div class="col-sm-6 col-xl-5">
+            <!-- card -->
+            <div class="card ">
+                <div class="card-body">
+                    <h6 class="mg-b-3">
+                        <a class="tx-dark" href="">Галенко Вадим Юрьевич</a>
+                    </h6>
+                    <p class="card-text">5 секция</p>
+                </div>
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/sd/2-2.jpg}">
+                <div class="card-body">
+                    <p class="card-text" style="margin-block-end: 0 !important">
+                        Работает в строительстве. Планирует сделать проживание в ЖК безопасным для собственников.
+                    </p>
+                    <br>
+                    <a href="https://teleg.run/VadimVadim84" style="text-align: right;" target="_blank">
+                        <i class="fab fa-2x fa-telegram-plane" style="color: #55a6f8"></i> VadimVadim84</a>
+
+                </div>
+            </div>
+            <!-- card -->
+        </div>
+
+        <div class="col-sm-6 col-xl-5">
+            <!-- card -->
+            <div class="card ">
+                <div class="card-body">
+                    <h6 class="mg-b-3">
+                        <a class="tx-dark" href="">Чуйко Михаил Вадимович</a>
+                    </h6>
+                    <p class="card-text">3 секция</p>
+                </div>
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/sd/2-3.jpg}">
+                <div class="card-body">
+                    <p class="card-text" style="margin-block-end: 0 !important">
+                        Высшее экономическое образование. На данный момент состоит в СД первого созыва. Имеет
+                        желание помогать осуществлять
+                        инициативы, которые делают наш жк лучше и комфортнее для жизни.
+                    </p>
+                    <br>
+                    <a href="https://teleg.run/MChuyko" style="text-align: right;" target="_blank">
+                        <i class="fab fa-2x fa-telegram-plane" style="color: #55a6f8"></i> MChuyko</a>
+
+                </div>
+            </div>
+            <!-- card -->
+        </div>
+
+        <div class="col-sm-6 col-xl-5">
+            <!-- card -->
+            <div class="card ">
+                <div class="card-body">
+                    <h6 class="mg-b-3">
+                        <a class="tx-dark" href="">Лихачев Виталий Александрович</a>
+                    </h6>
+                    <p class="card-text">2 секция</p>
+                </div>
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/sd/2-4.jpg}">
+                <div class="card-body">
+                    <p class="card-text" style="margin-block-end: 0 !important">
+                        Въедливый зануда.
+                    </p>
+                    <br>
+                    <a href="https://teleg.run/VitaliyX" style="text-align: right;" target="_blank">
+                        <i class="fab fa-2x fa-telegram-plane" style="color: #55a6f8"></i> VitaliyX</a>
+
+                </div>
+            </div>
+            <!-- card -->
+        </div>
+    </div>
+
+
+    <p></p>
+
+</div>
+
+
+</body>
+</html>

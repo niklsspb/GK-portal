@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="header">
+    <title th:text="#{page.siteTitle}+'.'+#{page.docs.sd3}">совет дома3</title>
+</header>
+<body>
+<div class="br-pagebody card" th:fragment="main">
+
+    <div th:replace="fragment/page-content::pageTitle
+    (title=#{page.docs.sd3},description=#{page.docs.sd1Description},iconClass='icon ion-ios-compose tx-70 lh-0 tx-info-800') ">
+    </div>
+
+    <div class="row row-sm">
+        <div class="col-sm-6 col-xl-3">
+            <!-- card -->
+            <div class="card ">
+                <div class="card-body rounded-top bd-0 bg-success tx-white">
+                    <h6 class="mg-b-3"><a class="tx-white hover-white-8" href="">Бояджи Юлия Римовна</a></h6>
+                    <span class="tx-12 tx-white-8">1 секция - кандидат в председатели</span>
+                </div>
+
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/sd/3-1.jpg}">
+                <div class="card-body">
+                    <p class="card-text" style="margin-block-end: 0 !important">
+                        Руководитель проектов. Один из громких проектов - запуск международной горячей линии по продаже
+                        билетов на Олимпиаду
+                        Сочи 2014.
+                        </br>Готова заниматься решением текущих проблем в ЖК, собирать вопросы от жильцов и
+                        коммуницировать с руководством
+                        новой УК. Есть время и желание это делать. Сейчас в декретном отпуске.
+                    </p>
+                    <a href="https://teleg.run/Julia_boyadzhi" style="text-align: right;" target="_blank">
+                        <i class="fab fa-2x fa-telegram-plane" style="color: #55a6f8"></i> Julia_boyadzhi</a>
+                </div>
+            </div>
+            <!-- card -->
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <!-- card -->
+            <div class="card ">
+                <div class="card-body">
+                    <h6 class="mg-b-3">
+                        <a class="tx-dark" href="">Великанов Александр Анатольевич</a>
+                    </h6>
+                    <p class="card-text">1 секция</p>
+                </div>
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/sd/3-4.jpg}">
+                <div class="card-body">
+                    <p class="card-text" style="margin-block-end: 0 !important">
+                        Идёт в Совет Дома для контроля работы УК. Профессиональный инженер.
+                        </br>Готов вести разговор с техническими службами ук на
+                        равных, а таже обеспечить диалог между ук и жителями, организации
+                        собраний и т.п.
+                    </p>
+                    <a href="https://teleg.run/Morethendeviant" style="text-align: right;" target="_blank">
+                        <i class="fab fa-2x fa-telegram-plane" style="color: #55a6f8"></i> Morethendeviant</a>
+                </div>
+            </div>
+            <!-- card -->
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <!-- card -->
+            <div class="card ">
+                <div class="card-body">
+                    <h6 class="mg-b-3">
+                        <a class="tx-dark" href="">Сафронова Юлия Сергеевна</a>
+                    </h6>
+                    <p class="card-text">2 секция</p>
+                </div>
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/sd/3-2.jpg}">
+                <div class="card-body">
+                    <p class="card-text" style="margin-block-end: 0 !important">
+                        Главный специалист по защите информации, сейчас в декрете.
+                        </br>Сильные стороны: ответственность, внимательность и желание
+                        делать что-то для блага нашего жк и комфортного проживания в нем.
+                    </p>
+                    <a href="https://teleg.run/Kissjuli" style="text-align: right;" target="_blank">
+                        <i class="fab fa-2x fa-telegram-plane" style="color: #55a6f8"></i> Kissjuli</a>
+                </div>
+            </div>
+            <!-- card -->
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <!-- card -->
+            <div class="card ">
+                <div class="card-body">
+                    <h6 class="mg-b-3">
+                        <a class="tx-dark" href="">Татьяна</a>
+                    </h6>
+                    <p class="card-text">5 секция</p>
+                </div>
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/sd/3-3.jpg}">
+                <div class="card-body">
+                    <p class="card-text" style="margin-block-end: 0 !important">
+                        Имеет опыт работы в сфере обслуживания нежилой недвижимости. А именно в земельных,
+                        имущественных, финансовых,
+                        юридических и документационных вопросах.
+                        </br>
+                        В качестве члена совета дома будет отвечать за документационное взаимодействие между советом
+                        дома и управляющей
+                        компанией. Помимо этого планирует наладить коммуникацию между жильцам и управляющей компанией.
+                        Хочет сделать условия для
+                        жизни в ЖК максимально комфортными.
+                    </p>
+                    <a href="https://teleg.run/LadySOTA" style="text-align: right;" target="_blank">
+                        <i class="fab fa-2x fa-telegram-plane" style="color: #55a6f8"></i> LadySOTA</a>
+
+                </div>
+            </div>
+            <!-- card -->
+        </div>
+    </div>
+
+
+    <p></p>
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+package ru.geekbrains.gkportal.controller;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import static ru.geekbrains.gkportal.config.TemplateNameConst.*;
+
+@Controller
+@RequestMapping("/document")
+public class DocumentController {
+    private static final Logger logger = Logger.getLogger(DocumentController.class);
+
+    @GetMapping("/oss4")
+    public String oss4(Model model) {
+        return returnShablon(model, OSS4_FORM);
+    }
+
+    @GetMapping("/sd1")
+    public String sd1(Model model) {
+        return returnShablon(model, SD1_FORM);
+    }
+
+    @GetMapping("/sd2")
+    public String sd2(Model model) {
+        return returnShablon(model, SD2_FORM);
+    }
+
+    @GetMapping("/sd3")
+    public String sd3(Model model) {
+        return returnShablon(model, SD3_FORM);
+    }
+
+    @GetMapping("/text1")
+    public String txt1(Model model) {
+        return returnShablon(model, TEXT1_FORM);
+    }
+
+
+}
