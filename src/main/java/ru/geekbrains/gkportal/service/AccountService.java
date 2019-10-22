@@ -82,6 +82,7 @@ public class AccountService implements UserDetailsService {
                 .passwordHash(encoder.encode(systemAccount.getPassword()))
                 .contact((contact == null) ? contactService.getOrCreateContact(systemAccount) : contact)
                 .roles(roleService.getDefaultRoleList())
+
                 .build());
     }
 

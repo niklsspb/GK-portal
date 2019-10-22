@@ -106,11 +106,13 @@ public class CommunicationService {
                 .contact(contact)
                 .build();
         // проверяем, что если есть другие емайл или почта, то их описание надо сменить с основного на другое
-        for (Communication com : contact.getCommunications()) {
-            if (com.getCommunicationType().getUuid().equals(communicationType.getUuid()) && !com.getIdentify().equals(communication.getIdentify())) {
-                com.setDescription(OTHER_DESCRIPTION);
+        Collection<Communication> listComm = contact.getCommunications();
+        if (listComm != null)
+            for (Communication com : contact.getCommunications()) {
+                if (com.getCommunicationType().getUuid().equals(communicationType.getUuid()) && !com.getIdentify().equals(communication.getIdentify())) {
+                    com.setDescription(OTHER_DESCRIPTION);
+                }
             }
-        }
         return communication;
     }
 

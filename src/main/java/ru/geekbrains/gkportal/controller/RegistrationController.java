@@ -214,6 +214,7 @@ public class RegistrationController {
 
         if (!isError) {
             try {
+                systemAccount.setContactType(contactTypeService.getContactTypeByDescription("Собственник"));
                 // создаём аккаунт
                 Account account = accountService.createAccount(systemAccount);
                 // отправляем подтверждающее письмо
