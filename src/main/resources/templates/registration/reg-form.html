@@ -8,7 +8,7 @@
         <script id="flatTemplate" type="text/x-jrender">
         <div class="gk-flat-chooser">
                 <div class="gk-select-house form-group row">
-                    <label class="col-sm-4 col-form-label">Номер Дома (почтовый номер, где 3 - колодец)</label>
+                    <label class="col-sm-4 col-form-label">Номер Дома (почтовый номер, где 1 - колодец)</label>
                     <div class="col-sm-6">
                         <select class="custom-select" required id="flats{{:num}}.housingNumber" name="flats[{{:num}}].housingNumber">
                         </select>
@@ -132,7 +132,7 @@
 
                 <div class="gk-flat-chooser" th:each="flat, flatStat : *{flats}">
                     <div class="gk-select-house form-group row">
-                        <label class="col-sm-4 col-form-label">Номер Дома (почтовый номер, где 3 - колодец)</label>
+                        <label class="col-sm-4 col-form-label">Номер Дома (почтовый номер, где 1 - колодец)</label>
                         <div class="col-sm-6">
                             <select class="custom-select" required
                                     th:field="*{flats[__${flatStat.index}__].housingNumber}">
