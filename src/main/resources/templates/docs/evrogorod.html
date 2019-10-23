@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="header">
+    <title th:text="#{page.siteTitle}+'.'+#{page.docs.text1}">УК еврогород отстой</title>
+</header>
+<body>
+<div class="br-pagebody card" th:fragment="main">
+
+    <div th:replace="fragment/page-content::pageTitle
+    (title=#{page.docs.text1},description=#{page.docs.text1Description},iconClass='icon ion-ios-compose tx-70 lh-0 tx-info-800') ">
+    </div>
+    <br><br>
+
+
+    <p class="lead pd-30 bg-primary tx-white">
+        УК работает в убыток, но это выгодно застройщику, т.к. с него не требуют исправления гарантийных недостатков.
+        Кадастр
+        ему не выгоден по той же причине. Наверняка после 2-ой очереди он закроет юр. лицо., чтобы мы не смогли через
+        суд
+        потребовать исправления.<br><br>
+        Не верите? - Читайте историю за год.
+    </p>
+
+
+    <div class="row">
+        <div class="col-md-4" style="margin-left: auto; margin-right: 0;">
+            <div align="right" class="card card-body">
+                <p class="card-text"><em>
+                    Первый раз - случайность,<br>
+                    второй - совпадение,<br>
+                    третий - закономерность<br>
+                </em>
+                </p>
+            </div>
+        </div>
+    </div>
+    <p style="margin-left: auto; margin-right: 0;">Актуально на 10.10.19</p>
+    <div class="row">
+
+        <div class="col-lg-6">
+            <p class="card-text">
+                Для начала стоит сказать, что Еврогород как-то работает. Вода есть, электричество есть, первые 3 этажа
+                ежедневно
+                убирают, а остальные по графику подметают и моют, как положено. Во дворе есть свет, собирают мусор,
+                иногда даже вывозят.
+                Как минимум при предыдущем руководстве пытались сделать что-то лучше, к примеру, как-то облагородить
+                участки вокруг
+                дома, поставить полусферы от заезда на тротуары, запустить Бурмистр и др. Но до реализации все
+                инициативы нередко
+                доходили после большой работы со стороны отдельных собственников. УК не имеет виденья, хватки и желания,
+                чтобы больше
+                зарабатывать, принося пользу. Есть большое число вопросов, которые не решены, а может даже не обнаружены
+                только потому,
+                что собственники не имеют прямого доступа к техническим помещениям.
+            </p>
+            <p class="card-text">
+                У меня есть работа, проекты, желание отдохнуть, и нет желания тратить большое количество времени на
+                мотивацию УК к
+                действию, а тем более на выполнение части работы за неё. Проработать проект двора без машин, сделать
+                навигацию,
+                нарисовать проект пандусов, изучать законы и много другое - не те занятия, которыми должны заниматься
+                собственники,
+                платящие УК выше ставки города, и не члены Совета дома это должны делать. Причем есть случаи в Москве,
+                когда тариф рос,
+                потому что собственники доверяли УК. Они принимали целевой сбор на улучшение условий, потому что видели
+                куда идут
+                деньги. С этой УК я боюсь лишние 100 рублей заплатить, т.к. велик риск, что они пропадут, УК испарится,
+                либо забудет о
+                переплате и придётся с ней сверять взаиморасчеты.
+            </p>
+            <p class="card-text">
+                Наверняка кому-то достаточно того, что есть: вода/свет, убрано. После закрытия последней базовой
+                потребности (появления
+                интернета в квартире) и мне тяжело себя раскачать на улучшение ЖК, т.к. это тратит сил много, результат
+                неконтроллируем,
+                а жители с такой УК во всём видят попытку обмануть. И выход - либо самоорганизовываться, либо
+                ограничиться своей
+                бетонной коробкой и не задумываться, что там на этаже, в подъезде, во дворе.
+            </p>
+            <p class="card-text">
+                НО не забывайте, что ставка у нас не городская, через 2 года начнутся взносы на капитальный ремонт, все
+                жители заедут, и
+                УК будет всё сложнее справляться с нагрузкой, учитывая, что тарифы растут каждые полгода, и уже сейчас
+                она работает в
+                убыток. Так что наверняка, как закончится гарантия, мы останемся с проблемами и без УК, которая их
+                решит. Чтобы помочь
+                вам с решением, мы собрали краткую историю УК Еврогород за год.
+            </p>
+
+        </div>
+
+        <div class="col-lg-6 card bd-0 ">
+            <div class="card-header tx-medium bd-0 tx-white bg-teal">
+                Оглавление
+            </div><!-- card-header -->
+            <div class="card-body bd bd-t-0 rounded-bottom pd-l-25">
+                <ol>
+                    <li><a href="#zastroy"> Компания, которая принадлежит нашему застройщику</a></li>
+                    <li><a href="#infinite"> Вечные проблемы</a></li>
+                    <li><a href="#info"> Плохое информирование</a></li>
+                    <li><a href="#manipulate"> Шантажируют и манипулируют</a></li>
+                    <li><a href="#obzorro"> Обзорро</a></li>
+                    <li><a href="#uninitiative"> УК Еврогород не проявляет инициативу по взысканию неустойки с
+                        застройщика в части
+                        устранения строительных дефектов/недостатков</a></li>
+                    <li><a href="#pi"> Двуличность в общении</a></li>
+                    <li><a href="#spec"> Некомпетентность специалистов</a></li>
+                    <li><a href="#surprise"> Постоянные сюрпризы с коммунальными платежами</a></li>
+                    <li><a href="#tax"> Изначально не могли обосновать свой тариф</a></li>
+                    <li><a href="#spend"> Тратит деньги в трубу, выбирает не лучшие решения, а первые попавшиеся</a>
+                    </li>
+                    <li><a href="#warm"> Ситуация с гребенками отопления</a></li>
+                    <li><a href="#netupite"> Неумение понять жителя, разобраться и решить проблему</a></li>
+                    <li><a href="#rabotai"> Чтобы УК что-то сделала хорошее для ЖК надо потратить огромное количество
+                        сил и времени</a>
+                    </li>
+                    <li><a href="#ban"> Крали баннеры</a></li>
+                    <li><a href="#paper"> Захламление секции макулатурой</a></li>
+                    <li><a href="#notech"> УК и технологии на разных планетах</a></li>
+                    <li><a href="#hashelme"> Невоспитанный наёмный персонал, живущий в паркинге.</a></li>
+                </ol>
+            </div><!-- card-body -->
+        </div>
+    </div>
+
+    <div class="br-pagebody br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="zastroy">1. Компания, которая принадлежит нашему
+            застройщику</h6>
+
+        <div class="row br-pagebody">
+
+            <div class="col-xl card bd-0 ">
+                <li>А он не может поставить на кадастр</li>
+                <li>Долго не мог завести провайдера, хоть это положено по договору.
+                    Но вдруг завел какого-то непонятного провайдера, выбор
+                    не обосновал, а тот теперь забивает нам шахты.
+                </li>
+
+                <div class="card bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/1.png}">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="tg://privatepost?channel=1197875491&post=94927">
+                                <i class="fa fa-telegram"></i> Ссылка на сообщение
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/2.png}">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="tg://privatepost?channel=1197875491&post=8749">
+                                <i class="fa fa-telegram"></i> Ссылка на сообщение
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <li>
+                    Он ответственен за проект паркинга, в котором на 1600 жителей - 600 мест и стоимость места по цене
+                    неплохой
+                    машины
+                </li>
+                <li>
+                    А также за узкий въезд в паркинг, который узок даже после расширения, но хоть немного его расширил и
+                    поставил
+                    новые
+                    ворота
+                </li>
+                <li>
+                    Он сделал 4-м секциям лестницы, когда уже почти все делают безбарьерную среду. Летний Сад через
+                    дорогу спокойно
+                    отдал первый этаж под магазины, сделал подземный паркинг, не строя лестницы. Для секций с лестницами
+                    были
+                    поставлены
+                    специальные подъемники, которые не работают, но за обслуживание мы платим по 10 т.р. каждый месяц.
+                    Ах да,
+                    подъемники
+                    потихоньку ржавеют.
+                </li>
+                <li>
+                    А горка на выезде из первого корпуса? Почему сразу не было понятно, что это непрактичная, да что
+                    там, бредовая,
+                    идея
+                    строить так? У второй очереди тоже уже нагородили холм. В общем, большие проблемы с выравниванием
+                    ландшафта у
+                    нашего
+                    строителя.
+                </li>
+                <li>
+                    Откуда-то взялся детский садик, полностью закрывший проход между корпусами, что является нарушением
+                    противопожарных
+                    норм. УК он не беспокоит. Они-то на первом этаже.
+                </li>
+                <li>
+                    Вдоль первого корпуса идут перила, потому что склон. Но там же магазины, для входа в которые надо
+                    делать обход
+                    половины корпуса. Д-дизайн.
+                </li>
+                <li>
+                    Корзины кондиционеров местами плохо держатся, а козырьков над дверьми нет.
+                </li>
+                <li>
+                    Навигацию жители сделали за свой счёт. А это вообще копейки, и само собой разумеющееся для всех
+                    нормальных
+                    компаний.
+                </li>
+                <li>
+                    С бордюров нет съездов. И правильно, этот дом не для инвалидов и детских колясок.
+                </li>
+                <li>
+                    На выезде из арок первого корпуса не стоит выпуклого зеркала. Как только никого ещё не задавили.
+                    Меня и моих
+                    знакомых суммарно раз 7 уже могли, учитывая, что половину выезда закрывают парковашки.
+                </li>
+                <li>
+                    Обходы, обходы и снова обходы. Есть подозрение, что после завершения всех строек, у нас не будет
+                    прямого выхода
+                    на
+                    метро, т.к. его закрывает ниссан и заправка. Ходите вокруг, потому что мы не умеем планировать. Уже
+                    сделанные
+                    дороги
+                    второй очереди тоже вызывают вопросы, т.к. Выглядят пока очень нелогичными и неудобными - не прямыми
+                    продолжениями
+                    дорог сданных строений. Заметили, что не о таком говорилось в рекламе?
+                </li>
+            </div>
+            <div class="col-xl card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/4.png}">
+                <div class="card-body">
+                    <p class="card-text">
+                        <a href="tg://resolve?domain=d107a&post=67">
+                            <i class="fa fa-telegram"></i> Ссылка на это сообщение про детский садик
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row br-pagebody">
+
+            <div class="col-lg card bd-0 ">
+                <li>
+                    Зоны, в которых расположены мусорки вызывают вопросы, которые у любого адекватного человека могли
+                    появиться на этапе
+                    проекта:
+                </li>
+                <ol start="1">
+                    <li>
+                        Мусорка рядом с прогулочной зоной детского сада, серьёзно?
+                    </li>
+                    <li>
+                        Мусорки, которые не по пути к общественному транспорту (когда завершат стройку)?
+                    </li>
+                    <li>
+                        Две зоны мусорки на 1600 квартир, серьёзно? Причём одну захватили под макулатуру работники УК.
+                    </li>
+                </ol>
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/3.png}">
+                <div class="card-body">
+                    <p class="card-text">
+                        Мусорка, с вещами, которые собирают рабочие УК с этажей для последующей реализации
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="br-pagebody br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="infinite">2. Вечные проблемы</h6>
+
+        <div class="row br-pagebody">
+
+            <div class="col-lg card bd-0 ">
+                <p>
+                    <a
+                            href="https://www.google.com/url?q=https://gzhi.mosreg.ru/sobytiya/novosti-ministerstva/26-11-2018-12-31-33-vadim-sokov-goszhilinspektsiya-vyyavila-2-tysyachi?utm_referrer%3Dhttps%253A%252F%252Fwww.google.ru%252F%26fa821dba_ipp_key%3Dv1569911716088%252Fv3394bd2c9791dfa476b112163aeca6afa04ab3%252F8uVgUYUb%252FW0uAilaZ5TNaA%253D%253D%26fa821dba_ipp_uid%3D1569911716087%252FQ4P8DX8vjwaaUvHm%252FBwxJJCBBmoVKziywB5Tdow%253D%253D%26fa821dba_ipp_uid2%3DQ4P8DX8vjwaaUvHm%252FBwxJJCBBmoVKziywB5Tdow%253D%253D%26fa821dba_ipp_uid1%3D1569911716087&amp;sa=D&amp;ust=1571312306815000">В
+                        этой статье</a> рассказывается про проверки управляющих компаний Московской области, где один из
+                    лидеров по
+                    заведенным административным делам УК “Европа” (принадлежащая застройщику).
+                </p>
+                <p>
+                    <a
+                            href="https://www.google.com/url?q=https://360tv.ru/news/obschestvo/v-krasnogorske-zhilcam-novostrojki-otklyuchili-vodu-i-svet-za-osteklenie-balkonov-i-kondicionery-129504/&amp;sa=D&amp;ust=1571312306815000">А
+                        в этой рассказ</a> про отключение воды и света без предписания той же организацией.
+                </p>
+                <p>
+                    <a
+                            href="https://www.google.com/url?q=https://dom.gosuslugi.ru/%23!/siteSearch/?query%3D7708745839%26searchMode%3DOR%26orderFieldName%3Drelevant%26entityTypes%3D13%26orderDirection%26max%3D10%26from%3D0%26page%3D1%26itemPerPage%3D10&amp;sa=D&amp;ust=1571312306816000">Здесь
+                        можно посмотреть</a> как часто проверяют УК Европа и какие нарушения выявляют.
+                </p>
+                <p>
+                    <a
+                            href="https://www.google.com/url?q=https://dom.gosuslugi.ru/%23!/siteSearch/?query%3D7708745839%26searchMode%3DOR%26orderFieldName%3Drelevant%26entityTypes%3D1;3;6;8;13;14;15;18;21;22;23;24;26;28;32;33;7;9;10;4;16;17;19;30;2;29;20;31;12;35%26orderDirection%26max%3D10%26from%3D0%26page%3D1%26itemPerPage%3D10&amp;sa=D&amp;ust=1571312306817000">А
+                        вот проверки Химкинской версии</a>, откуда пришел к нам исполнительный директор.
+                </p>
+                <p>
+                    <a
+                            href="https://www.google.com/url?q=https://dom.gosuslugi.ru/%23!/siteSearch/?query%3D1057749600886%26searchMode%3DOR%26orderFieldName%3Drelevant%26entityTypes%3D13%26orderDirection%26max%3D10%26from%3D0%26page%3D1%26itemPerPage%3D10&amp;sa=D&amp;ust=1571312306818000">А
+                        это 0 проверок предлагаемой УК</a>
+                </p>
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td colspan="3" rowspan="1">
+                            ООО УК "ЕВРОПА" (ИНН 7708745839 · ОГРН 1117746700092) - проверка СПАРК
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" rowspan="1">
+
+                            Проверки органами государственной власти
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" rowspan="1">
+
+                            Орган
+                        </td>
+                        <td colspan="1" rowspan="1">
+
+                            Проведено
+                        </td>
+                        <td colspan="1" rowspan="1">
+
+                            С нарушениями
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" rowspan="1">
+                                                <span>
+                                                    <a
+                                                            href="https://www.google.com/url?q=http://www.spark-interfax.ru/system/home/card%23/company/E59A99EE91A94CDA9AE2DD4994D507CA/422/eyJBZ2VuY3lJZCI6MTE2MjUsIkZpbHRlclR5cGUiOm51bGwsIklzUGFydGl0aW9uIjpmYWxzZX0%3D&amp;sa=D&amp;ust=1571312306822000">Госжилинспекция</a>
+
+                        </td>
+                        <td colspan="1" rowspan="1">
+                                                <span>
+                                                    <a
+                                                            href="https://www.google.com/url?q=http://www.spark-interfax.ru/system/home/card%23/company/E59A99EE91A94CDA9AE2DD4994D507CA/422/eyJBZ2VuY3lJZCI6MTE2MjUsIkZpbHRlclR5cGUiOiJDb25kdWN0ZWQiLCJJc1BhcnRpdGlvbiI6ZmFsc2V9&amp;sa=D&amp;ust=1571312306824000">563</a>
+
+                        </td>
+                        <td colspan="1" rowspan="1">
+                                                <span>
+                                                    <a
+                                                            href="https://www.google.com/url?q=http://www.spark-interfax.ru/system/home/card%23/company/E59A99EE91A94CDA9AE2DD4994D507CA/422/eyJBZ2VuY3lJZCI6MTE2MjUsIkZpbHRlclR5cGUiOiJXaXRoVmlvbGF0aW9ucyIsIklzUGFydGl0aW9uIjpmYWxzZX0%3D&amp;sa=D&amp;ust=1571312306825000">127</a>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" rowspan="1">
+                                                <span>
+                                                    <a
+                                                            href="https://www.google.com/url?q=http://www.spark-interfax.ru/system/home/card%23/company/E59A99EE91A94CDA9AE2DD4994D507CA/422/eyJBZ2VuY3lJZCI6MTQ5MywiRmlsdGVyVHlwZSI6bnVsbCwiSXNQYXJ0aXRpb24iOmZhbHNlfQ%3D%3D&amp;sa=D&amp;ust=1571312306826000">МЧС</a>
+
+                        </td>
+                        <td colspan="1" rowspan="1">
+                                                <span>
+                                                    <a
+                                                            href="https://www.google.com/url?q=http://www.spark-interfax.ru/system/home/card%23/company/E59A99EE91A94CDA9AE2DD4994D507CA/422/eyJBZ2VuY3lJZCI6MTQ5MywiRmlsdGVyVHlwZSI6IkNvbmR1Y3RlZCIsIklzUGFydGl0aW9uIjpmYWxzZX0%3D&amp;sa=D&amp;ust=1571312306827000">6</a>
+
+                        </td>
+                        <td colspan="1" rowspan="1">
+                                                <span>
+                                                    <a
+                                                            href="https://www.google.com/url?q=http://www.spark-interfax.ru/system/home/card%23/company/E59A99EE91A94CDA9AE2DD4994D507CA/422/eyJBZ2VuY3lJZCI6MTQ5MywiRmlsdGVyVHlwZSI6IldpdGhWaW9sYXRpb25zIiwiSXNQYXJ0aXRpb24iOmZhbHNlfQ%3D%3D&amp;sa=D&amp;ust=1571312306828000">2</a>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" rowspan="1">
+                                                <span>
+                                                    <a
+                                                            href="https://www.google.com/url?q=http://www.spark-interfax.ru/system/home/card%23/company/E59A99EE91A94CDA9AE2DD4994D507CA/422/eyJBZ2VuY3lJZCI6MTQwNTEsIkZpbHRlclR5cGUiOm51bGwsIklzUGFydGl0aW9uIjpmYWxzZX0%3D&amp;sa=D&amp;ust=1571312306829000">Региональная
+                                                        администрация</a>
+
+                        </td>
+                        <td colspan="1" rowspan="1">
+                                                <span>
+                                                    <a
+                                                            href="https://www.google.com/url?q=http://www.spark-interfax.ru/system/home/card%23/company/E59A99EE91A94CDA9AE2DD4994D507CA/422/eyJBZ2VuY3lJZCI6MTQwNTEsIkZpbHRlclR5cGUiOiJDb25kdWN0ZWQiLCJJc1BhcnRpdGlvbiI6ZmFsc2V9&amp;sa=D&amp;ust=1571312306830000">1</a>
+
+                        </td>
+                        <td colspan="1" rowspan="1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" rowspan="1">
+                            Итого
+                        </td>
+                        <td colspan="1" rowspan="1">
+                                                <span>
+                                                    <a
+                                                            href="https://www.google.com/url?q=http://www.spark-interfax.ru/system/home/card%23/company/E59A99EE91A94CDA9AE2DD4994D507CA/422/eyJBZ2VuY3lJZCI6bnVsbCwiRmlsdGVyVHlwZSI6IkNvbmR1Y3RlZCIsIklzUGFydGl0aW9uIjpmYWxzZX0%3D&amp;sa=D&amp;ust=1571312306832000">570</a>
+
+                        </td>
+                        <td colspan="1" rowspan="1">
+                                                <span>
+                                                    <a
+                                                            href="https://www.google.com/url?q=http://www.spark-interfax.ru/system/home/card%23/company/E59A99EE91A94CDA9AE2DD4994D507CA/422/eyJBZ2VuY3lJZCI6bnVsbCwiRmlsdGVyVHlwZSI6IldpdGhWaW9sYXRpb25zIiwiSXNQYXJ0aXRpb24iOmZhbHNlfQ%3D%3D&amp;sa=D&amp;ust=1571312306833000">129</a>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" rowspan="1">
+                                                <span>
+                                                    <a href="https://www.google.com/url?q=http://spark-interfax.ru/&amp;sa=D&amp;ust=1571312306834000">Отчет
+                                                        подготовлен 07.10.2019</a>
+
+                        </td>
+                        <td colspan="1" rowspan="1">
+                        </td>
+                        <td colspan="1" rowspan="1">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="br-pagebody br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="info">3. Плохое информирование</h6>
+
+
+        <div class="row br-pagebody">
+            <div class="col-lg card bd-0 ">
+                <ul>
+                    <li>
+                    <span>Не предупреждают о своих резких решениях, которые могут вызвать вопросы. К примеру, сменить гребенки,
+                        остановить лифты, обрезать всем провода от домофона или
+                        <span>выключить вам электричество за неуплату,
+                            &nbsp;хоть вы и заплатили в этом месяце. Хорошо бы заранее предупреждали, но даже после произошедшего не
+                            факт, что вы быстро сможете понять, что произошло.
+                    </li>
+                    <li>
+                        Редко обновляют сайт важными новостями, из средств коммуникации только чат в WhatsApp, где
+                        ограничение по
+                        количеству пользователей 256 чел. Попасть в этот чат проблематично, т.к. места нет, да и не ясно
+                        как. В самом
+                        чате отвечают далеко не на все вопросы, только на “удобные”.
+                    </li>
+                    <li>
+                        Из чата могут удалить за “неудобные” вопросы. Т.е. по сути лишить единственной возможности
+                        получить информацию.
+                    </li>
+                    <li>
+                        Бурмистр работает только с обращениями (что похвально), но не отображает данные с счётчиков,
+                        статусы зачисления,
+                        тем самым нерационально расходуется ресурс бухгалтера на постоянные пояснения. Также могли бы
+                        использовать
+                        раздел новостей, но зачем. Меньше знаешь - меньше не любишь УК.
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-lg-3 card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/5.png}">
+
+            </div>
+
+            <div class="col-lg-3 card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/6.png}">
+                <div class="card-body">
+                    Как УК электричество отключали
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="br-pagebody br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="manipulate">
+            4. Шантажируют и манипулируют
+        </h6>
+        <ul>
+            <li>
+                Не проведем охрану - не будет забора. (Очная часть ОСС 3)
+            </li>
+            <li>
+                Не выберете охрану - не настроим домофоны. (ОСС 1 и 2)
+            </li>
+            <li>
+                Отключение электроэнергии не оплатившим вывоз строительного мусора
+            </li>
+        </ul>
+
+        <div class="row br-pagebody">
+
+            <div class="col-lg-3 card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/7.png}">
+                <div class="card-body">
+
+                </div>
+            </div>
+
+            <div class="col-lg-3 card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/8.png}">
+                <div class="card-body">
+
+                </div>
+            </div>
+
+            <div class="col-lg-3 card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/9.png}">
+                <div class="card-body">
+                    <p class="card-text">
+                        "Особая" процедура отключения света в стиле "Еврогород"
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row br-pagebody">
+
+
+            <div class="col-lg card bd-0 ">
+                <p>
+                    Отдельное внимание нужно уделить забору и ОСС3. Формулировки сделаны так, что совершенно не
+                    гарантируют наличие
+                    забора, а протаскивают охрану. Забор без охраны не рассматривается. УК парирует это тем, что так они
+                    будут отбивать
+                    стоимость забора. Так охрана будет, или будет отбивание стоимости? Думаю, не стоит пояснять, как
+                    обычно у УК Европа
+                    бывает.
+                </p>
+                <p>
+                    УК уверяет, что проблем с оформлением забора не будет, но управа и совет депутатов на начало октября
+                    не разрешили
+                    установку.
+                </p>
+                <p>
+                    И помните, установленный забор будет собственностью УК, а собственность она может с собой забрать.
+                </p>
+
+                <div class="card bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/10.png}">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="tg://resolve?domain=d107a&post=21">
+                                <i class="fa fa-telegram"></i> Поверьте, застройщик лишь хочет отбить через охрану
+                                стоимость забора,
+                                поэтому забора без охраны не будет.
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/11.png}">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="tg://resolve?domain=d107a&post=26">
+                                <i class="fa fa-telegram"></i> Поверьте, всё согласуем! UPD: на 17.10 не согласовали.
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6 card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/12.png}">
+                <div class="card-body">
+                    <p class="card-text">
+                        <a href="tg://resolve?domain=d107a&post=79">
+                            <i class="fa fa-telegram"></i> Поверьте, всё согласуем! UPD: на 17.10 не согласовали.
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="br-pagebody br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="obzorro">
+            5. Обзорро
+        </h6>
+
+        <div class="row">
+
+            <div class="col-lg card bd-0 ">
+                <ul>
+                    <li>
+                        Застройщик сдал половину неработающих домофонов. УК не нанимала компанию, пока не пройдёт ОСС.
+                        Потом вдруг
+                        наняла
+                        без тендера
+                        .
+                    </li>
+                    <li>
+                        Ген.дир. УК Бабурина Л.Ю. на очной части ОСС-1 публично заявила (есть видеозапись), что
+                        обслуживание домофонов
+                        входит в ставку 34,9 руб/м2. Однако позже выяснилось (по факту), что это не так и за домофон
+                        надо платить
+                        отдельно.
+                    </li>
+                    <li>
+                        С целью стимулирования заключения договоров жильцами, а также с целью увеличения продажи ключей,
+                        Обзорро сменила
+                        единый код доступа в подъезды, прикрываясь тем, что код знают рабочие, которые могут быть
+                        причастны к случаям
+                        воровства. Однако новый код не знают только жители, рабочим он известен, хоть его меняют.
+                    </li>
+                    <li>
+                        Чтобы люди начали платить за обслуживание домофона, сотрудники компании Обзорро прошлись по всем
+                        этажам и
+                        перерезали провода домофонов в щитках. Есть запись видео. И ответы-признания исполнителей.
+                    </li>
+                    <li>
+                        УК открестилось от причастности к инциденту с порчей домофонов, сообщила, что прекращает
+                        договорные отношения с
+                        Обзорро. Но по факту этого не произошло, и УК сообщили, что Обзорро будет продолжать работать.
+                    </li>
+
+
+            </div>
+
+
+            <div class="col-lg card bd-0 ">
+
+                <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                        frameborder="0" height="300px" src="https://www.youtube.com/embed/9ETBWUgTXeE"
+                        width="100%"></iframe>
+
+                <div class="card bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/14.png}">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="tg://privatepost?channel=1197875491&post=98617 ">
+                                <i class="fa fa-telegram"></i> Ссылка на сообщение
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="сard bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/13.png}">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="tg://privatepost?channel=1197875491&post=98703">
+                                <i class="fa fa-telegram"></i> Ссылка на сообщение
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/15.png}">
+                <div class="card-body">
+                    Как УК договор разрывала
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="br-pagebody br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="uninitiative">
+            6. УК Еврогород не проявляет инициативу по взысканию неустойки с застройщика в части устранения строительных
+            дефектов/недостатков
+        </h6>
+
+        <div class="row br-pagebody">
+
+            <div class="col-lg-6 card bd-0 ">
+                <p>
+                    Застройщику не очень выгодно содержать УК. Это большой труд, а сейчас она работает в убыток. Зачем
+                    она ему? Да чтобы
+                    с ним не судились по гарантии. Одно дело житель отсудит 100 т.р., другое дело УК за весь дом 100
+                    млн.р. Ему во что
+                    бы то ни стало надо ещё 2-4 года продержать текущую УК, а потом уже безразлично.
+                </p>
+                <ul>
+                    <li>
+                        Год мы сидим без нормальных дорог к ЖК. Даже после завершения строительства соседних объектов УК
+                        не пытается
+                        организовать для жителей адекватный выход к близлежащим дорогам/улицам. А её владельцу
+                        (застройщику) вообще не
+                        важно проектирование участка.
+                    </li>
+                    <li>
+
+                        <a href="tg://privatepost?channel=1197875491&post=92200">Протечки в лифтовых шахтах</a>
+
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-6 card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/17.png}">
+                <div class="card-body">
+                    <p class="card-text">
+                        <a href="tg://privatepost?channel=1197875491&post=98004">
+                            <i class="fa fa-telegram"></i> Ссылка на сообщение
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <ul>
+            <li>
+                Протечки крыши на последних этажах
+            </li>
+        </ul>
+
+        <div class="row br-pagebody">
+
+            <div class=" col-lg-8 col-xl-4 card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/45.png}">
+
+            </div>
+
+            <div class=" col-lg-4 col-xl card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/46.png}">
+
+            </div>
+
+            <div class=" col-lg-6 col-xl card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/47.png}">
+            </div>
+
+            <div class=" col-lg-6 col-xl card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/48.png}">
+                <div class="card-body">
+                    <p class="card-text">
+                        <a href="tg://privatepost?channel=1197875491&post=109968">
+                            <i class="fa fa-telegram"></i> Ссылка на сообщение
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row br-pagebody">
+
+            <div class="col-lg card bd-0 ">
+                <ul>
+                    <li>
+                        Неработающие сети домофонов
+                    </li>
+                    <li>
+                        Невведённая в эксплуатацию пожарная сигнализация
+                    </li>
+                    <li>
+                        Многие пожарные гидранты до сих пор без рукавов
+                    </li>
+                    <li>
+                        В паркинг можно попасть только через лифты, остальные выходы для простых смертных закрыты.
+                        Однако, юркие
+                        сотрудники УК ходят через закрытые лестницы. Если пожар застанет вас в паркинге, то сами
+                        понимаете, бежать будет
+                        некуда. А может повезёт, и лифт будет работать, т.к. пожарная сигнализация его не отключит.
+                    </li>
+                    <li>
+                        Застройщик сдал дом без телевизионной антенны
+                    </li>
+                    <li>
+                        МЖК не для колясок. Нет съездов уже год. Новые корпуса тоже без съездов. Да, кое-какие съезды
+                        есть во дворах, но
+                        проблема в том, что есть жизнь и в другой части Москвы. Мало того, что арки в первом корпусе
+                        заставляют
+                        передвигаться по дороге, которая наполовину занята паркунами, так и на остальной территории
+                        вокруг корпусов ни
+                        единого съезда, кроме деревянного помоста. Но я бы сказал, что там не только съезд, там ещё и
+                        пеший проход
+                        достаточно ограничен. К примеру, убрали забор Летнего сада, сделали срам, а не дорогу. Не
+                        проехать с ребенком к
+                        магазину Пятерочка. Мало того, что нагородили и не исправляют, так новое делают ещё хуже. А вот
+                        эта горка между
+                        дорогой Летнего сада и нашим “торговым рядом”<br>
+                        <div class="col-lg-9 card bd-0 ">
+                            <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/19.png}">
+                        </div>
+                        <br>Это же не проехать не пройти. Всё засеяли травкой. А как в магазин то попасть? <br>Как мы
+                        видим, наш
+                        застройщик не смог договориться с другим застройщиком, а с жителями он даже и пытаться не будет.
+                        Как и его
+                        УК. Сделают так, как им выгоднее и проще. Чисто чтобы отчитаться.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-5 card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/18.png}">
+                <div class="card-body">
+                    <p class="card-text">
+                        После закрытия холла нам положили только 1 рукав, а у вас? Кстати, вы знали, что подходит один
+                        ключ к обоим
+                        замкам, а кнопка нужна, чтобы усилить напор воды.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="br-pagebody br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="pi">
+            7. Двуличность в общении
+        </h6>
+
+        <div class="row br-pagebody">
+
+            <div class="col-lg-6 card bd-0 ">
+                <p>
+                    Нередко были ситуации, когда УК говорит одно, потом делает другое, затем утверждает, что так и
+                    договорились, а в
+                    конце винит жителей и их рабочих, утверждая, что всё делали ради жителей. Это было:
+                </p>
+                <ul>
+                    <li>
+                        С домофоном<br>- не мы попросили перерезать провода <br>- они оборвали, расторгаем договор (хотя
+                        так этого и не
+                        сделали) <br>- вы сами виноваты, что неправильно всё подключили (хотя всё подключил
+                        застройщик)<br>- обращайтесь
+                        с проблемами в компанию Обзорро
+                    </li>
+                    <li>
+                        С провайдерами<br>- мы не можем впускать провайдеров<br>- это не мы, это застройщик завел
+                        марьино.нет<br>- нет,
+                        договоры не покажем<br>- застройщик делает что хочет, имеет право впустить 3-х провайдеров<br>-
+                        хорошо, впустим
+                        билайн<br>- ведём переговоры<br>- не договорились (билайн говорит, что не ответили вообще)
+                    </li>
+                    <li>
+                        С охраной<br>- нет в паркинге не живет никого<br>- в паркинге помещение для отдыха
+                        охранников<br>- в паркинге
+                        никто не живёт<br>- да, в паркинге ночуют охранники<br>- нет, в паркинге никто не живёт
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/20.png}">
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="br-pagebody br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="spec">
+            8. Некомпетентность специалистов
+        </h6>
+
+
+        <div class="row br-pagebody">
+
+            <div class="col-lg bd-0 ">
+                <ul>
+                    <li>
+                        Пытаясь решить проблему вы можете услышать несколько причин, которые будут не действительными.
+                        Когда первый раз
+                        затопило лифты, мне в диспетчерской с перерывом в
+                        час
+                        сообщили, что у нас: перекладывают плитку у лифтов, отключили электричество, сработала тревога,
+                        проводят
+                        обслуживание, кто-то застрял. А в реальности затопило шахту и продолжает течь крыша.
+                    </li>
+                    <li>
+                        С домофоном жителей слали вообще в никуда, пока не появилась компания Обзорро, а теперь шлют
+                        разбираться с ними.
+                    </li>
+                    <li>
+                        Не все рабочие по-русски говорят, очень обидно, когда это сантехник, и ты не можешь ему
+                        объяснить суть проблемы
+                    </li>
+                    <li>
+                        Мусор
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/21.png}">
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/22.png}">
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/23.png}">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row ">
+
+        <div class="col-xl col-md ">
+
+            <div class="br-pagebody br-section-wrapper">
+                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="surprise">
+                    9. Постоянные сюрпризы с коммунальными платежами
+                </h6>
+                <p>
+                    Они стараются делать всё по закону, но выглядит это незаконно. Постоянно пересчитывают, сбрасывают,
+                    добавляют
+                    новые
+                    платежи спустя полгода. Даже сейчас не все нужные платежи включены в ЕПД. Приличная часть людей не
+                    платит именно
+                    из-за неразберихи. А если кто-то не платит - отражается на всех. То ИТП обнаружится, то счётчики не
+                    ввели в
+                    эксплуатацию и т.д. У меня на 20-м этаже вода 45-48 градусов, но плачу я, как люди на первом за 70
+                    градусов (а
+                    трачу
+                    я её больше, соответственно из-за пониженной температуры).
+                </p>
+            </div>
+
+            <div class="br-pagebody br-section-wrapper">
+                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="tax">
+                    10. Изначально не могли обосновать свой тариф
+                </h6>
+                <p>
+                    Почти случайно насчитали какие-то цифры, затем легко прогнулись, затем ещё раз прогнулись, но как
+                    тратятся
+                    деньги
+                    так и не ясно. Сейчас работа УК не соответствует расшифровке тарифа.
+                </p>
+                <ul>
+                    <li>
+                        Штат сотрудников меньше
+                    </li>
+                    <li>
+                        Постоянная текучка кадров
+                    </li>
+                </ul>
+                <div class="card bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/24.png}">
+                </div>
+
+                <ul>
+                    <li>
+                        Диспетчерскую сократили и перенесли на аутсорс родительской компании в филиал Нахабино
+                    </li>
+                    <li>
+                        Мы платим за уборку придомовой территории, но её не убирают, т.к. не в нашей собственности
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl col-md">
+            <div class="br-pagebody br-section-wrapper">
+                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="spend">
+                    11. Тратит деньги в трубу, выбирает не лучшие решения, а первые попавшиеся
+                </h6>
+                <p>
+                    Почему обзорро?
+                </p>
+                <p>
+                    Как выбирается охрана?
+                </p>
+                <p>
+                    Почему Бурмистр? Кто и на основе чего формулировки первого ОСС делал?
+                </p>
+                <p>
+                    Почему к нам вошли какие-то непонятные провайдеры?
+                </p>
+
+                <div class="card bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/25.png}">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="tg://resolve?domain=d107a&post=22">
+                                <i class="fa fa-telegram"></i> Ссылка на сообщение
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="br-pagebody br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="warm">
+            12. Ситуация с гребенками отопления
+        </h6>
+
+        <div class="row br-pagebody">
+
+            <div class="col-lg card bd-0 ">
+                <p>
+                    Сразу после снятия охраны + угрозы от УК, что сейчас у нас начнётся и во всём будут виноваты жильцы,
+                    вдруг начали
+                    пропадать части отопительной системы. Кто-то пустил слух, что и у Летнего Сада пропадали гребенки,
+                    но его жители
+                    сказали, что им их просто не поставили. И концов с концами найти не получилось. Есть версии, что они
+                    ушли во вторую
+                    очередь ЖК Город, но это догадки.
+                </p>
+                <p>
+                    Сначала УК открестилась и заявила, что во всем виноваты жители, которые не проголосовали за охрану.
+                    Полиция не
+                    смогла возбудить уголовное дело, потому что
+                    УК отказалась подтверждать документально сумму ущерба. Но при этом УК согласилась за свой счёт
+                    гребенки поставить.
+                    Т.е. либо они транжирят деньги и их не волнует, что их обокрали на несколько миллионов, либо они
+                    знают, куда пропали
+                    гребенки и им это не интересно.
+                </p>
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/26.png}">
+
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/27.png}">
+            </div>
+        </div>
+
+        <div class="row br-pagebody">
+            <div class="col-lg card bd-0 ">
+                <p>
+                    В сентябре отсутствие гребенок обнаружили жители 3 корпуса (причем на тех этажах, которые не были
+                    оборудованы
+                    тамбурной дверью, или жильцы которых передали ключи от тамбурной двери УК). Снова вызвали полицию.
+                    УК призналась,
+                    что это было сделано сантехниками УК по распоряжению главного инженера. При этом УК и главный
+                    инженер (который на
+                    тот момент был в отпуске) выдвинули разные и неубедительные версии произошедшего:
+                </p>
+                <ul>
+                    <li>
+                        что гребенки сняли с 3 корпуса, чтобы переставить на место украденных в 1 корпусе, а в 3 корпус
+                        поставить новые
+                    </li>
+                    <li>
+                        что гребенки сняли для того, чтобы оборудовать секцию “однотипными системами распределения”,
+                        поскольку стояк в 3
+                        корпусе был якобы разукомплектован, в связи с кражами, хотя это не так, жильцы подтвердят
+                    </li>
+                    <li>
+                        что гребенки сняли якобы для “восстановления и промывки в рамках подготовки к отопительному
+                        сезону”, чего не
+                        делают, это подтверждено сантехниками других УК.
+                    </li>
+                </ul>
+                <p>
+                    Все версии абсурдны по себе, особенно учитывая, что сделали это не во всех секциях, а также любая
+                    замена - это не
+                    менее получаса работы, т.к. надо все перекрутить и счётчики ещё переставить. Одно дело дополнить
+                    недостающие, а
+                    другое не предупреждая жильцов заменить.
+                </p>
+                <p>
+                    В результате УК заменила снятые латунные гребенки, находящиеся на гарантии у застройщика, на более
+                    дешевые стальные.
+                    УК не ответила на письменный запрос жильцов, почему и на каком основании произведена замена. В
+                    результате в секциях
+                    3 корпуса НЕ стоят однотипные системы распределения, после “восстановительных действий” руками УК
+                    отсутствуют
+                    капиллярные трубки между балансировочными кранами и крепления, нарушены пломбы счетчиков тепла.
+                </p>
+                <p>
+                    Налицо факт самоуправного распоряжения общедомовой собственностью жителей и откровенной ЛЖИ со
+                    стороны управляющей
+                    компании Еврогород.
+                </p>
+            </div>
+
+            <div class="col-lg ">
+                <div class="card bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/28.png}">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="tg://privatepost?channel=1197875491&post=103906">
+                                <i class="fa fa-telegram"></i> Ссылка на сообщение
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="card bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/29.png}">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="tg://resolve?domain=d107a&post=49">
+                                <i class="fa fa-telegram"></i> Ссылка на сообщение
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="row br-pagebody">
+
+            <div class="col-lg card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/30.png}">
+                <div class="card-body">
+                </div>
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/31.png}">
+                <div class="card-body">
+                    <p class="card-text">
+                        <a href="tg://privatepost?channel=1197875491&post=104318">
+                            <i class="fa fa-telegram"></i> Ссылка на сообщение
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                        frameborder="0" src="https://www.youtube.com/embed/BGP1G6ii-E8"
+                        style="min-height:700px" width="100%"></iframe>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="row ">
+
+        <div class="col-xl-8 card bd-0 ">
+            <div class="br-pagebody br-section-wrapper">
+                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="netupite">
+                    13. Неумение понять жителя, разобраться и решить проблему
+                </h6>
+
+                <div class="row ">
+
+                    <div class="col-lg card bd-0 ">
+                        <div class="card bd-0 ">
+                            <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/32.png}">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <a href="tg://privatepost?channel=1197875491&post=87397">
+                                        <i class="fa fa-telegram"></i> Ссылка на сообщение
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div class="card bd-0 ">
+                            <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/33.png}">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <a href="tg://privatepost?channel=1197875491&post=84518">
+                                        <i class="fa fa-telegram"></i> Ссылка на сообщение
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card bd-0 ">
+                            <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/34.png}">
+                        </div>
+
+                        <div class="card bd-0 ">
+                            <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/35.png}">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <a href="tg://privatepost?channel=1197875491&post=74147">
+                                        <i class="fa fa-telegram"></i> Ссылка на сообщение
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card bd-0 ">
+                            <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/36.png}">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <a href="tg://privatepost?channel=1197875491&post=59696 ">
+                                        <i class="fa fa-telegram"></i> Ссылка на сообщение
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg card bd-0 ">
+                        <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/37.png}">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <a href="tg://resolve?domain=d107a&post=26">
+                                    <i class="fa fa-telegram"></i> Ссылка на сообщение
+                                </a>
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-xl card bd-0 ">
+            <div class="br-pagebody br-section-wrapper">
+                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="rabotai">
+                    14. Чтобы УК что-то сделала хорошее для ЖК надо потратить огромное количество сил и времени
+                </h6>
+                <p>
+                    И даже после того, как вы добьётесь от УК действий, то вашу инициативу всё равно могут развернуть не
+                    в вашу
+                    пользу,
+                    сделав “как всегда”.
+                </p>
+                <p>
+                    К примеру, был подготовлен проект пандуса с шириной пролёта 1 метр. УК согласилась его поставить, но
+                    долго
+                    тянула.
+                    Вдруг в один прекрасный день мы уже видим сваренные конструкции. Нам не показали итогового проекта,
+                    ни позвали
+                    на
+                    обсуждение, хоть всё это время мы напоминали о себе. Нам сообщили, что все изменения были внесены,
+                    чтобы больше
+                    соответствовать нормам. В итоге нормам уклона пандус не соответствует, а использовать его всё равно
+                    неудобно
+                    из-за
+                    меньшей ширины пролёта.
+                </p>
+                <p>
+                    Застройщик нам должен был оставить озеленение по проекту. Но он поздно закончил стройку, поэтому
+                    озеленение
+                    перенесли. И вместо нормальных, хотя бы 5-летних деревьев, были посажены бедные кустики, новые
+                    цветочки, жухлые
+                    росточки. При этом УК выдало это за свою инициативу и свой подвиг. Насколько нам известно, средства
+                    выделил
+                    застройщик, а посадками УК была не обязана заниматься. За труд ей спасибо, это лучше, чем голые
+                    площадки, но
+                    увы, до
+                    нормальных дворов, как у Летнего сада ещё расти и расти, а эти кустики могут легко не пережить зиму.
+                    Возможно,
+                    через
+                    лет 10 здесь будет нормальная зелень. Думаете дорого посадить нормальные кусты и деревья? НЕТ! Туя
+                    5-тилетняя
+                    стоит
+                    всего 2 т.р., ель 1,5-2т.р., жимолость 200-500 р., дерен 600 р., роза 550 р. А за нынешними ростками
+                    надо
+                    ухаживать,
+                    чтобы они доросли до 5-тилетнего растения. Очередной нелогичный поступок, который является лишь
+                    переводом денег
+                    впустую.
+                </p>
+                <p>
+                    УК Еврогород судя по всему не мыслит понятиями “удобство для жителей”, “приятный двор”, и вряд ли
+                    организует
+                    создание облагороженного двора без машин, в котором хочется собираться, а сделает что-то “как
+                    всегда”.
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="br-pagebody br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="ban">
+            15. Крали баннеры
+        </h6>
+
+        <div class="row ">
+
+            <div class="col-lg card bd-0 ">
+                <p>
+                    Ответы, полученные на очной части собрания ОСС3 повергли активных собственников в шок. Следя за
+                    ситуацией в ЖК, они
+                    сразу поняли, что это какой-то развод.
+                    <br>Да, многие хотят двор без машин.
+                    <br>Да, Алексей Горявин и Владимир Коляда, согласуя такие условия с УК хотели лишь лучшего для ЖК, а
+                    проект забор,
+                    не смотря на некоторые утверждения, многократно обсуждался и в общем чате, публиковался на ОСС2 (не
+                    набравшем
+                    кворума).
+                    <br>Но в бюллетени оказались формулировки, никак не связанные с конечным результатам, а организация
+                    ОСС в очередной
+                    раз оказалась такой, что вызывала массу возмущения и вопросов.
+                </p>
+                <p>
+                    Чтобы не следящие весь год за чатами собственники не подставили себя и всех, было решено установить
+                    газель с
+                    информацией про ОСС 3 и призывом не участвовать в этом событии. Это не могло быть проигнорировано
+                    УК. С газели
+                    несколько раз пытались украсть баннеры. Вот один из случаев, в котором <a
+                        href="tg://privatepost?channel=1197875491&post=107874">участвовал лично Игорь Калугин - новый
+                    исполнительный директор УК
+                    Еврогород</a>.
+                </p>
+                <p>
+                    Баннеры выбрасывали в близлежащие мусорные контейнеры. Один раз получилось найти, в остальные
+                    перепечатывали заново
+                    за свой счёт.
+                </p>
+                <p>
+                    В день визита главы Управы попытались укатить газель:
+                    (банеров нет, потому что их снимали на ночь и шли вешать обратно). Заявления поданы в полицию с
+                    видеоматериалам.
+                </p>
+                <p>
+                    Когда активисты повесили баннер про ОСС3 у себя на лоджии, моментально прилетело предписание
+                    (справедливо, фото
+                    ниже). Однако, месяцами на лоджиях могут висеть баннеры с рекламой штукатурки, ремонта и т.п.
+                    Пятёрочка спокойно без
+                    согласования поставила козырёк над входом, а владельцы магазинов вешают любые вывески на фасад.
+                </p>
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                        frameborder="0" height="35%" src="https://www.youtube.com/embed/NXDMDel4fmk"
+                        style="min-height: 300px" width="100%"></iframe>
+                <br><br>
+                <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                        frameborder="0" height="35%" src="https://www.youtube.com/embed/AcfRkABW7ME"
+                        style="min-height: 300px" width="100%"></iframe>
+            </div>
+
+            <div class="col-lg card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/38.png}">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="row ">
+        <div class="col-xl bd-0 ">
+            <div class="br-pagebody br-section-wrapper">
+                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="paper">
+                    16. Захламление секции макулатурой
+                </h6>
+                <p>
+                    Собирать макулатуру - хорошо, но почему страдать от этого приходится жителям?
+                </p>
+                <div class="row ">
+
+                    <div class="col-lg-8 card bd-0 ">
+                        <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/39.png}">
+                    </div>
+
+                    <div class="col-lg card bd-0 ">
+                        <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/40.png}">
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-xl-4 bd-0 ">
+            <div class="br-pagebody br-section-wrapper">
+                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="notech">
+                    17. УК и технологии на разных планетах
+                </h6>
+                <ul>
+                    <li>
+                        Чат в телеграм на всех жильцов по ссылке? Не для них! Несколько What’s up чатов с ограничением в
+                        256 человек
+                        и
+                        непонятным механизмом попадания в них - вот выбор экспертов обслуживания. Но говорят, мы и этого
+                        канала
+                        лишились.
+                    </li>
+                    <li>
+                        Сделать гугл форму сбора жалоб, пока не было бурмистра - не для них. Я предлагал бесплатно
+                        помочь с этим.
+                    </li>
+                    <li>
+                        Делать подсчёт голосов в электронной таблице, но всё равно анонимным - ДА, ведь есть что
+                        скрывать.
+                    </li>
+                    <li>
+                        Новости на сайте - не для них. Современное УК пишет в чат, где всё теряется.
+                    </li>
+                    <li>
+                        Рассылка по жильцам, на которую можно подписаться? - Нет. Рассылают только случайному списку
+                        получателей.
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="br-pagebody br-section-wrapper">
+        <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10" id="hashelme">
+            18. Невоспитанный наёмный персонал, живущий в паркинге.
+        </h6>
+
+        <div class="row ">
+
+            <div class="col-xl col-lg-6 card bd-0 ">
+                <p>
+                    Сгореть в нашем ЖК не так сложно. Достаточно нерабочей пожарной сигнализации, жить выше 11 этажа или
+                    оказаться в
+                    паркинге. Всего-то надо подождать, пока у какого-нибудь сотрудника УК загорится бытовой прибор в
+                    техническом
+                    помещении паркинга.
+                </p>
+                <p>
+                    Охранники нередко выпивали на рабочем месте, а иногда, не доходя до своей подсобки, засыпали,
+                    мочились в
+                    коридорах/на балконах.
+                </p>
+
+                <div class="card bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/41.png}">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="tg://privatepost?channel=1197875491&post=81304">
+                                <i class="fa fa-telegram"></i> Ссылка на сообщение
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xl col-lg-6 card bd-0 ">
+                <div class="card bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/42.png}">
+                </div>
+                <br>
+                <div class="card bd-0 ">
+                    <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/43.png}">
+                    <div class="card-body">
+                        <p class="card-text">
+                            Охрана не спит!.. А не, спит...
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-xl col-lg-6 card bd-0 ">
+                <img alt="Image" class="card-img-top img-fluid" th:src="@{/docs/pic/text1/44.png}">
+                <div class="card-body">
+                    <p class="card-text">
+                        <a href="tg://privatepost?channel=1197875491&post=90642">
+                            <i class="fa fa-telegram"></i> Ссылка на сообщение
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-xl col-lg-6 card bd-0 ">
+                <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                        frameborder="0" height="100%" src="https://www.youtube.com/embed/8aZdged4YR0"
+                        style="min-height: 40em" width="100%"></iframe>
+                <div class="card-body">
+                    <p class="card-text">
+                        Видео о проживании в тех. помещениях
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+</html>

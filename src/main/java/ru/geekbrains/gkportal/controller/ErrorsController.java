@@ -33,7 +33,7 @@ public class ErrorsController implements ErrorController {
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
 
                 if (logger.isDebugEnabled()) {
-                    logger.debug("404");
+                    logger.debug("404 - " + request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI));
                 }
                 return returnShablon(model, ERROR_404);
             } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {

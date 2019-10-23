@@ -33,7 +33,7 @@ public class DocumentController {
         return returnShablon(model, SD3_FORM);
     }
 
-    @GetMapping("/text1")
+    @GetMapping("/evrogorod")
     public String txt1(Model model) {
         return returnShablon(model, TEXT1_FORM);
     }
