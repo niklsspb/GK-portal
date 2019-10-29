@@ -39,4 +39,9 @@ public class DocumentController {
     }
 
 
+    @GetMapping("/information")
+    public String info(Model model) {
+        return returnShablon(model, INFO_FORM);
+    }
+
 }

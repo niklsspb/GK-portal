@@ -14,6 +14,7 @@ public class TemplateNameConst {
     public static final String SD2_FORM = "docs/sd2";
     public static final String SD3_FORM = "docs/sd3";
     public static final String TEXT1_FORM = "docs/evrogorod";
+    public static final String INFO_FORM = "docs/information";
     // ============= обычная регистрация =======================
     // Форма подтверждения аккаунта или опроса по почте
     public static final String REGISTRATION_CONFIRM_MAIL_FORM = "registration/confirm-mail";

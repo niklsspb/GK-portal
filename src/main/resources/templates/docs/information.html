@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <title th:text="#{page.siteTitle}+'.'+#{page.navigationMenu.docs.information}">Полезная информация</title>
+</head>
+<body>
+<div class="br-pagebody card" th:fragment="main">
+
+    <div th:replace="fragment/page-content::pageTitle
+    (title=#{page.docs.information},description=#{page.docs.informationDescription},iconClass='icon ion-ios-compose tx-70 lh-0 tx-info-800') ">
+    </div>
+
+    <div class="row row-sm">
+        <div class="col-xl-12">
+            <div class="card bd-0 br-pagebody">
+
+                <div class="card-header tx-medium bd-0 tx-white bg-info">
+                    <p class="mg-b-0">Ресурсы сообщества собственников ЖК Город</p>
+                </div><!-- card-header -->
+                <div class="card-body bd bd-t-0 rounded-bottom">
+
+                    <h6 class="card-title">Месседжеры</h6>
+
+
+                    <a href="https://tlgg.ru/@d107a" target="_blank"
+                    ><i class="fab fa-2x fa-telegram-plane" style="color: #55a6f8"></i> Новостной канал ЖК в телеграмме
+                        (или
+                        наберите @d107a в поиске месседжера)</a>
+                    <p class="card-text">
+                        Всё самое важное о жизни ЖК!
+                    </p>
+
+                    <a href="https://tlgg.ru/joinchat/DWOf2UdmISPCoWyiMUIYZA" target="_blank"
+                    ><i class="fab fa-2x fa-telegram-plane" style="color: #55a6f8"></i> Общий чат ЖК Город в телеграмме</a>
+                    <p class="card-text">
+                        Через него можно найти чат своего корпуса (ну или ремонта например), а в нём чат подъезда
+                    </p>
+
+                    <a href="https://chat.whatsapp.com/I2oEjph0gst3yGNFltSnKS" target="_blank"
+                    ><i class="fab fa-2x fa-whatsapp" style="color: green"></i> Резервный чат ЖК Город в вотсапе</a>
+                    <p class="card-text">
+                        Рекомендуется вместо него чат в телеграмм <br>
+                        (в телеграмм 1200 человек в основном чате, в вотсапе - 140)
+                    </p>
+
+
+                </div>
+
+            </div><!-- card-body -->
+
+
+            <div class="card bd-0 br-pagebody">
+
+                <div class="card-header tx-medium bd-0 tx-white bg-info">
+                    <p class="mg-b-0">Информация об УК</p>
+                </div><!-- card-header -->
+                <div class="card-body bd bd-t-0 rounded-bottom">
+
+                    <h6 class="card-title">Телефоны</h6>
+                    <p class="card-text">
+                        <strong class="text">офис</strong><br>
+                        <a href="tel:+74992888305"><i class="fa  fa-phone"></i> +7(499)288-83-05</a><br>
+                        <strong class="text">диспечерская 24ч</strong><br>
+                        <a href="tel:+74993505690"><i class="fa  fa-phone"></i> +7(499)350-56-90</a><br>
+                        <br>
+                        <strong class="text">ответственный за домофоны</strong><br>
+                        <a href="tel:+79259878250"><i class="fa  fa-phone"></i> +7(925)987-82-50</a> (Вячеслав)<br>
+
+                        <strong class="text">ответственный за уборку</strong><br>
+                        <a href="tel:+79771148274"><i class="fa  fa-phone"></i> +7(977)114-82-74</a> (Лариса)<br>
+                    </p>
+
+                    <h6 class="card-title">Сайт, почта</h6>
+                    <p class="card-text">
+                        <a href="https://uk-evrogorod.ru" target="_blank"><i class="fa  fa-link"></i>
+                            https://uk-evrogorod.ru</a><br>
+                        <br>
+                        <a href="mailto:info@uk-evrogorod.ru"><i class="fas fa-envelope-open-text"></i>
+                            info@uk-evrogorod.ru</a>
+                        <br>
+                        <br>
+                        <strong class="text">Расчётный отдел (вопросы по платежам)</strong><br>
+                        <a href="mailto:ro@uk-evrogorod.ru"><i class="fas fa-envelope-open-text"></i> ro@uk-evrogorod.ru</a><br>
+                    </p>
+                    <br>
+                    <h6 class="card-title"><i class="fa  fa-address-book"></i> Адрес, время работы</h6>
+                    <p class="card-text">
+                        г. Москва, Дмитровское шоссе д.107А к.3<br>
+                        <br>
+                        <strong>Понедельник</strong> с 9.00 -20.00 <br>
+                        <strong>Вторник -четверг</strong> с 9.00-18.00<br>
+                        <strong>Пятница</strong> с 9.00 -16.45<br>
+                        <strong>Субб.-воскр.</strong> выходной<br>
+                        <strong>Обед</strong> с 13.00-13.45<br>
+                    </p>
+
+
+                </div>
+
+            </div><!-- card-body -->
+        </div><!-- card -->
+    </div>
+
+</div>
+<p></p>
+
+
+</body>
+</html>
