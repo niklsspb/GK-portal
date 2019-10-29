@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="header">
+<head>
+    <th:block th:fragment="header">
     <title th:text="#{page.siteTitle}+'.'+#{page.lk.title}">Личный кабинет</title>
-</header>
+    </th:block>
+</head>
 <body>
 <div class="br-pagebody card" th:fragment="main">
 

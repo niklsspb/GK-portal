@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="header">
+<head>
+    <th:block th:fragment="header">
     <title th:text="#{page.siteTitle}+'.'+#{page.navigationMenu.docs.oss4title}">Документы к ОСС 4</title>
+    </th:block>
 </head>
 <body>
 <div class="br-pagebody card" th:fragment="main">

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="header">
+<head>
+    <th:block th:fragment="header">
     <title th:text="#{page.siteTitle}+'.'+#{page.docs.text1}">УК еврогород отстой</title>
+    </th:block>
 </head>
 <body>
 <div class="br-pagebody card" th:fragment="main">
