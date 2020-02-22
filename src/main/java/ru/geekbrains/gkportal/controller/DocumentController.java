@@ -13,6 +13,11 @@ import static ru.geekbrains.gkportal.config.TemplateNameConst.*;
 public class DocumentController {
     private static final Logger logger = Logger.getLogger(DocumentController.class);
 
+    @GetMapping("/faq")
+    public String faq(Model model) {
+        return returnShablon(model, FAQ_FORM);
+    }
+
     @GetMapping("/oss4")
     public String oss4(Model model) {
         return returnShablon(model, OSS4_FORM);

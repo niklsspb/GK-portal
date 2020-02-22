@@ -6,44 +6,114 @@
     </th:block>
 </head>
 <body>
-<div class="br-pagebody card" th:fragment="main">
+<div class="card br-pagebody pd-t-30 pd-b-30">
+    <div class="br-pagebody card " th:fragment="main">
 
     <div th:replace="fragment/page-content::pageTitle
     (title=#{page.docs.oss4},description=#{page.docs.oss4Description},iconClass='icon ion-ios-compose tx-70 lh-0 tx-info-800') ">
     </div>
-
-    <div class="row row-sm">
-        <div class="col-xl-12">
-            <!-- card-->
-            <div class="card bd-0 br-pagebody">
-                <div class="card-header tx-medium bd-0 tx-white bg-teal-info">
-                    <p class="mg-b-0" th:text="#{page.docs.oss4.Notice}">Объявление</p>
-                </div><!-- card-header -->
-                <div class="card-body bd bd-t-0 rounded-bottom ">
-
-                    <p class="card-text">
-                    <h4 class="tx-indigo tx-center"><b>Итоги ОСС 4 от 6.12.2019</b></h4><br><br>
-                    <p class="tx-inverse"> Сообщаем вам, что все документы по общему собранию собственников №4 (ОСС-4)
-                        были переданы в Государственную жилищную инспекцию города Москвы.</p>
-                    <br>
-                    <p class="tx-success"><b>Кворум есть во всех трёх корпусах</b></p><br>
-                    1 корпус - 53,38%<br>
-                    2 корпус - 59,00%<br>
-                    3 корпус - 60,69%<br><br>
-
-                    <br><b>Инициаторы собрания выражают благодарность тем собственникам, которые приняли участие в
-                    голосовании.</b><br>
-                    <br>
-                    Ниже сами протоколы в разделе каждого корпуса.
-                    <br>
-                    </p>
-
-
-                </div><!-- card-body -->
-            </div><!-- card -->
+        <div class="mg-t-20 mg-b-15">
+            <li>
+                <a target="" th:href="@{/document/faq}">Ответы на часто задаваемые вопросы (актуально на 21.02.2020)</a>
+            </li>
         </div>
 
-    </div>
+        <div class="row row-sm mg-t-30">
+
+            <div class="col-xl-4">
+
+                <div class="card">
+                    <div class="card-header tx-medium">
+                        <p class="mg-b-0">Текущая ситуация</p>
+                    </div><!-- card-header -->
+
+                    <div class="card-body pd-t-20 pd-b-15 pd-r-15 bd bd-t-0 rounded-bottom">
+                        <ul>
+                            <li> ОСС4 собрало кворум и утвердило новую компанию МС.Сервис</li>
+                            <li> Сменить УК Еврогород раньше марта, нельзя из-за договора, обязывающего известить её за
+                                2 месяца.
+                            </li>
+                            <li> УК МС.Сервис подала заявление на управление нашими домами. МС требуется заключить
+                                договоры с >50% собственников, чтобы никто не смог остановить смену.
+                            </li>
+                            <li> УК МС и Совет дома организовали подписание договоров.</li>
+                            <li> При успехе МС вступит в управление с 1 апреля. В худшем случае будет суд, который
+                                затянется на несколько месяцев.
+                            </li>
+                            <li> До вступления МС в управление должна работать УК Еврогород. Требуйте качественных услуг
+                                и корректных счетов.
+                            </li>
+                            <li> Как только МС получит лицензию на управление нашими домами, МС откроет офис на
+                                территории ЖК Город или Летнего Сада и обеспечит полноценное подписание договоров. 
+                            </li>
+                        </ul>
+                    </div><!-- card-body -->
+                </div>
+
+            </div>
+
+            <div class="col-xl-4">
+                <div class="card bd-0">
+
+                    <div class="card-header tx-medium bd-0 tx-white bg-primary">
+                        <p class="mg-b-0">Инструкция для собственника:</p>
+                    </div><!-- card-header -->
+
+                    <div class="card-body pd-t-20 pd-b-15 pd-r-15 bd bd-t-0 rounded-bottom">
+                        <ol>
+                            <li><a href="https://drive.google.com/open?id=1FcQcAm99i-Oi9DGBAUs9P8S0c0aEnD3a"><b>Скачайте
+                                необходимые страницы</b> по этой ссылке</a>.
+                            <li> Там же лежит полный текст договора, его содержание не менялось с собрания.</li>
+                            <li> Если у вас есть машиноместа проверьте принадлежность к корпусу по табличке <a
+                                    href="https://drive.google.com/open?id=1FcQcAm99i-Oi9DGBAUs9P8S0c0aEnD3a">по той же
+                                ссылке</a><br>
+                                Номер по БТИ – актуальный номер машиноместа, написанный на полу паркинга. По ДДУ – тот,
+                                что был в договоре.
+                            </li>
+                            <li><b>Распечатайте</b> нужные страницы, заполните ФИО, номер объекта и поставьте подписи.
+                                Остальное заполнять не обязательно.
+                            </li>
+                            <li><b>Отсканируйте или сфотографируйте</b> каждую страницу и <b>пришлите</b> на почту <a
+                                    href="mailto:muromcevn@gmail.com">muromcevn@gmail.com </a></li>
+                            <li>Несколько объектов собственности - несколько договоров. На один объект достаточно
+                                договора с одним собственником.
+                            </li>
+                        </ol>
+                    </div><!-- card-body -->
+                </div><!-- card -->
+            </div>
+
+            <div class="col-xl-4">
+                <!-- card-->
+                <div class="card bd-0">
+                    <div class="card-header tx-medium bd-0 tx-white bg-teal-info">
+                        <p class="mg-b-0" th:text="#{page.docs.oss4.Notice}">Итоги ОСС 4 от 6.12.2019</p>
+                    </div><!-- card-header -->
+                    <div class="card-body bd bd-t-0 rounded-bottom ">
+
+                        <p class="card-text">
+
+                        <p class="tx-inverse"> Сообщаем вам, что все документы по общему собранию собственников №4 (ОСС-4)
+                            были переданы в Государственную жилищную инспекцию города Москвы.</p>
+                        <br>
+                        <p class="tx-success"><b>Кворум есть во всех трёх корпусах</b></p><br>
+                        1 корпус - 53,38%<br>
+                        2 корпус - 59,00%<br>
+                        3 корпус - 60,69%<br><br>
+
+                        <br><b>Инициаторы собрания выражают благодарность тем собственникам, которые приняли участие в
+                        голосовании.</b><br>
+                        <br>
+                        Ниже сами протоколы в разделе каждого корпуса.
+                        <br>
+                        </p>
+
+
+                    </div><!-- card-body -->
+                </div><!-- card -->
+            </div>
+
+        </div>
     <div class="row row-sm">
         <div class="col-sm-6 col-xl-4">
         <!-- card-->
@@ -724,6 +794,6 @@
 </div>
     <p></p>
 
-
+</div>
 </body>
 </html>
