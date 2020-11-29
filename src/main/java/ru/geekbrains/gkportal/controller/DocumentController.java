@@ -18,6 +18,11 @@ public class DocumentController {
         return returnShablon(model, FAQ_FORM);
     }
 
+    @GetMapping("/oss8")
+    public String oss8(Model model) {
+        return returnShablon(model, OSS8_FORM);
+    }
+
     @GetMapping("/oss4")
     public String oss4(Model model) {
         return returnShablon(model, OSS4_FORM);
@@ -43,6 +48,10 @@ public class DocumentController {
         return returnShablon(model, TEXT1_FORM);
     }
 
+    @GetMapping("/pikabu")
+    public String txt2(Model model) {
+        return returnShablon(model, TEXT2_FORM);
+    }
 
     @GetMapping("/information")
     public String info(Model model) {

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:fragment="header">
+        <title th:text="#{page.siteTitle}+'.'+#{page.navigationMenu.docs.oss4title}">Документы к ОСС 8</title>
+    </th:block>
+</head>
+<body>
+<div class="card br-pagebody pd-30 ">
+    <div class="br-pagebody card " th:fragment="main">
+
+        <div th:replace="fragment/page-content::pageTitle
+    (title=#{page.docs.oss8},description=#{page.docs.oss8Description},iconClass='icon ion-ios-compose tx-70 lh-0 tx-info-800') ">
+        </div>
+
+
+        <div class="row row-sm">
+            <div class="col-xl-12">
+                <!-- card-->
+                <div class="card bd-0 br-pagebody">
+                    <div class="card-header tx-medium bd-0 tx-white bg-info">
+                        <p class="mg-b-0" th:text="#{page.docs.oss8.ExtendedInfo}">Доп инфо</p>
+                    </div><!-- card-header -->
+                    <div class="card-body bd bd-t-0 rounded-bottom">
+                        <div class="mg-t-20 mg-b-15">
+                            <li>
+                                <a href="https://yadi.sk/i/PEBcxUkwcWnNCQ" target="_blank">Ознакомиться с извещением о
+                                    проведении ОСС в ГИС ЖКХ</a>
+                            </li>
+                            <li>
+                                <a href="https://docs.google.com/document/d/1SdmYtCHZ4XVvf9UUbb-di8V7hB84y0c_NQGuflBkShQ/edit?usp=sharing"
+                                   target="_blank">
+                                    Инструкция как самим ознакомиться с повесткой ОСС в личном кабинене ГИС ЖКХ
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://yadi.sk/i/vFs-KlYFlc1fIg" target="_blank">Уведомление о проведении ОСС
+                                    для размещения на информационных досках</a>
+                            </li>
+
+                        </div>
+
+
+                        <h6 class="card-title">22.11.2020</h6>
+                        <p class="card-text">
+
+                            Собственниками из второго корпуса объявлено о проведении нового ОСС в форме
+                            заочного голосования с использованием Государственной информационной системы
+                            жилищно-коммунального
+                            хозяйства (ГИС ЖКХ).
+                            <br>
+                            <br>
+                            Начало голосования с 13:00 <b>22.12.2020</b><br>
+                            Окончание голосования в 13:00 11.02.2021
+                            <br>
+                            <br>
+                            <b>Место голосования:</b> Ваш личный кабинет на сайте <a
+                                href="https://my.dom.gosuslugi.ru/citizen-cabinet/#!/index" target="_blank">ГИС ЖКХ</a>
+                            или в мобильном приложении ГИС ЖКХ.
+                        </p>
+
+
+                    </div><!-- card-body -->
+                </div><!-- card -->
+            </div>
+
+        </div>
+        <p></p>
+    </div>
+</div>
+</body>
+</html>

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static ru.geekbrains.gkportal.config.TemplateNameConst.OSS4_FORM;
+import static ru.geekbrains.gkportal.config.TemplateNameConst.MAIN_FORM;
 import static ru.geekbrains.gkportal.config.TemplateNameConst.returnShablon;
 
 @Controller
@@ -20,7 +20,7 @@ public class MainController {
 
     @GetMapping("/")
     public String main(Model model) {
-        return returnShablon(model, OSS4_FORM);
+        return returnShablon(model, MAIN_FORM);
     }
 
     @RequestMapping("/mscontracts")

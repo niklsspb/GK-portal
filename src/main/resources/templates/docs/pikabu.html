@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:fragment="header">
+        <title th:text="#{page.siteTitle}+'.'+#{page.docs.text1}">УК еврогород отстой</title>
+    </th:block>
+</head>
+<body>
+<div class="br-pagebody card" th:fragment="main">
+
+    <div th:replace="fragment/page-content::pageTitle
+    (title=#{page.docs.text2},description=#{page.docs.text2Description},iconClass='icon ion-ios-compose tx-70 lh-0 tx-info-800') ">
+    </div>
+    <br><br>
+
+
+    <p class="lead pd-30 bg-primary tx-white">
+        Рассказ одного из наших собственников на Пикабу.<br>
+    </p>
+
+
+    <p class="lead pd-30">
+        Актуально на <b>20.11.2020</b><br>
+        <br>
+        <a href="https://pikabu.ru/story/skaz_o_tom_kak_myi_upravlyayushchuyu_kompaniyu_menyaem_chast_pervaya_7836027"
+           target="_blank">Часть 1.</a><br>
+        <a href="https://pikabu.ru/story/skaz_o_tom_kak_myi_upravlyayushchuyu_kompaniyu_menyaem_chast_vtoraya_7838271"
+           target="_blank">Часть 2.</a><br>
+        <a href="https://pikabu.ru/story/skaz_o_tom_kak_myi_upravlyayushchuyu_kompaniyu_menyaem_chast_tretya_7851667"
+           target="_blank">Часть 3.</a><br>
+    </p>
+
+</div>
+</body>
+</html>
