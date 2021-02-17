@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:fragment="header">
-        <title th:text="#{page.siteTitle}+'.'+#{page.navigationMenu.docs.oss4title}">Документы к ОСС 8</title>
+        <title th:text="#{page.siteTitle}+'.'+#{page.navigationMenu.docs.oss4title}">Документы к ОСС 8к2</title>
     </th:block>
 </head>
 <body>
@@ -23,11 +23,19 @@
                     </div><!-- card-header -->
                     <div class="card-body bd bd-t-0 rounded-bottom">
                         <div class="mg-t-20 mg-b-15">
+                            <h6 class="card-title">17.02.2021 ОСС закончено успешно, документы переданы в МЖИ и
+                                размещены в системе ГИС ЖКХ</h6>
+                            <br>
+                            <li>
+                                <a target="_blank" th:href="@{/docs/oss8.pdf}">Сообщение об итогах ОСС8к2</a>
+                            </li>
+
                             <li>
                                 <a href="https://yadi.sk/i/vFs-KlYFlc1fIg" target="_blank">Сообщение о проведении
                                     заочного ОСС с использованием ГИС ЖКХ</a>
                             </li>
                             <li>
+
                                 <a href="https://docs.google.com/document/d/1SdmYtCHZ4XVvf9UUbb-di8V7hB84y0c_NQGuflBkShQ/edit?usp=sharing"
                                    target="_blank">
                                     Инструкция, как самим ознакомиться с повесткой ОСС, в личном кабинене ГИС ЖКХ
@@ -37,6 +45,14 @@
 
                         </div>
 
+                        <h6 class="card-title">16.02.2021</h6>
+                        <p class="card-text">
+                            <strong>Подведены итоги голосования на нашем ОСС8к2.</strong><br>
+                            <br>
+                            Проголосовали 52.6%, собрание правомочно, по всем 14-ти вопросам повестки приняты решения
+                            "За".<br>
+                            <br>
+                            <img class="card-img-top img-fluid" th:src="@{/img/oss8.jpg}">
 
                         <h6 class="card-title">22.11.2020</h6>
                         <p class="card-text">
