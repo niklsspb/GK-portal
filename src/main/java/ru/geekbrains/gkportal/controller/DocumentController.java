@@ -23,6 +23,16 @@ public class DocumentController {
         return returnShablon(model, OSS8_FORM);
     }
 
+    @GetMapping("/oss9")
+    public String oss9(Model model) {
+        return returnShablon(model, OSS9_FORM);
+    }
+
+    @GetMapping("/heat")
+    public String heat(Model model) {
+        return returnShablon(model, HEAT_FORM);
+    }
+
     @GetMapping("/oss4")
     public String oss4(Model model) {
         return returnShablon(model, OSS4_FORM);

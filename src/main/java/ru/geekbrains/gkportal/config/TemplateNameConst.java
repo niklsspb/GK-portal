@@ -11,6 +11,8 @@ public class TemplateNameConst {
     public static final String LOGIN_FORM = "login";
     public static final String OSS4_FORM = "docs/oss4";
     public static final String OSS8_FORM = "docs/oss8";
+    public static final String OSS9_FORM = "docs/oss9";
+    public static final String HEAT_FORM = "docs/heat";
     public static final String MAIN_FORM = "docs/main";
     public static final String FAQ_FORM = "docs/faq";
     public static final String SD1_FORM = "docs/sd1";
