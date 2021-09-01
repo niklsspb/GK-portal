@@ -38,6 +38,11 @@ public class DocumentController {
         return returnShablon(model, OSS4_FORM);
     }
 
+    @GetMapping("/oss6k1")
+    public String oss6k1(Model model) {
+        return returnShablon(model, OSS6K1_FORM);
+    }
+
     @GetMapping("/sd1")
     public String sd1(Model model) {
         return returnShablon(model, SD1_FORM);
