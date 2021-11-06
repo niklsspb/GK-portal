@@ -25,8 +25,13 @@ public class MainController {
 
     @RequestMapping("/mscontracts")
     public void mscontracts(HttpServletResponse response, HttpServletRequest request) throws IOException {
-
         request.getContextPath();
         response.sendRedirect("https://drive.google.com/drive/folders/1FcQcAm99i-Oi9DGBAUs9P8S0c0aEnD3a");
+    }
+
+    @GetMapping("/k2")
+    public void index(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        request.getContextPath();
+        response.sendRedirect("https://d107a-k2.ru/");
     }
 }
