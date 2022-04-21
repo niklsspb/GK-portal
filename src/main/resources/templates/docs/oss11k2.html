@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:fragment="header">
+        <title th:text="#{page.siteTitle}+'.'+#{page.navigationMenu.docs.oss11title}">Документы к ОСС 11к2</title>
+    </th:block>
+</head>
+<body>
+<div class="card br-pagebody pd-30 ">
+    <div class="br-pagebody card " th:fragment="main">
+
+        <div th:replace="fragment/page-content::pageTitle
+    (title=#{page.docs.oss11},description=#{page.docs.oss11Description},iconClass='icon ion-ios-compose tx-70 lh-0 tx-info-800') ">
+        </div>
+
+
+        <div class="row row-sm">
+            <div class="col-xl-12">
+                <!-- card-->
+                <div class="card bd-0 br-pagebody">
+                    <div class="card-header tx-medium bd-0 tx-white bg-info">
+                        <p class="mg-b-0" th:text="#{page.docs.oss8.ExtendedInfo}">Доп инфо</p>
+                    </div><!-- card-header -->
+                    <div class="card-body bd bd-t-0 rounded-bottom">
+                        <div class="mg-t-20 mg-b-15">
+                            <ul class="mg-l-10">
+                                <li>
+                                    <a href="https://drive.google.com/file/d/1y9P8jG9faI113VgMR-IZWf7w4dCotEwM/view?usp=sharing"
+                                       target="_blank">Сообщение о проведении очередного общего собрания собственников
+                                        помещений</a>
+                                </li>
+                            </ul>
+
+                            <br><br>
+
+                            <h6 class="card-title">21.04.2022</h6>
+                            <p class="card-text">
+
+                                Собственниками, из второго корпуса, объявлено о проведении нового ОСС.
+                                <br>
+                                <br>
+                                Начало голосования с 18:00 30 апреля 2022 г.<br>
+                                Окончание голосования в 21:00 27 мая 2022
+                                <br>
+                                <br>
+
+                            </p>
+
+
+                        </div><!-- card-body -->
+                    </div><!-- card -->
+                </div>
+
+            </div>
+            <p></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
