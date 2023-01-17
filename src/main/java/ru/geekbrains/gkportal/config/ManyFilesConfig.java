@@ -5,6 +5,6 @@ import org.springframework.context.annotation.PropertySource;
 
 
 @Configuration
-@PropertySource("classpath:application-secret.properties")
+@PropertySource("classpath:application.properties")
 public class ManyFilesConfig {
 }
